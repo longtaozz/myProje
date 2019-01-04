@@ -1,0 +1,129 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/welcome.css" />
+	</head>
+
+	<body>
+		<div id="slider" class="mui-slider" >
+		    <div class="mui-slider-group">
+		        <!-- 第一张 -->
+		        <div class="mui-slider-item">
+		            <img src="img/boot_page3.jpg">
+		        </div>
+		        <!-- 第二张 -->
+		        <div class="mui-slider-item">
+		                <img src="img/boot_page3.jpg">
+		        </div>
+		        <!-- 第三张 -->
+		        <div class="mui-slider-item">
+		                <img src="img/boot_page3.jpg">
+		        </div>
+		        <!-- 第四张 -->
+		        <div class="mui-slider-item">
+		            <img src="img/boot_page3.jpg">
+		            <button id="dy_enter" style="background-color:rgba(0,0,0,0);color: #FFFFFF;border-radius:5px ;border: 1px solid #FFFFFF;font-size: 18px;">立即体验</button>
+		        </div>
+		    </div>
+		    <div class="mui-slider-indicator">
+		        <div class="mui-indicator mui-active"></div>
+		        <div class="mui-indicator"></div>
+		        <div class="mui-indicator"></div>
+		        <div class="mui-indicator"></div>
+		    </div>
+		</div>
+		<script src="js/mui.js"></script>
+		<script type="text/javascript" src="js/castapp.js" ></script>
+		<script type="text/javascript">
+			mui.init();
+			mui.plusReady(function(){
+				castapp.init();
+				castapp.whiteStatusBar();
+				var ids=0;
+				localStorage.setItem('url','http://api.manbuquanqiu.com/v1/');
+				localStorage.setItem('upload_imgurl','http://img.manbuquanqiu.com/admin/ue_upload.html');
+				if(!localStorage.getItem('userid')){
+					castapp.setStartpage({
+						url:'login.html',
+						id:'login'
+					});
+				}else{
+					castapp.ajaxs({url:'yanZheng',data:{
+						},succFn:function(data){
+							if(data.msg==500){
+								castapp.setStartpage({
+									url:'login.html',
+									id:'login'
+								});
+							}else{
+								if(new Date().getTime()-localStorage.getItem('loginlasttime')<86400000*15){
+									localStorage.setItem('loginlasttime',new Date().getTime());
+									ids=localStorage.getItem('userid');
+									var user=localStorage.getItem('account_switch');
+									var arr=JSON.parse(user);
+									// alert(JSON.stringify(arr))
+									for(var a=0;a<arr.length;a++){
+										if(ids==arr[a].userid){
+											arr[a].loginlasttime=new Date().getTime();
+										}
+									}
+									localStorage.setItem('account_switch', JSON.stringify(arr));
+									castapp.setStartpage({
+										url:'index.html',
+										id:'index'
+									});
+								}else{
+									castapp.setStartpage({
+										url:'login.html',
+										id:'login'
+									});
+								}
+							}
+						},errFn:function(err){
+							mui.toast(err);
+							ca.closeWaiting();
+							castapp.setStartpage({
+								url:'login.html',
+								id:'login'
+							});
+						}
+					})
+					
+	//				86400000*15
+					
+				}
+// 				ca.ajaxs({url:'',data:{
+// 					
+// 					},
+// 				})
+				
+				
+				if(!ca.emptyFun(plus.storage.getItem('indexData'))){
+				}else{
+					findAll();
+				}
+				function findAll(){
+					ca.ajaxs({url:'findIndexAdvertising',data:{
+						},succFn:function(data){
+							if(data){
+								plus.storage.setItem('indexData',JSON.stringify(data));
+							}
+						},errFn:function(err){
+							ca.closeWaiting();
+							mui.toast(err);
+						}
+					})
+				}
+				// 
+			})
+			
+			
+		</script>
+	</body>
+
+</html>

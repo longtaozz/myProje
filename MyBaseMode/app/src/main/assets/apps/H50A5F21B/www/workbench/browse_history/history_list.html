@@ -1,0 +1,269 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../../css/mui.css" rel="stylesheet" />
+		<link href="../../css/style.css" rel="stylesheet" />
+		<link href="../../css/iconfont.css" rel="stylesheet" />
+		<style>
+			.history li{
+				margin: 5px;border-radius:5px;
+			}
+			.historylidiv{
+				margin: 3px 5px;border-bottom: 1px solid #EFEFF4;padding: 3px 5px ;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav mheader user-index-top-bg">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left cffffff"></a>
+			<h1 class="fl fs15 ml20 cffffff" style="line-height: 32px;">浏览历史</h1>
+			<span class="fr fs14 lh44 cffffff" id="qingchu">清除所有</span>
+		</header>
+		<div class="mui-content">
+			<ul class="history" id="history"> 
+				<!-- <li class="bgwhite">
+					<div class="historylidiv" >
+						<span class="iconfont icon-jiudian fs18"></span>
+						<span class="fs13 c666666 ml3">酒店</span>
+						<span class="fr fs11">2018-12-21 12:30</span>
+					</div>
+					<div style="padding: 2px 6px;">
+						<span class="fs14">张家界国际大酒店</span>
+					</div>
+				</li>
+				<li class="bgwhite" style="margin: 5px;border-radius:5px;">
+					<div style="margin: 3px 5px;border-bottom: 1px solid #EFEFF4;padding: 3px 5px ;">
+						<span class="iconfont icon-yongcan1 fs14"></span>
+						<span class="fs13 ml3 c666666">餐厅</span>
+						<span class="fr fs11">2018-12-21 10:30</span>
+					</div>
+					<div style="padding: 2px 6px;">
+						<span class="fs14">张家界富正毅三下锅</span>
+					</div>
+				</li> -->
+				
+			</ul>
+		</div>
+		<script type="text/template" id="list">
+			{{each list}}
+				<li class="bgwhite" data_id="{{$value.id}}" data_type="{{$value.type}}" data_enterprise_id="{{$value.enterprise_id}}"  data_comment_num="{{$value.comment_num}}" data_grade="{{$value.data_grade}}">
+					<div class="historylidiv">
+					{{if $value.type=='hotel_item'}}
+						<span class="iconfont icon-jiudian fs18"></span>
+						<span class="fs12 c666666 ml3">酒店</span>
+					{{else if $value.type=='restaurant_item'}}
+						<span class="iconfont icon-yongcan1 fs14"></span>
+						<span class="fs12 c666666 ml3">餐厅</span>
+					{{else if $value.type=='car_item'}}
+						<span class="iconfont icon-lvyouyongche fs16"></span>
+						<span class="fs12 c666666 ml3">车队</span>
+					{{else if $value.type=='guide_item'}}
+						<span class="iconfont icon-daoyou fs17"></span>
+						<span class="fs12 c666666 ml3">导游</span>
+					{{else if $value.type=='pickup_item'}}
+						<span class="iconfont icon-lvyouyongche fs17"></span>
+						<span class="fs12 c666666 ml3">接送站</span>
+					{{else if $value.type=='line'}}
+						<span class="iconfont icon-qita fs17"></span>
+						<span class="fs12 c666666 ml3">线路</span>
+					{{else if $value.type=='recruit'}}
+						<span class="iconfont icon-zhaopin fs19"></span>
+						<span class="fs12 c666666 ml3">招聘</span>
+					{{else if $value.type=='visa'}}
+						<span class="iconfont icon-qianzheng fs17 c999999"></span>
+						<span class="fs12 c666666 ml3">签证</span>	
+					{{/if}}
+						<span class="fr fs11">{{$value.date | dateFormat:''}}</span>
+					</div>
+					<div class="yc1" style="padding:2px 6px;">
+						<span class="fs14">{{$value.name}}</span>
+					</div>
+				</li>
+			{{/each}}
+		</script>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/castapp.js"></script>
+		<script src="../../js/template-web.js"></script>
+		<script type="text/javascript">
+			mui.plusReady(function(){
+				mui.init({
+					swipeBack:true //启用右滑关闭功能
+				});
+				ca.init();
+				ca.whiteStatusBar();
+				var account=localStorage.getItem('e_code')+'_'+localStorage.getItem('username');
+				var historylist=JSON.parse(plus.storage.getItem(account+'history'));
+				if(!ca.emptyFun(historylist)){
+					try{
+						template.defaults.imports.dateFormat = function(arg1,arg2){
+							var date = new Date(arg1);
+							return transTime2(date);
+						};
+						ca.id('history').innerHTML=template('list', {
+							"list":historylist.sort(ca.getSortFun('desc','date'))
+						});
+					}catch(err){
+						console.log(err);
+					}
+				}else{
+					ca.id('history').innerHTML='<div class="fs17 c999999" style="margin-left:40%;margin-top:20%">无浏览历史！</div>';
+				}
+				ca.closeWaiting();
+				// alert(JSON.stringify(historylist))
+				mui('body').on('tap','.bgwhite',function(){
+					ca.showWaiting();
+					var type=this.getAttribute('data_type');
+					var id=this.getAttribute('data_id');
+					var data_comment_num=this.getAttribute('data_comment_num');
+					var data_grade=this.getAttribute('data_grade');
+					var enterprise_id=this.getAttribute('data_enterprise_id');
+					if(type=='hotel_item'){
+						var detailPage= mui.preload({
+							id:'hotel_item_list_detail',
+							url:'../../hotel/hotel_item_list_detail.html'
+						});
+							if(!detailPage){
+								detailPage = plus.webview.getWebviewById('hotel_item_list_detail');
+							}
+						setTimeout(function(){
+							mui.fire(detailPage,'hotel_item',{
+									hotel_id:id,
+									comment_num:data_comment_num,
+									data_grade:data_grade,
+									enterprise_id:enterprise_id
+								});
+							mui.openWindow({
+								id:'hotel_item_list_detail',
+							})
+							ca.closeWaiting();
+						},600)
+						
+					}else if(type=='restaurant_item'){
+						var detailPage = mui.preload({
+							id:'restaurant_item_list_detail',
+							url:'../../restaurant/restaurant_item_list_detail.html'
+						});
+						setTimeout(function(){
+							if(!detailPage){
+								detailPage = plus.webview.getWebviewById('restaurant_item_list_detail');
+							}
+							mui.fire(detailPage,'restaurant_item',{
+									food_id:id,
+									comment_num:data_comment_num,
+									data_grade:data_grade,
+									enterprise_id:enterprise_id
+								});
+							mui.openWindow({
+								id:'restaurant_item_list_detail',
+							})
+							ca.closeWaiting();
+						},600)
+							//触发详情页面的newsId事件
+					}else if(type=='car_item'){
+						var detailPage = mui.preload({
+							id:'car_list_item_detail',
+							url:'../../car/car_list_item_detail.html'
+						});
+						setTimeout(function(){
+							if(!detailPage){
+								detailPage = plus.webview.getWebviewById('car_list_item_detail');
+							}
+							mui.fire(detailPage,'car_item',{
+									car_id:id,
+									comment_num:data_comment_num,
+									data_grade:data_grade,
+									enterprise_id:enterprise_id
+								});
+							mui.openWindow({
+								id:'car_list_item_detail',
+							})
+							ca.closeWaiting();
+						},600)
+					}else if(type=='guide_item'){
+						var detailPage = mui.preload({
+							id:'guide_item_list_detail1',
+							url:'../../guide/guide_item_list_detail1.html'
+						});
+						setTimeout(function(){
+							if(!detailPage){
+								detailPage = plus.webview.getWebviewById('guide_item_list_detail1');
+							}
+							mui.fire(detailPage,'guide_item',{
+									guide_id:id,
+									comment_num:data_comment_num,
+									comments_num:enterprise_id,
+									data_grade:data_grade
+								});
+							mui.openWindow({
+								id:'guide_item_list_detail1',
+							})
+							ca.closeWaiting();
+						},600)
+					}else if(type=='pickup_item'){
+						var detailPage = mui.preload({
+							id:'pickup_list_item_detail',
+							url:'../../pickup/pickup_list_item_detail.html'
+						});
+						setTimeout(function(){
+							if(!detailPage){
+								detailPage = plus.webview.getWebviewById('pickup_list_item_detail');
+							}
+							mui.fire(detailPage,'pickup_item',{
+									car_id:id,
+									comment_num:data_comment_num,
+									data_grade:data_grade,
+									enterprise_id:enterprise_id
+								});
+							mui.openWindow({
+								id:'pickup_list_item_detail',
+							})
+							ca.closeWaiting();
+						},400)
+					}else if(type=='line'){
+						var styles={};
+						// 在Android5以上设备，如果默认没有开启硬件加速，则强制设置开启
+						if(!plus.webview.defaultHardwareAccelerated()&&parseInt(plus.os.version)>=5){
+							styles.hardwareAccelerated=true;
+						}
+						var web=plus.webview.create('../../line/line_listitem_detail.html','line_listitem_detail',styles,
+						{lineid:id});
+						setTimeout(function(){//延迟0.8s打开
+							plus.webview.show(web,'pop-in');
+							ca.closeWaiting();
+						},500)
+					}else if(type=='recruit'){
+						var self=plus.webview.create('../../recruit/recruitInfo_detail.html','recruitInfo_detail',{},{recruit_id:id});
+						setTimeout(function(){
+							self.show('slide-in-right',350);
+						},100)
+					}else if(type=='visa'){
+						var pl=plus.webview.create(
+							'../../visa/visa_list_item_detail.html',
+							'visa_list_item_detail',{},{product_id:id,country:data_grade})
+						setTimeout(function(){
+							pl.show('slide-in-right',400);
+						},300)
+					}
+					
+				})
+				ca.id('qingchu').addEventListener('tap',function(){
+					var btnArray = ['是','否'];
+					mui.confirm('确定清除所有历史记录?', '提示', btnArray, function(e) {
+						if (e.index == 0) {
+							plus.storage.removeItem(account+'history');
+							location.reload();
+						}
+					})
+				})
+				
+			})
+			
+		</script>
+	</body>
+
+</html>

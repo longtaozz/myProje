@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/style.css" rel="stylesheet" />
+	</head>
+	<style>
+		.mui-table-view-cell a{
+			font-size: 14px;
+			color: #666666!important;
+		}
+		
+	</style>
+	<body>
+		<header class="mui-bar mui-bar-nav user-index-top-bg mheader">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left cffffff" id="mui-action-back"></a>
+			<span class="cffffff fl fs15 ml20" style="line-height: 42px;">系统设置</span>
+		</header>
+		<div class="" style="margin-top: 80px;">
+		    <ul class="mui-table-view">
+			    <li class="mui-table-view-cell" style="">
+			        <a class="mui-navigate-right">账号</a>
+			    </li>
+			</ul>
+			<ul class="mui-table-view" style="margin-top: 15px;">
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">消息通知</a>
+				</li>
+			    <li class="mui-table-view-cell">
+			        <a class="mui-navigate-right">帮助</a>
+			    </li>
+			    <li class="mui-table-view-cell">
+			        <a class="mui-navigate-right">关于优旅通</a>
+			    </li>
+			</ul>
+			<ul class="mui-table-view" style="margin-top: 15px;">
+			    <li class="mui-table-view-cell" style="text-align: center;">
+			        <a class="" style="color: #F95B55!important;font-size: 18px;">退出账号</a>
+			    </li>
+			    
+			</ul>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/castapp.js" ></script>
+		<script type="text/javascript">
+			mui.init({
+				swipeBack:true //启用右滑关闭功能
+			});
+			ca.init();
+			ca.whiteStatusBar();
+			ca.id('mui-action-back').addEventListener('tap',function(){
+				var ps=plus.webview.currentWebview();
+				plus.webview.close(ps);
+			})
+			var cell=ca.className('mui-table-view-cell');
+			
+			cell[0].addEventListener('tap',function(){
+				ca.newInterface({url:'account_switch.html',id:'account_switch'});
+			})
+			cell[1].addEventListener('tap',function(){
+				ca.newInterface({url:'notify.html',id:'notify'});
+			})
+			cell[3].addEventListener('tap',function(){
+				ca.newInterface({url:'about.html',id:'about'});
+			})
+			
+			cell[4].addEventListener('tap',function(){
+				var btnArray = ['是','否'];
+				mui.confirm('确认退出账号？', '', btnArray, function(e) {
+                    if (e.index == 0) {
+                    	ca.deleteLocalStorageUser(localStorage.getItem('userid'));
+                    	localStorage.removeItem('userid');
+                    	localStorage.removeItem('e_id');
+                    	localStorage.removeItem('structure_id');
+						localStorage.removeItem('password');
+                    	mui.plusReady(function(){
+                    		var ws=plus.webview.getWebviewById('index');
+							plus.webview.close(ws);
+                    	})
+                    	ca.newInterface({url:'../login.html',id:'login'});
+                    } else {
+                    	
+                    }
+                })
+			})
+		</script>
+	</body>
+
+</html>

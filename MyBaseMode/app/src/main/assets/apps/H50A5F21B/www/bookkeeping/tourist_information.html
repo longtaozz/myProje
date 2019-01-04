@@ -1,0 +1,783 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/style.css" />
+		<style>
+			table tr td{
+				font-size: 14px;
+				text-align: center;
+			}
+			.jz{
+				color: #4F77AA;
+			}
+			.sz{
+				color: #4F77AA;
+			}
+			.dindanhao{
+				/*border-bottom: 1px solid #4F77AA;*/
+				color: #4F77AA;
+			}
+			.mui-scroll-wrapper1
+			{
+			    position: absolute;
+			    z-index: 2;
+			    top: 0;
+			    bottom: 0;
+			    left: 0;
+			    overflow: hidden;
+			    width: 100%;
+			}
+			.mui-scroll1
+			{
+			    position: absolute;
+			    z-index: 1;
+			    width: 100%;
+			    -webkit-transform: translateZ(0);
+			            transform: translateZ(0);
+			}
+			.mui-table-view li{
+				font-size: 14px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav mheader" style="background: #FFFFFF;">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mback" style="color: #333333;"></a>
+		    <h1 class="mui-title htitle" style="color: #333333;">计划详情</h1>
+		</header>
+		<div class="mui-content" style="margin-top: 30px;margin-bottom: 20px;">
+		    <div class="ml10">
+		    	<div>
+		    		<span class="c666666">游客信息</span>
+		    	</div>
+		    	<div class="mt10 c666666" id="">
+		    		<table border="1" style="width: 95%;" id="tourist">
+		    			
+		    		</table>
+		    	</div>
+		    </div>
+		    
+		    <div class="ml10 ">
+		    	<div class="mt10 c666666">
+		    		<span>住宿</span>
+		    	</div>
+		    	<div class="mt10 c666666">
+		    		<table border="1" style="width: 95%;" id="hotel">
+		    			
+		    		</table>
+		    	</div>
+		    </div>
+		    <div class="ml10 ">
+		    	<div class="mt10 c666666">
+		    		<span>用餐</span>
+		    	</div>
+		    	<div class="mt10 c666666">
+		    		<table border="1" style="width: 95%;" id="food">
+		    			
+		    		</table>
+		    	</div>
+		    </div>
+				<div class="ml10 ">
+					<div class="mt10 c666666">
+						<span>用车</span>
+					</div>
+					<div class="mt10 c666666">
+						<table border="1" style="width: 95%;" id="car">
+							
+						</table>
+					</div>
+				</div>
+		    <div class="ml10 ">
+		    	<div class="mt10 c666666">
+		    		<span>门票</span>
+		    	</div>
+		    	<div class="mt10 c666666">
+		    		<table border="1" style="width: 95%;" id="ticket">
+		    			
+		    		</table>
+		    	</div>
+		    </div>
+		    <div class="ml10 ">
+		    	<div class="mt10 c666666">
+		    		<span>团队备注</span>
+		    	</div>
+		    	<div class="mt10 c666666 fs14" style="border: 1px solid #666666;width: 95%;">
+		    		&nbsp;&nbsp;&nbsp;&nbsp;<span id="beizhu"></span>
+		    	</div>
+		    </div>
+		    <div class="ml10 ">
+		    	<div class="mt10 c666666">
+		    		<span>行程安排</span>
+		    	</div>
+		    	<div class="mt10 c666666">
+		    		<table border="1" style="width: 95%;" id="lineitem">
+		    			
+		    		</table>
+		    	</div>
+		    </div>
+		    <div id="middlePopover2" class="mui-popover" style=" position:fixed;height: 350px;width: 92%;border-radius:5px ;border-top: 1px solid #DADADD;z-index: 1000;">
+					<div class="w100 tc h40 lh40 bbc3">
+						<span class="fs15">游客信息</span>
+						<span class="mui-icon mui-icon-close" id="close" style="position: absolute;right:0px;top:-1px;"></span>
+					</div>
+					<div class="mui-scroll-wrapper1" id="mui-scroll-wrapper" style="margin-top: 42px;">
+						<div class="mui-scroll1" >
+							<ul class="mui-table-view tc" style="max-height: 5000px;" id="list">
+								<!--<li class="w100 oh">
+									<span class="w20  fl bde5">姓名</span ><span class="w10 fl bde5">性别</span><span class="w40 fl bde5">证件</span><span class="w10 fl bde5">年龄</span><span class="w20 fl bde5">电话</span>
+								</li>
+								<li class="fs12 oh">
+									<span class="w20  fl">李四三点</span ><span class="w10 fl">男</span><span class="w40 fl ">430802199602169311</span><span class="w10 fl ">45</span><span class="w20 fl">18570442259</span>
+								</li>-->
+								
+							</ul>
+						</div>
+					</div>
+			</div>
+			<div id="middlePopover3" class="mui-popover" style=" position:fixed;height: 350px;width: 92%;border-radius:5px ;border-top: 1px solid #DADADD;z-index: 1000;">
+					<div class="w100 tc h40 lh40 bbc3">
+						<span class="fs15" id="pickup_num"></span>
+						<span class="mui-icon mui-icon-close" id="close1" style="position: absolute;right:0px;top:-1px;"></span>
+					</div>
+					<div class="mui-scroll-wrapper1" id="mui-scroll-wrapper1" style="margin-top: 42px;">
+						<div class="mui-scroll1" >
+							<ul class="mui-table-view tc" style="max-height: 5000px;" id="list1">
+								<table border="1" bordercolor="#666666" style="width:98%;color:#666666;margin-left: 1%;" id="pickup">
+									
+								</table>
+							</ul>
+						</div>
+					</div>
+			</div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/castapp.js" ></script>
+		<script type="text/javascript">
+			mui.init();
+			ca.init(true);
+			ca.blackStatusBar();
+			ca.checkTheNetwork();
+			var teamsk_id=localStorage.getItem('teamsk_id');
+			mui.plusReady(function(){
+				plus.nativeUI.showWaiting();
+				ca.ajaxs({url:'findDetailedPlan',data:{
+						teamsk_id:teamsk_id,user_id:localStorage.getItem('userid')
+					},
+					succFn:function(data){
+						if(data.msg==1){
+						var tourist=data.lineOrders;
+						for(var i in tourist){
+							var temp='<tr >'
+						    		+		'<td colspan="6" align="center">第'+(parseInt(i)+1)+'组</td>'
+						    		+	'</tr>'
+						    		+	'<tr>'
+						    		+		'<td colspan="2">订单号</td>'
+						    		+		'<td colspan="4" class="dindanhao">'+tourist[i].order_num+'</td>'
+						    		+	'</tr>'
+						    		+	'<tr>'
+						    		+		'<td colspan="2">游客代表</td>'
+						    		+		'<td colspan="2">'+tourist[i].contact_name+'</td>'
+						    		+		'<td colspan="2" class="phone">'+tourist[i].contact_tel+'</td>'
+						    		+	'</tr>'
+						    		+	'<tr>'
+						    		+		'<td>总人数</td>'
+						    		+		'<td>'+(tourist[i].man_num+tourist[i].child_num)+'</td>'
+						    		+		'<td>大人数</td>'
+						    		+		'<td>'+tourist[i].man_num+'</td>'
+						    		+		'<td>小孩数</td>'
+						    		+		'<td>'+tourist[i].child_num+'</td>'
+						    		+	'</tr>'
+									+(tourist[i].collect_amount>0?'<tr class="cred"><td colspan="2">代收款</td><td colspan="4">'+tourist[i].collect_amount+'</td></tr>':'')
+									+(tourist[i].go_date!='0000-00-00'?'<tr><td colspan="1" class="jz" data_type="0" data_order_num="'+tourist[i].order_num+'">接站</td><td colspan="1">'+tourist[i].go_date+' '+tourist[i].go_time+'</td><td colspan="2">车次/航班</td><td colspan="2">'+tourist[i].go_traffic+'</td></tr>':'')
+									+(tourist[i].back_date!='0000-00-00'?'<tr><td colspan="1" class="jz" data_type="1" data_order_num="'+tourist[i].order_num+'">送站</td><td colspan="1">'+tourist[i].back_date+' '+tourist[i].back_time+'</td><td colspan="2">车次/航班</td><td colspan="2">'+tourist[i].back_traffic+'</td></tr>':'')
+									+(tourist[i].order_mark?'<tr><td colspan="1">备注</td><td colspan="5">'+tourist[i].order_mark+'</td></tr>':'');
+						    		
+						    ca.id('tourist').innerHTML+=temp;
+						}
+						
+						
+						
+						var hotel=data.hotel;
+						if(!ca.emptyFun(hotel)){
+							var use_date1=hotel[0].use_date;
+							for(var i in hotel){
+								var temp;
+								var phone='';
+								if(!ca.emptyFun(hotel[i].enterprisehotel)){
+									phone=hotel[i].enterprisehotel.contact_tel;
+								}
+								if(use_date1==hotel[i].use_date && i==0){
+									temp='<tr>'
+			    						+	'<td colspan="6" align="center">'+hotel[i].use_date+'</td>'
+						    			+'</tr>'
+						    			+'<tr>'
+						    			+	'<td colspan="3">'+hotel[i].name+'</td>'
+						    			+	'<td colspan="1.5" class="phone">'+phone+'</td>'
+						    			+	'<td colspan="1.5" class="phone">'+(hotel[i].procurement_price*hotel[i].procurement_quantity+hotel[i].procurement_price_two*hotel[i].procurement_quantity_two+hotel[i].procurement_price_three*hotel[i].procurement_quantity_three+hotel[i].procurement_price_four*hotel[i].procurement_quantity_four)+'</td>'
+						    			+'</tr>'
+						    			+'<tr class="'+(hotel[i].procurement_quantity>0?'':'disn')+'">'
+						    			+	'<td colspan="2">单人间</td>'
+						    			+	'<td colspan="1">'+hotel[i].procurement_quantity+'间</td>'
+						    			+	'<td colspan="1.5">'+hotel[i].procurement_price+'</td>'
+						    			+	'<td colspan="1.5">'+(hotel[i].procurement_price*hotel[i].procurement_quantity)+'</td>'
+						    			+'</tr>'
+										+'<tr class="'+(hotel[i].procurement_quantity_two>0?'':'disn')+'">'
+						    			+	'<td colspan="2">双人间</td>'
+						    			+	'<td colspan="1">'+hotel[i].procurement_quantity_two+'间</td>'
+						    			+	'<td colspan="1.5">'+hotel[i].procurement_price_two+'</td>'
+						    			+	'<td colspan="1.5">'+(hotel[i].procurement_price_two*hotel[i].procurement_quantity_two)+'</td>'
+						    			+'</tr>'
+										+'<tr class="'+(hotel[i].procurement_quantity_three>0?'':'disn')+'">'
+						    			+	'<td colspan="2">三人间</td>'
+						    			+	'<td colspan="1">'+hotel[i].procurement_quantity_three+'间</td>'
+						    			+	'<td colspan="1.5">'+hotel[i].procurement_price_three+'</td>'
+						    			+	'<td colspan="1.5">'+(hotel[i].procurement_price_three*hotel[i].procurement_quantity_three)+'</td>'
+						    			+'</tr>'
+						    			+'<tr class="'+(hotel[i].procurement_quantity_four>0?'':'disn')+'">'
+						    			+	'<td colspan="2">司陪房</td>'
+						    			+	'<td colspan="1">'+hotel[i].procurement_quantity_four+'间</td>'
+						    			+	'<td colspan="1.5">'+hotel[i].procurement_price_four+'</td>'
+						    			+	'<td colspan="1.5">'+(hotel[i].procurement_price_four*hotel[i].procurement_quantity_four)+'</td>'
+						    			+'</tr>';
+								}
+								if(use_date1==hotel[i].use_date && i!=0){
+									temp='<td colspan="3">'+hotel[i].name+'</td>'
+						    			+	'<td colspan="1.5" class="phone">'+phone+'</td>'
+						    			+	'<td colspan="1.5" class="phone">'+(hotel[i].procurement_price*hotel[i].procurement_quantity+hotel[i].procurement_price_two*hotel[i].procurement_quantity_two+hotel[i].procurement_price_three*hotel[i].procurement_quantity_three+hotel[i].procurement_price_four*hotel[i].procurement_quantity_four)+'</td>'
+						    			+'</tr>'
+						    			+'<tr class="'+(hotel[i].procurement_quantity>0?'':'disn')+'">'
+						    			+	'<td colspan="2">单人间</td>'
+						    			+	'<td colspan="1">'+hotel[i].procurement_quantity+'间</td>'
+						    			+	'<td colspan="1.5">'+hotel[i].procurement_price+'</td>'
+						    			+	'<td colspan="1.5">'+(hotel[i].procurement_price*hotel[i].procurement_quantity)+'</td>'
+						    			+'</tr>'
+										+'<tr class="'+(hotel[i].procurement_quantity_two>0?'':'disn')+'">'
+						    			+	'<td colspan="2">双人间</td>'
+						    			+	'<td colspan="1">'+hotel[i].procurement_quantity_two+'间</td>'
+						    			+	'<td colspan="1.5">'+hotel[i].procurement_price_two+'</td>'
+						    			+	'<td colspan="1.5">'+(hotel[i].procurement_price_two*hotel[i].procurement_quantity_two)+'</td>'
+						    			+'</tr>'
+										+'<tr class="'+(hotel[i].procurement_quantity_three>0?'':'disn')+'">'
+						    			+	'<td colspan="2">三人间</td>'
+						    			+	'<td colspan="1">'+hotel[i].procurement_quantity_three+'间</td>'
+						    			+	'<td colspan="1.5">'+hotel[i].procurement_price_three+'</td>'
+						    			+	'<td colspan="1.5">'+(hotel[i].procurement_price_three*hotel[i].procurement_quantity_three)+'</td>'
+						    			+'</tr>'
+						    			+'<tr class="'+(hotel[i].procurement_quantity_four>0?'':'disn')+'">'
+						    			+	'<td colspan="2">司陪房</td>'
+						    			+	'<td colspan="1">'+hotel[i].procurement_quantity_four+'间</td>'
+						    			+	'<td colspan="1.5">'+hotel[i].procurement_price_four+'</td>'
+						    			+	'<td colspan="1.5">'+(hotel[i].procurement_price_four*hotel[i].procurement_quantity_four)+'</td>'
+						    			+'</tr>';
+								}
+								if(use_date1!=hotel[i].use_date){
+									use_date1=hotel[i].use_date;
+									temp='<tr>'
+			    						+	'<td colspan="6" align="center">'+hotel[i].use_date+'</td>'
+						    			+'</tr>'
+						    			+'<tr>'
+						    			+	'<td colspan="3">'+hotel[i].name+'</td>'
+						    			+	'<td colspan="1.5" class="phone">'+phone+'</td>'
+						    			+	'<td colspan="1.5">'+(hotel[i].procurement_price*hotel[i].procurement_quantity+hotel[i].procurement_price_two*hotel[i].procurement_quantity_two+hotel[i].procurement_price_three*hotel[i].procurement_quantity_three+hotel[i].procurement_price_four*hotel[i].procurement_quantity_four)+'</td>'
+						    			+'</tr>'
+						    			+'<tr class="'+(hotel[i].procurement_quantity>0?'':'disn')+'">'
+						    			+	'<td colspan="2">单人间</td>'
+						    			+	'<td colspan="1">'+hotel[i].procurement_quantity+'间</td>'
+						    			+	'<td colspan="1.5">'+hotel[i].procurement_price+'</td>'
+						    			+	'<td colspan="1.5">'+(hotel[i].procurement_price*hotel[i].procurement_quantity)+'</td>'
+						    			+'</tr>'
+						    			+'<tr class="'+(hotel[i].procurement_quantity_two>0?'':'disn')+'">'
+						    			+	'<td colspan="2">双人间</td>'
+						    			+	'<td colspan="1">'+hotel[i].procurement_quantity_two+'间</td>'
+						    			+	'<td colspan="1.5">'+hotel[i].procurement_price_two+'</td>'
+						    			+	'<td colspan="1.5">'+(hotel[i].procurement_price_two*hotel[i].procurement_quantity_two)+'</td>'
+						    			+'</tr>'
+						    			+'<tr class="'+(hotel[i].procurement_quantity_three>0?'':'disn')+'">'
+						    			+	'<td colspan="2">三人间</td>'
+						    			+	'<td colspan="1">'+hotel[i].procurement_quantity_three+'间</td>'
+						    			+	'<td colspan="1.5">'+hotel[i].procurement_price_three+'</td>'
+						    			+	'<td colspan="1.5">'+(hotel[i].procurement_price_three*hotel[i].procurement_quantity_three)+'</td>'
+						    			+'</tr>'
+						    			+'<tr class="'+(hotel[i].procurement_quantity_four>0?'':'disn')+'">'
+						    			+	'<td colspan="2">司陪房</td>'
+						    			+	'<td colspan="1">'+hotel[i].procurement_quantity_four+'间</td>'
+						    			+	'<td colspan="1.5">'+hotel[i].procurement_price_four+'</td>'
+						    			+	'<td colspan="1.5">'+(hotel[i].procurement_price_four*hotel[i].procurement_quantity_four)+'</td>'
+						    			+'</tr>';
+						    			
+								}
+								ca.id('hotel').innerHTML+=temp;
+							}
+						}
+						
+						
+						var ticket=data.ticket;
+						if(!ca.emptyFun(ticket)){
+							var ticket1=ticket[0].use_date;
+							for(var i in ticket){
+								var temp;
+								var phone='';
+								if(!ca.emptyFun(ticket[i].enterpriseticket)){
+									phone=ticket[i].enterpriseticket.contact_tel;
+								}
+								if(ticket1==ticket[i].use_date && i==0){
+									temp='<tr>'
+			    						+	'<td colspan="6" align="center">'+ticket[i].use_date+'</td>'
+						    			+'</tr>'
+						    			+'<tr>'
+						    			+	'<td colspan="3">'+ticket[i].name+'</td>'
+						    			+	'<td colspan="1.5" class="phone">'+phone+'</td>'
+						    			+	'<td colspan="1.5">'+(ticket[i].procurement_price*ticket[i].procurement_quantity+ticket[i].procurement_price_two*ticket[i].procurement_quantity_two+ticket[i].procurement_price_three*ticket[i].procurement_quantity_three+ticket[i].procurement_price_four*ticket[i].procurement_quantity_four)+'</td>'
+						    			+'</tr>'
+						    			+'<tr class="'+(ticket[i].procurement_quantity>0?'':'disn')+'">'
+						    			+	'<td colspan="2">全票</td>'
+						    			+	'<td colspan="1">'+ticket[i].procurement_quantity+'张</td>'
+						    			+	'<td colspan="1.5">'+ticket[i].procurement_price+'</td>'
+						    			+	'<td colspan="1.5">'+(ticket[i].procurement_price*ticket[i].procurement_quantity)+'</td>'
+						    			+'</tr>'
+						    			+'<tr class="'+(ticket[i].procurement_quantity_two>0?'':'disn')+'">'
+						    			+	'<td colspan="2">优惠票</td>'
+						    			+	'<td colspan="1">'+ticket[i].procurement_quantity_two+'张</td>'
+						    			+	'<td colspan="1.5">'+ticket[i].procurement_price_two+'</td>'
+						    			+	'<td colspan="1.5">'+(ticket[i].procurement_price_two*ticket[i].procurement_quantity_two)+'</td>'
+						    			+'</tr>'
+						    			+'<tr class="'+(ticket[i].procurement_quantity_three>0?'':'disn')+'">'
+						    			+	'<td colspan="2">特惠票</td>'
+						    			+	'<td colspan="1">'+ticket[i].procurement_quantity_three+'张</td>'
+						    			+	'<td colspan="1.5">'+ticket[i].procurement_price_three+'</td>'
+						    			+	'<td colspan="1.5">'+(ticket[i].procurement_price_three*ticket[i].procurement_quantity_three)+'</td>'
+						    			+'</tr>';
+								}
+								if(ticket1==ticket[i].use_date && i!=0){
+									temp='<tr>'
+						    			+	'<td colspan="3">'+ticket[i].name+'</td>'
+						    			+	'<td colspan="1.5" class="phone">'+phone+'</td>'
+						    			+	'<td colspan="1.5">'+(ticket[i].procurement_price*ticket[i].procurement_quantity+ticket[i].procurement_price_two*ticket[i].procurement_quantity_two+ticket[i].procurement_price_three*ticket[i].procurement_quantity_three+ticket[i].procurement_price_four*ticket[i].procurement_quantity_four)+'</td>'
+						    			+'</tr>'
+										+'<tr class="'+(ticket[i].procurement_quantity>0?'':'disn')+'">'
+						    			+	'<td colspan="2">全票</td>'
+						    			+	'<td colspan="1">'+ticket[i].procurement_quantity+'张</td>'
+						    			+	'<td colspan="1.5">'+ticket[i].procurement_price+'</td>'
+						    			+	'<td colspan="1.5">'+(ticket[i].procurement_price*ticket[i].procurement_quantity)+'</td>'
+						    			+'</tr>'
+						    			+'<tr class="'+(ticket[i].procurement_quantity_two>0?'':'disn')+'">'
+						    			+	'<td colspan="2">优惠票</td>'
+						    			+	'<td colspan="1">'+ticket[i].procurement_quantity_two+'张</td>'
+						    			+	'<td colspan="1.5">'+ticket[i].procurement_price_two+'</td>'
+						    			+	'<td colspan="1.5">'+(ticket[i].procurement_price_two*ticket[i].procurement_quantity_two)+'</td>'
+						    			+'</tr>'
+						    			+'<tr class="'+(ticket[i].procurement_quantity_three>0?'':'disn')+'">'
+						    			+	'<td colspan="2">特惠票</td>'
+						    			+	'<td colspan="1">'+ticket[i].procurement_quantity_three+'张</td>'
+						    			+	'<td colspan="1.5">'+ticket[i].procurement_price_three+'</td>'
+						    			+	'<td colspan="1.5">'+(ticket[i].procurement_price_three*ticket[i].procurement_quantity_three)+'</td>'
+						    			+'</tr>';
+								}
+								if(ticket1!=ticket[i].use_date){
+									ticket1=ticket[i].use_date;
+									temp='<tr>'
+			    						+	'<td colspan="6" align="center">'+ticket[i].use_date+'</td>'
+						    			+'</tr>'
+						    			+'<tr>'
+						    			+	'<td colspan="3">'+ticket[i].name+'</td>'
+						    			+	'<td colspan="1.5" class="phone">'+phone+'</td>'
+						    			+	'<td colspan="1.5">'+(ticket[i].procurement_price*ticket[i].procurement_quantity+ticket[i].procurement_price_two*ticket[i].procurement_quantity_two+ticket[i].procurement_price_three*ticket[i].procurement_quantity_three+ticket[i].procurement_price_four*ticket[i].procurement_quantity_four)+'</td>'
+						    			+'</tr>'
+						    			+'<tr class="'+(ticket[i].procurement_quantity>0?'':'disn')+'">'
+						    			+	'<td colspan="2">全票</td>'
+						    			+	'<td colspan="1">'+ticket[i].procurement_quantity+'张</td>'
+						    			+	'<td colspan="1.5">'+ticket[i].procurement_price+'</td>'
+						    			+	'<td colspan="1.5">'+(ticket[i].procurement_price*ticket[i].procurement_quantity)+'</td>'
+						    			+'</tr>'
+						    			+'<tr class="'+(ticket[i].procurement_quantity_two>0?'':'disn')+'">'
+						    			+	'<td colspan="2">优惠票</td>'
+						    			+	'<td colspan="1">'+ticket[i].procurement_quantity_two+'张</td>'
+						    			+	'<td colspan="1.5">'+ticket[i].procurement_price_two+'</td>'
+						    			+	'<td colspan="1.5">'+(ticket[i].procurement_price_two*ticket[i].procurement_quantity_two)+'</td>'
+						    			+'</tr>'
+						    			+'<tr class="'+(ticket[i].procurement_quantity_three>0?'':'disn')+'">'
+						    			+	'<td colspan="2">特惠票</td>'
+						    			+	'<td colspan="1">'+ticket[i].procurement_quantity_three+'张</td>'
+						    			+	'<td colspan="1.5">'+ticket[i].procurement_price_three+'</td>'
+						    			+	'<td colspan="1.5">'+(ticket[i].procurement_price_three*ticket[i].procurement_quantity_three)+'</td>'
+						    			+'</tr>';
+						    			
+								}
+								ca.id('ticket').innerHTML+=temp;
+							}
+						}
+						var food=data.food;
+						if(!ca.emptyFun(food)){
+							var use_date2=food[0].use_date;
+							for(var i in food){
+								var temp;
+								var phone='';
+								if(!ca.emptyFun(food[i].enterprisefood)){
+									phone=food[i].enterprisefood.contact_tel;
+								}
+								if(use_date2==food[i].use_date && i==0){
+									temp='<tr>'
+			    						+	'<td colspan="7" align="center">'+food[i].use_date+'</td>'
+						    			+'</tr>'
+						    			+'<tr>'
+						    			+	'<td colspan="3">'+food[i].name+'</td>'
+						    			+	'<td colspan="1.5" class="phone">'+phone+'</td>'
+						    			+	'<td colspan="1.5">'+(food[i].procurement_price*food[i].procurement_quantity+food[i].procurement_price_two*food[i].procurement_quantity_two+food[i].procurement_price_three*food[i].procurement_quantity_three+food[i].procurement_price_four*food[i].procurement_quantity_four)+'</td>'
+						    			+'</tr>'
+						    			+'<tr class="'+(food[i].procurement_quantity>0?'':'disn')+'">'
+						    			+	'<td colspan="2">早餐</td>'
+						    			+	'<td colspan="1">'+food[i].procurement_quantity+'位</td>'
+						    			+	'<td colspan="1.5">'+food[i].procurement_price+'</td>'
+						    			+	'<td colspan="1.5">'+(food[i].procurement_price*food[i].procurement_quantity)+'</td>'
+						    			+'</tr>'
+						    			+'<tr class="'+(food[i].procurement_quantity_two>0?'':'disn')+'">'
+						    			+	'<td colspan="2">中餐</td>'
+						    			+	'<td colspan="1">'+food[i].procurement_quantity_two+'位</td>'
+						    			+	'<td colspan="1.5">'+food[i].procurement_price_two+'</td>'
+						    			+	'<td colspan="1.5">'+(food[i].procurement_price_two*food[i].procurement_quantity_two)+'</td>'
+						    			+'</tr>'
+						    			+'<tr class="'+(food[i].procurement_quantity_three>0?'':'disn')+'">'
+						    			+	'<td colspan="2">晚餐</td>'
+						    			+	'<td colspan="1">'+food[i].procurement_quantity_three+'位</td>'
+						    			+	'<td colspan="1.5">'+food[i].procurement_price_three+'</td>'
+						    			+	'<td colspan="1.5">'+(food[i].procurement_price_three*food[i].procurement_quantity_three)+'</td>'
+						    			+'</tr>'
+						    			+'<tr class="'+(food[i].procurement_quantity_four>0?'':'disn')+'">'
+						    			+	'<td colspan="2">半餐</td>'
+						    			+	'<td colspan="1">'+food[i].procurement_quantity_four+'位</td>'
+						    			+	'<td colspan="1.5">'+food[i].procurement_price_four+'</td>'
+						    			+	'<td colspan="1.5">'+(food[i].procurement_price_four*food[i].procurement_quantity_four)+'</td>'
+						    			+'</tr>';
+						    			
+								}
+								if(use_date2==food[i].use_date && i!=0){
+									temp='<tr>'
+						    			+	'<td colspan="3">'+food[i].name+'</td>'
+						    			+	'<td colspan="1.5" class="phone">'+phone+'</td>'
+						    			+	'<td colspan="1.5">'+(food[i].procurement_price*food[i].procurement_quantity+food[i].procurement_price_two*food[i].procurement_quantity_two+food[i].procurement_price_three*food[i].procurement_quantity_three+food[i].procurement_price_four*food[i].procurement_quantity_four)+'</td>'
+						    			+'</tr>'
+						    			+'<tr class="'+(food[i].procurement_quantity>0?'':'disn')+'">'
+						    			+	'<td colspan="2">早餐</td>'
+						    			+	'<td colspan="1">'+food[i].procurement_quantity+'位</td>'
+						    			+	'<td colspan="1.5">'+food[i].procurement_price+'</td>'
+						    			+	'<td colspan="1.5">'+(food[i].procurement_price*food[i].procurement_quantity)+'</td>'
+						    			+'</tr>'
+						    			+'<tr class="'+(food[i].procurement_quantity_two>0?'':'disn')+'">'
+						    			+	'<td colspan="2">中餐</td>'
+						    			+	'<td colspan="1">'+food[i].procurement_quantity_two+'位</td>'
+						    			+	'<td colspan="1.5">'+food[i].procurement_price_two+'</td>'
+						    			+	'<td colspan="1.5">'+(food[i].procurement_price_two*food[i].procurement_quantity_two)+'</td>'
+						    			+'</tr>'
+						    			+'<tr class="'+(food[i].procurement_quantity_three>0?'':'disn')+'">'
+						    			+	'<td colspan="2">晚餐</td>'
+						    			+	'<td colspan="1">'+food[i].procurement_quantity_three+'位</td>'
+						    			+	'<td colspan="1.5">'+food[i].procurement_price_three+'</td>'
+						    			+	'<td colspan="1.5">'+(food[i].procurement_price_three*food[i].procurement_quantity_three)+'</td>'
+						    			+'</tr>'
+						    			+'<tr class="'+(food[i].procurement_quantity_four>0?'':'disn')+'">'
+						    			+	'<td colspan="2">半餐</td>'
+						    			+	'<td colspan="1">'+food[i].procurement_quantity_four+'位</td>'
+						    			+	'<td colspan="1.5">'+food[i].procurement_price_four+'</td>'
+						    			+	'<td colspan="1.5">'+(food[i].procurement_price_four*food[i].procurement_quantity_four)+'</td>'
+						    			+'</tr>';
+								}
+								if(use_date2!=food[i].use_date){
+									use_date2=food[i].use_date;
+									temp='<tr>'
+			    						+	'<td colspan="7" align="center">'+food[i].use_date+'</td>'
+						    			+'</tr>'
+						    			+'<tr>'
+						    			+	'<td colspan="3">'+food[i].name+'</td>'
+						    			+	'<td colspan="1.5" class="phone">'+phone+'</td>'
+						    			+	'<td colspan="1.5">'+(food[i].procurement_price*food[i].procurement_quantity+food[i].procurement_price_two*food[i].procurement_quantity_two+food[i].procurement_price_three*food[i].procurement_quantity_three+food[i].procurement_price_four*food[i].procurement_quantity_four)+'</td>'
+						    			+'</tr>'
+						    			+'<tr class="'+(food[i].procurement_quantity>0?'':'disn')+'">'
+						    			+	'<td colspan="2">早餐</td>'
+						    			+	'<td colspan="1">'+food[i].procurement_quantity+'位</td>'
+						    			+	'<td colspan="1.5">'+food[i].procurement_price+'</td>'
+						    			+	'<td colspan="1.5">'+(food[i].procurement_price*food[i].procurement_quantity)+'</td>'
+						    			+'</tr>'
+						    			+'<tr class="'+(food[i].procurement_quantity_two>0?'':'disn')+'">'
+						    			+	'<td colspan="2">中餐</td>'
+						    			+	'<td colspan="1">'+food[i].procurement_quantity_two+'位</td>'
+						    			+	'<td colspan="1.5">'+food[i].procurement_price_two+'</td>'
+						    			+	'<td colspan="1.5">'+(food[i].procurement_price_two*food[i].procurement_quantity_two)+'</td>'
+						    			+'</tr>'
+						    			+'<tr class="'+(food[i].procurement_quantity_three>0?'':'disn')+'">'
+						    			+	'<td colspan="2">晚餐</td>'
+						    			+	'<td colspan="1">'+food[i].procurement_quantity_three+'位</td>'
+						    			+	'<td colspan="1.5">'+food[i].procurement_price_three+'</td>'
+						    			+	'<td colspan="1.5">'+(food[i].procurement_price_three*food[i].procurement_quantity_three)+'</td>'
+						    			+'</tr>'
+						    			+'<tr class="'+(food[i].procurement_quantity_four>0?'':'disn')+'">'
+						    			+	'<td colspan="2">半餐</td>'
+						    			+	'<td colspan="1">'+food[i].procurement_quantity_four+'位</td>'
+						    			+	'<td colspan="1.5">'+food[i].procurement_price_four+'</td>'
+						    			+	'<td colspan="1.5">'+(food[i].procurement_price_four*food[i].procurement_quantity_four)+'</td>'
+						    			+'</tr>';
+								}
+								ca.id('food').innerHTML+=temp;
+							}
+						}
+						var car=data.car;
+						if(!ca.emptyFun(car)){
+							for(var i in car){
+								var phone='';
+								if(!ca.emptyFun(car[i].enterprisecar)){
+									phone=car[i].enterprisecar.contact_tel;
+								}
+								var temp='<tr>'
+						    			+	'<td colspan="3">'+car[i].name+'</td>'
+						    			+	'<td colspan="1.5" class="phone">'+phone+'</td>'
+						    			+	'<td colspan="1.5">'+(car[i].procurement_price*car[i].procurement_quantity)+'</td>'
+						    			+'</tr>'
+											+'<tr><td colspan="7" align="center">'+car[i].use_date+'--'+car[i].end_date+'</td></tr>';
+								
+								ca.id('car').innerHTML+=temp;
+							}
+						}
+						
+						if(!ca.emptyFun(data.mark)){
+							ca.id('beizhu').innerHTML=data.mark;
+						}else{
+							ca.id('beizhu').innerHTML='无';
+						}
+						var lineitem=data.lineitem;
+						if(!ca.emptyFun(lineitem)){
+							for(var i in lineitem){
+								var temp='<tr>'
+					    			+		'<td colspan="6" align="center">day'+(parseInt(i)+1)+'</td>'
+					    			+	'</tr>'
+					    			+	'<tr>'
+					    			+		'<td colspan="6" >'+delHtmlTag(lineitem[i].detail)+'</td>'
+					    			+	'</tr>';
+							    ca.id('lineitem').innerHTML+=temp;	
+							}
+						}
+					}
+						plus.nativeUI.closeWaiting();	
+					},
+					errFn:function(call){
+						ca.closeWaiting();
+						mui.toast(call);
+					}
+					
+				})
+				function delHtmlTag(str){
+					  return str.replace(/<[^>]+>/g,"");//去掉所有的html标记
+				}
+				
+				mui(".mui-content").on('tap','.phone',function(){
+					callphone(this.innerHTML);
+				})
+				ca.id('middlePopover2').style.top='20%';
+				ca.id('middlePopover2').style.left='4%';
+				ca.id('middlePopover2').style.right='4%';
+				mui('#mui-scroll-wrapper').scroll();
+				mui('#tourist').on('tap','.dindanhao',function(){
+					var list=ca.id('list');
+					list.innerHTML="";
+					mui('#mui-scroll-wrapper').scroll().scrollTo(0,0,100);
+					plus.nativeUI.showWaiting();
+					ca.ajaxs({url:'findLineOderTourist_info',data:{
+							order_num:this.innerHTML,
+						},
+						succFn:function(data){
+							if(!ca.emptyFun(data)){
+								var data=data.tourist_info;
+								for(var a in data){
+									var li="";
+									var sex="";
+									if(data[a].sex==1){
+										sex='男';
+									}else{
+										sex='女';
+									}
+									
+									if(a==0){
+										li='<li class="w100 oh">'
+											+	'<span class="w18  fl bde5">姓名</span ><span class="w10 fl bde5">性别</span><span class="w40 fl bde5">证件</span><span class="w10 fl bde5">年龄</span><span class="w22 fl bde5">电话</span>'
+											+'</li>'
+											+'<li class="fs12 oh">'
+											+	'<span class="w18  fl">'+data[a].name+'</span ><span class="w10 fl">'+sex+'</span><span class="w40 fl ">'+data[a].card+'</span><span class="w10 fl ">'+data[a].age+'</span><span class="w22 fl">'+data[a].phone+'</span>'
+											+'</li>';
+									}else{
+										li='<li class="fs12 oh">'
+										+	'<span class="w18  fl">'+data[a].name+'</span ><span class="w10 fl">'+sex+'</span><span class="w40 fl ">'+data[a].card+'</span><span class="w10 fl ">'+data[a].age+'</span><span class="w22 fl">'+data[a].phone+'</span>'
+										+'</li>';
+									}
+									list.innerHTML+=li;
+								}
+							}
+							
+							ca.closeWaiting();
+							mui('#middlePopover2').popover('show');
+							closes();
+						},
+						errFn:function(call){
+							mui.toast(call);
+							ca.closeWaiting();
+						}
+					})
+				})
+				
+				function closes(){
+					ca.id('close').addEventListener('tap',function(){
+						mui('#middlePopover2').popover('hide');
+					})
+				}
+				function closes1(){
+					ca.id('close1').addEventListener('tap',function(){
+						mui('#middlePopover3').popover('hide');
+					})
+				}
+				ca.id('middlePopover3').style.top='20%';
+				ca.id('middlePopover3').style.left='4%';
+				ca.id('middlePopover3').style.right='4%';
+				mui('#mui-scroll-wrapper1').scroll();
+				mui('#tourist').on('tap','.jz',function(){
+					ca.showWaiting();
+					ca.id('pickup').innerHTML='';
+					ca.id('pickup_num').innerText='';
+					var order_num=this.getAttribute('data_order_num');
+					var type=this.getAttribute('data_type');
+					ca.ajaxs({url:'findAccountingGuidePickUpByOrder_num',data:{
+							teamsk_id:teamsk_id,order_num:order_num,type:type
+						},succFn:function(data){
+								if(data){
+									ca.id('pickup_num').innerText=order_num+(type>0?'送站':'接站')+'采购';
+									var hotel=data.hotel;
+									var food=data.food;
+									var pickup=data.pickup;
+									if(!ca.emptyFun(hotel)){
+										for(var i in hotel){
+											var phone='';
+											if(!ca.emptyFun(hotel[i].enterprisehotel)){
+												phone=hotel[i].enterprisehotel.contact_tel;
+											}
+										var temp='<tr>'
+													+	'<td colspan="6" align="center">酒店('+hotel[i].use_date+')</span></td>'
+													+'</tr>'
+													+'<tr>'
+													+	'<td colspan="3">'+hotel[i].name+'</td>'
+													+	'<td colspan="1.5" class="phone">'+phone+'</td>'
+													+	'<td colspan="1.5" class="phone">'+(hotel[i].procurement_price*hotel[i].procurement_quantity+hotel[i].procurement_price_two*hotel[i].procurement_quantity_two+hotel[i].procurement_price_three*hotel[i].procurement_quantity_three+hotel[i].procurement_price_four*hotel[i].procurement_quantity_four)+'</td>'
+													+'</tr>'
+													+'<tr class="'+(hotel[i].procurement_quantity>0?'':'disn')+'">'
+													+	'<td colspan="2">单人间</td>'
+													+	'<td colspan="1">'+hotel[i].procurement_quantity+'间</td>'
+													+	'<td colspan="1.5">'+hotel[i].procurement_price+'</td>'
+													+	'<td colspan="1.5">'+(hotel[i].procurement_price*hotel[i].procurement_quantity)+'</td>'
+													+'</tr>'
+												+'<tr class="'+(hotel[i].procurement_quantity_two>0?'':'disn')+'">'
+													+	'<td colspan="2">双人间</td>'
+													+	'<td colspan="1">'+hotel[i].procurement_quantity_two+'间</td>'
+													+	'<td colspan="1.5">'+hotel[i].procurement_price_two+'</td>'
+													+	'<td colspan="1.5">'+(hotel[i].procurement_price_two*hotel[i].procurement_quantity_two)+'</td>'
+													+'</tr>'
+												+'<tr class="'+(hotel[i].procurement_quantity_three>0?'':'disn')+'">'
+													+	'<td colspan="2">三人间</td>'
+													+	'<td colspan="1">'+hotel[i].procurement_quantity_three+'间</td>'
+													+	'<td colspan="1.5">'+hotel[i].procurement_price_three+'</td>'
+													+	'<td colspan="1.5">'+(hotel[i].procurement_price_three*hotel[i].procurement_quantity_three)+'</td>'
+													+'</tr>'
+													+'<tr class="'+(hotel[i].procurement_quantity_four>0?'':'disn')+'">'
+													+	'<td colspan="2">司陪房</td>'
+													+	'<td colspan="1">'+hotel[i].procurement_quantity_four+'间</td>'
+													+	'<td colspan="1.5">'+hotel[i].procurement_price_four+'</td>'
+													+	'<td colspan="1.5">'+(hotel[i].procurement_price_four*hotel[i].procurement_quantity_four)+'</td>'
+													+'</tr>';
+													ca.id('pickup').innerHTML+=temp;
+										}
+										
+										
+									}if(!ca.emptyFun(food)){
+										for(var i in food){
+											var phone='';
+											if(!ca.emptyFun(food[i].enterprisefood)){
+												phone=food[i].enterprisefood.contact_tel;
+											}
+												var temp='<tr>'
+													+	'<td colspan="7" align="center">餐厅 ('+food[i].use_date+')</span></td>'
+													+'</tr>'
+													+'<tr>'
+													+	'<td colspan="3">'+food[i].name+'</td>'
+													+	'<td colspan="1.5" class="phone">'+phone+'</td>'
+													+	'<td colspan="1.5">'+(food[i].procurement_price*food[i].procurement_quantity+food[i].procurement_price_two*food[i].procurement_quantity_two+food[i].procurement_price_three*food[i].procurement_quantity_three+food[i].procurement_price_four*food[i].procurement_quantity_four)+'</td>'
+													+'</tr>'
+													+'<tr class="'+(food[i].procurement_quantity>0?'':'disn')+'">'
+													+	'<td colspan="2">早餐</td>'
+													+	'<td colspan="1">'+food[i].procurement_quantity+'位</td>'
+													+	'<td colspan="1.5">'+food[i].procurement_price+'</td>'
+													+	'<td colspan="1.5">'+(food[i].procurement_price*food[i].procurement_quantity)+'</td>'
+													+'</tr>'
+													+'<tr class="'+(food[i].procurement_quantity_two>0?'':'disn')+'">'
+													+	'<td colspan="2">中餐</td>'
+													+	'<td colspan="1">'+food[i].procurement_quantity_two+'位</td>'
+													+	'<td colspan="1.5">'+food[i].procurement_price_two+'</td>'
+													+	'<td colspan="1.5">'+(food[i].procurement_price_two*food[i].procurement_quantity_two)+'</td>'
+													+'</tr>'
+													+'<tr class="'+(food[i].procurement_quantity_three>0?'':'disn')+'">'
+													+	'<td colspan="2">晚餐</td>'
+													+	'<td colspan="1">'+food[i].procurement_quantity_three+'位</td>'
+													+	'<td colspan="1.5">'+food[i].procurement_price_three+'</td>'
+													+	'<td colspan="1.5">'+(food[i].procurement_price_three*food[i].procurement_quantity_three)+'</td>'
+													+'</tr>'
+													+'<tr class="'+(food[i].procurement_quantity_four>0?'':'disn')+'">'
+													+	'<td colspan="2">半餐</td>'
+													+	'<td colspan="1">'+food[i].procurement_quantity_four+'位</td>'
+													+	'<td colspan="1.5">'+food[i].procurement_price_four+'</td>'
+													+	'<td colspan="1.5">'+(food[i].procurement_price_four*food[i].procurement_quantity_four)+'</td>'
+													+'</tr>';
+													ca.id('pickup').innerHTML+=temp;
+										}
+									}if(!ca.emptyFun(pickup)){
+											for(var i in pickup){
+													var phone='';
+													if(!ca.emptyFun(pickup[i].enterprisepickup)){
+														phone=pickup[i].enterprisepickup.contact_tel;
+													}
+													var temp='<tr>'
+													+	'<td colspan="7" align="center">车队 ('+pickup[i].use_date+')</td>'
+													+'</tr>'
+													+'<tr>'
+													+	'<td colspan="3">'+pickup[i].name+'</td>'
+													+	'<td colspan="1.5" class="phone">'+phone+'</td>'
+													+	'<td colspan="1.5">'+(pickup[i].procurement_price*pickup[i].procurement_quantity)+'</td>'
+													+'</tr>';
+													ca.id('pickup').innerHTML+=temp;
+											}
+									}
+									
+									closes1();
+								}
+								if(ca.emptyFun(pickup) && ca.emptyFun(food)  && ca.emptyFun(hotel)){
+									ca.id('pickup').innerHTML='<span class="c999999">无采购信息</sapn>'
+								}
+							ca.closeWaiting();
+						},errFn:function(err){
+							ca.closeWaiting();
+							mui.toast(err);
+						}
+					})
+					mui('#middlePopover3').popover('show');
+				})
+				
+//				window.addEventListener('tap', function(e) {
+//				    e.target.className == 'mui-backdrop mui-active' && e.stopPropagation();
+//				},true)	
+				
+				function callphone(phone){
+					ca.callPhone(phone);
+				}
+			});
+		</script>
+	</body>
+
+</html>

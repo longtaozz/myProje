@@ -1,0 +1,180 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/style.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav user-index-top-bg mheader" >
+		    <a class="mui-icon mui-icon-left-nav mui-pull-left" id="mui-action-back" style="color: #FFFFFF !important;"></a>
+		    <h1 class="mui-title" style="font-size: 18px !important;color: #FFFFFF !important;">添加出行人</h1>
+		    <span class="mui-pull-right" id="baocun" style="line-height: 44px;color: #FFFFFF !important;font-weight: bold;">保存</span>
+		</header>
+		<div class="mui-content" style="margin-top: 25px;">
+			<div id="youkexinxitab">
+				
+			</div>
+		    <div>
+						<input type="button" value="批量新增" id="add2" style="width: 50%;color: #FF8201;border: 1px solid #FF8201;display: block;margin: 10px auto;"/>
+					</div>
+		    	<input type="button" value="单次新增" id="add1" style="width: 50%;color: #FF8201;border: 1px solid #FF8201;display: block;margin: 10px auto;"/>
+		    </div>
+		    <div>
+		    	<input type="button" value="清除所有" id="delete1" style="width: 50%;color: #FF8201;border: 1px solid #FF8201;display: block;margin: 10px auto;"/>
+		    </div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/castapp.js" ></script>
+		<script type="text/javascript">
+			mui.init();
+			var manmoney=localStorage.getItem('manmoney');
+			var childmoney=localStorage.getItem('childmoney');
+			var zongrenshu=localStorage.getItem('renshu');
+			var renshumoney=0;
+			var renshu=0;
+			var darenshu=0;
+			var childshu=0;
+			ca.init();
+			 mui.plusReady(function(){
+	       		plus.navigator.setStatusBarStyle('light');
+	       })
+			ca.receiveNotice('update',function(){
+				get_tourist();
+				
+			});
+		
+			document.getElementById('add1').addEventListener('tap',function(){
+				if(renshu>=zongrenshu){
+					alert('最多添加'+zongrenshu+'人');
+					return;
+				}
+				ca.newInterface({
+					url:'write_pedestrian.html',
+					id:'write_pedestrian'
+				})
+			})
+			
+			document.getElementById('add2').addEventListener('tap',function(){
+				ca.newInterface({
+					url:'write_pedestrians.html',
+					id:'write_pedestrians'
+				})
+			})
+			
+			document.getElementById('delete1').addEventListener('tap',function(){
+				var btnArray = ['是','否'];
+				mui.confirm('确认删除', '', btnArray, function(e) {
+					if (e.index == 0) {
+						renshu=0;
+						localStorage.removeItem('youkexinxi');
+						localStorage.removeItem('renshumoney');
+						localStorage.removeItem('darenshu');
+						localStorage.removeItem('childshu');
+						get_tourist();
+                    } else {
+                    }
+                })
+				
+				
+			})
+			get_tourist();
+			function get_tourist(){
+				renshumoney=0;
+				var list=document.getElementById('youkexinxitab');
+				var tourist=localStorage.getItem('youkexinxi');
+				var arr=JSON.parse(tourist);
+				if(arr==null){
+					list.innerHTML="";
+					return;
+				}
+				if(arr.length>0){
+					renshu=arr.length;
+					childshu=0;
+					darenshu=0;
+					var result = "<table border='1' style='margin: 10px auto;width: 98%;font-size: 14px;'>";  
+			        result += "<tr style='width: 100%;' ><td>姓名</td><td>证件号</td><td>电话</td><td>操作</td></tr>";  
+			        for(var i=0;i<arr.length;i++){ 
+			            result += "<tr><td>"+arr[i].name+"</td><td>"+arr[i].card+"</td><td>"+arr[i].phone+"</td><td class='delete' id='"+i+"'>删除</td></tr>";
+			            
+			            if(arr[i].age<18){
+			            	childshu=parseInt(childshu)+parseInt(1);
+			            	renshumoney=parseInt(renshumoney)+parseInt(childmoney);
+			            }else{
+			            	darenshu=parseInt(darenshu)+parseInt(1);
+			            	renshumoney=parseInt(renshumoney)+parseInt(manmoney);
+			            }
+			            
+			            
+			        }  
+			        result += "</table>";  
+			        list.innerHTML = result; 
+					localStorage.setItem('renshumoney',renshumoney);
+					localStorage.setItem('darenshu',darenshu);
+					localStorage.setItem('childshu',childshu);
+				}else{
+					list.innerHTML="";
+				}
+				delete_item();
+			}
+			function delete_item(){
+				var cell=document.getElementsByClassName('delete');
+				for(var i=0;i<cell.length;i++){
+				     		(function(inde){
+								cell[i].addEventListener('tap',function(){
+									var iid = cell[inde].getAttribute('id');
+									var tourists=localStorage.getItem('youkexinxi');
+									var arrs=JSON.parse(tourists);
+									var btnArray = ['是','否'];
+									mui.confirm('确认删除', '', btnArray, function(e) {
+					                    if (e.index == 0) {
+					                    	arrs.splice(iid,1);
+					                       	localStorage.setItem('youkexinxi',JSON.stringify(arrs))
+//											var parend = cell[inde].parentNode;
+//					   						parend.removeChild(cell[inde]);
+											get_tourist();
+					                    } else {
+					                    	
+					                    }
+					                })
+								})
+							})(i);
+				}
+			}
+			
+			ca.id('baocun').addEventListener('tap',function(){
+				if(renshu>zongrenshu){
+					alert('最多添加'+zongrenshu+'人');
+					return;
+				}else{
+					var iswhere=localStorage.getItem('businesslist_or_order');
+					var arr1;
+					if(iswhere==1){
+						arr1 =['business_order_filling']
+					}else{
+						arr1 =['order_filling']
+					}
+					ca.sendNotice(arr1,'update',{});
+					mui.back();
+				}
+				
+			})
+			ca.id('mui-action-back').addEventListener('tap',function(){
+// 				var iswhere=localStorage.getItem('businesslist_or_order');
+// 				var arr1;
+// 				if(iswhere==1){
+// 					arr1 =['business_order_filling']
+// 				}else{
+// 					arr1 =['order_filling']
+// 				}
+// 				ca.sendNotice(arr1,'update',{});
+				mui.back();
+			})
+		</script>
+	</body>
+
+</html>

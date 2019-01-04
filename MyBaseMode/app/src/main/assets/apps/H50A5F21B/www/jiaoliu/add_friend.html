@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/style.css" />
+	</head>
+	
+	<body>
+		<header class="mui-bar mui-bar-nav mheader">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mback"></a>
+		    <h1 class="mui-title mtitle">朋友验证</h1>
+		    <span class="fr " id="fasong" style="padding: 10px 0px 10px 15px;">发送</span>
+		</header>
+		<div class="mui-content">
+		    <div class="mt15 c666666 fs14 ml15">
+		    	<span>你需要发送验证申请，等对方通过</span>
+		    </div>
+		    <div class="w100 mui-input-row">
+		    	<input type="text" class="mui-input-clear" style="width: 100%;border: 0px;font-size: 14px;" />
+		    </div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/castapp.js" ></script>
+		<script type="text/javascript" src="../js/NIM_Web_NIM_v5.5.0.js" ></script>
+		<script type="text/javascript">
+			mui.init({
+				swipeBack: true //启用右滑关闭功能
+			});
+			ca.init();
+			ca.blackStatusBar();
+			mui.plusReady(function(){
+				var self = plus.webview.currentWebview();
+				ca.tagName('input')[0].value='我是 '+localStorage.getItem('realname');
+				
+				var nim = NIM.getInstance({
+					  appKey:'fc06054e7594d0cd2e17b1238c9fc296',
+					  account:localStorage.getItem('e_code')+'_'+localStorage.getItem('username'),
+					  token:localStorage.getItem('im_token')
+				});
+				
+				
+				ca.id('fasong').addEventListener('tap',function(){
+					nim.applyFriend({
+					    account: self.accounts,
+					    ps: ca.tagName('input')[0].value,
+					    done: applyFriendDone
+					});
+					function applyFriendDone(error, obj) {
+						if(!error){
+							mui.toast('申请成功!');
+							setTimeout(function(){
+								var self = plus.webview.currentWebview();
+								self.close();
+							},500);
+						}else{
+							mui.toast('添加失败！');
+						}
+//					    console.log('申请加为好友' + (!error?'成功':'失败'));
+					}
+					
+				})
+				
+	
+				
+			})
+		</script>
+	</body>
+
+</html>

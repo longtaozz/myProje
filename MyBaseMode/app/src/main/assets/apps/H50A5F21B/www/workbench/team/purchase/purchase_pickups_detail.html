@@ -1,0 +1,596 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../../css/style.css" rel="stylesheet"/>
+		<link href="../../../css/iconfont.css" rel="stylesheet" />
+		<style>
+			.purchase-tab{
+				float: left;
+				width: 50%;
+				text-align: center;
+				font-size: 15px;
+			}
+			.purchase-tab-active{
+				float: left;
+				width: 50%;
+				text-align: center;
+				border-bottom: 2px solid #1E92FE;
+				color: #1E92FE;
+				font-size: 15px;
+			}
+			#topPopover {
+				position: fixed;
+				top: 0px;
+				right: 6px;
+			}
+			#topPopover .mui-popover-arrow {
+				left: auto;
+				right: 6px;
+			}
+			.mui-popover {
+				height: 135px;
+				width: 100px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav user-index-top-bg mheader">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left cffffff"></a>
+			<span class="cffffff fl fs15 ml20" id="title" style="line-height: 42px;">接送站采购</span>
+			<a id="menu"  class="mui-action-menu mui-pull-right cffffff fs15 lh43" style="width:60px;" href="#topPopover">接采购</a>
+		</header>
+		<div class="mui-content">
+			<div class="bgwhite oh h40 lh38" style="position: fixed;width: 100%;z-index:100;">
+				<div class="purchase-tab-active shai" data-type="all" data-index=0>
+					<span>接站</span>
+				</div>
+				<div class="purchase-tab shai" data-type="hotel" data-index=1>
+					<span>送站</span>
+				</div>
+			</div>
+			<div id="content">
+				
+			</div>
+		</div>
+		<div id="topPopover" class="mui-popover">
+			<div class="mui-popover-arrow"></div>
+			<div class="mui-scroll-wrapper">
+				<div class="mui-scroll">
+					<ul class="mui-table-view" id="popover_list">
+						<!-- <li class="mui-table-view-cell tc" data_type="hotel">
+							<a href="#">酒店</a>
+						</li>
+						<li class="mui-table-view-cell tc" data_type="food"><a href="#">餐厅</a>
+						</li>
+						<li class="mui-table-view-cell tc" data_type="pickup"><a href="#">车队</a>
+						</li> -->
+					</ul>
+				</div>
+			</div>
+		</div>
+		<script src="../../../js/mui.min.js"></script>
+		<script src="../../../js/castapp.js"></script>
+		<script type="text/javascript">
+			mui.plusReady(function(){
+				mui.init();
+				ca.init();
+// 				team_num:team_num,
+// 				order_id:order_id,
+// 				go_date:go_date,go_time:go_time,go_stay:go_stay,go_food:go_food,
+// 				back_date:back_date,back_time:back_time,back_stay:back_stay,back_food:back_food
+				var self=plus.webview.currentWebview();
+				mui('body').on('tap','.shai',function(){
+					var type=this.getAttribute('data-type');
+					var index=this.getAttribute('data-index');
+					
+				})
+				
+				document.addEventListener('update',function(event){
+					findItem();
+				});
+				findItem();
+				function findItem(){
+					ca.id('content').innerHTML='';
+					ca.showWaiting();
+					ca.ajaxs({url:'findPickupPurchase',data:{
+							user_id:localStorage.getItem('userid'),order_id:self.order_id,team_num:self.team_num
+						},succFn:function(data){
+							if(data){
+								show(data);
+								onlicktabl();
+							}else{
+								ca.className('mui-content')[0].innerHTML='<div>无采购信息</div>';
+							}
+							ca.closeWaiting();
+						},errFn:function(err){
+							ca.closeWaiting();
+							mui.toast(err)
+						}
+					})
+				}
+				
+				function show(data){
+					var temps1='',temps2='',temps3='',temps4='',temps5='',temps6='';;
+					for(var a in data){
+						if(data[a].pickup_flag==0){//接站
+							if(data[a].type=='hotel'){
+								var bt='';
+								if(data[a].status==0){
+									bt='<div class="oh ml15 mr10 btff h30 ">'
+									+		'<div class="fl fs15 c1296db lh30"><span>待确认</span></div>'
+									+		'<div class="fr bb4f77aa c4F77AA fs15 quxiao" data_id="'+data[a].id+'" ><span>取消</span></div>'		
+									+	'</div>';	
+								}else if(data[a].status==1){
+									bt='<div class="oh ml15 mr10 btff h30 ">'
+									+		'<div class="fl fs15 cred lh30"><span>已确认</span></div>'
+									+	'</div>';
+								}else if(data[a].status==2){
+									bt='<div class="oh ml15 mr10 btff h30 ">'
+									+		'<div class="fl fs15 c1296db lh30"><span>申请取消</span></div>'
+									+		'<div class="fr bb4f77aa c4F77AA fs15 tongyiquxiao" data_id="'+data[a].id+'"><span>同意取消</span></div>'		
+									+	'</div>';
+								}else{
+									bt='<div class="oh ml15 mr10 btff h30 ">'
+									+		'<div class="fl fs15 c666666 lh30"><span>取消</span></div>'
+									+	'</div>';
+								}
+								var tem='<li class="" style="background: #F0F0F0;border-radius: 5px;">'
+										+	'<div class="oh ml10 mr10 bbff h35 lh35">'
+										+		'<div class="fl">'		
+										+			'<span class="iconfont icon-jiudian"></span>'			
+										+		'</div>'		
+										+		'<div class="fl fs15 c333333 ml10"><span>'+data[a].name+'</span></div>'		
+										+		'<div class="fr cred fs14"><span>￥'+(data[a].procurement_price*data[a].procurement_quantity+data[a].procurement_price_two*data[a].procurement_quantity_two+data[a].procurement_quantity_three*data[a].procurement_price_three+data[a].procurement_quantity_four*data[a].procurement_quantity_four)+'</span></div>'			
+										+	'</div>'			
+										+	'<div class="ml15 mr10 mt5 mb7 c666666 fs14">'		
+										+		'<div><span>'+(data[a].procurement_quantity>0?data[a].alias+'/'+data[a].procurement_price+' x'+data[a].procurement_quantity:'')+'</span>'			
+										+		'<div><span>'+(data[a].procurement_quantity_two>0?data[a].alias_two+'/'+data[a].procurement_price_two+' x'+data[a].procurement_quantity_two:'')+'</span>'			
+										+		'<div><span>'+(data[a].procurement_quantity_three>0?data[a].alias_three+'/'+data[a].procurement_price_three+' x'+data[a].procurement_quantity_three:'')+'</span>'		
+										+		'<div><span>'+(data[a].procurement_quantity_four>0?data[a].alias_four+'/'+data[a].procurement_price_four+' x'+data[a].procurement_quantity_four:'')+'</span>'
+										+		'</div>'
+										+		'<div><span>'+(data[a].guide_pay>0?'导游付'+data[a].guide_pay:'')+'</span>'	
+										+			'<span>'+(data[a].company_pay>0?'公司付'+data[a].company_pay:'')+'</span>'	
+										+			'<span>'+(data[a].sign_bill>0?'签单'+data[a].sign_bill:'')+'</span>'
+										+		'</div>'
+										+		'<div class="yc2 c999999">'+(data[a].mark?data[a].mark:'')+'</div>'
+										+		'<div><span>下单时间:'+data[a].create_time.slice(0,16)+'</span></div>'			
+										+	'</div>'
+										+		bt
+										+'</li>';
+								temps1+=tem;
+							}else if(data[a].type=='food'){
+								var bt='';
+								if(data[a].status==0){
+									bt='<div class="oh ml15 mr10 btff h30 ">'
+									+		'<div class="fl fs15 c1296db lh30"><span>待确认</span></div>'
+									+		'<div class="fr bb4f77aa c4F77AA fs15 quxiao" data_id="'+data[a].id+'" ><span>取消</span></div>'		
+									+	'</div>';	
+								}else if(data[a].status==1){
+									bt='<div class="oh ml15 mr10 btff h30 ">'
+									+		'<div class="fl fs15 cred lh30"><span>已确认</span></div>'
+									+	'</div>';
+								}else if(data[a].status==2){
+									bt='<div class="oh ml15 mr10 btff h30 ">'
+									+		'<div class="fl fs15 c1296db lh30"><span>申请取消</span></div>'
+									+		'<div class="fr bb4f77aa c4F77AA fs15 tongyiquxiao" data_id="'+data[a].id+'"><span>同意取消</span></div>'		
+									+	'</div>';
+								}else{
+									bt='<div class="oh ml15 mr10 btff h30 ">'
+									+		'<div class="fl fs15 c666666 lh30"><span>取消</span></div>'
+									+	'</div>';
+								}
+								var tem='<li class="" style="background: #F0F0F0;border-radius: 5px;">'
+										+	'<div class="oh ml10 mr10 bbff h35 lh35">'
+										+		'<div class="fl">'		
+										+			'<span class="iconfont icon-shangjia"></span>'			
+										+		'</div>'		
+										+		'<div class="fl fs15 c333333 ml10"><span>'+data[a].name+'</span></div>'		
+										+		'<div class="fr cred fs14"><span>￥'+(data[a].procurement_price*data[a].procurement_quantity+data[a].procurement_price_two*data[a].procurement_quantity_two+data[a].procurement_quantity_three*data[a].procurement_price_three+data[a].procurement_quantity_four*data[a].procurement_quantity_four)+'</span></div>'			
+										+	'</div>'			
+										+	'<div class="ml15 mr10 mt5 mb7 c666666 fs14">'		
+										+		'<div><span>'+(data[a].procurement_quantity>0?data[a].alias+'/'+data[a].procurement_price+' x'+data[a].procurement_quantity:'')+'</span>'			
+										+		'<div><span>'+(data[a].procurement_quantity_two>0?data[a].alias_two+'/'+data[a].procurement_price_two+' x'+data[a].procurement_quantity_two:'')+'</span>'			
+										+		'<div><span>'+(data[a].procurement_quantity_three>0?data[a].alias_three+'/'+data[a].procurement_price_three+' x'+data[a].procurement_quantity_three:'')+'</span>'		
+										+		'<div><span>'+(data[a].procurement_quantity_four>0?data[a].alias_four+'/'+data[a].procurement_price_four+' x'+data[a].procurement_quantity_four:'')+'</span>'
+										+		'</div>'
+										+		'<div><span>'+(data[a].guide_pay>0?'导游付'+data[a].guide_pay:'')+'</span>'	
+										+			'<span>'+(data[a].company_pay>0?'公司付'+data[a].company_pay:'')+'</span>'	
+										+			'<span>'+(data[a].sign_bill>0?'签单'+data[a].sign_bill:'')+'</span>'
+										+		'</div>'
+										+		'<div class="yc2 c999999">'+(data[a].mark?data[a].mark:'')+'</div>'
+										+		'<div><span>下单时间:'+data[a].create_time.slice(0,16)+'</span></div>'			
+										+	'</div>'
+										+		bt
+										+'</li>';
+								temps2+=tem;
+							}else{
+								var bt='';
+								if(data[a].status==0){
+									bt='<div class="oh ml15 mr10 btff h30 ">'
+									+		'<div class="fl fs15 c1296db lh30"><span>待确认</span></div>'
+									+		'<div class="fr bb4f77aa c4F77AA fs15 quxiao" data_id="'+data[a].id+'" ><span>取消</span></div>'		
+									+	'</div>';	
+								}else if(data[a].status==1){
+									bt='<div class="oh ml15 mr10 btff h30 ">'
+									+		'<div class="fl fs15 cred lh30"><span>已确认</span></div>'
+									+	'</div>';
+								}else if(data[a].status==2){
+									bt='<div class="oh ml15 mr10 btff h30 ">'
+									+		'<div class="fl fs15 c1296db lh30"><span>申请取消</span></div>'
+									+		'<div class="fr bb4f77aa c4F77AA fs15 tongyiquxiao" data_id="'+data[a].id+'"><span>同意取消</span></div>'		
+									+	'</div>';
+								}else{
+									bt='<div class="oh ml15 mr10 btff h30 ">'
+									+		'<div class="fl fs15 c666666 lh30"><span>取消</span></div>'
+									+	'</div>';
+								}
+								var tem='<li class="" style="background: #F0F0F0;border-radius: 5px;">'
+										+	'<div class="oh ml10 mr10 bbff h35 lh35">'
+										+		'<div class="fl">'		
+										+			'<span class="iconfont icon-lvyouyongche"></span>'			
+										+		'</div>'		
+										+		'<div class="fl fs15 c333333 ml10"><span>'+data[a].name+'</span></div>'		
+										+		'<div class="fr cred fs14"><span>￥'+(data[a].procurement_price*data[a].procurement_quantity+data[a].procurement_price_two*data[a].procurement_quantity_two+data[a].procurement_quantity_three*data[a].procurement_price_three+data[a].procurement_quantity_four*data[a].procurement_quantity_four)+'</span></div>'			
+										+	'</div>'			
+										+	'<div class="ml15 mr10 mt5 mb7 c666666 fs14">'		
+										+		'<div><span>'+(data[a].procurement_quantity>0?data[a].alias+'/'+data[a].procurement_price+' x'+data[a].procurement_quantity:'')+'</span>'			
+										+		'<div><span>'+(data[a].procurement_quantity_two>0?data[a].alias_two+'/'+data[a].procurement_price_two+' x'+data[a].procurement_quantity_two:'')+'</span>'			
+										+		'<div><span>'+(data[a].procurement_quantity_three>0?data[a].alias_three+'/'+data[a].procurement_price_three+' x'+data[a].procurement_quantity_three:'')+'</span>'		
+										+		'<div><span>'+(data[a].procurement_quantity_four>0?data[a].alias_four+'/'+data[a].procurement_price_four+' x'+data[a].procurement_quantity_four:'')+'</span>'
+										+		'</div>'
+										+		'<div><span>'+(data[a].guide_pay>0?'导游付'+data[a].guide_pay:'')+'</span>'	
+										+			'<span>'+(data[a].company_pay>0?'公司付'+data[a].company_pay:'')+'</span>'	
+										+			'<span>'+(data[a].sign_bill>0?'签单'+data[a].sign_bill:'')+'</span>'
+										+		'</div>'
+										+		'<div class="yc2 c999999">'+(data[a].mark?data[a].mark:'')+'</div>'
+										+		'<div><span>下单时间:'+data[a].create_time.slice(0,16)+'</span></div>'			
+										+	'</div>'
+										+		bt
+										+'</li>';
+								temps3+=tem;
+							}
+							
+						}else{//送站
+							if(data[a].type=='hotel'){
+								var bt='';
+								if(data[a].status==0){
+									bt='<div class="oh ml15 mr10 btff h30 ">'
+									+		'<div class="fl fs15 c1296db lh30"><span>待确认</span></div>'
+									+		'<div class="fr bb4f77aa c4F77AA fs15 quxiao" data_id="'+data[a].id+'" ><span>取消</span></div>'		
+									+	'</div>';	
+								}else if(data[a].status==1){
+									bt='<div class="oh ml15 mr10 btff h30 ">'
+									+		'<div class="fl fs15 cred lh30"><span>已确认</span></div>'
+									+	'</div>';
+								}else if(data[a].status==2){
+									bt='<div class="oh ml15 mr10 btff h30 ">'
+									+		'<div class="fl fs15 c1296db lh30"><span>申请取消</span></div>'
+									+		'<div class="fr bb4f77aa c4F77AA fs15 tongyiquxiao" data_id="'+data[a].id+'"><span>同意取消</span></div>'		
+									+	'</div>';
+								}else{
+									bt='<div class="oh ml15 mr10 btff h30 ">'
+									+		'<div class="fl fs15 c666666 lh30"><span>取消</span></div>'
+									+	'</div>';
+								}
+								var tem='<li class="" style="background: #F0F0F0;border-radius: 5px;">'
+										+	'<div class="oh ml10 mr10 bbff h35 lh35">'
+										+		'<div class="fl">'		
+										+			'<span class="iconfont icon-jiudian"></span>'			
+										+		'</div>'		
+										+		'<div class="fl fs15 c333333 ml10"><span>'+data[a].name+'</span></div>'		
+										+		'<div class="fr cred fs14"><span>￥'+(data[a].procurement_price*data[a].procurement_quantity+data[a].procurement_price_two*data[a].procurement_quantity_two+data[a].procurement_quantity_three*data[a].procurement_price_three+data[a].procurement_quantity_four*data[a].procurement_quantity_four)+'</span></div>'			
+										+	'</div>'			
+										+	'<div class="ml15 mr10 mt5 mb7 c666666 fs14">'		
+										+		'<div><span>'+(data[a].procurement_quantity>0?data[a].alias+'/'+data[a].procurement_price+' x'+data[a].procurement_quantity:'')+'</span>'			
+										+		'<div><span>'+(data[a].procurement_quantity_two>0?data[a].alias_two+'/'+data[a].procurement_price_two+' x'+data[a].procurement_quantity_two:'')+'</span>'			
+										+		'<div><span>'+(data[a].procurement_quantity_three>0?data[a].alias_three+'/'+data[a].procurement_price_three+' x'+data[a].procurement_quantity_three:'')+'</span>'		
+										+		'<div><span>'+(data[a].procurement_quantity_four>0?data[a].alias_four+'/'+data[a].procurement_price_four+' x'+data[a].procurement_quantity_four:'')+'</span>'
+										+		'</div>'
+										+		'<div><span>'+(data[a].guide_pay>0?'导游付'+data[a].guide_pay:'')+'</span>'	
+										+			'<span>'+(data[a].company_pay>0?'公司付'+data[a].company_pay:'')+'</span>'	
+										+			'<span>'+(data[a].sign_bill>0?'签单'+data[a].sign_bill:'')+'</span>'
+										+		'</div>'
+										+		'<div class="yc2 c999999">'+(data[a].mark?data[a].mark:'')+'</div>'
+										+		'<div><span>下单时间:'+data[a].create_time.slice(0,16)+'</span></div>'			
+										+	'</div>'
+										+		bt
+										+'</li>';
+								temps4+=tem;
+							}else if(data[a].type=='food'){
+								var bt='';
+								if(data[a].status==0){
+									bt='<div class="oh ml15 mr10 btff h30 ">'
+									+		'<div class="fl fs15 c1296db lh30"><span>待确认</span></div>'
+									+		'<div class="fr bb4f77aa c4F77AA fs15 quxiao" data_id="'+data[a].id+'" ><span>取消</span></div>'		
+									+	'</div>';	
+								}else if(data[a].status==1){
+									bt='<div class="oh ml15 mr10 btff h30 ">'
+									+		'<div class="fl fs15 cred lh30"><span>已确认</span></div>'
+									+	'</div>';
+								}else if(data[a].status==2){
+									bt='<div class="oh ml15 mr10 btff h30 ">'
+									+		'<div class="fl fs15 c1296db lh30"><span>申请取消</span></div>'
+									+		'<div class="fr bb4f77aa c4F77AA fs15 tongyiquxiao" data_id="'+data[a].id+'"><span>同意取消</span></div>'		
+									+	'</div>';
+								}else{
+									bt='<div class="oh ml15 mr10 btff h30 ">'
+									+		'<div class="fl fs15 c666666 lh30"><span>取消</span></div>'
+									+	'</div>';
+								}
+								var tem='<li class="" style="background: #F0F0F0;border-radius: 5px;">'
+										+	'<div class="oh ml10 mr10 bbff h35 lh35">'
+										+		'<div class="fl">'		
+										+			'<span class="iconfont icon-shangjia"></span>'			
+										+		'</div>'		
+										+		'<div class="fl fs15 c333333 ml10"><span>'+data[a].name+'</span></div>'		
+										+		'<div class="fr cred fs14"><span>￥'+(data[a].procurement_price*data[a].procurement_quantity+data[a].procurement_price_two*data[a].procurement_quantity_two+data[a].procurement_quantity_three*data[a].procurement_price_three+data[a].procurement_quantity_four*data[a].procurement_quantity_four)+'</span></div>'			
+										+	'</div>'			
+										+	'<div class="ml15 mr10 mt5 mb7 c666666 fs14">'		
+										+		'<div><span>'+(data[a].procurement_quantity>0?data[a].alias+'/'+data[a].procurement_price+' x'+data[a].procurement_quantity:'')+'</span>'			
+										+		'<div><span>'+(data[a].procurement_quantity_two>0?data[a].alias_two+'/'+data[a].procurement_price_two+' x'+data[a].procurement_quantity_two:'')+'</span>'			
+										+		'<div><span>'+(data[a].procurement_quantity_three>0?data[a].alias_three+'/'+data[a].procurement_price_three+' x'+data[a].procurement_quantity_three:'')+'</span>'		
+										+		'<div><span>'+(data[a].procurement_quantity_four>0?data[a].alias_four+'/'+data[a].procurement_price_four+' x'+data[a].procurement_quantity_four:'')+'</span>'
+										+		'</div>'
+										+		'<div><span>'+(data[a].guide_pay>0?'导游付'+data[a].guide_pay:'')+'</span>'	
+										+			'<span>'+(data[a].company_pay>0?'公司付'+data[a].company_pay:'')+'</span>'	
+										+			'<span>'+(data[a].sign_bill>0?'签单'+data[a].sign_bill:'')+'</span>'
+										+		'</div>'
+										+		'<div class="yc2 c999999">'+(data[a].mark?data[a].mark:'')+'</div>'
+										+		'<div><span>下单时间:'+data[a].create_time.slice(0,16)+'</span></div>'			
+										+	'</div>'
+										+		bt
+										+'</li>';
+								temps5+=tem;
+							}else{
+								var bt='';
+								if(data[a].status==0){
+									bt='<div class="oh ml15 mr10 btff h30 ">'
+									+		'<div class="fl fs15 c1296db lh30"><span>待确认</span></div>'
+									+		'<div class="fr bb4f77aa c4F77AA fs15 quxiao" data_id="'+data[a].id+'" ><span>取消</span></div>'		
+									+	'</div>';	
+								}else if(data[a].status==1){
+									bt='<div class="oh ml15 mr10 btff h30 ">'
+									+		'<div class="fl fs15 cred lh30"><span>已确认</span></div>'
+									+	'</div>';
+								}else if(data[a].status==2){
+									bt='<div class="oh ml15 mr10 btff h30 ">'
+									+		'<div class="fl fs15 c1296db lh30"><span>申请取消</span></div>'
+									+		'<div class="fr bb4f77aa c4F77AA fs15 tongyiquxiao" data_id="'+data[a].id+'"><span>同意取消</span></div>'		
+									+	'</div>';
+								}else{
+									bt='<div class="oh ml15 mr10 btff h30 ">'
+									+		'<div class="fl fs15 c666666 lh30"><span>取消</span></div>'
+									+	'</div>';
+								}
+								var tem='<li class="" style="background: #F0F0F0;border-radius: 5px;">'
+										+	'<div class="oh ml10 mr10 bbff h35 lh35">'
+										+		'<div class="fl">'		
+										+			'<span class="iconfont icon-lvyouyongche"></span>'			
+										+		'</div>'		
+										+		'<div class="fl fs15 c333333 ml10"><span>'+data[a].name+'</span></div>'		
+										+		'<div class="fr cred fs14"><span>￥'+(data[a].procurement_price*data[a].procurement_quantity+data[a].procurement_price_two*data[a].procurement_quantity_two+data[a].procurement_quantity_three*data[a].procurement_price_three+data[a].procurement_quantity_four*data[a].procurement_quantity_four)+'</span></div>'			
+										+	'</div>'			
+										+	'<div class="ml15 mr10 mt5 mb7 c666666 fs14">'		
+										+		'<div><span>'+(data[a].procurement_quantity>0?data[a].alias+'/'+data[a].procurement_price+' x'+data[a].procurement_quantity:'')+'</span>'			
+										+		'<div><span>'+(data[a].procurement_quantity_two>0?data[a].alias_two+'/'+data[a].procurement_price_two+' x'+data[a].procurement_quantity_two:'')+'</span>'			
+										+		'<div><span>'+(data[a].procurement_quantity_three>0?data[a].alias_three+'/'+data[a].procurement_price_three+' x'+data[a].procurement_quantity_three:'')+'</span>'		
+										+		'<div><span>'+(data[a].procurement_quantity_four>0?data[a].alias_four+'/'+data[a].procurement_price_four+' x'+data[a].procurement_quantity_four:'')+'</span>'
+										+		'</div>'
+										+		'<div><span>'+(data[a].guide_pay>0?'导游付'+data[a].guide_pay:'')+'</span>'	
+										+			'<span>'+(data[a].company_pay>0?'公司付'+data[a].company_pay:'')+'</span>'	
+										+			'<span>'+(data[a].sign_bill>0?'签单'+data[a].sign_bill:'')+'</span>'
+										+		'</div>'
+										+		'<div class="yc2 c999999">'+(data[a].mark?data[a].mark:'')+'</div>'
+										+		'<div><span>下单时间:'+data[a].create_time.slice(0,16)+'</span></div>'			
+										+	'</div>'
+										+		bt
+										+'</li>';
+								temps6+=tem;
+							}
+						}
+					}
+					var temp1='<div class="mui-card" id="mui-card1" style="margin-top: 45px;">'
+							+	'<ul class="mui-table-view">'
+							+		'<li class="mui-table-view-cell mui-collapse">'		
+							+			'<a class="mui-navigate-right" href="#">接用房</a>'
+							+			'<div class="mui-collapse-content">'
+							+				'<ul>'+temps1+'</ul>'
+							+			'</div>'					
+							+		'</li>'				
+							+		'<li class="mui-table-view-cell mui-collapse">'		
+							+			'<a class="mui-navigate-right" href="#">接用餐</a>'
+							+			'<div class="mui-collapse-content">'
+							+				'<ul>'+temps2+'</ul>'
+							+			'</div>'					
+							+		'</li>'	
+							+		'<li class="mui-table-view-cell mui-collapse">'		
+							+			'<a class="mui-navigate-right" href="#">接用车</a>'
+							+			'<div class="mui-collapse-content">'
+							+				'<ul>'+temps3+'</ul>'
+							+			'</div>'					
+							+		'</li>'	
+							+	'</ul>'
+							+'</div>';
+					var temp2='<div class="mui-card disn" id="mui-card2" style="margin-top: 45px;">'
+							+	'<ul class="mui-table-view">'
+							+		'<li class="mui-table-view-cell mui-collapse">'		
+							+			'<a class="mui-navigate-right" href="#">送用房</a>'
+							+			'<div class="mui-collapse-content">'
+							+				'<ul>'+temps4+'</ul>'
+							+			'</div>'					
+							+		'</li>'				
+							+		'<li class="mui-table-view-cell mui-collapse">'		
+							+			'<a class="mui-navigate-right" href="#">送用餐</a>'
+							+			'<div class="mui-collapse-content">'
+							+				'<ul>'+temps5+'</ul>'
+							+			'</div>'					
+							+		'</li>'	
+							+		'<li class="mui-table-view-cell mui-collapse">'		
+							+			'<a class="mui-navigate-right" href="#">送用车</a>'
+							+			'<div class="mui-collapse-content">'
+							+				'<ul>'+temps6+'</ul>'
+							+			'</div>'					
+							+		'</li>'	
+							+	'</ul>'
+							+'</div>';
+					ca.id('content').innerHTML+=temp1;
+					ca.id('content').innerHTML+=temp2;
+				}
+				
+				var pickup_flag=0;
+				showPopover(self.go_stay,self.go_food,self.go_time,self.go_date);
+				function showPopover(data1,data2,data3,data4){
+					ca.id('popover_list').innerHTML="";
+					if(data1>0){
+						var temp='<li class="mui-table-view-cell tc" data_type="hotel" data_time="'+data4+'">'
+								+	'<a href="#">酒店</a>'
+								+'</li>';
+						ca.id('popover_list').innerHTML+=temp;
+					}
+					if(data2>0){
+						var temp='<li class="mui-table-view-cell tc" data_type="food" data_time="'+data4+'">'
+								+	'<a href="#">餐厅</a>'
+								+'</li>';
+						ca.id('popover_list').innerHTML+=temp;
+					}
+					if(data3){
+						var temp='<li class="mui-table-view-cell tc" data_type="pickup" data_time="'+data4+'">'
+								+	'<a href="#">接送站</a>'
+								+'</li>';
+						ca.id('popover_list').innerHTML+=temp;
+					}
+				}
+				function onlicktabl(){
+					ca.className('shai')[0].addEventListener('tap',function(){
+						pickup_flag=0;
+						showPopover(self.go_stay,self.go_food,self.go_time,self.go_date);
+						setTable(0);
+						ca.id('mui-card1').classList.remove('disn');
+						ca.id('mui-card1').classList.add('disb');
+						ca.id('mui-card2').classList.remove('disb');
+						ca.id('mui-card2').classList.add('disn');
+						ca.className('mui-action-menu')[0].innerText='接采购';
+					})
+					ca.className('shai')[1].addEventListener('tap',function(){
+						pickup_flag=1;
+						showPopover(self.back_stay,self.back_food,self.back_time,self.back_date);
+						setTable(1);
+						ca.id('mui-card2').classList.remove('disn');
+						ca.id('mui-card2').classList.add('disb');
+						ca.id('mui-card1').classList.remove('disb');
+						ca.id('mui-card1').classList.add('disn');
+						ca.className('mui-action-menu')[0].innerText='送采购';
+					})
+				}
+				
+				
+				
+				
+				
+				function setTable(index){
+					var cell=document.getElementsByClassName('shai');
+					for(var a=0;a<cell.length;a++){
+						if(index==a){
+							cell[a].classList.add('purchase-tab-active');
+							cell[a].classList.remove('purchase-tab');
+						}else{
+							cell[a].classList.remove('purchase-tab-active');
+							cell[a].classList.add('purchase-tab');
+						}
+					}
+				}
+				mui('#topPopover').on('tap', '.mui-table-view-cell', function(e){
+					var type=this.getAttribute('data_type');
+					var time=this.getAttribute('data_time');
+					ca.showWaiting();
+					var se=plus.webview.create('add_purchase_pickup.html','add_purchase_pickup',{},{
+						type:type,
+						team_num:self.team_num,
+						team_date:time,
+						order_id:self.order_id,
+						teamsk_id:self.teamsk_id,
+						pickup_flag:pickup_flag
+						});
+					setTimeout(function(){
+						se.show('pop-in','300');
+					},200)
+					mui('#topPopover').popover('hide');
+				});
+				mui('#content').on('tap','.quxiao',function(){
+					var id=this.getAttribute('data_id');
+					var btnArray=['是','否'];
+					mui.confirm('确认取消该采购?', '提示', btnArray, function(e) {
+						if (e.index == 0) {
+							ca.showWaiting();
+							ca.ajaxs({url:'updateTeamSkPurchaseBystatus',
+								data:{user_id:localStorage.getItem('userid'),guide_id:id,status:3},
+								succFn:function(data){
+									if(data.msg==1){
+										mui.toast(data.text);
+										findItem();
+									}else{
+										mui.toast(data.text)
+									}
+									ca.closeWaiting();
+								},errFn:function(call){
+									ca.closeWaiting();
+									mui.toast(call);
+								}
+							});
+						} 
+					})
+				})
+				mui('#content').on('tap','.tongyiquxiao',function(){
+					var id=this.getAttribute('data_id');
+					var btnArray=['是','否'];
+					mui.confirm('是否同意取消?', '提示', btnArray, function(e) {
+						if (e.index == 0) {
+							ca.showWaiting();
+							ca.ajaxs({url:'updateTeamSkPurchaseBystatus',
+								data:{user_id:localStorage.getItem('userid'),guide_id:id,status:3},
+								succFn:function(data){
+									if(data.msg==1){
+										mui.toast(data.text);
+										findItem();
+									}else{
+										mui.toast(data.text)
+									}
+									ca.closeWaiting();
+								},errFn:function(call){
+									ca.closeWaiting();
+									mui.toast(call);
+								}
+							});
+						}else{
+							ca.showWaiting();
+							ca.ajaxs({url:'updateTeamSkPurchaseBystatus',
+								data:{user_id:localStorage.getItem('userid'),guide_id:id,status:1},
+								succFn:function(data){
+									if(data.msg==1){
+										mui.toast(data.text);
+										findItem();
+									}else{
+										mui.toast(data.text)
+									}
+									ca.closeWaiting();
+								},errFn:function(call){
+									ca.closeWaiting();
+									mui.toast(call);
+								}
+							});
+						}
+					})
+				})
+				
+			})
+			
+		</script>
+	</body>
+
+</html>

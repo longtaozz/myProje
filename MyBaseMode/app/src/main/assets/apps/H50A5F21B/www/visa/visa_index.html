@@ -1,0 +1,322 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/style.css" rel="stylesheet" />
+		<style>
+			.mui-bar-nav {
+				top: 0;
+				-webkit-box-shadow: 0 0px 0px #ccc;
+				box-shadow: 0 0px 0px #ccc;
+			}
+			.visa-index-search{
+				border-radius:20px ;height:36px;background: #E6E6E8;
+				text-align: center;line-height: 35px;border: 1px solid #FFFFFF;
+			}
+			.visa-index-tabs{
+				width:100%;
+				display: inline;
+				white-space: nowrap;/*规定段落中的文本不进行换行*/
+				overflow-x:scroll;/*水平方向，超出部分添加滚动机制*/
+				float:left;/*一定要设置左侧浮动*/
+				overflow-y:hidden;/*竖直方向，超出部分隐藏*/
+			}
+			.visa-index-tabs::-webkit-scrollbar{
+				display:none
+			}
+			.visa-index-tabs div{
+				display:inline-block;/*既可以水平排列，又可以设置宽高和边距*/
+				width: 17%;
+			}
+			.visa-index-tab{
+				color: #333333;
+				text-align: center;
+			}
+			.visa-index-tab-active{
+				color: #0595EC;
+				text-align: center;
+				border-bottom: 2px solid #0595EC;
+			}
+			.mui-scroll-wrapper0{
+				position: absolute;
+				z-index:2;top:90px;bottom:5px;
+				left: 0;overflow: hidden;width:100%;
+			}
+			.mui-scroll0{
+				position: absolute;
+				z-index:2;width: 100%;
+				-webkit-transform: translateZ(0);
+				transform: translateZ(0);
+			}
+			.visa-index-content{
+				height:400px;
+			}
+			.visa-index-content div{
+				width:30%;margin-left:2%;float: left;margin-top: 2%;height:30%;
+				max-height: 150px;
+			}
+			.visa-index-content div span{
+				position: relative;bottom:35px;left:8px;color: #FFFFFF;
+				font-size: 13px;
+			}
+			.mui-scroll-wrapper .dock-header-bar{position: fixed;top: 69px;z-index: 999;width: 100%;}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav mheader">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mback"></a>
+			<h1 class="mui-title">签证</h1>
+		</header>
+		<div class="mui-content mui-scroll-wrapper bgwhite" id="refreshContainer">
+			<div class="mui-scroll">
+				<div style="background: #EFEFF4;padding: 10px 10%;">
+					<div class="visa-index-search" id="search">
+						<span class="mui-icon mui-icon-search c999999 fs20 "></span>
+						<span class="fs14 c999999">签证国家/地区</span>
+					</div>
+				</div>
+				<div class="brand-bar-wrapper">
+					<div id="tab" class="h40 visa-index-tabs bbf0 bgwhite">
+						<div class="lh37 visa-index-tab-active fs15" data_index="0" data_type="0">
+							<span>热门</span>
+						</div>
+						<div class="lh37 visa-index-tab fs15" data_index="1" data_type="1">
+							<span>亚洲</span>
+						</div>
+						<div class="lh37 visa-index-tab fs15" data_index="2" data_type="2">
+							<span>北美洲</span>
+						</div>
+						<div class="lh37 visa-index-tab fs15" data_index="3" data_type="3">
+							<span>欧洲</span>
+						</div>
+						<div class="lh37 visa-index-tab fs15" data_index="4" data_type="4">
+							<span>大洋洲</span>
+						</div>
+						<div class="lh37 visa-index-tab fs15" data_index="5" data_type="5">
+							<span>非洲</span>
+						</div>
+						<div class="lh37 visa-index-tab fs15" data_index="6" data_type="6">
+							<span>南美洲</span>
+						</div>
+					</div>
+				</div>
+				<div class="oh bgwhite" >
+						<div class="visa-index-content" id="content" >
+						<!-- <div>
+							<img src="../img/1.png" style="height: 100%;width: 100%;"/>
+							<span>泰国</span>
+						</div>
+						<div style="margin-left: 3%;">
+							<img src="../img/1.png" style="height: 100%;width: 100%;"/>
+							<span>美国</span>
+						</div>
+						<div style="margin-left: 3%;">
+							<img src="../img/1.png" style="height: 100%;width: 100%;"/>
+							<span >美国</span>
+						</div>
+						<div>
+							<img src="../img/1.png" style="height: 100%;width: 100%;"/>
+							<span>美国</span>
+						</div>
+						<div style="margin-left: 3%;">
+							<img src="../img/1.png" style="height: 100%;width: 100%;"/>
+							<span>美国</span>
+						</div> -->
+						
+					</div>
+					<div id="gengduo"  style="color:#0595EC;font-size:13px;text-align:center;">
+						<div style="">
+							更多国家/地区
+						</div>
+						<div class="mtf3">
+							<span class="mui-icon mui-icon-arrowdown fs13"></span>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/castapp.js"></script>
+		<script src="../js/template-web.js"></script>
+		<script type="text/template" id="visa_list">
+			{{each list}}
+				{{if ($index+1)%3==1}}
+					<div class="visa_list_item" data_name="{{$value.name}}" data_img="{{$value.pic}}">
+						<img src="{{$value.pic}}" style="height: 100%;width: 100%;"/>
+						<span>{{$value.name}}</span>
+					</div>
+				{{else}}
+					<div class="visa_list_item"  data_name="{{$value.name}}" data_img="{{$value.pic}}" style="margin-left: 3%;">
+						<img src="{{$value.pic}}" style="height: 100%;width: 100%;"/>
+						<span>{{$value.name}}</span>
+					</div>
+				{{/if}}
+				
+			{{/each}}
+		</script>
+		<script type="text/javascript">
+			mui.plusReady(function(){
+				mui.init({
+					pullRefresh : {
+						container:"#refreshContainer",//下拉刷新容器标识，querySelector能定位的cs
+						up: {
+							height:50,//可选.默认50.触发上拉加载拖动距离
+							auto:false,//可选,默认false.自动上拉加载一次
+							contentrefresh : "正在加载...",//可选，正在加载状态时，上拉加载控件上显示的标题内容
+							contentnomore:'',//可选，请求完毕若没有更多数据时显示的提醒内容；
+							callback: upFn // 上拉执行函数
+						}
+					},
+				});
+				ca.init();
+				ca.blackStatusBar();
+				
+				function upFn(){
+					mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
+				}
+				var page=1,type=0;
+				// ca.id('content').style.height=(window.innerHeight/10)*6+'px';
+				var dockHeader = function(){
+					var wrapper= mui('#refreshContainer')[0],
+						barWrapper = mui('.brand-bar-wrapper')[0],
+						brandBar= mui('#tab')[0],
+						scroll= mui('#refreshContainer').scroll();
+					//顶部悬停
+					var dock = function(){
+						if (!brandBar.classList.contains('dock-header-bar')) {
+							wrapper.appendChild(brandBar);
+							brandBar.classList.add('dock-header-bar');
+						}
+					}
+					//复原
+					var reset = function(){
+						if (brandBar.classList.contains('dock-header-bar')) {
+							barWrapper.appendChild(brandBar);
+							brandBar.classList.remove('dock-header-bar');
+						}
+					}
+					//安卓停靠方式
+					var androidDock = function(){
+						document.addEventListener('scroll', function(e) {
+							window.pageYOffset > barWrapper.offsetTop ? dock() : reset();
+						});
+					}
+					//IOS停靠方式
+					var iosDock = function(){
+						wrapper.addEventListener('scroll', function(e) {
+							scroll.y < -(barWrapper.offsetTop) ? dock() : reset();
+						}, false);
+					}
+					//准备执行条件
+					var init = function(){
+						if (mui.os.ios) {
+							iosDock();
+						}else{
+							//安卓系统禁止系统滚动条
+							document.body.addEventListener('touchmove', function (event) {
+								event.stopPropagation();
+							}, false);
+							androidDock();
+						}
+					}
+					init();
+				}
+				dockHeader();
+				mui('#refreshContainer').on('tap','.lh37',function(){
+					var index=this.getAttribute('data_index');
+					var types=this.getAttribute('data_type');
+					setTable(index);
+					ca.id('content').innerHTML="";
+					page=1;
+					type=types;
+					findVisa(types);
+				})
+				
+				function setTable(index){
+					if(plus.os.name=='iOS'){
+						mui('#refreshContainer').scroll().scrollTo(0,0,500);
+					}else{
+						ca.className('mui-content')[0].scrollTo=100+'px';
+					}
+					var cell=document.getElementsByClassName('lh37');
+					for(var a=0;a<cell.length;a++){
+						if(index==a){
+							cell[a].classList.add('visa-index-tab-active');
+							cell[a].classList.remove('visa-index-tab');
+						}else{
+							cell[a].classList.remove('visa-index-tab-active');
+							cell[a].classList.add('visa-index-tab');
+						}
+					}
+				}
+				findVisa(0);
+				function findVisa(type){
+					ca.showWaiting();
+					ca.ajaxs({url:'findVisaZone',data:{
+							type:type,page:page
+						},succFn:function(data){
+							if(ca.emptyFun(data.next_item)){
+								//没有下一页了
+								ca.id('gengduo').classList.remove('disb');
+								ca.id('gengduo').classList.add('disn');
+							}else{
+								ca.id('gengduo').classList.remove('disn');
+								ca.id('gengduo').classList.add('disb');
+							}
+							if(ca.emptyFun(data.data) && data.current_page==1){
+								//第一页没有数据
+								ca.closeWaiting();
+								ca.id('content').innerHTML='<div class="c999999">无</div>';
+								return;
+							}
+							show(data.data);
+							ca.closeWaiting();
+						},errFn:function(err){
+							mui.toast(err);
+							ca.closeWaiting();
+						}
+					})
+				}
+				
+				function show(data){
+					try{
+						ca.id('content').innerHTML+=template('visa_list',{
+							'list':data
+						})
+					}catch(e){
+						console.log(e);
+					}
+					
+				}
+				ca.id('gengduo').addEventListener('tap',function(){
+					page=page+1;
+					findVisa(type);
+				})
+				
+				
+				mui('#content').on('tap','.visa_list_item',function(){
+					ca.showWaiting();
+					var country=this.getAttribute('data_name');
+					var country_img=this.getAttribute('data_img');
+					var self=plus.webview.create('visa_list_item.html','visa_list_item',{},{country:country,country_img:country_img});
+					setTimeout(function(){
+						self.show('slide-in-right',400);
+					},300)
+					
+				})
+				ca.id('search').addEventListener('tap',function(){
+					var self=plus.webview.create('visa_search.html','visa_search',{},{});
+					self.show('slide-in-right',400);
+				})
+			})
+			
+		</script>
+	</body>
+
+</html>

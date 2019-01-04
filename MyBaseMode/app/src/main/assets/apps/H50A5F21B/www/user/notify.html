@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/style.css" />
+		<style>
+			.mui-switch.mui-active {
+			    border-color: #24ABFE;
+			    background-color: #24ABFE;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav user-index-top-bg mheader">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: #FFFFFF !important;"></a>
+		    <h1 class="mui-title" style="font-size: 15px !important;color: #FFFFFF !important;">消息通知</h1>
+		</header>
+		<div class="mui-content" style="margin-top: 25px;">
+		    <!--<div class="mui-switch mui-switch-mini">
+			  <div class="mui-switch-handle"></div>
+			</div>-->
+			<!-- 简洁模式开关打开状态 -->
+			
+			<ul class="mui-table-view" style="margin-top: 15px;">
+			    <li class="mui-table-view-cell">
+			        <div class="c666666 fs16">声音</div>
+			        <div class="mui-switch mui-switch-mini">
+					  <div class="mui-switch-handle"></div>
+					</div>
+			    </li>
+			    <li class="mui-table-view-cell">
+			    	<div class="c666666 fs16">振动</div>
+			        <div class="mui-switch mui-switch-mini">
+					  <div class="mui-switch-handle"></div>
+					</div>
+			    </li>
+			</ul>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/castapp.js" ></script>
+		<script type="text/javascript">
+			mui.init();
+			ca.init();
+			ca.whiteStatusBar();
+			var swi=ca.className('mui-switch');
+			var setVibrate=localStorage.getItem('setVibrate');
+			var setBeep=localStorage.getItem('setBeep');
+			if(setBeep=='true'){
+				swi[0].classList.remove('mui-active');
+			}else{
+				swi[0].classList.add('mui-active');
+			}
+			if(setVibrate=='true'){
+				swi[1].classList.remove('mui-active');
+			}else{
+				swi[1].classList.add('mui-active');
+			}
+			swi[1].addEventListener("toggle",function(event){
+			  if(event.detail.isActive){
+					localStorage.setItem('setVibrate',false);
+			  }else{
+					localStorage.setItem('setVibrate',true);
+			  }
+			})
+			swi[0].addEventListener("toggle",function(event){
+			  if(event.detail.isActive){
+			  	localStorage.setItem('setBeep',false);
+			  }else{
+			  	localStorage.setItem('setBeep',true)
+			  }
+			})
+			
+		</script>
+	</body>
+
+</html>

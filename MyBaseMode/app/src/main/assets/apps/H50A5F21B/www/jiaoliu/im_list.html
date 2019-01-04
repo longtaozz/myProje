@@ -1,0 +1,658 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/style.css" />
+		<style>
+			.mui-btn-red{
+				background-color: #FF8201;
+			}
+			.mui-table-view-cell {
+			    position: relative;
+			    overflow: hidden;
+			   	padding: 0px;
+			    -webkit-touch-callout: none;
+			}
+			.mui-table-view-cell>.tubiao{
+			    -webkit-transition: -webkit-transform 0ms ease;
+			    transition: transform 0ms ease;
+			}
+			.im-list-item{
+				/*border: 1px solid red;*/
+				overflow: hidden;
+			}
+			.im-list-item-l{
+				width: 60px;
+				float: left;
+				 margin: 8px 0px 8px 10px;
+			}
+			.im-list-item-l img{
+				width: 49px;
+				height: 49px;
+				border-radius:5px ;
+			}
+			.im-list-item-c{
+				width: 77%;
+				float: left;
+				padding-top: 3px;
+				margin-top: 8px;
+			}
+			.ts-li-title{
+				overflow: hidden; 
+			    text-overflow: ellipsis; 
+			    -o-text-overflow: ellipsis;
+			    white-space:nowrap;
+			    display:block;
+			    width: 80%;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div style="z-index: 1000;position: relative;width: 100%;height: 25px; background: #ffd2d2;" class="tc disn" id="jianchawangluo">
+			<span class="fs12 cffffff" id="jianchawangluozi"></span>
+		</div>
+		<div id="refreshContainer" class="mui-scroll-wrapper" style="padding-bottom: 35px;">
+			<div class="mui-scroll" >
+				<ul class="ww" id="list_item">
+				    	<!--<li class="mui-table-view-cell h65 bgwhite" data_id="">
+				      		<div class="mui-slider-right mui-disabled information-list-delete" data_id="">
+								<a class="mui-btn mui-btn-red" >删除</a>
+							</div>
+							<div class="mui-slider-handle im-list-item" data_id="">
+								<div class="im-list-item-l">
+									<img src="../img/touxiang1.jpg"/>
+									<div class="cffffff fs11 tubiao" style="position: absolute;top: 2px;left: 50px;background: red;border-radius:50%;height: 16px;width: 16px;z-index: 1000;">
+										<span class="ml5" style="position: absolute;top: -2px;">8</span>
+									</div>
+								</div>
+								<div class="im-list-item-c">
+									<div class="fs15">
+										<span>张三</span>
+										<span class="fr fs12 c666666">19:50</span>
+									</div>
+									<div class="fs13 c666666">
+										<span class="ts-li-title">打了圣诞节昂克赛拉建档立卡</span>
+									</div>
+								</div>
+							</div>
+						</li>-->
+				</ul>
+			</div>
+		</div>
+		<script type="text/template" id="liebiao">
+			{{each list}}
+				<li class="mui-table-view-cell h65 bgwhite" data_id="">
+		      		<div class="mui-slider-right mui-disabled information-list-delete" data_id="">
+						<a class="mui-btn mui-btn-red" >删除</a>
+					</div>
+					<div class="mui-slider-handle im-list-item" data_account="{{$value.useraccount}}" data_name="{{$value.username}}" data_userimg="{{$value.userimg}}">
+						<div class="im-list-item-l">
+							<img src="{{$value.userimg}}"/>
+							{{if $value.unreadcount>0}}
+								<div class="cffffff fs11 tubiao" style="position: absolute;top: 2px;left: 50px;background: red;border-radius:50%;height: 16px;width: 16px;z-index: 1000;">
+									<span class="ml5" style="position: absolute;top: -2px;">{{$value.unreadcount}}</span>
+								</div>
+							{{/if}}
+						</div>
+						<div class="im-list-item-c">
+							<div class="fs16">
+								<span>{{$value.username}}</span>
+								<span class="fr fs12 c666666">{{$value.lastcontenttime | dateFormat:''}}</span>
+							</div>
+							<div class="fs13 c666666">
+								<span class="ts-li-title">{{$value.lastcontent}}</span>
+							</div>
+						</div>
+					</div>
+				</li>
+			{{/each}}
+		</script>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/castapp.js" ></script>
+		<script type="text/javascript" src="../js/NIM_Web_NIM_v5.5.0.js" ></script>
+		<script type="text/javascript" src="../js/template-web.js" ></script>
+		<script type="text/javascript">
+			mui.plusReady(function(){
+				mui.init({
+				 	pullRefresh : {
+					    container:"#refreshContainer",//下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
+					    down : {
+					      height:50,//可选,默认50.触发下拉刷新拖动距离,
+					      auto: false,//可选,默认false.首次加载自动下拉刷新一次
+					      contentdown : "下拉可以刷新",//可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
+					      contentover : "释放立即刷新",//可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
+					      contentrefresh : "正在刷新...",//可选，正在刷新状态时，下拉刷新控件上显示的标题内容
+					      callback :downFn //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+					    }
+					}
+		        });
+		    	ca.init();
+					document.addEventListener("netchange",onNetChange,false);
+					function onNetChange(){
+					　　//获取当前网络类型
+					　　var nt = plus.networkinfo.getCurrentType();
+					　　switch(nt){
+					　　　　case plus.networkinfo.CONNECTION_ETHERNET:
+					　　　　case plus.networkinfo.CONNECTION_WIFI:
+					// 　　　　　　mui.toast("当前网络为WiFi");
+											ca.id('jianchawangluo').style.display="none";
+											if(plus.os.name=='iOS'){
+												ca.id('refreshContainer').style.marginTop='0px';
+											}
+					　　　　　　break;
+					　　　　case plus.networkinfo.CONNECTION_CELL2G:
+										if(plus.os.name=='iOS'){
+											ca.id('refreshContainer').style.marginTop='25px';
+										}
+										ca.id('jianchawangluo').style.display="block";
+										ca.id('jianchawangluozi').innerText='当前网络环境较差，请检查网络环境！';
+										break;
+					　　　　case plus.networkinfo.CONNECTION_CELL3G:
+										if(plus.os.name=='iOS'){
+											ca.id('refreshContainer').style.marginTop='25px';
+										}
+										ca.id('jianchawangluo').style.display="block";
+										ca.id('jianchawangluozi').innerText='当前网络环境较差，请检查网络环境！';
+										break;
+					　　　　case plus.networkinfo.CONNECTION_CELL4G:
+					// 　　　　　　mui.toast("当前网络非WiFi");
+					　　　　　　break;
+					　　　　default:
+					　　　　　if(plus.os.name=='iOS'){
+											ca.id('refreshContainer').style.marginTop='25px';
+										}
+										ca.id('jianchawangluo').style.display="block";
+										ca.id('jianchawangluozi').innerText='当前网络不可用，请检查网络！';
+					　　　　　break;
+					　　}
+					}
+					
+					ca.getMachineInfo(function(data){
+						if(data.network=='未连接网络'){
+							if(plus.os.name=='iOS'){
+								ca.id('refreshContainer').style.marginTop='25px';
+							}
+							ca.id('jianchawangluo').style.display="block";
+							ca.id('jianchawangluozi').innerText='当前网络不可用，请检查网络！';
+						}else if(data.network=='2G蜂窝网络' || data.network=='3G蜂窝网络'){
+							if(plus.os.name=='iOS'){
+								ca.id('refreshContainer').style.marginTop='25px';
+							}
+							ca.id('jianchawangluo').style.display="block";
+							ca.id('jianchawangluozi').innerText='当前网络环境较差，请检查网络环境！';
+						}else{
+							ca.id('jianchawangluo').style.display="none";
+						}
+					})
+			    function downFn(){
+					mui('#refreshContainer').pullRefresh().endPulldownToRefresh();  //这行代码会隐藏掉 正在加载... 容器
+						
+			    }
+				ca.receiveNotice('update',function(){
+		        	mui('#refreshContainer').pullRefresh().refresh(true);
+		        	WillReconnect();
+				});
+				WillReconnect();
+				function WillReconnect(){
+					var account=localStorage.getItem('e_code')+'_'+localStorage.getItem('username');//自己的id
+					var accounts='';//计入房间的id
+					var nim = NIM.getInstance({
+						  // debug: true,
+						  appKey:'fc06054e7594d0cd2e17b1238c9fc296',
+						  account:account,
+						  token:localStorage.getItem('im_token'),
+						  // privateConf: {}, // 私有化部署方案所需的配置
+						  onconnect:onConnect,
+						  onwillreconnect:onWillReconnect,
+						  ondisconnect:onDisconnect,
+						  onerror:onError,
+					      onroamingmsgs: onRoamingMsgs,
+					      onofflinemsgs: onOfflineMsgs,
+					      onmsg: onMsg
+					});
+					function onConnect(optional) {
+					  console.log('连接成功');
+		//			  console.log(JSON.stringify(optional))
+							 // updateImLIst(account);
+							 getUserDones({account:account,succFn:function(data){
+								 alert(JSON.stringify(data))
+							 }})
+					}
+					function onWillReconnect(obj) {
+					  // 此时说明 SDK 已经断开连接, 请开发者在界面上提示用户连接已断开, 而且正在重新建立连接
+		//			  console.log('即将重连');
+					}
+					function onDisconnect(error) {
+					  // 此时说明 SDK 处于断开状态, 开发者此时应该根据错误码提示相应的错误信息, 并且跳转到登录页面
+					  console.log('丢失连接');
+					  console.log(error);
+					}
+					function onError(error) {
+					  console.log(error);
+					}
+					function onRoamingMsgs(obj) {
+					    console.log('收到漫游消息', obj);
+					}
+					function onOfflineMsgs(obj){
+					    console.log('收到离线消息', obj);
+//					    alert(JSON.stringify(obj))
+					    var da=obj.msgs;
+					    for(var a in da){
+					    	if(da[a].scene=='p2p'){
+					    		onCustomMsg(da[a]);
+					    	}
+					    }
+					}
+					//收到消息
+					function onMsg(msg) {
+					    switch (msg.scene) {
+					    case 'p2p':
+					        onCustomMsg(msg);
+					        break;
+					    case 'notification':
+					        // 处理群通知消息
+					        onTeamNotificationMsg(msg);
+					        break;
+					    // 其它case
+					    default:
+					        break;
+					    }
+					}
+					//收到消息处理
+					function onCustomMsg(msg) {
+						// alert(JSON.stringify(msg));
+						//处理消息列表数据
+						ProcessingmMessageList(msg);
+						//处理消息详细数据
+						if(accounts!=msg.target){
+							ProcessingmMessageDetail(msg);
+						}
+						
+					}
+					function onOfflineSysMsgs(sysMsgs) {
+							console.log('收到离线系统通知', sysMsgs);
+							pushSysMsgs(sysMsgs);
+					}
+					function onSysMsg(sysMsg) {
+							console.log('收到系统通知', sysMsg);
+							pushSysMsgss(sysMsg);
+					}
+					function onUpdateSysMsg(sysMsg) {
+		//			    pushSysMsgs(sysMsg);
+					}
+					function onsysmsgunread(sysMsg){
+	//						alert(JSON.stringify(sysMsg));
+					}
+					
+					show();
+					function show(){
+						template.defaults.imports.dateFormat = function(arg1,arg2){
+						var date = new Date(arg1);
+					    return ca.thisTimeForm(date.getHours(),date);
+						};
+						
+						var arr=JSON.parse(plus.storage.getItem(account+'_listitem'));
+						if(!ca.emptyFun(arr)){
+							ca.id('list_item').innerHTML=template('liebiao', {
+								"list":arr.sort(ca.getSortFun('desc','lastcontenttime'))
+							});
+						}
+						
+						
+					}
+					//处理消息列表
+					function ProcessingmMessageList(msg){
+						var unreadcount=0;
+						var arr=JSON.parse(plus.storage.getItem(account+'_listitem'));
+						// getUserDones(msg.target);
+						if(msg.flow=='in'){
+							var content='';
+							if(msg.type=='text'){
+								content=msg.text;
+							}else if(msg.type=='audio'){
+								content='[语音]';
+							}else if(msg.type=='image'){
+								content='[图片]';
+							}
+							if(ca.emptyFun(arr)){
+								arr=[{
+									userindex:1,
+									useraccount:msg.target,
+									username:msg.fromNick,
+									userimg:'../img/touxiang1.jpg',
+									lastcontent:content,
+									lastcontenttime:msg.time,
+									unreadcount:1
+								}]
+							}else{
+								var isyou=false;
+								for(var a in arr){
+									if(arr[a].useraccount==msg.target){
+										if(localStorage.getItem('accounts')==msg.target){
+											arr[a].unreadcount=0;
+										}else{
+											arr[a].unreadcount=arr[a].unreadcount+1;
+										}
+										arr[a].lastcontent=content;
+										arr[a].lastcontenttime=msg.time,
+										isyou=true;
+									}
+								}
+								if(!isyou){
+									if(localStorage.getItem('accounts')==msg.target){
+										unreadcount=0;
+									}else{
+										unreadcount=1;
+									}
+									arr.push({
+										userindex:arr.length+1,
+										useraccount:msg.target,
+										username:msg.fromNick,
+										userimg:'../img/touxiang1.jpg',
+										lastcontent:content,
+										lastcontenttime:msg.time,
+										unreadcount:unreadcount
+									})
+								}		
+							}
+							
+						}else{
+							var content='';
+							if(msg.type=='text'){
+								content=msg.text;
+							}else if(msg.type=='audio'){
+								content='[语音]';
+							}else if(msg.type=='image'){
+								content='[图片]';
+							}
+							if(ca.emptyFun(arr)){
+								arr=[{
+									userindex:1,
+									useraccount:msg.target,
+									username:msg.fromNick,
+									userimg:'../img/touxiang1.jpg',
+									lastcontent:content,
+									lastcontenttime:msg.time,
+									unreadcount:0
+								}]
+							}else{
+								var isyou=false;
+								for(var a in arr){
+									if(arr[a].useraccount==msg.target){
+										arr[a].unreadcount=0;
+										arr[a].lastcontent=content;
+										arr[a].lastcontenttime=msg.time,
+										isyou=true;
+									}
+								}
+								if(!isyou){
+									arr.push({
+										userindex:arr.length+1,
+										useraccount:msg.target,
+										username:msg.fromNick,
+										userimg:'../img/touxiang1.jpg',
+										lastcontent:content,
+										lastcontenttime:msg.time,
+										unreadcount:0
+									})
+								}		
+							}
+							
+						}
+						plus.storage.setItem(account+'_listitem',JSON.stringify(arr));
+						show();
+					}
+					//处理消息详细数据
+					function ProcessingmMessageDetail(msg){
+						// alert(JSON.stringify(msg))
+						var storageName='chatList'+account+'and'+msg.from;
+						var chatlist=JSON.parse(plus.storage.getItem(storageName));
+						var ob={};
+						if(ca.emptyFun(chatlist)){
+							var chat=new Object;
+							chat.selfuserid=localStorage.getItem('userid');
+							chat.selfname=localStorage.getItem('realname');
+							chat.selfimg=localStorage.getItem('userimg_url');
+							chat.selfaccount=account;
+							chat.heuserid=1;
+							chat.hename=msg.fromNick;
+							chat.heimg='../img/touxiang.jpg';
+							chat.heaccount=msg.from;
+							chat.updatetime=new Date().getTime();
+							chat.content=[];
+							plus.storage.setItem(storageName,JSON.stringify(chat));
+							chatlist=JSON.parse(plus.storage.getItem(storageName));
+						}
+						if(msg.type=="text"){
+							EncapsulationMessage(msg.flow,msg.time,msg.type,msg.status,msg.text,'',msg,0);
+						}else if(msg.type=="audio"){
+							createDownload(msg.file.url,msg);
+						}else if(msg.type=="image"){
+							// if(plus.os.name=="iOS"){
+								createDownload1(msg.file.url,msg);
+// 							}else{
+// 								EncapsulationMessage(msg.flow,msg.time,msg.type,msg.status,'',msg.file.url,msg,0)
+// 							}
+						}
+						
+					}
+					//处理系统通知
+					function pushSysMsgss(sysMsg){
+						if(sysMsg.type=='applyFriend'){
+							var arrlist=JSON.parse(plus.storage.getItem(account+'new_friend'));
+							var sysMsg=sysMsg;
+							if(ca.emptyFun(arrlist)){
+								nim.getUser({
+										account:sysMsg.from,
+										done: getUserDone1
+								});
+								function getUserDone1(error, user) {
+										if (!error) {
+											if(user){
+												var arr={
+												unreadcount:1,
+												content:[{
+													friendaccount:user.account,
+													friendname:user.nick,
+													friendimg:user.avatar,
+													friendtime:sysMsg.time,
+													friendidserver:sysMsg.idServer,
+													state:sysMsg.state,
+													ps:sysMsg.ps
+												}]
+											}
+												plus.storage.setItem(account+'new_friend',JSON.stringify(arr));
+												show();
+											}
+										}
+								}
+							}else{
+								for(var a  in arrlist.content){
+									if(arrlist.content[a].friendaccount==sysMsg.from){
+										arrlist.content[a].friendtime=sysMsg.time;
+										arrlist.content[a].ps=sysMsg.ps;
+									}else if(a==arrlist.content.length-1){
+										nim.getUser({
+												account:sysMsg.from,
+												done: getUserDone2
+										});
+										function getUserDone2(error, user) {
+												if (!error) {
+													if(user){
+														arrlist.unreadcount=arrlist.unreadcount+1;
+														arrlist.content.push({
+														friendaccount:user.account,
+														friendname:user.nick,
+														friendimg:user.avatar,
+														friendtime:sysMsg.time,
+														friendidserver:sysMsg.idServer,
+														state:sysMsg.state,
+														ps:sysMsg.ps
+														})
+														plus.storage.setItem(account+'new_friend',JSON.stringify(arrlist));
+														show();
+													}
+												}
+										}
+									}
+								}
+							}
+						}
+						
+					}
+					//处理点击计入单聊后的未读数
+					function ProcessingmUnreadcount(){
+						var arr=JSON.parse(plus.storage.getItem(account+'_listitem'));
+						for(var a in arr){
+							if(arr[a].useraccount==localStorage.getItem('accounts')){
+								arr[a].unreadcount=0;
+							}
+						}
+						plus.storage.setItem(account+'_listitem',JSON.stringify(arr));
+						show();
+					}
+					//获取用户资料
+					function getUserDones(json){
+						nim.getUser({
+						    account: json.account,
+						    done: getUserDone
+						});
+						function getUserDone(error, user) {
+	//					    console.log(error);
+	//					    console.log(user);
+	//					    console.log('获取用户资料' + (!error?'成功':'失败'));
+						    if (!error) {
+								json.succFn && json.succFn(user);
+						        // updataUser(user);
+						    }
+						}
+					}
+					
+					function updataUser(user){
+						var arr=JSON.parse(plus.storage.getItem(account+'_listitem'));
+						for(var a in arr){
+							if(arr[a].useraccount==user.account){
+								arr[a].username=user.nick;
+								arr[a].userimg=user.avatar;
+								isyou=true;
+							}
+						}
+						plus.storage.setItem(account+'_listitem',JSON.stringify(arr));
+						show();
+					}
+					mui('body').on('tap','.im-list-item',function(){
+						var name=this.getAttribute('data_name');
+						var userimg=this.getAttribute('data_userimg');
+						accounts=this.getAttribute('data_account');
+						localStorage.setItem('accounts',accounts);
+						ProcessingmUnreadcount();
+						mui.openWindow({
+						    url:'im_list_detail.html',
+						    id:'im_list_detail',
+						    extras:{
+						        accounts:accounts,
+						        userimg:userimg,
+						        name:name
+						    }
+						});
+					})
+					/**
+					 * 下载
+					 */
+					function createDownload(urls,msg){
+							var dtask = plus.downloader.createDownload(urls, {},function (d, status) {
+								// 下载完成
+								if ( status == 200 ) {
+									EncapsulationMessage(msg.flow,msg.time,msg.type,msg.status,'',d.filename,msg,msg.file.dur);
+								} else {
+			//						 alert( "Download failed: " + status ); 
+								}  
+							});
+							dtask.start();
+						}
+				function createDownload1(urls,msg) {
+					var filename='';
+					var dtask = plus.downloader.createDownload(urls, {filename:'_downloads/'+new Date().getTime()+'.png'}, function ( d, status ) {
+						// 下载完成
+						if ( status == 200 ) { 
+							showPics(d.filename,msg);
+						} else {
+							
+						}  
+					});
+					dtask.start(); 
+					
+				}
+				
+				
+				function showPics(url,msg){          
+						//根据路径读取到文件   
+							 plus.io.resolveLocalFileSystemURL(url,function(entry){  
+									 entry.file(function(file){
+										 EncapsulationMessage(msg.flow,msg.time,msg.type,msg.status,'',file.fullPath,msg,0);
+									 });  
+							});   
+						}  
+					/*
+					* 封装消息
+					*/
+					function EncapsulationMessage(flow,time,type,status,contents,fileurl,msg,dur){
+						var storageName='chatList'+account+'and'+msg.from;
+						var chatlists=JSON.parse(plus.storage.getItem(storageName));
+						var ob={
+							flow:flow,
+							time:time,
+							type:type,
+							status:status,
+							content:contents,
+							fileurl:fileurl,
+							dur:dur
+						}
+						// alert(JSON.stringify(chatlists))
+						chatlists.content.unshift(ob);
+						plus.storage.setItem(storageName,JSON.stringify(chatlists));
+					}
+					function	updateImLIst(account){
+						var arr=JSON.parse(plus.storage.getItem(account+'_listitem'));
+						var arrs=[];
+						mui.each(arr,function(index,item){
+							arrs.push(item['useraccount']);
+						})
+						nim.getUsers({
+								accounts: arrs,
+								done: getUserDone
+						});
+						function getUserDone(error, user) {
+								console.log('获取用户资料' + (!error?'成功':'失败'));
+								if (!error) {
+									mui.each(user,function(index,item){
+											var storageName='chatList'+account+'and'+item['account'];
+											var chatlist=JSON.parse(plus.storage.getItem(storageName));
+											chatlist.hename=item['nick'];
+											chatlist.heimg=item['avatar'];
+											chatlist.heaccount=item['account'];
+											chatlist.updatetime=new Date().getTime();
+											plus.storage.setItem(storageName,JSON.stringify(chatlist));
+									})
+								}
+						}
+					}
+				}
+// 			document.addEventListener("plusready", onPlusReady, false); 
+// 			function onPlusReady(){
+// 				document.addEventListener("background", onAppBackground, false);
+// 			}
+// 			function onAppBackground(){
+// 				console.log("Application background!"); 
+// 			}
+			})
+			
+		</script>
+	</body>
+
+</html>

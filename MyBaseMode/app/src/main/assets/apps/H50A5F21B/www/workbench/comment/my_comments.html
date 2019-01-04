@@ -1,0 +1,294 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../../css/mui.css" rel="stylesheet" />
+		<link href="../../css/style.css" rel="stylesheet" />
+		<style>
+			.mui-scroll ul li{
+				margin: 5px;
+				background: #fff;
+				border-radius:5px ;
+			}
+			.mycomments-d1{
+				position:fixed;top: 69px;
+				z-index: 88;
+				width: 100%;
+				background: #EFEFF4;
+				padding: 8px 15px;
+			}
+			.mycomments-d1 img{
+				width: 45px;height: 45px;border-radius:100px ;
+			}
+			.mycomments-d2-d1-d1 img{
+				width: 25px;height: 25px;border-radius:100px ;
+			}
+			.mui-table-view-cell > .mui-slider-handle{
+				 background-color:rgba(255,255,255,0);
+			}
+			.mycomments-bgdel{
+				background-color:rgba(255,250,244,0.8) !important;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav user-index-top-bg mheader">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left cffffff"></a>
+			<span class="cffffff fl fs15 ml20" style="line-height: 42px;">我的评论</span>
+		</header>
+		<div class="mui-content">
+			<div class="mycomments-d1">
+				<img src="" class="fl touxiang" />
+				<span class="fs13 fl ml10 lh44" id="name"></span>
+			</div>
+			<div id="refreshContainer" class="mui-scroll-wrapper mycomments-d2" >
+				<div class="mui-scroll" >
+					<ul  id="comment_list">
+						<!-- <li class="mui-table-view-cell h150" data_id="'+da[a].id+'" >
+							<div class="mui-slider-right mui-disabled" style="margin: 0px 0px 20px 0px;" data_id="'+da[a].id+'">
+								<a class="mui-btn mui-btn-red" >删除</a>
+							</div>
+							<div class="mui-slider-handle mycomments-d2-d1">
+								<div class="oh mycomments-d2-d1-d1">
+									<img src="../../img/ttyou.png" class="fl" />
+									<span class="fs11 fl ml15 c666666">2018-12-05</span>
+									<div class="icons mui-inline fr fs13 ">
+										<i data-index="1" class="mui-icon mui-icon-star-filled fs14"></i>
+										<i data-index="1" class="mui-icon mui-icon-star-filled fs14"></i>
+										<i data-index="1" class="mui-icon mui-icon-star-filled fs14"></i>
+										<i data-index="1" class="mui-icon mui-icon-star-filled fs14"></i>
+										<i data-index="1" class="mui-icon mui-icon-star fs14"></i>
+									</div>
+								</div>
+								<div class="mt3 pl5 bbf0 pb5">
+									<span class="fs13 yc2">dajshdkj是的了解来看撒娇地离开静安寺立刻就打深刻理解的是的了解来看撒娇地离开静安寺立刻就打深刻理解的是的了解来看撒娇地离开静安寺立刻就打深刻理解的</span>
+								</div>
+								<div class="pt7">
+									<div class="w25 fl">
+										<img src="../../img/banner1.jpg" style="width: 83px;height: 50px;"/>
+									</div>
+									<div class="w70 fl pl10">
+										<div class="" style="margin-top: -4px;">
+											<span class="fs13 yc1">张家界等哈说看见很多借口达康书记爱喝酒</span>
+										</div>
+										<div>
+											<span class="fs12 c666666">不知道</span>
+										</div>
+									</div>
+								</div>
+							</div>	
+						</li> -->
+						
+					</ul>
+				</div>
+			</div>
+			<div class="fs13 ca6a6a6 tc mt70 disn" id="kong">
+				<span>未发布过评论，快去发布一次评论试试吧！</span>
+			</div>
+		</div>
+		<script type="text/template" id="list">
+			{{each list}}
+				{{if $value.status=='0'}}
+					<li class="mui-table-view-cell  mycomments-bgdel">
+				{{else}}
+					<li class="mui-table-view-cell">
+					<div class="mui-slider-right mui-disabled" style="margin: 0px 0px 20px 0px;">
+						<a class="mui-btn mui-btn-red "  data_id="{{$value.id}}">删除</a>
+					</div>
+				{{/if}}
+					<div class="mui-slider-handle mycomments-d2-d1">
+						<div class="oh mycomments-d2-d1-d1">
+							<img src="../../img/ttyou.png" class="fl touxiang" />
+							<span class="fs11 fl ml15 c666666">{{$value.create_time.substring(0,16)}}</span>
+							<div class="icons mui-inline fr fs13">
+								<%for (var i=0;i<$value.grade;i++) {%>
+									<i data-index="1" class="mui-icon mui-icon-star-filled fs14"></i>
+								<%}%>
+								<%for (var i=0;i<5-$value.grade;i++) {%>
+									<i data-index="1" class="mui-icon mui-icon-star fs14"></i>
+								<%}%>
+							</div>
+						</div>
+						<div class="mt3 pl5 bbf0 pb5">
+							<span class="fs13 yc2">{{$value.content}}</span>
+						</div>
+						<div class="pt7">
+							{{if $value.product_type=='line'}}
+								{{if $value.product.shelves==0}}
+									<div class="w75 tc">
+										<span>已下架</span>
+									</div>
+								{{else}}
+									<div class="w25 fl">
+										<img src="{{$value.product.pic}}" style="width: 83px;height: 50px;"/>
+									</div>
+									<div class="w70 fl pl10">
+										<div class="" style="margin-top: -4px;">
+											<span class="fs13 yc1">{{$value.product.name}}</span>
+										</div>
+										<div>
+											<span class="fs12 c666666">{{$value.product.linecatebc.name}}</span>
+											<span class="fs12 c666666 ml10">{{$value.product.linecatec.name}}</span>
+										</div>
+									</div>
+								{{/if}}
+							{{else if $value.product_type=='sign'}}
+								{{if $value.product.status==0}}
+									<div class="w75 tc">
+										<span>已下架</span>
+									</div>
+								{{else}}
+									<div class="w25 fl">
+										<img src="{{$value.product.pic}}" style="width: 83px;height: 50px;"/>
+									</div>
+									<div class="w70 fl pl10">
+										<div class="" style="margin-top: -4px;">
+											<span class="fs13 yc1">{{$value.product.name}}</span>
+										</div>
+										<div>
+											<span class="fs12 c666666">{{$value.product.tags}}</span>
+										</div>
+									</div>
+								{{/if}}
+							{{else}}
+								<div class="w25 fl">
+									<img src="{{$value.product.pic}}" style="width: 83px;height: 50px;"/>
+								</div>
+								<div class="w70 fl pl10">
+									<div class="" style="margin-top: 0px;">
+										<span class="fs13 yc1">{{$value.product.name}}</span>
+									</div>
+									<div>
+										{{if $value.product_type=='hotel' }}
+										<span class="fs12 c666666">酒店</span>
+										{{/if}}
+										{{if $value.product_type=='car' }}
+										<span class="fs12 c666666">车队</span>
+										{{/if}}
+										{{if $value.product_type=='ticket' }}
+										<span class="fs12 c666666">景点</span>
+										{{/if}}
+										{{if $value.product_type=='food' }}
+										<span class="fs12 c666666">餐厅</span>
+										{{/if}}
+										{{if $value.product_type=='pickup' }}
+										<span class="fs12 c666666">接送站车队</span>
+										{{/if}}
+									</div>
+								</div>
+							{{/if}}
+						</div>
+					</div>	
+				</li>
+			{{/each}}
+		</script>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/castapp.js"></script>
+		<script src="../../js/template-web.js"></script>
+		<script type="text/javascript">
+			mui.plusReady(function(){
+				mui.init({
+					pullRefresh : {
+							container:"#refreshContainer",//下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
+							up: {
+								height:50,//可选.默认50.触发上拉加载拖动距离
+								auto:false,//可选,默认false.自动上拉加载一次
+								contentrefresh : "正在加载...",//可选，正在加载状态时，上拉加载控件上显示的标题内容
+								contentnomore:'没有更多数据了',//可选，请求完毕若没有更多数据时显示的提醒内容；
+								callback: upFn // 上拉执行函数
+							}
+					},
+					swipeBack:true //启用右滑关闭功能
+				});
+				ca.init();
+				ca.whiteStatusBar();
+				var page=1;
+				var pagee=1;
+				ca.className('touxiang')[0].src=localStorage.getItem('userimg_url');
+				function upFn(){
+					if(pagee==0){
+						mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
+					}else{
+						page++;
+						findMyComments(page);
+						this.endPullupToRefresh(false);
+					}
+				}
+				if(plus.os.name=='iOS'){
+					ca.id('kong').style.marginTop='165px';
+					ca.id('refreshContainer').style.marginTop='125px';
+				}else{
+					ca.id('kong').style.marginTop='100px';
+					ca.id('refreshContainer').style.marginTop='68px';
+				}
+				findMyComments(page);
+				function findMyComments(page){
+					ca.showWaiting();
+					ca.ajaxs({url:'findMyComments',data:{
+						user_id:localStorage.getItem('userid'),
+						page:page,
+						size:10
+						},succFn:function(data){
+							if(ca.emptyFun(data.next_item)){
+								pagee=0;
+							}
+							if(!ca.emptyFun(data.data)){
+								showLIst(data);
+							}else{
+								ca.id('refreshContainer').style.display='none';
+								ca.id('kong').style.display='block';
+							}
+							ca.closeWaiting();
+						},errFn:function(err){
+							ca.closeWaiting();
+						}
+					});
+				}
+				ca.id('name').innerText=localStorage.getItem('realname');
+				function showLIst(data){
+					var datas=data.data;
+					ca.id('comment_list').innerHTML+=template('list',{
+						"list":datas
+					});
+					var im=ca.className('touxiang')
+					for(var i=0;i<im.length;i++){
+						im[i].src=localStorage.getItem('userimg_url');
+					}
+					
+				}
+				mui('#comment_list').on('tap','.mui-btn-red',function(){
+					var id=this.getAttribute('data_id');
+					var btnArray = ['是','否'];
+					mui.confirm('确定删除该条评论?', '提示', btnArray, function(e) {
+						if (e.index == 0) {
+							ca.ajaxs({url:'updateCommentStatus',data:{id:id,user_id:localStorage.getItem('userid')},
+								succFn:function(data){
+									if(data.msg==1){
+										if(data.msgtext=='success'){
+											ca.id('comment_list').innerHTML='';
+											page=1;
+											findMyComments(page);
+										}else{
+											mui.toast(data.msgtext);
+										}
+									}
+									ca.closeWaiting();
+								},errFn:function(err){
+									mui.toast(err);
+									ca.closeWaiting();
+								}
+							})
+						}
+						
+					})
+				})
+			})
+			
+		</script>
+	</body>
+
+</html>

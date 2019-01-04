@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+    <title></title>
+    <link href="../css/mui.min.css" rel="stylesheet"/>
+	<link href="../css/style.css" rel="stylesheet"/>
+    <style>
+    	.feedback-div1{
+    		height: 80px;
+    		background: #FFFFFF;
+    	}
+    	.neixin{
+    		float: left;
+    		border: 1px solid #4F77AA;
+    		width: 25%;
+    		margin-left: 6%;
+    		text-align: center;
+    		height: 30px;
+    		line-height: 30px;
+    		border-radius:4px ;
+			color: #666666;
+    	}
+		.neixin-active{
+			float: left;
+			width: 25%;
+			margin-left: 6%;
+			text-align: center;
+			height: 30px;
+			line-height: 30px;
+			border-radius:4px ;
+			border: 1px solid #FF8201 !important;
+			color: #FF8201;
+		}
+    	.feedback-div2{
+    		height: 242px;
+    		margin-top: 10px;
+    		background: #FFFFFF;
+    	}
+    	.feedback-div3{
+    		margin-top: 10px;
+    		background: #FFFFFF;
+    		overflow: hidden;
+    		height: 40px;
+    		line-height: 40px;
+    	}
+    </style>
+</head>
+<body>
+	<header class="mui-bar mui-bar-nav user-index-top-bg mheader" >
+		    <a class="mui-icon mui-icon-left-nav mui-pull-left mui-action-back" style="color: #FFFFFF !important;"></a>
+		    <h1 class="mui-title" style="font-size: 18px !important;color: #FFFFFF !important;">意见反馈</h1>
+	</header>
+	<div class="mui-content" style="margin-top: 25px;">
+	    <div class="feedback-div1">
+	    	<div style="margin-left: 21px;padding-top: 10px;color: #666666;font-size: 14px;">
+	    		<span>反馈类型</span>
+	    	</div>
+	    	<div class="fs14 mt10">
+	    		<div class="neixin xx" data_index=0 data_type="线路问题">
+	    			<span>线路问题</span>
+	    		</div>
+	    		<div  class="neixin xx" data_index=1 data_type="网络问题">
+	    			<span>网络问题</span>
+	    		</div>
+	    		<div class="neixin xx" data_index=2 data_type="其他问题">
+	    			<span>其他问题</span>
+	    		</div>
+	    	</div>
+	    </div>
+	    <div class="feedback-div2">
+	    	<div style="padding-left: 21px;padding-top: 10px;padding-bottom:10px;color: #666666;font-size: 14px;border-bottom: 1px solid #C3C3C3;">
+	    		<span>问题描述</span>
+	    	</div>
+	    	<div>
+	    		<textarea name="" class="info" placeholder="请填写您的意见或者建议..." rows="3" style="border:1px solid #DDDDDD;height: 200px;font-size: 14px;"></textarea>
+	    	</div>
+	    </div>
+	    <div class="feedback-div3">
+	    	<div style="float: left;color: #666666;font-size: 14px;margin-left: 21px;">
+	    		<span>手机</span>
+	    		
+	    	</div>
+	    	<div style="float: left;width: 70%;margin-left: 10px;">
+	    		<input type="number" style="border: 0px;font-size: 14px;" placeholder="必填" id="shoujihao"/>
+	    	</div>
+	    </div>
+	    <div>
+	    	 <button class="public-g-btn info" style="width:80%;height:40px;background:#FF8201 ;color:#FFFFFF;font-size:17px;font-weight: bold;border: 0px;display: block; margin:40px auto;">提交</button>
+	    </div>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<script type="text/javascript" src="../js/mui.min.js" ></script>
+	<script src="../js/castapp.js"></script>
+	<script>
+		mui.plusReady(function(){
+			mui.init({
+				swipeBack:true
+			});
+			ca.init();
+			ca.whiteStatusBar();
+			var info = ca.className('info');
+			var type='';
+			var setItem=function(index){
+				var cell=ca.className('xx');
+				for(var i=0;i<cell.length;i++){
+					if(i==index){
+						cell[i].classList.add('neixin-active');
+						cell[i].classList.remove('neixin');
+					}else{
+						cell[i].classList.add('neixin');
+						cell[i].classList.remove('neixin-active');
+					}
+				}
+			}
+			mui('body').on('tap','.xx',function(){
+				type=this.getAttribute('data_type');
+				setItem(this.getAttribute('data_index'));
+			})
+			info['1'].addEventListener('tap',function(){
+				var shoujihao=ca.id('shoujihao');
+				var content = info['0'].value;
+				if(!type){
+					ca.prompt('选择反馈类型');
+					return;
+				}
+				if(content == ''){
+					ca.prompt('多少给点意见吧');
+					return;
+				}
+				if(shoujihao.value=='' || shoujihao.value.length!=11){
+					ca.prompt('请输入手机号');
+					return;
+				}
+				ca.ajaxs({url:'addFeedback',data:{
+						userid:localStorage.getItem('userid'),type:type,phone:shoujihao.value,content:content
+					},succFn:function(data){
+						if(data.msg==1){
+							mui.toast('感谢您的意见');
+							setTimeout(function(){
+								mui.back();
+							},500)
+							
+						}
+						ca.closeWaiting();
+					},errFn:function(call){
+						ca.closeWaiting();
+						mui.toast(call);
+					}
+				})
+				
+			});
+		})
+		
+		
+		
+		
+		
+		
+	</script>
+</body>
+</html>

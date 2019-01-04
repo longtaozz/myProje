@@ -1,0 +1,195 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/style.css" />
+	    <style type="text/css">  
+	        #bcid{  
+	            width: 100%;  
+	            height: calc(100% - 111px);  
+	            position: absolute;  
+	            background: #000000;  
+	            top: 69px;
+	        }  
+	        html, body ,div{  
+	            height:100%;  
+	            width: 100%;  
+	        }  
+	        .fbt{  
+	            color: #0E76E1;  
+	            width: 50%;  
+	            background-color: #ffffff;  
+	            float: left;   
+	            line-height: 44px;  
+	            text-align: center;  
+	        }  
+	    </style>  
+	</head>
+
+	<body>
+	    <header class="mui-bar mui-bar-nav mheader" style="background-color: #ffffff;">  
+	      <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>  
+	      <h1 class="mui-title" style="color: #0E76E1;">扫描用户二维码</h1>  
+	      <span class="mui-icon mui-icon-spinner-cycle mui-spin mui-pull-right" id="turnTheLight"></span>  
+	    </header>  
+          <div class="mui-content">
+               <div id="bcid" class="" style="padding-top: 25px;">     
+	        	 <!--盛放扫描控件的div-->          
+	   			 </div>  
+          </div>
+	   
+          
+	    <div class="mui-bar mui-bar-footer" style="padding:0px;z-index: 999;">  
+	        <div class="fbt" id="xuanzexiangce">从相册选择二维码</div>  
+	        <div class="fbt mui-action-back">取　 消</div>  
+	    </div>  
+	    
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/castapp.js" ></script>
+    <script type="text/javascript" src="../js/NIM_Web_NIM_v5.5.0.js" ></script>      
+    <script type="text/javascript">  
+        scan = null;//扫描对象  
+        mui.plusReady(function(){  
+					mui.init(); 
+					setTimeout(function(){
+						startRecognize();  
+					},400)
+          ca.init();
+          ca.blackStatusBar();
+					var nim = NIM.getInstance({
+							appKey:'fc06054e7594d0cd2e17b1238c9fc296',
+							account:localStorage.getItem('e_code')+'_'+localStorage.getItem('username'),
+							token:localStorage.getItem('im_token'),
+							onconnect:onConnect,
+							onwillreconnect:onWillReconnect,
+							ondisconnect:onDisconnect,
+							onerror:onError
+					});
+					function onConnect(optional) {
+						//console.log('连接成功');
+					}
+					function onWillReconnect(obj) {
+						// 此时说明 SDK 已经断开连接, 请开发者在界面上提示用户连接已断开, 而且正在重新建立连接
+						//console.log('即将重连');
+					}
+					function onDisconnect(error) {
+						// 此时说明 SDK 处于断开状态, 开发者此时应该根据错误码提示相应的错误信息, 并且跳转到登录页面
+						console.log('丢失连接');
+						console.log(error);
+						if (error) {
+							switch (error.code) {
+								// 账号或者密码错误, 请跳转到登录页面并提示错误
+								case 302:
+									break;
+								// 重复登录, 已经在其它端登录了, 请跳转到登录页面并提示错误
+								case 417:
+									break;
+								// 被踢, 请提示错误后跳转到登录页面
+								case 'kicked':
+									break;
+								default:
+									break;
+							}
+						}
+					}
+					function onError(error) {
+						console.log(error);
+					}
+					function findUser(name){
+							nim.getUser({
+									account:name,
+									done: getUserDone
+							});
+							function getUserDone(error, user) {
+									if (!error) {
+										if(user){
+											setTimeout(function(){
+												mui.openWindow({
+													url:'../jiaoliu/friend_detail.html',
+													id:'friend_detail',
+													extras:{
+														users:user
+													}
+												});
+											},100)
+// 											setTimeout(function(){
+// 												plus.webview.currentWebview().close('slide-out-right');
+// 											},100)
+										}else{
+											mui.toast('暂无用户');
+										}
+									}else{
+										mui.toast('搜索失败，请稍后再试!')
+									}
+							}
+					}  
+						function startRecognize(){  
+							try{  
+								var filter;  
+								//自定义的扫描控件样式  
+								var styles = {frameColor: "#29E52C",scanbarColor: "#29E52C"};  
+								//扫描控件构造  
+								scan = new plus.barcode.Barcode('bcid',filter,styles);  
+								scan.onmarked = onmarked;   
+								scan.onerror = onerror;  
+								scan.start();  
+								//打开关闭闪光灯处理  
+								var flag = false;  
+								document.getElementById("turnTheLight").addEventListener('tap',function(){  
+									 if(flag == false){  
+											scan.setFlash(true);  
+											flag = true;  
+									 }else{  
+										 scan.setFlash(false);  
+										 flag = false;  
+									 }  
+								});  
+							}catch(e){  
+								alert("出现错误啦:\n"+e);  
+							}
+						};  
+						function onerror(e){  
+										alert(e);  
+						};  
+						function onmarked( type, result ) {
+										var text = '';  
+										switch(type){  
+												case plus.barcode.QR:  
+												text = 'QR: ';  
+												break;  
+												case plus.barcode.EAN13:  
+												text = 'EAN13: ';  
+												break;  
+												case plus.barcode.EAN8:  
+												text = 'EAN8: ';  
+												break;  
+										}  
+										console.log('result',result);
+										findUser(result);
+									 
+						};    
+					 ca.id('xuanzexiangce').addEventListener('tap',function(){
+							scanPicture();
+					 })             
+						// 从相册中选择二维码图片   
+						function scanPicture() {  
+								plus.gallery.pick(function(path){  
+										plus.barcode.scan(path,onmarked,function(error){  
+												plus.nativeUI.alert( "无法识别此图片" );  
+										});  
+								},function(err){  
+										// plus.nativeUI.alert("Failed: "+err.message);  
+								});  
+						}         					 
+         });  
+              
+	        
+           
+        </script>  
+	</body>
+
+</html>

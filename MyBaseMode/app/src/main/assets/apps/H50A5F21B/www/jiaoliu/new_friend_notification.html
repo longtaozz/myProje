@@ -1,0 +1,212 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/style.css" />
+		<style>
+			.mui-table-view-cell {
+			    position: relative;
+			    overflow: hidden;
+			   	padding: 0px;
+			    -webkit-touch-callout: none;
+			}
+			.mui-table-view-cell>.tubiao{
+			    -webkit-transition: -webkit-transform 0ms ease;
+			    transition: transform 0ms ease;
+			}
+			.im-list-item-l{
+				width: 55px;
+				float: left;
+				 margin: 8px 0px 4px 5px;
+			}
+			.im-list-item-l img{
+				width: 39px;
+				height: 39px;
+				border-radius:5px ;
+			}
+			.im-list-item-c{
+				width: 50%;
+				float: left;
+				padding-top: 3px;
+				margin-top: 5px;
+			}
+			.ts-li-title{
+				overflow: hidden; 
+			    text-overflow: ellipsis; 
+			    -o-text-overflow: ellipsis;
+			    white-space:nowrap;
+			    display:block;
+			    width: 80%;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav mheader">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mback"></a>
+		    <h1 class="mui-title mtitle">新的朋友</h1>
+		</header>
+		<div class="mui-content">
+		    <ul id="list_item">
+		    	<!--<li class="mui-table-view-cell h55 bgwhite" data_id="">
+		      		<div class="mui-slider-right mui-disabled information-list-delete" data_id="">
+						<a class="mui-btn mui-btn-red" >删除</a>
+					</div>
+					<div class="mui-slider-handle im-list-item" data_id="">
+						<div class="im-list-item-l">
+							<img src="../img/touxiang1.jpg"/>
+						</div>
+						<div class="im-list-item-c">
+							<div class="fs15">
+								<span>张三</span>
+							</div>
+							<div class="fs13 c666666">
+								<span class="ts-li-title">打了圣诞节昂克赛拉建档立卡</span>
+							</div>
+						</div>
+						<div class="fr  fs14 mr15">
+							<span class="c999999 lh55">已添加</span>
+						</div>
+					</div>
+				</li>
+				<li class="mui-table-view-cell h55 bgwhite" data_id="">
+		      		<div class="mui-slider-right mui-disabled information-list-delete" data_id="">
+						<a class="mui-btn mui-btn-red" >删除</a>
+					</div>
+					<div class="mui-slider-handle im-list-item" data_id="">
+						<div class="im-list-item-l">
+							<img src="../img/touxiang1.jpg"/>
+						</div>
+						<div class="im-list-item-c">
+							<div class="fs15">
+								<span>张三</span>
+							</div>
+							<div class="fs13 c666666">
+								<span class="ts-li-title">打了圣诞节昂克赛拉建档立卡</span>
+							</div>
+						</div>
+						<div class="fr fs14 mr15">
+							<div class="tianjia" style="background: #DDDDDD;margin-top:15px;padding: 2px 8px;border-radius:2px;">
+								<span class="fs14">添加</span>
+							</div>
+						</div>
+					</div>
+				</li>-->
+		    </ul>
+		</div>
+		<script id="liebiao" type="text/template">
+			{{each list}}
+				<li class="mui-table-view-cell h55 bgwhite" data_id="{{$index}}">
+		      		<div class="mui-slider-right mui-disabled information-list-delete" data_id="{{$index}}">
+						<a class="mui-btn mui-btn-red" >删除</a>
+					</div>
+					<div class="mui-slider-handle im-list-item" data_id="{{$index}}">
+						<div class="im-list-item-l">
+							<img src="{{$value.friendimg}}"/>
+						</div>
+						<div class="im-list-item-c">
+							<div class="fs15">
+								<span>{{$value.friendname}}</span>
+							</div>
+							<div class="fs13 c666666">
+								<span class="ts-li-title">{{$value.ps}}</span>
+							</div>
+						</div>
+						<div class="fr  fs14 mr15">
+							{{if $value.state=="init"}}
+								<div class="tianjia" data_index = "{{$index}}" data_idServer="{{$value.friendidserver}}" data_account="{{$value.friendaccount}}"  style="background: #DDDDDD;margin-top:15px;padding: 2px 8px;border-radius:2px;">
+									<span class="fs14">添加</span>
+								</div>
+							{{else}}
+								<span class="c999999 lh55">已添加</span>
+							{{/if}}
+						</div>
+					</div>
+				</li>
+			{{/each}}
+		</script>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/castapp.js" ></script>
+		<script type="text/javascript" src="../js/template-web.js" ></script>
+		<script type="text/javascript" src="../js/NIM_Web_NIM_v5.5.0.js" ></script>
+		<script type="text/javascript">
+			mui.init({
+				swipeBack: true //启用右滑关闭功能
+			})
+			ca.init();
+			ca.blackStatusBar();
+			mui.plusReady(function(){
+				var self = plus.webview.currentWebview();
+				var account=self.account;
+				var arrlist=JSON.parse(plus.storage.getItem(account+'new_friend'));
+				if(!ca.emptyFun(arrlist)){
+					var da=arrlist.content;
+					show(da);
+				}
+				
+				var nim = NIM.getInstance({
+					  appKey:'fc06054e7594d0cd2e17b1238c9fc296',
+					  account:localStorage.getItem('e_code')+'_'+localStorage.getItem('username'),
+					  token:localStorage.getItem('im_token'),
+					  onconnect:onConnect,
+					  onwillreconnect:onWillReconnect,
+					  ondisconnect:onDisconnect,
+					  onerror:onError
+				});
+				function onConnect(optional) {
+				  console.log('连接成功');
+				}
+				function onWillReconnect(obj) {
+				  // 此时说明 SDK 已经断开连接, 请开发者在界面上提示用户连接已断开, 而且正在重新建立连接
+				  console.log('即将重连');
+
+				}
+				function onDisconnect(error) {
+				  // 此时说明 SDK 处于断开状态, 开发者此时应该根据错误码提示相应的错误信息, 并且跳转到登录页面
+				  console.log('丢失连接');
+				  console.log(error);
+				  
+				}
+				function onError(error) {
+				  console.log(error);
+				}
+				
+				mui('body').on('tap','.tianjia',function(){
+					var index=this.getAttribute('data_index');
+					nim.passFriendApply({
+					    idServer: this.getAttribute('data_idServer'),
+					    account: this.getAttribute('data_account'),
+					    ps: 'ps',
+					    done: passFriendApplyDone
+					});
+					function passFriendApplyDone(error, obj) {
+					    console.log('通过好友申请' + (!error?'成功':'失败'));
+					    if(!error){
+					        arrlist.content[index].state='passed';
+					        plus.storage.setItem(account+'new_friend',JSON.stringify(arrlist));
+					        window.location.reload()
+					    }
+					}
+				})
+				
+				function show(da){
+					template.defaults.imports.dateFormat = function(arg1,arg2){
+						var date = new Date(arg1);
+					    return ca.thisTimeForm(date.getHours(),date);
+					};
+					// alert(JSON.stringify(da))
+					ca.id('list_item').innerHTML=template('liebiao', {
+							"list":da.sort(ca.getSortFun('desc','friendtime'))
+					});
+					
+				}
+				
+			})
+		</script>
+	</body>
+
+</html>

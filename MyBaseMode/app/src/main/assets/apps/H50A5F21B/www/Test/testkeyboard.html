@@ -1,0 +1,158 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<style>
+			/*总体布局*/
+			html,body,.mui-content{width:100%;height:100%;overflow:hidden;}
+			/*顶部header*/
+			header.mui-bar.mui-bar-nav{width: 100%;position: absolute;top: 0px;}
+			/*变化动画,可删除*/
+			.mui-focusin header.mui-bar.mui-bar-nav{transition: top 0.5s;}
+			/*聊天内容*/
+			header.mui-bar.mui-bar-nav~.mui-content{position: absolute;top: 0px;bottom: 50px;padding: 44px 0px 50px;overflow: auto;}
+			/*底部*/
+			footer.mui-input-row{width: 100%;height: 50px;position: absolute;bottom: 0px;padding: 5px 10px;background-color: #EFEFF4;border-top: 1px solid #DEDEDE;}
+			/*发送按钮*/
+			footer.mui-input-row>span.mui-btn{padding: 10px 0px;margin: 1.5px 0px;}
+			/*输入框*/
+			footer.mui-input-row>.mui-btn~textarea{width: 82.5%;height: 40px;line-height: 30px;margin-right: 2.5%;padding: 5px 0px;}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">标题</h1>
+		</header>
+		<div class="mui-content">
+			<div class="h200" style="height: 400px;"></div>
+			<div>
+				<textarea></textarea>
+			</div>
+		</div>
+		<footer></footer>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/castapp.js"></script>
+		<script type="text/javascript">
+			// 这些demo代码是结合解决"ios的浏览器端输入文字时header/input可能不听话"问题来写的
+			// 有其他需求可结合具体逻辑修改
+			(function($,doc,win){
+				$.init();
+				$.qs = function(selector,context){
+					return $.qsa(selector,context)[0];
+				}
+				var body = doc.body,
+					header = $.qs('header',body),
+					header_style = header.style,
+					content = $.qs('.mui-content',body),
+					content_style = content.style,
+					footer = $.qs('footer',body),
+					text_input = $.qs('textarea',body),
+					init_width = body.offsetWidth,
+					init_height = body.offsetHeight,
+					is_web_ios = $.os.ios&&!$.os.plus&&!$.os.android,
+					tap_y = 0;
+				// 阻止window滚动
+				function block_window_scroll(e){
+					e.preventDefault();
+					e.stopPropagation();
+				}
+				// 阻止在header/footer上触发iso网页上的滚动/弹性拖拽
+				// 如果在获得焦点时通过header/footer触发了滚动/弹性拖拽,
+				// 会有不想看到的情况
+				header.addEventListener($.EVENT_MOVE,block_window_scroll);
+				footer.addEventListener($.EVENT_MOVE,block_window_scroll);
+				text_input.addEventListener($.EVENT_MOVE,block_window_scroll);
+				//阻止已经滚动了顶部/底部时,继续拖拽
+				content.addEventListener($.EVENT_START,function(e){
+					tap_y = e.touches[0].screenY;
+				});
+				content.addEventListener($.EVENT_MOVE,function(e){
+					((!(this.scrollTop)&&(e.touches[0].screenY - tap_y)>0)||((this.scrollTop == (this.scrollHeight-  this.offsetHeight))&&(e.touches[0].screenY - tap_y)<0))&&block_window_scroll(e);
+				});
+				// 键盘弹出事件
+				is_web_ios&&win.addEventListener('keyboardShow',function(e){
+					var keyboard_height = e.detail.keyboardHeight;
+					header_style.top = keyboard_height + 'px';
+					content_style.paddingTop = keyboard_height + 44 + 'px';
+				});
+				// 键盘关闭事件
+				is_web_ios&&win.addEventListener('keyboardHide',function(e){
+					header.removeAttribute('style');
+					content.removeAttribute('style');
+				});
+				// 如果是ios,在浏览器第一次弹出键盘时
+				// 我的6s(ios 11.2.1)footer会错位(浏览器会,html5+的webview不会)
+				// 需要在第二次打开时才不会错位
+				// (第一次不是指的刷新后的第一次)
+				// (而是访问网页后的第一次,哪怕是刷新了,但不是访问的第一次,就不会出现问题)
+				// 很是奇怪,所以在第一次想要弹出键盘时,先阻止一下,
+				// 让用户以为没点到,用户自然会重点一次
+				is_web_ios&&text_input.addEventListener('focus',(function(){
+					var first_focus = true;
+					return function(){
+						if (first_focus) {
+							this.blur();
+							return !(first_focus = false);
+						}
+					}
+				})());
+				// 键盘弹出/收起实现
+				// ios的webview通过设置softinputMode:'adjustResize',
+				// 表现会和android一样不会有header/footer不受控制的情况
+				$.os.ios&&$.os.plus?null:(is_web_ios?win:body).addEventListener(is_web_ios?'scroll':'resize',(function(){
+					var timer;
+					return is_web_ios?function(){
+						clearTimeout(timer);
+						var scroll_height = win.scrollY;
+						// 实时触发
+						// scroll_height>=0&&$.trigger(win,scroll_height?'keyboardShow':'keyboardHide',{
+						//     keyboardHeight:scroll_height
+						// });
+						// 弹出后&收起后触发
+						timer = setTimeout(scroll_height>=0?function(){
+							$.trigger(win,scroll_height?'keyboardShow':'keyboardHide',{
+								keyboardHeight:scroll_height
+							});
+						}:$.noop,100);
+					}:function(){
+						clearTimeout(timer);
+						if(body.offsetWidth != init_width){ //横竖屏的resize
+							init_height = body.offsetHeight;
+							init_width = body.offsetWidth;
+							return;
+						}
+						var resize_height = init_height - body.offsetHeight;
+						// 实时触发
+						// $.trigger(win,resize_height?'keyboardShow':'keyboardHide',{
+						//     keyboardHeight:resize_height
+						// });
+						// 弹出后&收起后触发
+						timer = setTimeout(function(){
+							$.trigger(win,resize_height?'keyboardShow':'keyboardHide',{
+								keyboardHeight:resize_height
+							});
+						},100);
+					}
+				})());
+				$.plusReady(function(){
+					// ios在h5+环境中需要设置softinputMode:'adjustResize'
+					// 通过resize来监听键盘弹出/收起
+					// 但是ios的"第一次"获得焦点时
+					// 键盘高度似乎不准确
+					// 不知道是什么原因
+					// 个人觉得和上面监听focus注释描述的问题有关
+					$.os.ios&&plus.webview.currentWebview().setStyle({
+						softinputMode:'adjustResize'
+					});
+				});
+			})(mui,document,window);
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,346 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/style.css" />
+		<link rel="stylesheet" href="../css/iconfont.css" />
+		<style>
+			.mui-bar{
+				padding-right: 0px;
+    			padding-left: 0px;
+			}
+			.mui-bar .mui-icon{
+				padding-top: 0px;
+			}
+			.mui-bar-nav.mui-bar .mui-icon {
+			    margin-left: 2px; 
+			}
+			.sy1-search{
+				margin-top: 4px;
+				background:#F2F2F2 ;
+				height: 30px;
+				margin-left: 11%;
+				width: 78%;
+				border-radius:8px ;
+				line-height: 30px;
+				color: #B6B6B6;
+			}
+			.sy1-search .mui-icon{
+				font-size: 20px;
+			}
+			
+			.mui-row.mui-fullscreen>[class*="mui-col-"] {
+				height: 100%;
+			}
+			.mui-col-xs-3,.mui-control-content {
+				overflow-y: auto;
+				height: 100%;
+			}
+			.mui-segmented-control .mui-control-item {
+				line-height: 50px;
+				width: 100%;
+			}
+			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
+				background-color: #fff;
+				color: #FF8201;
+			}
+			.mui-scroll-wrapper1
+			{
+			    position: absolute;
+			    z-index: 2;
+			    top: 0;
+			    bottom: 0;
+			    left: 0;
+			    overflow: hidden;
+			    width: 100%;
+			}
+			
+			.mui-scroll1
+			{
+			    position: absolute;
+			    z-index: 1;
+			    width: 100%;
+			    -webkit-transform: translateZ(0);
+			            transform: translateZ(0);
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav mheader aaa">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mback cffffff mt10"></a>
+		    <h1 class="mui-title htitle cffffff">选择城市</h1>
+		</header>
+		
+		<div class="mui-content">
+		    <div class="oh h40 lh38 bgwhite">
+		    	<div class="w50 fl tc fs15 cff8201 bbFF8201">
+		    		<span>
+		    			国内
+		    		</span>
+		    	</div>
+		    	<div class="w50 fl tc fs15 c333333">
+		    		<span>
+		    			国际
+		    		</span>
+		    	</div>
+		    </div>
+		    <div id="guonei" class="disb">
+		    	<div class="ml15 fs15">
+		    		<span class="c333333">当前</span>
+		    	</div>
+		    	<div class="bgwhite h40" style="padding: 5px 5px 5px 15px;">
+		    		<div style="border: 1px solid #FF8201;border-radius:5px;margin-top: 2px;width: auto;display:inline-block;" id="dangqianxuanze">
+		    			<span class="iconfont icon-qi fs16 cff8201 ml5"></span>	<span class="fs14 mr10" id="city" >张家界</span>
+		    		</div>
+		    		<div style="border: 1px solid #FF8201;border-radius:5px;margin-top: 2px;width: auto;display:inline-block;" id="dangqianxuanze">
+		    			<span class="iconfont icon-zhong fs16 cff8201 ml5"></span>	<span class="fs14 mr10" id="to_city" >张家界</span>
+		    		</div>
+		    	</div>
+		    	<div class="ml15 fs15">
+		    		<span class="c333333">筛选</span>
+		    	</div>
+		    	<div class="mui-content mui-row mui-fullscreen" style="margin-top: 195px;">
+					<div class="mui-col-xs-3">
+						<div id="segmentedControls" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-vertical fs15"></div>
+					</div>
+					<div id="segmentedControlContents" class="mui-col-xs-9 fs15 bgwhite" style="border-left: 1px solid #c8c7cc;"></div>
+				</div>
+		    </div>
+		    <div id="guoji" class="disn">
+		    	<div class="ml15 fs15">
+		    		<span class="c333333">当前</span>
+		    	</div>
+		    	<div class="bgwhite h40" style="padding: 5px 5px 5px 15px;">
+		    		<div style="border: 1px solid #FF8201;border-radius:5px;margin-top: 2px;width: auto;display:inline-block;" id="dangqianxuanze">
+		    			<span class="iconfont icon-qi fs16 cff8201 ml5"></span>	<span class="fs14 mr10" id="city1" >张家界</span>
+		    		</div>
+		    		<div style="border: 1px solid #FF8201;border-radius:5px;margin-top: 2px;width: auto;display:inline-block;" id="dangqianxuanze">
+		    			<span class="iconfont icon-zhong fs16 cff8201 ml5"></span>	<span class="fs14 mr10" id="to_city1" >张家界</span>
+		    		</div>
+		    	</div>
+		    	<div class="ml15 fs15">
+		    		<span class="c333333">筛选</span>
+		    	</div>
+		    	<div class="mui-scroll-wrapper1" id="mui-scroll-wrapper" style="margin-top: 197px;">
+					<div class="mui-scroll1" >
+						<ul class="mui-table-view" id="xingji" >
+							<!--<li class="h43 lh43 pl15 bbc8c7cc">
+								<span class="fs15">美国实打实</span>
+							</li>-->
+						</ul>
+					</div>
+				</div>
+		    </div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/castapp.js" ></script>
+		<script src="../js/city.min.js"></script>
+		<!-- <script src="http://www.manbuquanqiu.com/static/admin/lib/city/city.min.js"></script> -->
+		<script type="text/javascript">
+			mui.plusReady(function(){
+				mui.init({
+					swipeBack:true
+				});
+				ca.init();
+				ca.whiteStatusBar();
+				var self=plus.webview.currentWebview();
+				var type=self.type;
+				var line_type=self.line_type;
+				if(type==2){
+					ca.className('htitle')[0].innerText='选择目的城市';
+				}else{
+					ca.className('htitle')[0].innerText='选择出发城市';
+				}
+				if(ca.emptyFun(localStorage.getItem('line_position2_xianshiname'))){
+					localStorage.setItem('line_position2_xianshiname','无');
+				}
+				ca.id('city').innerText=localStorage.getItem('line_position1_xianshiname');
+				ca.id('city1').innerText=localStorage.getItem('line_position1_xianshiname');
+				ca.id('to_city').innerText=localStorage.getItem('line_position2_xianshiname');
+				ca.id('to_city1').innerText=localStorage.getItem('line_position2_xianshiname');
+				var cell=ca.className('w50');
+				for(var i=0;i<cell.length;i++){
+					(function(index){
+						cell[i].addEventListener('tap',function(){
+							for(var a=0;a<cell.length;a++){
+								if(index==a){
+									cell[a].classList.add('cff8201');
+									cell[a].classList.add('bbFF8201');
+									cell[a].classList.remove('c333333');
+								}else{
+									cell[a].classList.remove('cff8201');
+									cell[a].classList.remove('bbFF8201');
+									cell[a].classList.add('c333333');
+								}
+							}
+							if(index==0){
+								ca.id('guonei').style.display='block';
+								ca.id('guoji').style.display='none';
+							}else{
+								ca.id('guonei').style.display='none';
+								ca.id('guoji').style.display='block';
+							}
+						})
+					})(i);
+				}
+				ca.receiveNotice('update',function(){
+	        		ca.id('city').innerText=localStorage.getItem('line_position2_xianshiname');
+	        		ca.id('city1').innerText=localStorage.getItem('line_position2_xianshiname');
+				});
+				mui('.mui-scroll-wrapper1').scroll();
+				showItem1();
+				function showItem1(){
+					plus.nativeUI.showWaiting();
+					mui.plusReady(function(){
+	          ca.ajaxs({url:'findLineCate',data:{
+							},
+							succFn:function(data){
+								show1(cityData);
+								if(line_type==2){
+									if(type==2){
+										show2(data.guoji);
+										ca.className('w50')[0].classList.add('disn');
+										ca.id('guonei').classList.add('disn');
+										ca.id('guonei').classList.remove('disb');
+										ca.id('guoji').classList.add('disb');
+										ca.id('guoji').classList.remove('disn');
+									}else{
+										ca.className('w50')[1].classList.add('disn');
+										ca.id('guoji').classList.add('disn');
+										ca.id('guoji').classList.remove('disb');
+										ca.id('guonei').classList.add('disb');
+										ca.id('guonei').classList.remove('disn');
+									}
+									
+								}else if(line_type==1){
+										ca.className('w50')[1].classList.add('disn');
+								}else{
+										ca.className('w50')[1].classList.add('disn');
+								}
+								ca.closeWaiting();
+							},
+							errFn:function(call){
+								ca.closeWaiting();
+								mui.toast(call);
+							}
+						})
+	               })
+				}
+			
+			
+			
+			
+			function show1(data){
+				var controls = document.getElementById("segmentedControls");
+				var contents = document.getElementById("segmentedControlContents");
+				var html = [];
+				var html1 = [];
+				for (var i=0;i<data.length;i++) {
+					html.push('<a class="mui-control-item" href="#content' + i + '">' + data[i].p + '</a>');
+					html1.push('<div id="content' + i + '" class="mui-control-content"><ul class="mui-table-view">');
+					if(!ca.emptyFun(data[i].c)){
+						var da=data[i].c;
+						for(var a=0;a<da.length;a++){
+							html1.push('<li class="mui-table-view-cell" data_province="'+data[i].p+'">'+da[a].n+'</li>');
+						}
+					}else{
+						html1.push('<li class="mui-table-view-cell">无城市选择</li>');
+					}
+					html1.push('</ul></div>');
+				}
+				controls.innerHTML = html.join('');
+				contents.innerHTML = html1.join('');
+				 //默认选中第一个
+				controls.querySelector('.mui-control-item').classList.add('mui-active');
+				contents.querySelector('.mui-control-content').classList.add('mui-active');
+				
+			}
+			
+			function show2(data){
+				if(!ca.emptyFun(data)){
+					for(var a in data){
+						var temp='<li class="h43 lh43 pl15 bbc8c7cc" data_id="'+data[a].id+'">'
+								+	'<span class="fs15">'+data[a].name+'</span>'
+								+'</li>';
+						ca.id('xingji').innerHTML+=temp;
+					}
+				}
+			}
+			mui('body').on('tap','.mui-table-view-cell',function(){
+				var province=this.getAttribute('data_province');
+				if(province){
+					if(type==2){
+						localStorage.setItem('line_position_ischina',1);
+						localStorage.setItem('to_city',this.innerText);
+						localStorage.setItem('to_province',province);
+						localStorage.setItem('line_position2_xianshiname',this.innerText);
+						var arr=['北京','天津','上海','重庆','香港','澳门'];
+						for(var i=0;i<arr.length;i++){
+							if(province==arr[i]){
+								localStorage.setItem('line_position2_xianshiname',arr[i]);
+							}
+						}
+					}else{
+						localStorage.setItem('chufa_city',this.innerText);
+						localStorage.setItem('chufa_province',province);
+						localStorage.setItem('line_position1_xianshiname',this.innerText);
+						var arr=['北京','天津','上海','重庆','香港','澳门'];
+						for(var i=0;i<arr.length;i++){
+							if(province==arr[i]){
+								localStorage.setItem('line_position1_xianshiname',arr[i]);
+							}
+						}
+					}
+					var arr1 = ['line_tourist_route_list'];
+					ca.sendNotice(arr1,'update',{});
+					self.close();
+				}
+			})
+			mui('body').on('tap','.lh43',function(){
+				var id=this.getAttribute('data_id');
+				if(id){
+					if(type==2){
+						localStorage.setItem('line_position_ischina',2);
+						localStorage.setItem('to_city',this.innerText);
+						localStorage.setItem('to_province',id);
+						localStorage.setItem('line_position2_xianshiname',this.innerText);
+						var arr=['北京','天津','上海','重庆','香港','澳门'];
+						for(var i=0;i<arr.length;i++){
+							if(id==arr[i]){
+								localStorage.setItem('line_position2_xianshiname',arr[i]);
+							}
+						}
+						var arr1 = ['line_tourist_route_list'];
+						ca.sendNotice(arr1,'update',{});
+						self.close();
+					}else{
+						mui.toast('出发城市暂不支持选择境外');
+// 						localStorage.setItem('chufa_city',this.innerText);
+// 						localStorage.setItem('chufa_province',id);
+// 						localStorage.setItem('line_position1_xianshiname',this.innerText);
+// 						var arr=['北京','天津','上海','重庆','香港','澳门'];
+// 						for(var i=0;i<arr.length;i++){
+// 							if(id==arr[i]){
+// 								localStorage.setItem('line_position1_xianshiname',arr[i]);
+// 							}
+// 						}
+					}
+					
+				}
+			})
+// 			ca.id('dangqianxuanze').addEventListener('tap',function(){
+// 				ca.newInterface({url:'line_list.html',id:'line_list'});
+// 			})
+// 			ca.id('dangqianxuanze1').addEventListener('tap',function(){
+// 				ca.newInterface({url:'line_list.html',id:'line_list'});
+// 			})
+			})
+		</script>
+	</body>
+
+</html>

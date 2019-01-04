@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/style.css" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav mheader">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mback"></a>
+		    <h1 class="mui-title htitle"></h1>
+		</header>
+		<div class="mui-content">
+			<ul class="mui-table-view " id="div_list" style="margin: 2px;">
+				             <!--<li class="car-li cb" style="border-bottom: 1px solid #C3C3C3;">
+				             	<div class="w30 fl car-li-l">
+				             		<div class="car-li-l-d">
+				             			<img src="../img/1.jpg"/>
+				             		</div>
+				             	</div>
+				             	<div class="w65 fl car-li-r">
+				             		<div class="car-li-r-1">
+				             			<span class="ts-li-title fs15 c323232">啥都看见啊时刻记得哈的哈萨克大家哈空间</span>
+				             		</div>
+				             		<div class="mt1">
+				             			<span class="fs13 ca6a6a6">什么公司</span>
+				             		</div>
+				             		<div class="mt3">
+				             			<span class="fs13 ca6a6a6">地区：张家界</span>
+				             		</div>
+				             		<div class="mt3">
+				             			<span class="fs13 cffa101">￥</span><span class="fs15 cffa101 ml3">200</span><span class="fs13 cffa101 ml3">起</span>
+				             		</div>
+				             	</div>
+				             </li>-->
+				              
+						</ul>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/castapp.js" ></script>
+		<script type="text/javascript">
+			mui.init();
+			ca.init();
+			var list=ca.id('div_list');
+			ca.blackStatusBar();
+			mui.plusReady(function(){
+				var self = plus.webview.currentWebview();
+				var id = self.car_id;//获得参数
+				ca.ajaxs({url:'findSupplyCarComboByid',data:{
+						id:id
+					},succFn:function(data){
+						ca.className('htitle')[0].innerHTML=data.name;
+						if(data.supply_car_combo){
+							var da=data.supply_car_combo;
+							for(var i in da){
+								var img="../img/errimg.png";
+								if(da[i].pic!=""){
+									img=da[i].pic;
+								}
+								var temp='<li class="car-li cb" data_id="'+da[i].id+'" style="border-bottom: 1px solid #C3C3C3;">'
+								            + 	'<div class="w30 fl car-li-l">'
+								            + 		'<div class="car-li-l-d">'
+								            + 			'<img src="'+img+'"/>'
+								            + 		'</div>'
+								            + 	'</div>'
+								            + 	'<div class="w65 fl car-li-r">'
+								            + 		'<div class="car-li-r-1 mt5">'
+								            + 			'<span class="ts-li-title fs15 c323232">'+da[i].name+'</span>'
+								            + 		'</div>'
+								            + 		'<div class="mt3">'
+								            + 			'<span class="fs13 ca6a6a6">地区：'+da[i].province+' '+da[i].city+'</span>'
+								            + 		'</div>'
+								            + 		'<div class="mt3">'
+								            + 			'<span class="fs13 cffa101">￥</span><span class="fs15 cffa101 ml3">'+da[i].price+'</span><span class="fs13 cffa101 ml3">起</span>'
+								            + 		'</div>'
+								            + 	'</div>'
+								            + '</li>';
+									
+								list.innerHTML+=temp;
+							}
+							onclick();
+							ca.closeWaiting();
+						}else{
+							list.innerHTML="暂无数据";
+							ca.closeWaiting();
+						}
+					},errFn:function(call){
+						ca.closeWaiting();
+						mui.toast(call);
+					}
+				})
+				
+				function onclick(){
+					mui("body").on('tap','.car-li',function(){
+						var id=this.getAttribute('data_id');
+						mui.openWindow({
+						    url:'car_item_combo.html',
+						    id:'car_item_combo',
+						    extras:{
+						        car_id:id
+						    }
+						});
+						
+					})
+				}
+				
+			})
+		</script>
+	</body>
+
+</html>

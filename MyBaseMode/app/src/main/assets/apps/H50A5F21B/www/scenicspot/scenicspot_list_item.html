@@ -1,0 +1,500 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<script src="../js/mui.min.js"></script>
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/style.css" />
+		<link rel="stylesheet" href="../css/iconfont.css" />
+	</head>
+	<style  type="text/css">
+		
+		.content{
+			z-index: 1;
+		}
+		.hl-list-div-l{
+			width: 25%;
+		}
+		.hl-list-div-l img{
+			height: 80px;
+			width: 80px;
+		}
+		.hl-list-div-r{
+			margin-top: -5px;
+		}
+		.hl-list-div-r-t-l-1{
+			margin-top: -3px;	
+		}
+		.hl-list-div-r-t-l-1 span{
+			border: 1px solid #4F77AA;
+			border-radius: 4px;
+			padding:0px 10px 0px 10px;
+			font-size: 12px;
+			color: #4F77AA;
+		}
+		.hl-list-div-r-t-l-2 span{
+			color: #A6A6A6;
+			font-size: 12px;
+		}
+		.hl-list-div-r-tt{
+			margin-top: 0px;
+			font-size: 12px;
+			color: #FF703B;
+		}
+		.hl-list-div-r-o-1 h4{
+			font-size: 16px;
+			color: #333333;
+		}
+		.mui-backdrop {
+			    position: fixed;
+			    top: 172px !important;
+			    right: 0;
+			    bottom: 0;
+			    left: 0;
+			    z-index: 998;
+			    background-color: rgba(0,0,0,0.2);
+			}
+			.mui-popover{
+				-webkit-box-shadow: 0 0 0px rgba(0,0,0,0.1);
+    		 box-shadow: 0 0 0px rgba(0,0,0,0.1)
+			}
+			.mui-row.mui-fullscreen>[class*="mui-col-"] {
+				height: 100%;
+			}
+			.mui-col-xs-3,
+			.mui-control-content {
+				overflow-y: auto;
+				height: 100%;
+			}
+			.mui-segmented-control .mui-control-item {
+				line-height: 50px;
+				width: 100%;
+				
+			}
+			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
+				background-color: #fff;
+				color: #4F77AA;
+			}
+			.mui-scroll-wrapper1{
+			    position: absolute;
+			    z-index: 2;
+			    top: 0;
+			    bottom: 0;
+			    left: 0;
+			    overflow: hidden;
+			    width: 100%;
+			}
+			.mui-scroll1{
+			    position: absolute;
+			    z-index: 1;
+			    width: 100%;
+			    -webkit-transform: translateZ(0);
+			    transform: translateZ(0);
+			}
+	</style>
+	<body>
+		<header class="mui-bar mui-bar-nav bgwhite" style="z-index: 9998;height: 69px;padding-top: 25px;">
+				<div class="fl w10">
+					<span class="mui-icon mui-icon-arrowleft mui-action-back">
+						
+					</span>
+				</div>
+				<div class="fl w80 mt8">
+					<div class="top-neirong w90" >
+					<div class="top-dinwei">
+						<span class="top-dinwei-name">张家界</span>
+						<span class="iconfont icon-shuxian2"></span>
+					</div>
+					<div class="top-input">
+						<input type="text" readonly="readonly" placeholder="张家界火车站" id="top-search-input"/>
+					</div>
+				</div>
+				</div>
+		</header>		
+		<div id="ccc"  class="shaixuan" style="height:35px;position:fixed;top:69px;width: 100%;border-bottom: 1px solid #4F77AA;">
+				<div class="shaixuan-div" >
+					<span class="shaixuan-divxiala-zi">主题筛选</span>
+					<span class="mui-icon mui-icon-arrowdown"></span>
+					
+				</div>
+				<div class="shaixuan-div">
+					<span class="shaixuan-divxiala-zi">星级筛选</span>
+					<span class="mui-icon mui-icon-arrowdown"></span>
+				</div>
+				<div class="shaixuan-div">
+					<span class="shaixuan-divxiala-zi">价格筛选</span>
+					<span  class="mui-icon mui-icon-arrowdown"></span>
+				</div>
+				
+		</div>
+		<div >
+				<div id="pullrefresh" class=" mui-scroll-wrapper pt5" style="margin-top: 98px;">
+	    			<div class="mui-scroll">		
+						<ul  id="div_list">
+				             
+						</ul>
+					</div>
+				</div>
+				<div id="wushuju" class="disn" style="margin-top: 98px;">
+					<img src="../img/wushuju.png" style="width: 100%;"/>
+				</div>
+			</div>
+			
+			
+			<div id="middlePopover1" class="mui-popover" style=" position:fixed;height: 170px;width: 100%;border-radius:0px ;border-top: 1px solid #DADADD;z-index: 1000;">
+				<div class="mui-scroll-wrapper1" id="mui-scroll-wrapper3">
+					<div class="mui-scroll1">
+						<ul class="mui-table-view" id="jiage">
+							<li class="mui-table-view-cell jiage" data_price1="0" data_price2="50">50元以下/人</li>
+							<li class="mui-table-view-cell jiage" data_price1="50" data_price2="100">50-100元/人</li>
+							<li class="mui-table-view-cell jiage" data_price1="100" data_price2="200">100-200元/人</li>
+							<li class="mui-table-view-cell jiage" data_price1="200" data_price2="300">200-300元/人</li>
+							<li class="mui-table-view-cell jiage" data_price1="300" data_price2="10000">300元以上/人</li>
+						</ul>
+					</div>
+				</div>
+				
+			</div>
+			<div id="middlePopover2" class="mui-popover" style=" position:fixed;height: 200px;width: 100%;border-radius:0px ;border-top: 1px solid #DADADD;z-index: 1000;">
+				<div class="mui-scroll-wrapper1" id="mui-scroll-wrapper2">
+					<div class="mui-scroll1">
+						<ul class="mui-table-view" id="xingji">
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div id="middlePopover0" class="mui-popover" style=" position:fixed;height: 250px;width: 100%;border-radius:0px ;border-top: 1px solid #DADADD;z-index: 1000;">
+				<div class="mui-scroll-wrapper1" id="mui-scroll-wrapper1">
+					<div class="mui-scroll1">
+						<ul class="mui-table-view" id="leixing">
+							<li class="mui-table-view-cell leixings" data_id="0">默认排序</li>
+							<li class="mui-table-view-cell leixings" data_id="1">地质公园</li>
+							<li class="mui-table-view-cell leixings" data_id="2">森林公园</li>
+							<li class="mui-table-view-cell leixings" data_id="3">海洋公园</li>
+							<li class="mui-table-view-cell leixings" data_id="4">主题公园</li>
+						</ul>
+					</div>
+				</div>
+				
+			</div>
+		<script type="text/javascript" src="../js/castapp.js" ></script>	
+		<script type="text/javascript">
+			var cell0=0;
+			var cell1=0;
+			var cell2=0;
+			var xingjiid=0;
+			var jiage1=0;
+			var jiage2=10000;
+			var leixing="";
+			var pages=1;
+			var pagess=1;
+			var listhotel=ca.id('div_list');
+			mui.plusReady(function(){
+				mui.init({
+					pullRefresh : {
+					    container:"#pullrefresh",//下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
+				        up: {
+				        	height:150,
+				            contentrefresh: '正在加载...',
+				            callback: upFn // 上拉执行函数
+				        }
+					}
+		       });
+				ca.init();
+				ca.blackStatusBar();
+				function upFn(){
+					if(pagess==0){
+						this.endPullupToRefresh(true);
+					}else{
+						pages=pages+1;
+						getHotel(leixing,xingjiid,jiage1,jiage2,pages);
+						this.endPullupToRefresh(false);
+						
+					}
+//					this.endPullupToRefresh(true|false);
+				}
+				xila_onclick();
+//				var cell=document.getElementsByClassName('shaixuan-div');
+				function xila_onclick(){
+			     	var cell=document.getElementsByClassName('shaixuan-div');
+			     	var select_input = ca.className('shaixuan-divxiala-zi');
+			     	var arrowdown=ca.className('mui-icon-arrowdown');
+			     	ca.id('middlePopover0').style.top='104px';
+			     	mui('#mui-scroll-wrapper1').scroll();
+					cell[0].addEventListener('tap',function(){
+						if(cell0==0){
+						select_input['0'].style.color='#4F77AA';
+						arrowdown['0'].style.color='#4F77AA';
+						select_input[2].style.color='#323232';
+						arrowdown[2].style.color='#323232';
+						select_input[1].style.color='#323232';
+						arrowdown[1].style.color='#323232';
+						mui('#middlePopover0').popover('show');
+						cell0=1;
+						cell1=0;
+						cell2=0;
+						ca.className('mui-backdrop')[0].addEventListener('tap',function(){
+							select_input[0].style.color='#323232';
+							arrowdown[0].style.color='#323232';
+							mui("#middlePopover0").popover('hide');
+							cell0=0;
+						})
+						
+					}else{
+						select_input[0].style.color='#323232';
+						arrowdown[0].style.color='#323232';
+						mui('#middlePopover0').popover('hide');
+						cell0=0;
+					}
+					})
+					ca.id('middlePopover2').style.top='104px';
+					mui('#mui-scroll-wrapper2').scroll();
+					cell[1].addEventListener('tap',function(){
+						if(cell1==0){
+							select_input[2].style.color='#323232';
+							arrowdown[2].style.color='#323232';
+							select_input[1].style.color='#4F77AA';
+							arrowdown[1].style.color='#4F77AA';
+							mui('#middlePopover2').popover('show');
+							select_input['0'].style.color='#323232';
+							arrowdown['0'].style.color='#323232';
+							cell1=1;
+							cell2=0;
+							cell0=0;
+							ca.className('mui-backdrop')[0].addEventListener('tap',function(){
+								select_input[1].style.color='#323232';
+								arrowdown[1].style.color='#323232';
+								mui("#middlePopover2").popover('hide');
+								cell1=0;
+							})
+							
+						}else{
+							select_input[1].style.color='#323232';
+							arrowdown[1].style.color='#323232';
+							mui('#middlePopover2').popover('hide');
+							cell1=0;
+						}
+					})
+					ca.id('middlePopover1').style.top='104px';
+					mui('#mui-scroll-wrapper3').scroll();
+					cell[2].addEventListener('tap',function(){
+						if(cell2==0){
+							select_input[1].style.color='#323232';
+							arrowdown[1].style.color='#323232';
+							select_input[2].style.color='#4F77AA';
+							arrowdown[2].style.color='#4F77AA';
+							select_input['0'].style.color='#323232';
+							arrowdown['0'].style.color='#323232';
+							mui('#middlePopover1').popover('show');
+							cell2=1;
+							cell1=0;
+							cell0=0;
+							ca.className('mui-backdrop')[0].addEventListener('tap',function(){
+								select_input[2].style.color='#323232';
+								arrowdown[2].style.color='#323232';
+								mui("#middlePopover1").popover('hide');
+								cell2=0;
+							})
+							
+						}else{
+							select_input[2].style.color='#323232';
+							arrowdown[2].style.color='#323232';
+							mui('#middlePopover1').popover('hide');
+							cell2=0;
+						}
+					})
+					leixingxuanze();
+					 function leixingxuanze(){
+					 	var cell11=ca.className('leixings');
+			        	for(var i=0;i<cell11.length;i++){
+					     		(function(index1){
+									cell11[i].addEventListener('tap',function(){
+										select_input[0].innerHTML=cell11[index1].innerHTML;
+										listhotel.innerHTML="";
+										leixingid=cell11[index1].getAttribute('data_id');
+										if(leixingid==0){
+											xingjiid=0;
+											jiage1=0;
+											jiage2=10000;
+											leixing="";
+											select_input[1].innerHTML='星级筛选';
+											select_input[2].innerHTML='价格筛选';
+										}else{
+											leixing=cell11[index1].innerHTML;
+										}
+										pages=1;
+										pagess=1;
+										getHotel(leixing,jiage1,jiage2,xingjiid,pages);
+										mui('#pullrefresh').pullRefresh().refresh(true);
+										mui('#middlePopover0').popover('hide');
+										cell0=0;
+									})
+								})(i);
+					     }
+					 }
+					
+					findxinji();
+					function findxinji(){
+				       	var list=ca.id('xingji');
+				       	var html=[];
+								ca.ajaxs({url:'findTicketLevel',data:{
+									},succFn:function(data){
+										if(data){
+											for(var a in data){
+												html.push('<li class="mui-table-view-cell xingjis" data_id="'+data[a].id+'">'+data[a].name+'</li>')
+											}
+											list.innerHTML = html.join('');
+											xingjixuanze();
+										}
+										ca.closeWaiting();
+									},errFn:function(err){
+										ca.closeWaiting();
+										mui.toast(err);
+									}
+								})
+				       
+					}
+					 function xingjixuanze(){
+					 	var cell11=ca.className('xingjis');
+			        	for(var i=0;i<cell11.length;i++){
+					     		(function(index1){
+									cell11[i].addEventListener('tap',function(){
+										select_input[1].innerHTML=cell11[index1].innerHTML;
+										listhotel.innerHTML="";
+										xingjiid=cell11[index1].getAttribute('data_id');
+										pages=1;
+										pagess=1;
+										getHotel(leixing,jiage1,jiage2,xingjiid,pages);
+										mui('#pullrefresh').pullRefresh().refresh(true);
+										mui('#middlePopover2').popover('hide');
+										cell1=0;
+									})
+								})(i);
+					     }
+					 }
+			
+			
+			
+			
+			
+			
+					quyuxuanze();
+			        function quyuxuanze(){
+			        	var cell11=ca.className('jiage');
+			        	for(var i=0;i<cell11.length;i++){
+					     		(function(index){
+									cell11[i].addEventListener('tap',function(){
+										select_input[2].innerHTML=cell11[index].innerHTML;
+										listhotel.innerHTML="";
+										jiage1=cell11[index].getAttribute('data_price1');
+										jiage2=cell11[index].getAttribute('data_price2');
+										pages=1;
+										pagess=1;
+										getHotel(leixing,jiage1,jiage2,xingjiid,pages);
+										mui('#pullrefresh').pullRefresh().refresh(true);
+										mui('#middlePopover1').popover('hide');
+										cell2=0;
+									})
+								})(i);
+					     }
+			        }
+			     }
+			    
+				getHotel(leixing,jiage1,jiage2,xingjiid,pages);
+			function getHotel(leixing,jiage1,jiage2,xingjiid,page){
+					plus.nativeUI.showWaiting();
+					ca.ajaxs({url:'findSupplyTicketBylevel_man_price_theme',data:{
+								level:xingjiid,man_price1:jiage1,man_price2:jiage2,theme:leixing,page:page
+						},succFn:function(datas){
+							if(datas.msg==1){
+									if(!ca.emptyFun(datas.data.data)){
+											ca.id('pullrefresh').classList.add('disb');
+											ca.id('wushuju').classList.add('disn');
+											ca.id('pullrefresh').classList.remove('disn');
+											var da1=datas.data.next_item;
+											var da=datas.data.data;
+											if(!ca.emptyFun(da1)){
+												pagess=0;
+											}
+											for(var a in da){
+													var img="../img/errimg.png";
+													if(da[a].pic!=""){
+														img=da[a].pic;
+													}
+													var th=da[a].theme.split('/');
+													var theme="";
+													for(var t in th){
+														var te="";
+														if(t>0){
+															te='<span class="ml5">'+th[t]+'</span>';
+														}else{
+															te='<span>'+th[t]+'</span>';
+														}
+														theme+=te;
+													}
+													
+													var temp='<li class="scenicspot-list" id="div_list" data_id="'+da[a].id+'" style="background: #FFFFFF;height:105px">'	
+																	+	'<div class="hl-list-div">'
+														+		'<div class="hl-list-div-l">'
+														+			'<img src="'+img+'" alt="" />'
+														+		'</div>'
+														+		'<div class="hl-list-div-r">'
+														+			'<div class="hl-list-div-r-o">'
+														+				'<div class="hl-list-div-r-o-1"><h4>'+da[a].name+'</h4></div>'
+														+			'</div>'				
+														+			'<div class="hl-list-div-r-t">'			
+														+				'<div class="hl-list-div-r-t-l"><div class="hl-list-div-r-t-l-1 ">'+theme+'</div></div>'			
+														+			'</div>'	
+														+			'<div class="hl-list-div-r-t">'				
+														+				'<div class="hl-list-div-r-t-l-2">'					
+														+					'<span class="ts-li-title">'+da[a].enterprise.address+'</span>'				
+														+				'</div>'			
+														+			'</div>'		
+														+			'<div class="hl-list-div-r-tt">'
+														+				'<span style="color: #333333;">门票:</span>'				
+														+				'<span style="margin-left: 5px;">'+da[a].man_price+'</span>'				
+														+				'<span>元</span>'					
+														+			'</div>'				
+														+		'</div>'			
+														+	'</div>'		
+														+'</li>';	
+														listhotel.innerHTML+=temp;
+												}
+											
+									}else{
+										ca.id('wushuju').classList.add('disb');
+										ca.id('pullrefresh').classList.add('disn');
+										ca.id('wushuju').classList.remove('disn');
+									}
+							}else{
+								ca.id('wushuju').classList.add('disb');
+								ca.id('pullrefresh').classList.add('disn');
+								ca.id('wushuju').classList.remove('disn');
+							}
+								ca.closeWaiting();
+						},errFn:function(err){
+								ca.closeWaiting();
+								mui.toast(err);
+						}
+					})
+					
+			}
+				
+				ca.className('top-input')[0].addEventListener('tap',function(){
+				ca.newInterface({url:'../search.html',id:'search'});
+				})	
+				mui('#pullrefresh').on('tap','.scenicspot-list',function(){
+					var iid = this.getAttribute('data_id');
+					var self=plus.webview.create('scenicspot_list_item_detail.html','scenicspot_list_item_detail',{},{ticket_item_id:iid});
+					self.show('slide-in-right',400);
+				})
+			});
+				
+
+		</script>
+	</body>
+
+</html>

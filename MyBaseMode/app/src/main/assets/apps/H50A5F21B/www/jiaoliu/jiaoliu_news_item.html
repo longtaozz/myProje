@@ -1,0 +1,373 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/style.css" />
+		<style>
+			.mui-btn-red{
+				background-color: #FF8201;
+			}
+			.mui-table-view-cell>.mui-slider-handle {
+			     position: absolute;
+			     left: 0px;
+			    background-color: #fff;
+			}
+			
+		</style>
+	</head>
+
+	<body>
+		<div id="refreshContainer" class="mui-scroll-wrapper" style="margin: 0px;padding-bottom: 35px;">
+			<div class="mui-scroll" >
+				<ul class="ww" id="list_item">
+				    	<li class="information-list mui-table-view-cell h65" data_id="">
+				      		<div class="mui-slider-right mui-disabled information-list-delete" data_id="">
+								<a class="mui-btn mui-btn-red" >删除</a>
+							</div>
+							<div class="mui-slider-handle information-list-div oh" data_id="">
+								<div class="jiaoliu-news-list-l w20"><img  src="../img/touxiang1.jpg"/></div>	
+								<div class="information-list-c w70 mt3">
+									<div class="information-list-c-1"><span>李四</span></div>
+									<div class="information-list-c-2"><span class="">你好啊！aa</span></div>
+								</div>
+								<div class="information-list-r w20">	
+									<div class="">12:36</div>	
+									<div></div>
+								</div>
+							</div>		
+						</li>
+						<li class="information-list mui-table-view-cell h65" data_id="">
+				      		<div class="mui-slider-right mui-disabled information-list-delete" data_id="">
+								<a class="mui-btn mui-btn-red" >删除</a>
+							</div>
+							<div class="mui-slider-handle information-list-div" data_id="">
+								<div class="jiaoliu-news-list-l w20"><img  src="../img/touxiang1.jpg"/></div>	
+								<div class="information-list-c w70 mt3">
+									<div class="information-list-c-1"><span>李四</span></div>
+									<div class="information-list-c-2"><span class="">你好啊！aa</span></div>
+								</div>
+								<div class="information-list-r w20">	
+									<div class="" >12:36</div>	
+									<div></div>
+								</div>
+							</div>		
+						</li>
+				</ul>
+			</div>
+		</div>
+		<script type="text/template" id="liebiao">
+			{{each list}}
+			    <li class="information-list mui-table-view-cell h65" data_id="">
+		      		<div class="mui-slider-right mui-disabled information-list-delete" data_id="">
+						<a class="mui-btn mui-btn-red" >删除</a>
+					</div>
+					<div class="mui-slider-handle information-list-div oh" data_userName="{{$value.userName}}" data_account="{{$value.account}}">
+						<div class="jiaoliu-news-list-l w20 ml15"><img  src="{{$value.imgSrc}}"/></div>	
+						<div class="information-list-c w60 mt3">
+							<div class="information-list-c-1"><span>{{$value.userName}}</span></div>
+							<div class="information-list-c-2 ts-li-title"><span class="">{{$value.lastChat}}</span></div>
+						</div>
+						<div class="w20" style="margin-right: 40px;font-size: 10px;color: #A6A6A6;position: absolute;right: -40px;">
+							<div class="w100 mt5" style="text-align: right;">{{$value.lastTime}}</div>	
+							<div class="fr tc fs10 cffffff" style="background: #FFB400;border-radius:100px ;padding: 0px 7px;margin-top: 5px;">
+								{{$value.unreadCount}}
+							</div>
+						</div>
+					</div>		
+				</li>
+			{{/each}}
+		</script>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/castapp.js" ></script>
+		<script type="text/javascript" src="../js/template-web.js" ></script>
+		<script type="text/javascript" src="../js/NIM_Web_NIM_v5.5.0.js" ></script>
+		<script type="text/javascript">
+			var list='';
+			mui.init({
+				 pullRefresh : {
+					    container:"#refreshContainer",//下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
+					    down : {
+					      height:50,//可选,默认50.触发下拉刷新拖动距离,
+					      auto: false,//可选,默认false.首次加载自动下拉刷新一次
+					      contentdown : "下拉可以刷新",//可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
+					      contentover : "释放立即刷新",//可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
+					      contentrefresh : "正在刷新...",//可选，正在刷新状态时，下拉刷新控件上显示的标题内容
+					      callback :downFn //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+					    },
+				        up: {
+				            contentrefresh: '正在加载...',
+				            callback: upFn // 上拉执行函数
+				        }
+					}
+		        });
+		    ca.init();
+		    function downFn(){
+				mui('#refreshContainer').pullRefresh().endPulldownToRefresh();  //这行代码会隐藏掉 正在加载... 容器
+					
+		    }
+				
+			function upFn(){
+				this.endPullupToRefresh(true);
+			}
+			
+			
+			mui('body').on('tap','.information-list-div',function(){
+				var name=this.getAttribute('data_userName');
+				var accounts=this.getAttribute('data_account');
+				mui.openWindow({
+				    url:'im_detail.html',
+				    id:'im_detail',
+				    extras:{
+				        userName:name,
+				        accounts:accounts
+				    }
+				});
+			})
+			var account=localStorage.getItem('e_code')+'_'+localStorage.getItem('username');
+			var data = {};
+			// 注意这里, 引入的 SDK 文件不一样的话, 你可能需要使用 SDK.NIM.getInstance 来调用接口
+			var nim = NIM.getInstance({
+			  // debug: true,
+			  appKey: 'fc06054e7594d0cd2e17b1238c9fc296',
+			  account: account,
+			  token: '123456',
+			  
+			  // privateConf: {}, // 私有化部署方案所需的配置
+			  onconnect: onConnect,
+			  onwillreconnect: onWillReconnect,
+			  ondisconnect: onDisconnect,
+			  onerror: onError,
+		      db:true,
+		      onroamingmsgs: onRoamingMsgs,
+		      onofflinemsgs: onOfflineMsgs,
+		      onmsg: onMsg
+			});
+			function onConnect(optional) {
+			  console.log('连接成功');
+//			  console.log(JSON.stringify(optional))
+			}
+			function onWillReconnect(obj) {
+			  // 此时说明 SDK 已经断开连接, 请开发者在界面上提示用户连接已断开, 而且正在重新建立连接
+//			  console.log('即将重连');
+//			  console.log(obj.retryCount);
+//			  console.log(obj.duration);
+			}
+			function onDisconnect(error) {
+			  // 此时说明 SDK 处于断开状态, 开发者此时应该根据错误码提示相应的错误信息, 并且跳转到登录页面
+//			  console.log('丢失连接');
+//			  console.log(error);
+			  if (error) {
+			    switch (error.code) {
+			      // 账号或者密码错误, 请跳转到登录页面并提示错误
+			      case 302:
+			        break;
+			      // 重复登录, 已经在其它端登录了, 请跳转到登录页面并提示错误
+			      case 417:
+			        break;
+			      // 被踢, 请提示错误后跳转到登录页面
+			      case 'kicked':
+			        break;
+			      default:
+			        break;
+			    }
+			  }
+			}
+			function onError(error) {
+			  console.log(error);
+			}
+			function onRoamingMsgs(obj) {
+			    console.log('收到漫游消息', obj);
+			    pushMsg(obj.msgs);
+			}
+			function onOfflineMsgs(obj) {
+			    console.log('收到离线消息', JSON.stringify(obj));
+//			    alert(JSON.stringify(obj))
+			    pushMsg(obj.msgs);
+			}
+			function onMsg(msg) {
+//			    console.log('收到消息', msg.scene, msg.type, JSON.stringify(msg));
+//			    alert(JSON.stringify(msg))
+//			    pushMsg(msg);
+			    switch (msg.scene) {
+			    case 'p2p':
+			        onCustomMsg(msg);
+			        break;
+			    case 'notification':
+			        // 处理群通知消息
+			        onTeamNotificationMsg(msg);
+			        break;
+			    // 其它case
+			    default:
+			        break;
+			    }
+			}
+			function pushMsg(msgs) {
+				
+			    if (!Array.isArray(msgs)) { msgs = [msgs]; }
+			    var sessionId = msgs[0].scene + '-' + msgs[0].account;
+			    data.msgs = data.msgs || {};
+			    data.msgs[sessionId] = nim.mergeMsgs(data.msgs[sessionId], msgs);
+			}
+			//收到消息
+			function onCustomMsg(msg) {
+				var arrs=[];
+				if(localStorage.getItem('userid')==169){
+					arrs=JSON.parse(plus.storage.getItem('chatList1'));
+				}else{
+					arrs=JSON.parse(plus.storage.getItem('chatList2'));
+				}
+				if(msg.flow=='in'){
+					var acc='chatList'+msg.to+'and'+msg.from;
+					var datalist=JSON.parse(plus.storage.getItem(acc));
+					if(ca.emptyFun(datalist)){
+						var chat=new Object;
+						chat.userId=1;
+						chat.fromuserName='张三';
+						chat.fromAccount='zdy1_admin';
+						chat.fromimgSrc='../img/touxiang1.jpg';
+						chat.touserName='李四';
+						chat.toAccount='zl1_admin';
+						chat.toimgSrc='../img/touxiang.jpg';
+						chat.content=[];
+						plus.storage.setItem(acc,JSON.stringify(chat));
+						datalist=JSON.parse(plus.storage.getItem(acc));
+					}
+					var sender='';
+					if(msg.flow=='in'){
+						sender='in'
+					}else{
+						sender='out'
+					}
+					
+					if(msg.type=="audio"){
+						datalist.content.push({
+							sender:sender,
+							type:msg.type,
+							content:msg.text,
+							time:msg.time,
+							status:msg.status,
+							fileurl:msg.file.url
+						})
+					}else if(msg.type=="image"){
+						
+					var urll=createDownload(msg.file.url,msg);
+						
+						
+						
+						datalist.content.push({
+							sender:sender,
+							type:msg.type,
+							content:msg.text,
+							time:msg.time,
+							status:msg.status,
+							fileurl:urll
+						})
+					}else{
+						datalist.content.push({
+							sender:sender,
+							type:msg.type,
+							content:msg.text,
+							time:msg.time,
+							status:msg.status,
+							fileurl:''
+						})
+					}
+					plus.storage.setItem(acc,JSON.stringify(datalist));
+				}
+				for(var i=0;i<arrs.length;i++){
+					if(arrs[i].account==msg.target){
+							if(msg.type=='text'){
+								arrs[i].lastChat=msg.text;
+								var date = new Date(msg.time);
+								arrs[i].lastTime=ca.thisTimeForm(date.getHours(),date);
+								if(msg.flow=='in'){
+									if(!ca.emptyFun(arrs[i].unreadCount)){
+										arrs[i].unreadCount=parseInt(arrs[i].unreadCount)+1;
+									}else{
+										arrs[i].unreadCount=1;
+									}
+								}
+								
+								if(localStorage.getItem('userid')==169){
+									plus.storage.setItem('chatList1',JSON.stringify(arrs));
+								}else{
+									plus.storage.setItem('chatList2',JSON.stringify(arrs));
+								}
+								show();
+							}
+						}
+						return;
+					}
+			}
+			
+			function show(){
+				if(localStorage.getItem('userid')==169){
+					list=JSON.parse(plus.storage.getItem('chatList1'));
+				}else{
+					list=JSON.parse(plus.storage.getItem('chatList2'));
+				}
+				ca.id('list_item').innerHTML=template('liebiao', {
+					"list":list
+				});
+			}
+			
+			mui.plusReady(function(){
+//				var arr=[];
+//				var chat=new Object;
+//				chat.userId=1;
+//				chat.userName='张三';
+//				chat.account='zdy1_admin';
+//				chat.imgSrc='../img/touxiang1.jpg';
+//				chat.lastChat='这是谁最后一条消息';
+//				chat.lastTime='2018-9-12';
+//				chat.unreadCount=12;
+//				arr.push(chat);
+//				var arr1=[];
+//				var chat1=new Object;
+//				chat1.userId=2;
+//				chat1.userName='李四';
+//				chat1.account='zl1_admin';
+//				chat1.imgSrc='../img/touxiang.jpg';
+//				chat1.lastChat='这是谁最后一条消息';
+//				chat1.lastTime='2018-9-14';
+//				chat1.unreadCount=5;
+//				var chat2=new Object;
+//				chat2.userId=2;
+//				chat2.userName='码子';
+//				chat2.account='zl2_admin';
+//				chat2.imgSrc='../img/touxiang.jpg';
+//				chat2.lastChat='这是谁最后一条消息';
+//				chat2.lastTime='2018-9-14';
+//				chat2.unreadCount=5;
+//				arr1.push(chat1);
+//				arr1.push(chat2);
+//				plus.storage.setItem('chatList1',JSON.stringify(arr));
+//				plus.storage.setItem('chatList2',JSON.stringify(arr1));
+				show();
+				
+				
+				
+				
+				
+				function createDownload(urls,msg) {
+					var dtask = plus.downloader.createDownload( urls, {}, function ( d, status ) {
+						// 下载完成
+						if ( status == 200 ) { 
+						return plus.io.convertLocalFileSystemURL(d.filename);
+							
+						} else {
+							
+						}  
+					});
+					dtask.start(); 
+				}
+			})
+//			
+		</script>
+	</body>
+
+</html>

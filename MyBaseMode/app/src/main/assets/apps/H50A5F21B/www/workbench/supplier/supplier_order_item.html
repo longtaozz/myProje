@@ -1,0 +1,533 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<!--<script type="text/javascript" src="../../js/mui.picker.min.js" ></script>-->
+		<!--<link rel="stylesheet" href="../../css/mui.picker.min.css" />-->
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../css/style.css" />
+		<link rel="stylesheet" href="../../css/iconfont.css" />
+		<style>
+			.li-title{
+				overflow: hidden; 
+			    text-overflow: ellipsis; 
+			    -o-text-overflow: ellipsis;
+			    white-space:nowrap;
+			    width: 100%;
+			    display:block;
+			}
+			.sp-icon{
+				width:20%;
+				
+			}
+			.shaixuan-div{
+				padding: 5px 15px;
+			}
+			.mui-table-view-chevron .mui-table-view-cell {
+			     padding-right: 0px;
+			     padding: 5px 10px 0px 15px; 
+			}
+			.mt1{
+				margin-top: 1px;
+			}
+			.mt3{
+				margin-top: 3px;
+			}
+			.order-list-1-l-div{
+				width: 20px;
+				height: 20px;
+				background: #4F77AA;
+				border-radius:5px ;
+				margin: 11px auto;
+				padding-left: 3px;
+			}
+			.order-list-1-l-div span{
+				font-size: 14px;
+				color: #FFFFFF;
+				
+			}
+			.kehus{
+				font-size: 14px;
+			}
+			.zhuangtais{
+				font-size: 14px;
+			}
+			.mui-plus .plus{
+				display: inline;
+			}
+			
+			.plus{
+				display: none;
+			}
+			.mui-scroll-wrapper1
+			{
+			    position: absolute;
+			    z-index: 2;
+			    top: 0;
+			    bottom: 0;
+			    left: 0;
+			    overflow: hidden;
+			    width: 100%;
+			}
+			
+			.mui-scroll1
+			{
+			    position: absolute;
+			    z-index: 1;
+			    width: 100%;
+			    -webkit-transform: translateZ(0);
+			            transform: translateZ(0);
+			}
+			
+		</style>
+	</head>
+
+	<body>
+		<div id="ccc"  class="shaixuan" style="height: 35px;position:fixed;top: 0px;width: 100%;">
+				<div class="shaixuan-div">
+					<div class="w75 fl">
+						<span class="shaixuan-divxiala-zi li-title">客户筛选</span>
+					</div>
+					<div class="fl" style="margin-left: -5px;">
+						<span class="mui-icon mui-icon-arrowdown sp-icon"></span>
+					</div>
+					
+				</div>
+				<div class="shaixuan-div">
+					<div class="w75 fl">
+						<span class="shaixuan-divxiala-zi li-title">日期筛选</span>
+					</div>
+					<div class="fl" style="margin-left: -5px;">
+						<span class="mui-icon mui-icon-arrowdown sp-icon"></span>
+					</div>
+					
+				</div>
+				<div class="shaixuan-div">
+					<div class="w75 fl">
+						<span class="shaixuan-divxiala-zi li-title">状态筛选</span>
+					</div>
+					<div class="fl" style="margin-left: -5px;">
+						<span class="mui-icon mui-icon-arrowdown sp-icon"></span>
+					</div>
+					
+				</div>
+				
+		</div>
+		<div class="body " >
+				<div id="pullrefresh" class="mui-content mui-scroll-wrapper pt5" style="margin-top: 35px;">
+	    			<div class="mui-scroll">		
+						<ul class="mui-table-view mui-table-view-chevron" id="div_list" style="background-color:#EFEFF4">
+				            
+						</ul>
+					</div>
+				</div>
+				
+		</div>
+			
+			
+			<div id="middlePopover0" class="mui-popover" style=" position:fixed;height: 200px;width: 100%;border-radius:0px ;border-top: 1px solid #DADADD;z-index: 1000;">
+				<div class="mui-scroll-wrapper1" id="mui-scroll-wrapper1">
+					<div class="mui-scroll1">
+						<ul class="mui-table-view" id="kehu" style="max-height: 4000px;">
+							
+						</ul>
+					</div>
+				</div>
+				
+			</div>
+			
+			<div id="middlePopover2" class="mui-popover" style=" position:fixed;height: 250px;width: 100%;border-radius:0px ;border-top: 1px solid #DADADD;z-index: 1000;">
+				<div class="mui-scroll-wrapper" id="mui-scroll-wrapper2">
+					<div class="mui-scroll">
+						<ul class="mui-table-view" id="zhuangtai">
+							<li class="mui-table-view-cell zhuangtais" data_id="4">全部订单</li>
+							<li class="mui-table-view-cell zhuangtais" data_id="0">等待接单</li>
+							<li class="mui-table-view-cell zhuangtais" data_id="1">订单确认</li>
+							<li class="mui-table-view-cell zhuangtais" data_id="3">订单拒绝</li>
+							<li class="mui-table-view-cell zhuangtais" data_id="2">申请取消</li>
+						</ul>
+					</div>
+				</div>
+				
+			</div>
+		<script type="text/template" id="list">
+			{{each list}}
+				<li class="order-list mui-table-view-cell mt5" data_id="{{$value.id}}">
+					<!-- <div class="mui-slider-right mui-disabled order-list-delete">'	
+						<a class="mui-btn mui-btn-red" >删除</a>
+					</div> -->
+					<div class="mui-slider-handle information-list-div" >
+						<div class="order-list-1">
+							<div class="order-list-1-l">
+								<div class="order-list-1-l-div">
+									<span class="iconfont icon-cart"></span>
+								</div>
+							</div>
+							<div class="order-list-1-c"style="color: #121212;width: 45%;">
+								<span  class="li-title">{{$value.structure.enterprise.alias}} {{$value.structure.name}}</span>
+							</div>
+							<div class="order-list-1-r">
+								<span>{{$value.create_time.slice(0,16)}}</span>
+							</div>
+						</div>
+						<div class="order-list-2" style="height: 90px;padding: 0px 15px;">
+							<div class="oh">
+								{{if $value.procurement_quantity>0}}
+								<div class="order-list-2-top mt3 fs13 fl">
+									<span class="fs14" style="color: #121212;">{{$value.alias}}</span>
+									<span>x</span><span>{{$value.procurement_quantity}}</span>
+								</div>
+								{{/if}}
+								{{if $value.procurement_quantity_two>0}}
+								<div class="order-list-2-top mt3 fs13 fl ml10">
+									<span class="fs14" style="color: #121212;">{{$value.alias_two}}</span>
+									<span>x</span><span>{{$value.procurement_quantity_two}}</span>
+								</div>
+								{{/if}}
+								{{if $value.procurement_quantity_three>0}}
+								<div class="order-list-2-top mt3 fs13 fl ml10">
+									<span class="fs14" style="color: #121212;">{{$value.alias_three}}</span>
+									<span>x</span><span>{{$value.procurement_quantity_three}}</span>
+								</div>
+								{{/if}}
+								{{if $value.procurement_quantity_four>0}}
+								<div class="order-list-2-top mt3 fs13 fl ml10">
+									<span class="fs14" style="color: #121212;">{{$value.alias_four}}</span>
+									<span>x</span><span>{{$value.procurement_quantity_four}}</span>
+								</div>
+								{{/if}}
+							</div>
+							
+							<div class="order-list-2-c mt1" style="color: #121212;">
+								<span>使用日期 </span><span> : </span><span>{{$value.use_date}}</span>
+							</div>	
+							<div class="order-list-2-b mt1" style="color: #121212;">
+								<span>总数量</span><span>:</span><span>{{$value.procurement_quantity+$value.procurement_quantity_two+$value.procurement_quantity_three+$value.procurement_quantity_four}}</span>
+							</div>
+							<div class="order-list-2-b mt1" style="color: #121212;">
+								<span>订单总额</span><span>:</span><span>{{$value.procurement_price*$value.procurement_quantity+$value.procurement_price_two*$value.procurement_quantity_two+$value.procurement_price_three*$value.procurement_quantity_three+$value.procurement_price_four*$value.procurement_quantity_four}}</span>
+							</div>
+							<div style="position: absolute;right: 0px;bottom: 10px;">
+								{{if $value.status==0}}
+									{{#$value.status | dateFormat:$value.use_date}}
+								{{/if}}
+								{{if $value.status==1}}
+									<div  style="color: #4F77AA;font-size: 14px;border-radius:5px ;padding: 2px;">
+										<span>订单确认</span>
+									</div>
+								{{/if}}
+								{{if $value.status==2}}
+									<div  style="color: red;font-size: 14px;border-radius:5px ;padding: 2px;">
+										<span>申请取消</span>
+									</div>
+								{{/if}}
+								{{if $value.status==3}}
+									<div  style="color: red;font-size: 14px;border-radius:5px ;padding: 2px;">
+										<span>订单取消</span>
+									</div>
+								{{/if}}
+							</div>
+						</div>
+					</div>
+	      		</li>
+			{{/each}}
+		</script>
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/castapp.js" ></script>
+		<script type="text/javascript" src="../../js/template-web.js" ></script>
+		<script type="text/javascript">
+			var cell0=0;
+			var cell1=0;
+			var cell2=0;
+			var pages=1;
+			var pagess=1;
+			var clientid=0;
+			var use_date=0;
+			var status=localStorage.getItem('business_sorder_type');
+			mui.init({
+				pullRefresh : {
+				    container:"#pullrefresh",//下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
+			        up: {
+			        	height:150,
+			            contentrefresh: '正在加载...',
+			            callback: upFn // 上拉执行函数
+			        }
+				}
+				});
+				ca.init();
+				var listLineOrder=ca.id('div_list')
+				function upFn(){
+					if(pagess==0){
+						this.endPullupToRefresh(true);
+					}else{
+						pages=pages+1;
+						findItem(clientid,use_date,status,pages);
+						this.endPullupToRefresh(false);
+						
+					}
+//					this.endPullupToRefresh(true|false);
+				}
+			
+			mui.plusReady(function(){
+				
+				xila_onclick();
+				function xila_onclick(){
+			     	var cell=document.getElementsByClassName('shaixuan-div');
+			     	var select_input = ca.className('shaixuan-divxiala-zi');
+			     	var arrowdown=ca.className('mui-icon-arrowdown');
+			     	ca.id('middlePopover0').style.top='32px';
+			     	
+			     	mui('#mui-scroll-wrapper1').scroll();
+					cell[0].addEventListener('tap',function(){
+						if(cell0==0){
+						select_input['0'].style.color='#4F77AA';
+						arrowdown['0'].style.color='#4F77AA';
+						select_input[2].style.color='#323232';
+						arrowdown[2].style.color='#323232';
+						select_input[1].style.color='#323232';
+						arrowdown[1].style.color='#323232';
+						mui('#middlePopover0').popover('show');
+						cell0=1;
+						cell1=0;
+						cell2=0;
+						ca.className('mui-backdrop')[0].addEventListener('tap',function(){
+							select_input[0].style.color='#323232';
+							arrowdown[0].style.color='#323232';
+							mui("#middlePopover0").popover('hide');
+							cell0=0;
+						})
+						
+					}else{
+						select_input[0].style.color='#323232';
+						arrowdown[0].style.color='#323232';
+						mui('#middlePopover0').popover('hide');
+						cell0=0;
+					}
+					})
+					cell[1].addEventListener('tap',function(){
+						if(cell1==0){
+							select_input[2].style.color='#323232';
+							arrowdown[2].style.color='#323232';
+							select_input[1].style.color='#4F77AA';
+							arrowdown[1].style.color='#4F77AA';
+							select_input['0'].style.color='#323232';
+							arrowdown['0'].style.color='#323232';
+							cell1=1;
+							cell2=0;
+							cell0=0;
+							showdate();
+							function showdate(){
+								// 使用原生js获取时间对象
+								var date = new Date();
+								var year = date.getFullYear();//年
+								var month = date.getMonth() + 1;//月
+								var day = date.getDate();//日
+								ca.dateSelect({
+									defaultTime:year + '-' + month + '-' + day,
+									minTime:(year-2) + '-' + month + '-' + day,
+									maxTime:year + '-'+ (month+1) + '-' + day,
+									callback:function(data){
+										if(data){
+											select_input[1].innerHTML=data;
+											pages=1;
+											pagess=1;
+											use_date=data;
+											listLineOrder.innerHTML="";
+											findItem(clientid,use_date,status,pages);
+											mui('#pullrefresh').pullRefresh().refresh(true);
+											cell1=0;
+										}else{
+											select_input[1].innerHTML="日期筛选";
+											select_input[1].style.color='#323232';
+											arrowdown[1].style.color='#323232';
+											pages=1;
+											pagess=1;
+											use_date=0;
+											listLineOrder.innerHTML="";
+											findItem(clientid,use_date,status,pages);
+											mui('#pullrefresh').pullRefresh().refresh(true);
+											cell1=0;
+										}
+									}
+								})
+							}
+						}else{
+							select_input[1].style.color='#323232';
+							arrowdown[1].style.color='#323232';
+							cell1=0;
+						}
+					})
+					ca.id('middlePopover2').style.top='32px';
+					cell[2].addEventListener('tap',function(){
+						if(cell2==0){
+							select_input[1].style.color='#323232';
+							arrowdown[1].style.color='#323232';
+							select_input[2].style.color='#4F77AA';
+							arrowdown[2].style.color='#4F77AA';
+							select_input['0'].style.color='#323232';
+							arrowdown['0'].style.color='#323232';
+							mui('#middlePopover2').popover('show');
+							cell2=1;
+							cell1=0;
+							cell0=0;
+							ca.className('mui-backdrop')[0].addEventListener('tap',function(){
+								select_input[2].style.color='#323232';
+								arrowdown[2].style.color='#323232';
+								mui("#middlePopover2").popover('hide');
+								cell2=0;
+							})
+							
+						}else{
+							select_input[2].style.color='#323232';
+							arrowdown[2].style.color='#323232';
+							mui('#middlePopover2').popover('hide');
+							cell2=0;
+						}
+					})
+					zhuangtaixuanze();
+					 function zhuangtaixuanze(){
+					 	var cell11=ca.className('zhuangtais');
+			        	for(var i=0;i<cell11.length;i++){
+					     		(function(index1){
+									cell11[i].addEventListener('tap',function(){
+										status=cell11[index1].getAttribute('data_id');
+										if(status==4){
+											select_input[2].innerHTML='状态筛选';
+										}else{
+											select_input[2].innerHTML=cell11[index1].innerHTML;
+										}
+										status=status;
+										pages=1;
+										pagess=1;
+										listLineOrder.innerHTML="";
+										findItem(clientid,use_date,status,pages);
+										mui('#pullrefresh').pullRefresh().refresh(true);
+										mui('#middlePopover2').popover('hide');
+										cell2=0;
+									})
+								})(i);
+					     }
+					 }
+					
+					findkehu();
+					function findkehu(){
+						var urls=localStorage.getItem('url');
+				       	var user_id=localStorage.getItem('userid');
+				       	var list=ca.id('kehu');
+				       	ca.ajaxs({url:'findCustomer',data:{
+				       			user_id:user_id
+				       		},succFn:function(data){
+				       			for(var a in data){
+					       			var temp;
+					       			if(a==0){
+					       				temp='<li class="mui-table-view-cell kehus" data_id="0">全部客户</li><li class="mui-table-view-cell kehus" data_id="'+data[0].id+'">'+data[0].enterprise.alias+' '+data[0].name+'</li>';
+					       			}else{
+					       				temp='<li class="mui-table-view-cell kehus" data_id="'+data[a].id+'">'+data[a].enterprise.alias+' '+data[a].name+'</li>';
+					       			}
+					       			list.innerHTML+=temp;
+				       			}
+				       			kehuxuanze();
+				       			ca.closeWaiting();
+				       		},errFn:function(call){
+				       			ca.closeWaiting();
+				       			mui.toast(call);
+				       		}
+				       	})
+				       
+					}
+					 function kehuxuanze(){
+					 	var cell11=ca.className('kehus');
+			        	for(var i=0;i<cell11.length;i++){
+					     		(function(index1){
+									cell11[i].addEventListener('tap',function(){
+										if(index1==0){
+											select_input[0].innerHTML="客户筛选";
+										}else{
+											select_input[0].innerHTML=cell11[index1].innerHTML;
+										}
+										
+//										listhotel.innerHTML="";
+										clientid=cell11[index1].getAttribute('data_id');
+										pages=1;
+										pagess=1;
+										listLineOrder.innerHTML="";
+										findItem(clientid,use_date,status,pages);
+										mui('#pullrefresh').pullRefresh().refresh(true);
+										mui('#middlePopover0').popover('hide');
+										cell0=0;
+									})
+								})(i);
+					     }
+					 }
+			
+			     }
+				
+				findItem(clientid,use_date,status,pages);
+				
+				mui('#div_list').on('tap','.order-list',function(){
+					ca.showWaiting();
+					var lineOrder_id=this.getAttribute('data_id');
+					var self=plus.webview.create('supplier_order_detail.html','supplier_order_detail',{},{'supplier_order_id':lineOrder_id});
+					setTimeout(function(){
+						self.show('slide-in-right',400);
+					},150)
+					
+				})
+				
+			})
+			function findItem(clientid,use_date,status,page){
+					ca.showWaiting();
+					var urls=localStorage.getItem('url');
+					var user_id=localStorage.getItem('userid');
+					ca.ajaxs({url:'findSupplierOrder',data:{
+							user_id:user_id,clientid:clientid,use_date:use_date,status:status,page:page
+						},succFn:function(da){
+							if(da.msg==1){
+								var data=da.data.data;
+								var next_item=da.data.next_item;
+								if(next_item==null){
+									pagess=0;
+		//							mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
+								}
+								if(next_item!=null){
+									pagess==1;
+		//							mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
+								}
+								if(data==""){
+									listLineOrder.innerHTML="暂无数据";
+									ca.closeWaiting();
+									return;
+								}
+								template.defaults.imports.dateFormat = function(arg1,arg2){
+									var myDate = new Date();
+									var ye=myDate.getFullYear();
+									var mo=myDate.getMonth()+1; //获取当前月份(0-11,0代表1月)
+									var day=myDate.getDate();
+									var mmda=ye+'-'+mo+'-'+day;
+									var date = new Date(mmda.replace(/-/g, '/'));
+									var date1 = new Date(arg2.replace(/-/g, '/'));
+									if(date.getTime()>date1.getTime() ){
+										return '<div  style="color: #999999;font-size: 14px;border-radius:5px ;padding: 2px;"><span>已过期</span></div>';
+									}else{ 
+										return '<div  style="color: #FF7F00;font-size: 14px;border-radius:5px ;padding: 2px;"><span>等待接单</span></div>';
+									}
+								};
+								listLineOrder.innerHTML+=template('list', {
+									"list":data
+								});
+							}
+							ca.closeWaiting();
+						},errFn:function(call){
+							ca.closeWaiting();
+							mui.toast(call);
+						}
+					})
+					
+				}
+		</script>
+	</body>
+
+</html>

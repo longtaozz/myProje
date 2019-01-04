@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/iconfont.css" />
+		<style>
+			.mui-bar-nav~ .mui-content .mui-pull-top-pocket{
+				top:70px !important;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav user-index-top-bg" style="height: 69px;">
+			<h1 class="mui-title" style="font-size: 16px; color: #FFFFFF;line-height: 44px;margin-top: 25px;">朋友</h1>
+			<div class="fr" style="font-size: 21px; margin-top: 25px;line-height: 44px;width: 50px;">
+				<span class="fr iconfont icon-friend-list cffffff mr5 fs21" ></span>
+			</div>
+			<!--<div class="c000000 fs11 tubiao" style="position: absolute;top: 27px;right: 10px;background: #FFFFFF;border-radius:50%;height: 16px;width: 16px;z-index: 1000;">
+				<span class="ml5" style="position: absolute;top: -2px;">1</span>
+			</div>-->
+		</header>
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript" src="js/castapp.js" ></script>
+		<script type="text/javascript">
+			mui.init({
+				 subpages:[{
+			      url:'jiaoliu/chat_message_list.html',//下拉刷新内容页面地址
+			      id:'chat_message_list',//内容页面标志
+			      styles:{
+			       top:69,
+			      }
+			    }]
+	       });
+			ca.init();
+			ca.whiteStatusBar();
+			ca.className('fr')[0].addEventListener('tap',function(){
+				ca.newInterface({url:'jiaoliu/list_of_friends.html',id:'list_of_friends'});
+			})
+//			New friend
+		</script>
+	</body>
+
+</html>

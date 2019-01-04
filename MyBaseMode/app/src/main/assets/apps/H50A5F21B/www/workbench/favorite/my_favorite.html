@@ -1,0 +1,405 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../../css/mui.css" rel="stylesheet" />
+		<link href="../../css/style.css" rel="stylesheet"/>
+		<style>
+			.mui-scroll ul li{
+				margin: 5px;
+				background: #fff;
+				border-radius:5px ;
+			}
+			.myfavorite-d2-d1 {
+				width: 40px;float: left;height:50px;
+			}
+			.myfavorite-d2 .fl img{
+				margin-top: 5px;
+				border-radius:100px;
+				height: 40px;
+				width: 40px;
+			}
+			.mui-table-view-cell{
+				padding: 0px;
+			}
+			.cheduibg{
+				background: -webkit-linear-gradient(left,rgba(59,163,229,1),rgba(144,219,254,1)); /* Safari 5.1 - 6 */
+				background: -o-linear-gradient(right,rgba(59,163,229,1),rgba(144,219,254,1)); /* Opera 11.1 - 12*/
+				background: -moz-linear-gradient(right,rgba(59,163,229,1),rgba(144,219,254,1)); /* Firefox 3.6 - 15*/
+				background: linear-gradient(to right, rgba(59,163,229,1),rgba(144,219,254,1)); /* 标准的语法 */
+			}
+			.cantingbg{
+				background: -webkit-linear-gradient(left,rgba(129,215,44,1),rgba(172,239,107,1)); /* Safari 5.1 - 6 */
+				background: -o-linear-gradient(right,rgba(129,215,44,1),rgba(172,239,107,1)); /* Opera 11.1 - 12*/
+				background: -moz-linear-gradient(right,rgba(129,215,44,1),rgba(172,239,107,1)); /* Firefox 3.6 - 15*/
+				background: linear-gradient(to right, rgba(129,215,44,1),rgba(172,239,107,1)); /* 标准的语法 */
+			}
+			.jindianbg{
+				background: -webkit-linear-gradient(left,rgba(19,158,206,1),rgba(94,224,232,1)); /* Safari 5.1 - 6 */
+				background: -o-linear-gradient(right,rgba(19,158,206,1),rgba(94,224,232,1)); /* Opera 11.1 - 12*/
+				background: -moz-linear-gradient(right,rgba(19,158,206,1),rgba(94,224,232,1)); /* Firefox 3.6 - 15*/
+				background: linear-gradient(to right, rgba(19,158,206,1),rgba(94,224,232,1)); /* 标准的语法 */
+			}
+			.daoyoubg{
+				background: -webkit-linear-gradient(left,rgba(254,113,87,1),rgba(249,159,114,1)); /* Safari 5.1 - 6 */
+				background: -o-linear-gradient(right,rgba(254,113,87,1),rgba(249,159,114,1)); /* Opera 11.1 - 12*/
+				background: -moz-linear-gradient(right,rgba(254,113,87,1),rgba(249,159,114,1)); /* Firefox 3.6 - 15*/
+				background: linear-gradient(to right,rgba(254,113,87,1),rgba(249,159,114,1)); /* 标准的语法 */
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav user-index-top-bg mheader">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left cffffff"></a>
+			<span class="cffffff fl fs15 ml20" style="line-height: 42px;">我的收藏</span>
+		</header>
+		<div id="refreshContainer" class="mui-scroll-wrapper mui-content" >
+			<div class="mui-scroll" >
+				<ul  id="favorite_list">
+					<!-- <li class="mui-table-view-cell" >
+						<div class="mui-slider-right mui-disabled" style="margin: 0px 0px 20px 0px;" data_id="'+da[a].id+'">
+							<a class="mui-btn mui-btn-red" >删除</a>
+						</div>
+						<div class="mui-slider-handle myfavorite-d2 h50">
+							<div class="user-index-top-bg myfavorite-d2-d1">
+								<span class="fs12 cffffff lh50 ml5">线路</span>
+							</div>
+							<div class="fl ml10 ">
+								<img src="../../img/gl.png" />
+							</div>
+							<div class="fl ml10">
+								<span class="fs14 lh50 c333333">zjjdsakjhj啥都会尽快</span>
+							</div>
+						</div>	
+					</li> -->
+					
+				</ul>
+			</div>
+		</div>
+		<script type="text/template" id="list">
+			{{each list}}
+				{{if $value.product}}
+				<li class="mui-table-view-cell">
+					<div class="mui-slider-right mui-disabled" style="margin: 0px 0px 20px 0px;" >
+						<a class="mui-btn mui-btn-red" data_id="{{$value.id}}">删除</a>
+					</div>
+					<div class="mui-slider-handle myfavorite-d2 h50" data_id="{{$value.product.id}}" data_type="{{$value.type}}" data_enterprise_id="{{$value.enterprise_id}}"  data_comment_num="{{$value.comment_num}}" data_grade="{{$value.data_grade}}" data_comments_num="{{$value.comments_num}}">
+						{{if $value.type=='line'}}
+						<div class="user-index-top-bg myfavorite-d2-d1">
+							<span class="fs12 cffffff lh50 ml5">线路</span>
+						</div>
+						{{/if}}
+						{{if $value.type=='hotel'}}
+						<div class="aaa myfavorite-d2-d1">
+							<span class="fs12 cffffff lh50 ml5">酒店</span>
+						</div>
+						{{/if}}
+						{{if $value.type=='ticket'}}
+						<div class="jindianbg myfavorite-d2-d1">
+							<span class="fs12 cffffff lh50 ml5">景点</span>
+						</div>
+						{{/if}}
+						{{if $value.type=='car'}}
+						<div class="cheduibg myfavorite-d2-d1">
+							<span class="fs12 cffffff lh50 ml5">车队</span>
+						</div>
+						{{/if}}
+						{{if $value.type=='pickup'}}
+						<div class="jindianbg myfavorite-d2-d1">
+							<span class="fs12 cffffff lh50 ml5">接送站车队</span>
+						</div>
+						{{/if}}
+						{{if $value.type=='food'}}
+						<div class="cantingbg myfavorite-d2-d1">
+							<span class="fs12 cffffff lh50 ml5">餐厅</span>
+						</div>
+						{{/if}}
+						{{if $value.type=='guide'}}
+						<div class="daoyoubg myfavorite-d2-d1">
+							<span class="fs12 cffffff lh50 ml5">导游</span>
+						</div>
+						{{/if}}
+						{{if $value.type=='sign'}}
+						<div class="daoyoubg myfavorite-d2-d1">
+							<span class="fs12 cffffff lh50 ml5">签证</span>
+						</div>
+						{{/if}}
+						{{if $value.type=='guide'}}
+							<div class="fl ml10 " id="guide" >
+								{{if $value.product.img_url=='null'}}
+									<img src="" />
+								{{else}}
+									<img src="{{$value.product.img_url}}" />
+								{{/if}}
+							</div>
+							<div class="fl ml10">
+								<span class="fs14 lh50 c333333">{{$value.product.realname}}</span>
+							</div>
+						{{else if $value.type=='sign'}}
+							<div class="fl ml10 ">
+								{{if $value.product.supplysign.pic=='null'}}
+									<img src="" />
+								{{else}}
+									<img src="{{$value.product.supplysign.pic}}" />
+								{{/if}}
+							</div>
+							<div class="fl ml10 yc11">
+								<span class="fs14 lh50 c333333" >{{$value.product.name}}</span>
+							</div>
+						{{else}}
+							<div class="fl ml10 ">
+								{{if $value.product.pic=='null'}}
+									<img src="" />
+								{{else}}
+									<img src="{{$value.product.pic}}" />
+								{{/if}}
+							</div>
+							<div class="fl ml10 yc11">
+								<span class="fs14 lh50 c333333" >{{$value.product.name}}</span>
+							</div>
+						{{/if}}
+						
+					</div>	
+				</li>
+				{{/if}}
+			{{/each}}
+		</script>
+		<script src="../../js/mui.js"></script>
+		<script src="../../js/castapp.js"></script>
+		<script src="../../js/template-web.js"></script>
+		<script type="text/javascript">
+			mui.plusReady(function(){
+				mui.init({
+					pullRefresh : {
+							container:"#refreshContainer",//下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
+							up: {
+								height:50,//可选.默认50.触发上拉加载拖动距离
+								auto:false,//可选,默认false.自动上拉加载一次
+								contentrefresh : "正在加载...",//可选，正在加载状态时，上拉加载控件上显示的标题内容
+								contentnomore:'没有更多数据了',//可选，请求完毕若没有更多数据时显示的提醒内容；
+								callback: upFn // 上拉执行函数
+							}
+					},
+					swipeBack:true //启用右滑关闭功能
+				})
+				ca.init();
+				var page=1;
+				var pagee=1;
+				function upFn(){
+					if(pagee==0){
+						mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
+					}else{
+						page++;
+						findMyFavorites(page);
+						this.endPullupToRefresh(false);
+					}
+				}
+				findMyFavorites(page);
+				function findMyFavorites(page){
+					ca.showWaiting();
+					ca.ajaxs({url:'findMyFavorites',data:{
+						user_id:localStorage.getItem('userid'),
+						page:page,
+						size:15
+						},succFn:function(data){
+							if(ca.emptyFun(data.next_item)){
+								pagee=0;
+							}
+							if(!ca.emptyFun(data.data)){
+								// alert(JSON.stringify(data))
+								showLIst(data);
+							}else{
+								ca.id('favorite_list').innerHTML='<div class="fs17 c999999" style="margin-left:40%;margin-top:20%">无收藏内容！</div>'
+							}
+							ca.closeWaiting();
+						},errFn:function(err){
+							mui.toast(err);
+							ca.closeWaiting();
+						}
+					});
+				}
+				function showLIst(data){
+					var datas=data.data;
+					try{
+						ca.id('favorite_list').innerHTML+=template('list',{
+							"list":datas
+						});
+					}catch(e){
+						console.log(e)
+					}
+					
+				}
+				mui('#favorite_list').on('tap','.mui-btn-red',function(){
+					var id=this.getAttribute('data_id');
+					var btnArray = ['是','否'];
+					mui.confirm('确定删除该收藏?', '提示', btnArray, function(e) {
+						if (e.index == 0) {
+							ca.ajaxs({url:'deleteMyFavorite',data:{id:id,user_id:localStorage.getItem('userid')},
+								succFn:function(data){
+									if(data.msg==1){
+										if(data.msgtext=='success'){
+											ca.id('favorite_list').innerHTML='';
+											page=1;
+											findMyFavorites(page);
+										}else{
+											mui.toast(data.msgtext);
+										}
+									}else{
+										mui.toast(data.msgtext);
+									}
+									ca.closeWaiting();
+								},errFn:function(err){
+									mui.toast(err);
+									ca.closeWaiting();
+								}
+							})
+						}
+						
+					})
+				})
+				mui('body').on('tap','.myfavorite-d2',function(){
+					ca.showWaiting();
+					var type=this.getAttribute('data_type');
+					var id=this.getAttribute('data_id');
+					var data_comment_num=this.getAttribute('data_comment_num');
+					var data_grade=this.getAttribute('data_grade');
+					var enterprise_id=this.getAttribute('data_enterprise_id');
+					if(type=='hotel'){
+						var detailPage= mui.preload({
+							id:'hotel_item_list_detail',
+							url:'../../hotel/hotel_item_list_detail.html'
+						});
+							if(!detailPage){
+								detailPage = plus.webview.getWebviewById('hotel_item_list_detail');
+							}
+						setTimeout(function(){
+							mui.fire(detailPage,'hotel_item',{
+									hotel_id:id,
+									comment_num:data_comment_num,
+									data_grade:data_grade,
+									enterprise_id:enterprise_id
+								});
+							mui.openWindow({
+								id:'hotel_item_list_detail',
+							})
+							ca.closeWaiting();
+						},400)
+						
+					}else if(type=='food'){
+						var detailPage = mui.preload({
+							id:'restaurant_item_list_detail',
+							url:'../../restaurant/restaurant_item_list_detail.html'
+						});
+						setTimeout(function(){
+							if(!detailPage){
+								detailPage = plus.webview.getWebviewById('restaurant_item_list_detail');
+							}
+							mui.fire(detailPage,'restaurant_item',{
+									food_id:id,
+									comment_num:data_comment_num,
+									data_grade:data_grade,
+									enterprise_id:enterprise_id
+								});
+							mui.openWindow({
+								id:'restaurant_item_list_detail',
+							})
+							ca.closeWaiting();
+						},400)
+							//触发详情页面的newsId事件
+					}else if(type=='car'){
+						var detailPage = mui.preload({
+							id:'car_list_item_detail',
+							url:'../../car/car_list_item_detail.html'
+						});
+						setTimeout(function(){
+							if(!detailPage){
+								detailPage = plus.webview.getWebviewById('car_list_item_detail');
+							}
+							mui.fire(detailPage,'car_item',{
+									car_id:id,
+									comment_num:data_comment_num,
+									data_grade:data_grade,
+									enterprise_id:enterprise_id
+								});
+							mui.openWindow({
+								id:'car_list_item_detail',
+							})
+							ca.closeWaiting();
+						},400)
+					}else if(type=='guide'){
+						var data_comments_num=this.getAttribute('data_comments_num');
+						var detailPage = mui.preload({
+							id:'guide_item_list_detail1',
+							url:'../../guide/guide_item_list_detail1.html'
+						});
+						setTimeout(function(){
+							if(!detailPage){
+								detailPage = plus.webview.getWebviewById('guide_item_list_detail1');
+							}
+							mui.fire(detailPage,'guide_item',{
+									guide_id:id,
+									comment_num:data_comment_num,
+									comments_num:data_comments_num,
+									data_grade:data_grade
+								});
+							mui.openWindow({
+								id:'guide_item_list_detail1',
+							})
+							ca.closeWaiting();
+						},400)
+						
+					}
+					else if(type=='pickup'){
+						var detailPage = mui.preload({
+							id:'pickup_list_item_detail',
+							url:'../../pickup/pickup_list_item_detail.html'
+						});
+						setTimeout(function(){
+							if(!detailPage){
+								detailPage = plus.webview.getWebviewById('pickup_list_item_detail');
+							}
+							mui.fire(detailPage,'pickup_item',{
+									car_id:id,
+									comment_num:data_comment_num,
+									data_grade:data_grade,
+									enterprise_id:enterprise_id
+								});
+							mui.openWindow({
+								id:'pickup_list_item_detail',
+							})
+							ca.closeWaiting();
+						},400)
+					}else if(type=='line'){
+						var styles={};
+						// 在Android5以上设备，如果默认没有开启硬件加速，则强制设置开启
+						if(!plus.webview.defaultHardwareAccelerated()&&parseInt(plus.os.version)>=5){
+							styles.hardwareAccelerated=true;
+						}
+						var web=plus.webview.create('../../line/line_listitem_detail.html','line_listitem_detail',styles,
+						{lineid:id});
+						setTimeout(function(){//延迟0.8s打开
+							plus.webview.show(web,'pop-in');
+						},500)
+					}else if(type=='sign'){
+						var styles={};
+						// 在Android5以上设备，如果默认没有开启硬件加速，则强制设置开启
+						if(!plus.webview.defaultHardwareAccelerated()&&parseInt(plus.os.version)>=5){
+							styles.hardwareAccelerated=true;
+						}
+						var web=plus.webview.create('../../visa/visa_list_item_detail.html','visa_list_item_detail',styles,
+						{product_id:id});
+						setTimeout(function(){//延迟0.8s打开
+							plus.webview.show(web,'pop-in',400);
+						},300)
+					}
+				})
+			})
+			
+		</script>
+	</body>
+
+</html>

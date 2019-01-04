@@ -1,0 +1,107 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../../css/style.css" rel="stylesheet" />
+		<link href="../../../css/iconfont.css" rel="stylesheet"/>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav user-index-top-bg mheader">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left cffffff"></a>
+			<span class="cffffff fl fs15 ml20" style="line-height: 42px;"></span>
+		</header>
+		<div class="mui-content">
+			<ul class="mt10" id="list">
+				<!-- <li class="bgwhite h50 lh50 pl15 c1296db mt5 fs15">
+					<span class="iconfont icon-day"></span>
+					<span class="ml10">2018-12-11</span>
+					<span class="mui-icon mui-icon-arrowright fr lh50 mr15"></span>
+				</li>
+				<li class="bgwhite h50 lh50 pl15 c1296db mt5 fs15">
+					<span class="iconfont icon-day"></span>
+					<span class="ml10">2018-12-12</span>
+					<span class="mui-icon mui-icon-arrowright fr lh50 mr15"></span>
+				</li>
+				<li class="bgwhite h50 lh50 pl15 c1296db mt5 fs15">
+					<span class="iconfont icon-day"></span>
+					<span class="ml10">2018-12-13</span>
+					<span class="mui-icon mui-icon-arrowright fr lh50 mr15"></span>
+				</li> -->
+			</ul>
+		</div>
+		<script src="../../../js/mui.min.js"></script>
+		<script src="../../../js/castapp.js"></script>
+		<script type="text/javascript">
+			mui.plusReady(function(){
+				mui.init();
+				ca.init();
+				var self=plus.webview.currentWebview();
+				var days=self.days;
+				var team_id=self.team_id;
+				var start_date=self.start_date;
+				var team_num=self.team_num;
+				ca.className('ml20')[0].innerText=self.team_num+' '+'采购';
+				if(days>0){
+					for(var i=0;i<days;i++){
+						var temp='<li class="bgwhite h50 lh50 pl15 c1296db mt5 fs15" data_time="'+dateAdd(start_date,i)+'">'
+								+	'<span class="iconfont icon-day"></span>'
+								+	'<span class="ml10">'+dateAdd(start_date,i)+'</span>'
+								+	'<span class="mui-icon mui-icon-arrowright fr lh50 mr15"></span>'
+								+'</li>';
+						ca.id('list').innerHTML+=temp;
+					}
+					var temps='<div class="bgwhite h50 lh50 pl15 c1296db mt5 fs15" id="jiesongzhan">'
+							+	'<span class="iconfont icon-day"></span>'
+							+	'<span class="ml10">接送站采购</span>'
+							+	'<span class="mui-icon mui-icon-arrowright fr lh50 mr15"></span>'
+							+'</div>';
+					ca.id('list').innerHTML+=temps;
+					onclickjsz();
+				}
+				
+				
+				
+				mui('body').on('tap','li',function(){
+					ca.showWaiting();
+					var time=this.getAttribute('data_time');
+					var se=plus.webview.create('purchase_for_day_detail.html','purchase_for_day_detail',{},{
+						time:time,
+						team_num:team_num,
+						teamsk_id:team_id,
+						end_date:self.end_date
+						});
+					setTimeout(function(){
+						se.show('pop-in','300');
+					},100)
+				})
+				
+				function dateAdd(startDate,a) {
+					startDate = new Date(startDate);
+					startDate = +startDate + 1000*60*60*24*a;
+					startDate = new Date(startDate);
+					var nextStartDate = startDate.getFullYear()+"-"+(startDate.getMonth()+1)+"-"+startDate.getDate();
+					return nextStartDate;
+				}
+				function onclickjsz(){
+					ca.id('jiesongzhan').addEventListener('tap',function(){
+						var self=plus.webview.create('purchase_pickup_list.html','purchase_pickup_list',{},{
+							team_num:team_num,
+							teamsk_id:team_id
+							});
+						setTimeout(function(){
+							self.show('pop-in','300');
+						},100)
+						
+					})
+				}
+			})
+			
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,248 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../css/mui.picker.min.css" />
+		<link rel="stylesheet" href="../../css/style.css" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav mheader">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mback"></a>
+		    <h1 class="mui-title htitle">编辑导游信息</h1>
+		    <span class="mui-pull-right" id="add" style="line-height: 44px;">保存</span>
+		</header>
+		<div class="mui-content">
+			<div class="bgwhite h40 bbf2 oh">
+		    	<div class="fl w40 fs14 c121212 pl20 lh40">
+		    		<span>姓名</span>
+		    	</div>
+		    	<div class="fl w60 lh40">
+		    		<input type="text" class="w70 tc fs12" style="width:70%;border:1px solid #e5e5e5;border-radius:4px ;height: 28px;" placeholder="请输入姓名"/>
+		    	</div>
+		    </div>
+		    <div class="bgwhite h40 bbf2 oh">
+		    	<div class="fl w40 fs14 c121212 pl20 lh40">
+		    		<span>性别</span>
+		    	</div>
+		    	<div class="fl w60 lh40">
+		    		<input type="text" readonly="readonly" class="w70 tc fs12" style="width:70%;border:1px solid #e5e5e5;border-radius:4px ;height: 28px;" placeholder="请选择性别"/>
+		    	</div>
+		    </div>
+		    <div class="bgwhite h40 bbf2 oh">
+		    	<div class="fl w40 fs14 c121212 pl20 lh40">
+		    		<span>从业资格证号</span>
+		    	</div>
+		    	<div class="fl w60 lh40">
+		    		<input type="text" class="w70 tc fs12" style="width:70%;border:1px solid #e5e5e5;border-radius:4px ;height: 28px;" placeholder="请输入从业资格证号"/>
+		    	</div>
+		    </div>
+		    <div class="bgwhite h40 bbf2 oh">
+		    	<div class="fl w40 fs14 c121212 pl20 lh40">
+		    		<span>导游证号</span>
+		    	</div>
+		    	<div class="fl w60 lh40">
+		    		<input type="text" class="w70 tc fs12" style="width:70%;border:1px solid #e5e5e5;border-radius:4px ;height: 28px;" placeholder="请输入导游证号"/>
+		    	</div>
+		    </div>
+		    <div class="bgwhite h40 bbf2 oh">
+		    	<div class="fl w40 fs14 c121212 pl20 lh40">
+		    		<span>导游语种</span>
+		    	</div>
+		    	<div class="fl w60 lh40">
+		    		<input type="text" class="w70 tc fs12" style="width:70%;border:1px solid #e5e5e5;border-radius:4px ;height: 28px;" placeholder="请输入导游语种"/>
+		    	</div>
+		    </div>
+		    <div class="bgwhite h40 bbf2 oh">
+		    	<div class="fl w40 fs14 c121212 pl20 lh40">
+		    		<span>开始带团日期</span>
+		    	</div>
+		    	<div class="fl w60 lh40" id="shijian">
+		    		<input type="text"  readonly="readonly" class="w70 tc fs12" style="width:70%;border:1px solid #e5e5e5;border-radius:4px ;height: 28px;" placeholder="请选择首次带团时间"/>
+		    	</div>
+		    </div>
+		    <div class="bgwhite h40 bbf2 oh">
+		    	<div class="fl w40 fs14 c121212 pl20 lh40">
+		    		<span>擅长带团类型</span>
+		    	</div>
+		    	<div class="fl w60 lh40">
+		    		<input type="text" class="w70 tc fs12" style="width:70%;border:1px solid #e5e5e5;border-radius:4px ;height: 28px;" placeholder="请选择擅长带团类型"/>
+		    	</div>
+		    </div>
+		    <div class="bgwhite h40 bbf2 oh">
+		    	<div class="fl w40 fs14 c121212 pl20 lh40">
+		    		<span>擅长带团区域</span>
+		    	</div>
+		    	<div class="fl w60 lh40">
+		    		<input type="text" class="w70 tc fs12" style="width:70%;border:1px solid #e5e5e5;border-radius:4px ;height: 28px;" placeholder="请输入擅长带团区域"/>
+		    	</div>
+		    </div>
+		    <div class="bgwhite h40 bbf2 oh">
+		    	<div class="fl w40 fs14 c121212 pl20 lh40">
+		    		<span>联系电话</span>
+		    	</div>
+		    	<div class="fl w60 lh40">
+		    		<input type="text" class="w70 tc fs12" style="width:70%;border:1px solid #e5e5e5;border-radius:4px ;height: 28px;" placeholder="请输入联系电话"/>
+		    	</div>
+		    </div>
+		    <div class="bgwhite h200 bbf2 oh">
+		    	<div class="fl w40 fs14 c121212 pl20 lh40">
+		    		<span>自我介绍</span>
+		    	</div>
+		    	<div class="fl w60 lh40 mt10">
+		    		<textarea id="textarea" placeholder="详细介绍..." rows="3" style="width: 90%;height: 150px;font-size: 14px;" ></textarea>
+				</div>
+		    </div>
+		</div>
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/castapp.js" ></script>
+		<script type="text/javascript" src="../../js/mui.picker.min.js" ></script>
+		<script type="text/javascript">
+			mui.init();
+			ca.init(true);
+			ca.blackStatusBar();
+			ca.closeWaitings();
+			ca.getMachineInfo(function(data){
+//				alert(data.network);
+			});
+			
+			mui.plusReady(function(){
+				var url=localStorage.getItem('url');
+				var user_id=localStorage.getItem('userid');
+				var input=ca.tagName('input');
+				var detail=ca.id('textarea');
+				plus.nativeUI.showWaiting();
+				ca.ajaxs({url:'findGuideById',data:{
+						id:user_id
+					},succFn:function(data){
+						if(data.supply_guide_info=="" || data.supply_guide_info==null){
+							
+						}else{
+							var da=data.supply_guide_info;
+							input[0].value=da.realname;
+							var se="女";
+							if(da.sex==1){
+								se="男";
+							}
+							input[1].value=se;
+							input[2].value=da.cert_num;
+							input[3].value=da.card_num;
+							input[4].value=da.language;
+							input[5].value=da.team_start_date;
+							input[6].value=da.good_type;
+							input[7].value=da.good_zone;
+							input[8].value=da.phone;
+							detail.value=da.details;
+							
+						}
+						ca.closeWaiting();
+					},errFn:function(err){
+						ca.closeWaiting();
+						mui.toast(err);
+					}
+				})
+				input[1].addEventListener('tap',function(){
+					var picker1 = new mui.PopPicker();
+					picker1.setData([{value:1,text:'男'},{value:2,text:'女'}]);
+					picker1.show(function(selectItems){
+						input[1].value=selectItems[0].text;
+					})
+				})
+				input[6].addEventListener('tap',function(){
+					var picker1 = new mui.PopPicker();
+					picker1.setData([{value:1,text:'团队'},{value:2,text:'散拼'}]);
+					picker1.show(function(selectItems){
+						input[6].value=selectItems[0].text;
+					})
+				})
+				ca.id('shijian').addEventListener('tap',function(){
+					var date = new Date();
+					var year = date.getFullYear();//年
+					var month = date.getMonth() + 1;//月
+					var day = date.getDate();//日
+					ca.dateSelect({
+						defaultTime:year + '-' + month + '-' + day,
+						minTime:(year-20)+ '-' + month + '-' + day,
+						maxTime:year + '-'+ (month+1) + '-' + day,
+						callback:function(data){
+							input[5].value=data;
+						}
+										
+					});
+				})
+				
+				ca.id('add').addEventListener('tap',function(){
+					if(input[0].value==""){
+						mui.toast('请输入姓名');
+						return;
+					}
+					if(input[1].value=="" ||input[1].value==false){
+						mui.toast('请选择性别');
+						return;
+					}
+					if(input[2].value==""){
+						mui.toast('请输入从业资格证');
+						return;
+					}
+					if(input[3].value==""){
+						mui.toast('请输入导游证号');
+						return;
+					}
+					if(input[4].value==""){
+						mui.toast('请输入导游语种');
+						return;
+					}
+					if(input[5].value==""){
+						mui.toast('请选择首次带团日期');
+						return;
+					}
+					if(input[6].value==""){
+						mui.toast('请选择带团类型');
+						return;
+					}
+					if(input[7].value==""){
+						mui.toast('请输入擅长带团区域');
+						return;
+					}
+					if(input[8].value==""){
+						mui.toast('请输入联系电话');
+						return;
+					}
+					var ses=2;
+					if(input[1].value=="男"){
+						ses=1;
+					}
+					ca.ajaxs({url:'addSupplyGuideInfo',data:{
+							employee_id:user_id,
+							realname:input[0].value,
+							sex:ses,
+							cert_num:input[2].value,
+							card_num:input[3].value,
+							language:input[4].value,
+							team_start_date:input[5].value,
+							good_type:input[6].value,
+							good_zone:input[7].value,
+							phone:input[8].value,
+							details:detail.value
+					},succFn:function(data){
+							if(data.msg==1){
+								mui.toast('编辑成功');
+							}
+							ca.closeWaiting();
+						},errFn:function(call){
+							ca.closeWaiting();
+							mui.toast(call);
+						}
+					})
+				})
+				
+			})
+			
+		</script>
+	</body>
+
+</html>

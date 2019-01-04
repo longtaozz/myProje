@@ -1,0 +1,453 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../../css/style.css" rel="stylesheet" />
+		<link href="../../../css/iconfont.css" rel="stylesheet" />
+		<style>
+			.purchase-tab{
+				float: left;
+				width: 20%;
+				text-align: center;
+				font-size: 15px;
+			}
+			.purchase-tab-active{
+				float: left;
+				width: 20%;
+				text-align: center;
+				border-bottom: 2px solid #1E92FE;
+				color: #1E92FE;
+				font-size: 15px;
+				
+			}
+			.mui-plus .plus{
+				display: inline;
+			}
+			
+			.plus{
+				display: none;
+			}
+			
+			#topPopover {
+				position: fixed;
+				top: 0px;
+				right: 6px;
+			}
+			#topPopover .mui-popover-arrow {
+				left: auto;
+				right: 6px;
+			}
+			.mui-popover {
+				height: 180px;
+				width: 100px;
+			}
+			p {
+				text-indent: 22px;
+			}
+			span.mui-icon {
+				font-size: 14px;
+				color: #007aff;
+				margin-left: -15px;
+				padding-right: 10px;
+			}
+			
+			.bgwhite{
+				background: #FFFFFF;
+				position: fixed;
+				width: 100%;
+				z-index: 100;
+			}
+			.shai{
+				display:inline-block;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav user-index-top-bg mheader">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left cffffff"></a>
+			<span class="cffffff fl fs15 ml20" style="line-height: 42px;"></span>
+			<a id="menu" class="mui-action-menu mui-pull-right cffffff fs15 lh43" style="width:40px;" href="#topPopover">采购</a>
+			<!-- <span class="fs15 cffffff lh43 fr mr10">采购</span> -->
+		</header>
+		<div class="mui-content">
+			<div class="bgwhite oh h40 lh38">
+				<div class="purchase-tab-active shai" data-type="all" data-index=0>
+					<span>全部</span>
+				</div>
+				<div class="purchase-tab shai" data-type="hotel" data-index=1>
+					<span>酒店</span>
+				</div>
+				<div class="purchase-tab shai" data-type="food" data-index=2>
+					<span>餐厅</span>
+				</div>
+				<div class="purchase-tab shai" data-type="car" data-index=3>
+					<span>车队</span>
+				</div>
+				<div class="purchase-tab shai" data-type="ticket" data-index=4>
+					<span>门票</span>
+				</div>
+			</div>
+			<div id="pullrefresh" class="mui-scroll-wrapper">
+				<div class="mui-scroll">
+					<ul class="" id="list_item">
+						<!-- <li class="" style="margin: 5px;background: #FFFFFF;border-radius: 5px;">
+							<div class="oh ml10 mr10 bbf0 h35 lh35">
+								<div class="fl">
+									<span class="iconfont icon-jiudian"></span>
+								</div>
+								<div class="fl fs15 c333333 ml10">
+									<span>张家界国际大酒店</span>
+								</div>
+								<div class="fr cred fs14">
+									<span>￥1500</span>
+								</div>
+							</div>
+							<div class="ml15 mr10 mt5 mb7 c666666 fs14">
+								<div>
+									<span>单人间/150 x20</span><span class="ml10">双人间/200 x15</span>
+								</div>
+								<div>
+									<span>导游付667</span>
+									<span>公司付5000</span>
+								</div>
+								<div class="yc2 c999999">
+									备注:sjdlkaj打开撒到了就爱上了空间大就是空间带来的撒的卢卡斯即可第六届奥斯卡建档立卡数据库的骄傲时刻了解到
+								</div>
+								<div>
+									<span>下单时间:2018-12-11 12:55</span>
+								</div>
+							</div>
+							<div class="oh ml15 mr10 btf0 h30 ">
+								<div class="fl fs15 cred lh30">
+									<span>待确认</span>
+								</div>
+								<div class="fr bb4f77aa c4F77AA fs15">
+									<span>取消</span>
+								</div>
+							</div>
+						</li> -->
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div id="topPopover" class="mui-popover">
+			<div class="mui-popover-arrow"></div>
+			<div >
+				<div >
+					<ul class="mui-table-view">
+						<li class="mui-table-view-cell tc" data_type="hotel">
+							<a href="#">酒店</a>
+						</li>
+						<li class="mui-table-view-cell tc" data_type="food"><a href="#">餐厅</a>
+						</li>
+						<li class="mui-table-view-cell tc" data_type="car"><a href="#">车队</a>
+						</li>
+						<li class="mui-table-view-cell tc" data_type="ticket"><a href="#">门票</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+		</div>
+		<script src="../../../js/mui.min.js"></script>
+		<script src="../../../js/castapp.js"></script>
+		<script src="../../../js/template-web.js"></script>
+		<script type="text/template" id="list_items">
+			{{each list}}
+				<li class="" style="margin: 5px;background: #FFFFFF;border-radius: 5px;">
+					<div class="oh ml10 mr10 bbf0 h35 lh35">
+						<div class="fl">
+							{{if $value.type=='hotel'}}
+								<span class="iconfont icon-jiudian"></span>
+							{{else if $value.type=='food'}}
+								<span class="iconfont icon-shangjia"></span>
+							{{else if $value.type=='car'}}
+								<span class="iconfont icon-lvyouyongche"></span>
+							{{else if $value.type=='ticket'}}
+								<span class="iconfont icon-menpiao11"></span>
+							{{else}}
+								<span class="iconfont icon-qichezhan"></span>
+							{{/if}}
+						</div>
+						<div class="fl fs15 c333333 ml10">
+							<span>{{$value.name}}</span>
+						</div>
+						<div class="fr cred fs14">
+							<span>￥{{$value.procurement_price*$value.procurement_quantity+$value.procurement_price_two*$value.procurement_quantity_two+$value.procurement_quantity_three*$value.procurement_price_three+$value.procurement_price_four*$value.procurement_quantity_four}}</span>
+						</div>
+					</div>
+					<div class="ml15 mr10 mt5 mb7 c666666 fs14">
+						<div>
+							{{if $value.procurement_quantity>0}}
+								<span>{{$value.alias}} / {{$value.procurement_price}}*{{$value.procurement_quantity}}</span>
+							{{/if}}
+							{{if $value.procurement_quantity_two>0}}
+								<span>{{$value.alias_two}} / {{$value.procurement_price_two}}*{{$value.procurement_quantity_two}}</span>
+							{{/if}}
+							{{if $value.procurement_quantity_three>0}}
+								<span>{{$value.alias_three}} / {{$value.procurement_price_three}}*{{$value.procurement_quantity_three}}</span>
+							{{/if}}
+							{{if $value.procurement_quantity_four>0}}
+								<span>{{$value.alias_four}} / {{$value.procurement_price_four}}*{{$value.procurement_quantity_four}}</span>
+							{{/if}}
+							<span></span>
+						</div>
+						<div>
+							{{if $value.guide_pay>0}}
+								<span>导游付{{$value.guide_pay}}</span>
+							{{/if}}
+							{{if $value.company_pay>0}}
+								<span>公司付{{$value.company_pay}}</span>
+							{{/if}}
+							{{if $value.sign_bill>0}}
+								<span>签单{{$value.sign_bill}}</span>
+							{{/if}}
+						</div>
+						{{if $value.mark}}
+							<div class="yc2 c999999">
+								备注:{{$value.mark}}
+							</div>
+						{{/if}}
+						{{if $value.type=='car'}}
+							<div>
+								<span class="fs12 c999999">{{$value.use_date}}</span>
+								<span>--</span>
+								<span class="fs12 c999999">{{$value.end_date}}</span>
+							</div>
+						{{/if}}
+						<div>
+							<span class="fs12 c999999">下单时间:{{$value.create_time.slice(0,16)}}</span>
+						</div>
+					</div>
+					<div class="oh ml15 mr10 btf0 h30 ">
+						{{if $value.status==1}}
+							<div class="fl fs15 cred lh30">
+								<span>已确认</span>
+							</div>
+						{{else if $value.status==0}}
+							<div class="fl fs15 c1296db lh30">
+								<span>待确认</span>
+							</div>
+							<div class="fr bb4f77aa c4F77AA fs15 quxiao " data_id="{{$value.id}}">
+								<span>取消</span>
+							</div>
+						{{else if $value.status==2}}
+							<div class="fl fs15 cred lh30">
+								<span>申请取消</span>
+							</div>
+							<div class="fr bb4f77aa c4F77AA fs15 tongyiquxiao"  data_id="{{$value.id}}">
+								<span>同意取消</span>
+							</div>
+						{{else}}
+							<div class="fl fs15 c999999 lh30">
+								<span>取消</span>
+							</div>
+						{{/if}}
+					</div>
+				</li>
+			{{/each}}
+		</script>
+		<script type="text/javascript">
+			mui.plusReady(function(){
+				mui.init({
+					pullRefresh : {
+						container:"#pullrefresh",//下拉刷新容器标识
+						up: {
+							contentrefresh: '正在加载...',
+							callback: upFn // 上拉执行函数
+						}
+					}
+				})
+				var self=plus.webview.currentWebview();
+				ca.className('ml20')[0].innerText=self.team_num+'('+self.time+')';
+				var listData="";
+				ca.init();
+				if(plus.os.name=='iOS'){
+					// ca.id('kong').style.marginTop='165px';
+					ca.id('pullrefresh').style.marginTop='109px';
+				}else{
+					// ca.id('kong').style.marginTop='100px';
+					ca.id('pullrefresh').style.marginTop='40px';
+				}
+				ComparisonTime(self.time);
+				function ComparisonTime(date1){
+					var myDate = new Date();
+					var ye=myDate.getFullYear();
+					var mo=myDate.getMonth()+1; //获取当前月份(0-11,0代表1月)
+					var day=myDate.getDate();
+					var mmda=ye+'-'+mo+'-'+day;
+					var da1 = new Date(mmda.replace(/-/g, '/'));
+					var da2 = new Date(date1.replace(/-/g, '/'));
+					if(da1>da2){
+						ca.id('menu').classList.add('disn');
+					}
+				}
+				
+				document.addEventListener('update',function(event){
+					findItem();
+					setTable(0)
+				});
+				
+				findItem();
+				function findItem(){
+					ca.showWaiting();
+					ca.ajaxs({url:'findTeamPurchaseByTime',data:{
+							user_id:localStorage.getItem('userid'),time:self.time,team_num:self.team_num
+						},succFn:function(data){
+							if(data){
+								listData=data;
+								show(data);
+							}
+							ca.closeWaiting();
+						},errFn:function(err){
+							ca.closeWaiting();
+							mui.toast(err);
+						}
+					})
+				}
+				function show(data){
+					try{
+						if(!ca.emptyFun(data)){
+							ca.id('list_item').innerHTML=template('list_items',{
+								'list':data
+							})
+						}else{
+							ca.id('list_item').innerHTML='无数据';
+						}
+					}catch(e){
+						console.log(e);
+					}
+				}
+				function upFn(){
+					this.endPullupToRefresh(true);
+				}
+				mui('body').on('tap','.shai',function(){
+					var type=this.getAttribute('data-type');
+					var index=this.getAttribute('data-index');
+					var datas=[];
+					if(listData && type!='all'){
+						listData.forEach(function(item,indx){
+							if(type==item['type']){
+								datas.push(item);
+							}
+						})
+						show(datas);
+					}else{
+						show(listData);
+					}
+					setTable(index);
+					
+				})
+				function setTable(index){
+					if(plus.os.name=='iOS'){
+						mui('#pullrefresh').scroll().scrollTo(0,0,500);
+					}else{
+						ca.className('mui-content')[0].scrollTo=100+'px';
+					}
+					
+					var cell=document.getElementsByClassName('shai');
+					for(var a=0;a<cell.length;a++){
+						if(index==a){
+							cell[a].classList.add('purchase-tab-active');
+							cell[a].classList.remove('purchase-tab');
+						}else{
+							cell[a].classList.remove('purchase-tab-active');
+							cell[a].classList.add('purchase-tab');
+						}
+					}
+				}
+				mui('body').on('tap', '.mui-table-view-cell', function(e){
+					var type=this.getAttribute('data_type');
+					ca.showWaiting();
+					var se=plus.webview.create('add_purchase.html','add_purchase',{},{
+						type:type,
+						team_num:self.team_num,
+						team_date:self.time,
+						teamsk_id:self.teamsk_id,
+						end_date:self.end_date
+						});
+					setTimeout(function(){
+						se.show('pop-in','300');
+					},200)
+					mui('#topPopover').popover('hide');
+				});
+				mui('#list_item').on('tap','.quxiao',function(){
+					var id=this.getAttribute('data_id');
+					var btnArray=['是','否'];
+					mui.confirm('确认取消该采购?', '提示', btnArray, function(e) {
+						if (e.index == 0) {
+							ca.showWaiting();
+							ca.ajaxs({url:'updateTeamSkPurchaseBystatus',
+								data:{user_id:localStorage.getItem('userid'),guide_id:id,status:3},
+								succFn:function(data){
+									if(data.msg==1){
+										mui.toast(data.text);
+										findItem();
+									}else{
+										mui.toast(data.text)
+									}
+									ca.closeWaiting();
+								},errFn:function(call){
+									ca.closeWaiting();
+									mui.toast(call);
+								}
+							});
+						} 
+					})
+				})
+				mui('#list_item').on('tap','.tongyiquxiao',function(){
+					var id=this.getAttribute('data_id');
+					var btnArray=['是','否'];
+					mui.confirm('是否同意取消?', '提示', btnArray, function(e) {
+						if (e.index == 0) {
+							ca.showWaiting();
+							ca.ajaxs({url:'updateTeamSkPurchaseBystatus',
+								data:{user_id:localStorage.getItem('userid'),guide_id:id,status:3},
+								succFn:function(data){
+									if(data.msg==1){
+										mui.toast(data.text);
+										findItem();
+									}else{
+										mui.toast(data.text)
+									}
+									ca.closeWaiting();
+								},errFn:function(call){
+									ca.closeWaiting();
+									mui.toast(call);
+								}
+							});
+						}else{
+							ca.showWaiting();
+							ca.ajaxs({url:'updateTeamSkPurchaseBystatus',
+								data:{user_id:localStorage.getItem('userid'),guide_id:id,status:1},
+								succFn:function(data){
+									if(data.msg==1){
+										mui.toast(data.text);
+										findItem();
+									}else{
+										mui.toast(data.text)
+									}
+									ca.closeWaiting();
+								},errFn:function(call){
+									ca.closeWaiting();
+									mui.toast(call);
+								}
+							});
+						}
+					})
+				})
+// 				ca.className('lh43')[0].addEventListener('tap',function(){
+// 					alert(1)
+// 				})
+				
+			})
+			
+		</script>
+	</body>
+
+</html>

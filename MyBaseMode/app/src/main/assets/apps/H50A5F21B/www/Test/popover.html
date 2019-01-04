@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/style.css" />
+		<link rel="stylesheet" href="../css/hui.css" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav mheader">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <h1 class="mui-title">标题</h1>
+		</header>
+		<div class="hui-wrap">
+			<div class="hui-common-title" style="margin-top:15px;">
+				<div class="hui-common-title-line"></div>
+				<div class="hui-common-title-txt">Toast 提示框演示</div>
+				<div class="hui-common-title-line"></div>
+			</div>
+			<div style="padding:25px 50px;">
+		        <button type="button" class="hui-button hui-button-large" id="btn1">普通 Toast</button>
+		        <button type="button" class="hui-button hui-button-large" id="btn2" style="margin-top:15px;">时间比较长的 Toast</button>
+		        <button type="button" class="hui-button hui-button-large" id="btn3" style="margin-top:15px;">带有指定图标的 Toast</button>
+		        <button type="button" class="hui-button hui-button-large" id="btn4" style="margin-top:15px;">顶部弹出的信息框</button>
+			</div>
+			<div style="padding:50px;">
+				<button type="button" class="hui-button hui-button-large" onclick="hui.shwoBlackMasker();">展示消息</button>
+			</div>
+		</div>
+		<div id="hui-black-mask" class="   " style="display: none;">
+			<!-- 演示消息内容 -->
+			<div id="hui-black-mask-content">
+				<div id="hui-black-action" class="   " style="top: 0px; display: none;">
+					<div id="hui-black-close"></div>
+				</div>
+				<div style="text-align:center;"><img src="../img/gift.png" width="230"></div>
+				<div style="text-align:center; color:#FFFFFF; line-height:60px;">
+					一个演示广告
+				</div>
+			</div>
+		</div>
+		<div style="background:#FFF; padding:0px 15px; margin:10px;" class="hui-flex">
+			<div style="height:46px; width:20px;">
+				<img src="../img/spiker.png" width="20" style="padding:13px 0px;">
+			</div>
+			<div class="hui-scroll-news" id="scrollnew1">
+			<div class="hui-scroll-news-items">新一轮成品油价或迎年内首次"二连涨"</div><div class="hui-scroll-news-items    ">暴雪再袭长三角：交通遭重创 用电量增 菜价涨</div><div class="hui-scroll-news-items     "><a href="javascript:hui.toast('test...');">一块橘子皮就能秒开你的手机</a></div></div>
+		</div>
+		<script type="text/javascript" src="../js/template-web.js" ></script>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/castapp.js" ></script>
+		<script type="text/javascript" src="../js/hui.js" ></script>
+		<script type="text/javascript" src="../js/hui-swipe.js" ></script>
+		<script type="text/javascript">
+			hui('#btn1').click(function(){hui.toast('Hi......');});
+			hui('#btn2').click(function(){hui.toast('Hi......', 'long');});
+			hui('#btn3').click(function(){hui.iconToast('操作成功', 'success');});
+			hui('#btn4').click(function(){hui.upToast('更新成功 !');});
+			hui.blackMask();
+			hui.scrollNews(scrollnew1)
+			mui.plusReady(function(){
+				mui.init();
+				createDownload1('https://nim.nosdn.127.net/NTMyNjkwMA==/bmltYV81MzI0MDYwNTE4XzE1MzgxMjU2NjY2MjRfNGFlOGU1ZjktYzA2MS00MDkwLTljMTEtMTY3MzcxMmMxMzZm?createTime=1538125669863')
+				function createDownload1(urls) {
+					var dtask = plus.downloader.createDownload(urls, {priority:5,timeout:50}, function ( d, status ) {
+						alert(JSON.stringify(d));
+						// 下载完成
+						if ( status == 200 ) { 
+							alert(1)
+							// showPics(d.filename,msg);
+						} else {
+							
+						}  
+					});
+					dtask.start(); 
+					
+				}
+			})
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,218 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/style.css" />
+		<link rel="stylesheet" href="../css/iconfont.css" />
+		<style>
+			.mui-table-view-cell>a:not(.mui-btn){
+				padding: 0;
+			}
+			
+		</style>
+	</head>
+
+	<body style="background:#F0F0F0 ;">
+		<header class="mui-bar mui-bar-nav user-index-top-bg mheader">
+		    <a class=" mui-icon mui-icon-left-nav mui-pull-left mui-action-back"  style="color: #FFFFFF !important;"></a>
+		    <h1 class="mui-title" style="font-size: 16px !important;color: #FFFFFF !important;">账号管理</h1>
+		    <span class="fr lh44 mr10 fs15 cffffff" id="bianji">编辑</span>
+		    <span class="fr lh44 mr10 fs15 cffffff disn" id="wanchen">完成</span>
+		</header>
+		<div class="mui-content" >
+			<div class="mt10 divv">
+				<ul class="mui-table-view mui-table-view-radio" id="list">
+					
+					
+				</ul>
+				
+				<div class="bgwhite oh mt20">
+					<div class="fl w15 h40  tc ml10 lh40 mt3">
+						<span class="mui-icon mui-icon-plus c4F77AA" style="font-size: 29px;"></span>
+					</div>
+					<div class="fl w70 lh40 fs15 c4F77AA">
+						<span class="mt3">添加账号</span>
+					</div>
+				</div>
+				<div class="mt4">
+					<span class="fs12 c999999 ml20 ">最多添加5个账号。</span>
+				</div>
+			<div>
+				
+			</div>
+			</div>
+			<div class="mt10 divv disn" >
+				<ul class="mui-table-view mui-table-view-radio" id="list1">
+				<!--<li class="mui-table-view-cell h50" style="padding: 5px 20px;">
+					<div class="fl w12 h40 cred lh40" >
+						<span class="iconfont icon-minus" style="font-size: 24px;"></span>
+					</div>
+					<div class="fl w15 h40 ">
+						<img src="../img/touxiang1.jpg" style="width: 40px;height: 40px;border-radius:100px ;"/>
+					</div>
+					<div class="fl w70 ">
+						<div class="fs15">
+							李四
+						</div>
+						<div class="fs14 c666666">
+							湘西中旅  业务一部
+						</div>
+					</div>
+				</li>-->
+				
+			</ul>
+			</div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/castapp.js" ></script>
+		<script type="text/javascript">
+			mui.init();
+			ca.init();
+			var ce=ca.className('divv');
+			var list=ca.id('list');
+			var list1=ca.id('list1');
+			ca.id('bianji').addEventListener('tap',function(){
+				ce[0].style.display='none';
+				ce[1].style.display='block';
+				ca.id('bianji').style.display='none';
+				ca.id('wanchen').style.display='block';
+			})
+			ca.id('wanchen').addEventListener('tap',function(){
+				ce[1].style.display='none';
+				ce[0].style.display='block';
+				ca.id('bianji').style.display='block';
+				ca.id('wanchen').style.display='none';
+			})
+			ca.className('bgwhite')[0].addEventListener('tap',function(){
+				ca.newInterface({url:'add_account.html',id:'add_account'});
+			})
+			ca.receiveNotice('update',function(){
+				list.innerHTML="";
+				list1.innerHTML="";
+				show();
+			});
+			document.querySelector('.mui-table-view.mui-table-view-radio').addEventListener('selected',function(e){
+//				alert("当前选中的为："+e.detail.el.innerText) ;
+				var data_length=e.detail.el.getAttribute('data_length');
+				if(ca.localStorageUser(data_length)){
+					var arr1 = ['user/user_index','information_item','chat_message_list'];
+					ca.sendNotice(arr1,'update',{});
+				}else{
+                	mui.toast('账号已过期！');
+                	list.innerHTML="";
+					list1.innerHTML="";
+					show();
+				}
+			});
+			show();
+			function show(){
+				var user=localStorage.getItem('account_switch');
+				var arr=JSON.parse(user);
+//				mui.each(arr,function(i,n){
+//					alert(JSON.stringify(i))
+//				})
+				if(arr==null){
+					list.innerHTML="";
+					list1.innerHTML="";
+					return;
+				}
+				if(arr.length>0){
+					var userid=localStorage.getItem('userid');
+					for(var a in arr){
+						var li="";
+						var li1="";
+						var img="../img/NoHeadportrait.png";
+						if(ca.emptyFun(arr[a].userimg_url)){
+							
+						}else{
+							img=arr[a].userimg_url;
+						}
+						li1='<li class="mui-table-view-cell h50 shanchu" data_length="'+a+'" style="padding: 5px 20px;">'
+							+	'<div class="fl w12 h40 cred lh40" >'
+							+		'<span class="iconfont icon-minus" style="font-size: 24px;"></span>'
+							+	'</div>'
+							+	'<div class="fl w15 h40 ">'
+							+		'<img src="'+img+'" style="width: 40px;height: 40px;border-radius:100px ;"/>'
+							+	'</div>'
+							+	'<div class="fl w70 ">'
+							+		'<div class="fs15">'+arr[a].realname+'</div>'
+							+		'<div class="fs14 c666666">'+arr[a].e_code+' - ' +arr[a].username+'</div>'
+							+	'</div>'
+							+'</li>'
+						
+						
+						
+						
+						if(arr[a].userid==userid){
+							li='<li class="mui-table-view-cell mui-selected h50" data_userid="'+arr[a].userid+'" data_length="'+a+'">'
+								+	'<a class="mui-navigate-right" >'
+								+		'<div class="fl w15 h40 mt5 ml20">'
+								+			'<img src="'+img+'" style="width: 40px;height: 40px;border-radius:100px ;"/>'
+								+		'</div>'
+								+		'<div class="fl w70 mt5">'
+								+			'<div class="fs15">'+arr[a].realname+'</div>'
+								+			'<div class="fs14 c666666">'+arr[a].e_code+' - ' +arr[a].username+'</div>'
+								+		'</div>'
+								+	'</a>'
+								+'</li>';
+						}else{
+							li='<li class="mui-table-view-cell h50" data_userid="'+arr[a].userid+'" data_length="'+a+'">'
+								+	'<a class="mui-navigate-right h50 " data_length="'+a+'">'
+								+		'<div class="fl w15 h40 mt5 ml20">'
+								+			'<img src="'+img+'" style="width: 40px;height: 40px;border-radius:100px ;"/>'
+								+		'</div>'
+								+		'<div class="fl w70 mt5">'
+								+			'<div class="fs15">'+arr[a].realname+'</div>'
+								+			'<div class="fs14 c666666">'+arr[a].e_code+' - ' +arr[a].username+'</div>'
+								+		'</div>'
+								+	'</a>'
+								+'</li>';
+						}
+						list.innerHTML+=li;
+						list1.innerHTML+=li1;
+					}
+				}
+			}
+			mui("body").on('tap','.shanchu',function(){
+				var that=this;
+				var btnArray = ['是','否'];
+				mui.confirm('确认移除次账号？', '', btnArray, function(e) {
+					var inde=that.getAttribute('data_length');
+					var user=localStorage.getItem('account_switch');
+					var arr=JSON.parse(user);
+					if(localStorage.getItem('userid')==arr[inde].userid){
+						ca.deleteLocalStorageUser(arr[inde].userid);
+						localStorage.removeItem('userid');
+						localStorage.removeItem('password');
+	                	localStorage.removeItem('e_id');
+	                	localStorage.removeItem('structure_id');
+	                	localStorage.removeItem('isadmin');
+	                	localStorage.removeItem('im_token');
+						localStorage.removeItem('province');
+						localStorage.removeItem('city');
+	                	mui.plusReady(function(){
+	                		var ws=plus.webview.getWebviewById('index');
+							plus.webview.close(ws);
+//	                		var ws=plus.webview.getWebviewById('account_switch');
+//							plus.webview.close(ws);
+							
+	                	})
+	                	ca.newInterface({url:'../login.html',id:'login'});
+					}else{
+						ca.deleteLocalStorageUser(arr[inde].userid);
+						list.innerHTML="";
+						list1.innerHTML="";
+						show();
+					}
+				})
+			 	
+			}) 
+			
+		</script>
+	</body>
+
+</html>

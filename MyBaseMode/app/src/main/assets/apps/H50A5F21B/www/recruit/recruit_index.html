@@ -1,0 +1,510 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/style.css" rel="stylesheet" />
+		<link href="../css/iconfont.css" rel="stylesheet"/>
+		<style type="text/css">
+			.index-div1-top-div2{
+				float: right;
+				width:10%;
+				height: 27px;
+				border-top-left-radius: 20px ;
+				border-bottom-left-radius: 20px ;
+				text-align: center;
+				border: 1px solid #FFFFFF;
+				background: #FFFFFF;
+				line-height: 26px;
+			}
+			.icon-tuijian1{
+				color: #CD2E2C;
+			}
+			.xuhao{
+				color: #333333;
+			}
+			.mui-table-view-radio .mui-table-view-cell .mui-navigate-right:after{
+				color: #18A3E5;
+			}
+			.mui-scroll-wrapper1{
+				position: absolute;
+				z-index: 20;top:0px;bottom:2px;
+				left: 0;overflow: hidden;width:100%;
+			}
+			.mui-scroll1{
+				position: absolute;
+				z-index: 19;width: 100%;-webkit-transform: translateZ(0);
+				transform: translateZ(0);
+			}
+			
+		</style>
+	</head>
+
+	<body>
+		<div style="position:fixed;top:0px;z-index:30;">
+			<div class="index-div1" style="height:156px; ">
+				<img src="../img/recruit-index.jpg" style="height: 100%;width: 100%;"/>
+				<div class="index-div1-top">
+					<div>
+						<span class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left ml10 cffffff"></span>
+					</div>
+					<div class="index-div1-top-div2" id="tongzhi">
+						<span class="iconfont icon-set c49C6CC ml3 fs17"></span>
+					</div>
+				</div>
+			</div>
+			<div class="brand-bar-wrapper">
+				<div id="tab" class="bgwhite brand-store-bar oh bbfa">
+					<div class="fl h35 lh35 c666666 w28" id="w333">
+						<div class="fl ml15">
+							<span class="fs13">所属地区</span>
+						</div>
+						<div class="fl" style="margin-top:1px;">
+							<span class="iconfont icon-arrLeft-fill fs16 ml5"></span>
+						</div>
+					</div>
+					<div class="fl h35 lh35 w28 c666666" id="w334">
+						<div class="fl ml15">
+							<span class="fs13">企业类型</span>
+						</div>
+						<div class="fl" style="margin-top:1px;">
+							<span class="iconfont icon-arrLeft-fill fs16 ml5"></span>
+						</div>
+					</div>
+					<div class="fl h35 lh35 w22 c666666" id="w335">
+						<div class="fl ml15">
+							<span class="fs13">专兼职</span>
+						</div>
+						<div class="fl" style="margin-top:1px;">
+							<span class="iconfont icon-arrLeft-fill fs16 ml5"></span>
+						</div>
+					</div>
+					<div class="fl h35 lh35 w22 c666666" id="w336">
+						<div class="fl ml15">
+							<span class="fs13">薪资</span>
+						</div>
+						<div class="fl" style="margin-top:1px;">
+							<span class="iconfont icon-arrLeft-fill fs16 ml5"></span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="mui-scroll-wrapper" id="refreshContainer">
+			<div class="mui-scroll">
+				<ul id="rec_list">
+					<!-- <li class="bgwhite oh h50 lh45 bbf04">
+						<div class="fl w15 tc xuhao">
+							<span class="iconfont icon-tuijian1 fs19"></span>
+						</div>
+						<div class="fl w75 ">
+							<div class="yc1 c323232 fs14">
+								<span>永定区</span>
+								<span>|</span>
+								<span>大唐锦鲤/临班</span>
+								<span>4000-8000元/月</span>
+							</div>
+						</div>
+						<div class="fl w10">
+							<span class="mui-icon mui-icon-arrowright"></span>
+						</div>
+					</li> -->
+				</ul>
+			</div>
+		</div>
+		<div id="wushuju" class="disn" style="margin-top: 196px;">
+			<img src="../img/wushuju.png" style="width: 100%;"/>
+		</div>
+		<div id="middlePopover1"  class="mui-popover" style="position:fixed;height:250px;width:100%;border-radius:0px;">
+			<div class="mui-scroll-wrapper1" id="mui-scroll-wrapper1">
+				<div class="mui-scroll1">
+					<ul class="mui-table-view mui-table-view-radio fs12" id="zong_list" style="max-height: 2000px;">
+						
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div id="middlePopover2"  class="mui-popover" style="position:fixed;height:250px;width:100%;border-radius:0px;">
+			<div class="mui-scroll-wrapper1" id="mui-scroll-wrapper2" >
+				<div class="mui-scroll1">
+					<ul class="mui-table-view mui-table-view-radio fs12" id="e_type_list">
+						<li class="mui-table-view-cell mui-selected " data_id=0 >
+							<a class="mui-navigate-right">
+								不限
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div id="middlePopover3"  class="mui-popover" style="position:fixed;height:150px;width:100%;border-radius:0px;">
+			<div class="mui-scroll-wrapper1">
+				<div class="mui-scroll1" >
+					<ul class="mui-table-view mui-table-view-radio fs12">
+						<li class="mui-table-view-cell mui-selected">
+							<a class="mui-navigate-right">不限</a>
+						</li>
+						<li class="mui-table-view-cell">
+							<a class="mui-navigate-right">专职</a>
+						</li>
+						<li class="mui-table-view-cell">
+							<a class="mui-navigate-right">兼职</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div id="middlePopover4"  class="mui-popover" style="position:fixed;height:250px;width:100%;border-radius:0px;">
+			<div class="mui-scroll-wrapper1" id="mui-scroll-wrapper2">
+				<div class="mui-scroll1" >
+					<ul class="mui-table-view mui-table-view-radio fs12" id="salary_list" style="max-height: 2000px;">
+						<li class="mui-table-view-cell mui-selected " data_id=0 >
+							<a class="mui-navigate-right">
+								不限
+							</a>
+						</li>
+						
+					</ul>
+				</div>
+			</div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/castapp.js"></script>
+		<script src="../js/template-web.js"></script>
+		<script type="text/template" id="re_list">
+			{{each list}}
+				<li class="bgwhite oh h50 lh45 bbf04" data_id="{{$value.id}}">
+					<div class="fl w15 tc xuhao">
+						{{if $index<3}}
+							<span class="iconfont icon-tuijian1 fs19"></span>
+						{{else}}
+							{{$index+1}}
+						{{/if}}	
+					</div>
+					<div class="fl w75 ">
+						<div class="yc1 c323232 fs14">
+							<span>{{$value.city}}</span>
+							<span>|</span>
+							<span>{{$value.name}}</span>
+							<span>{{$value.pay}}</span>
+						</div>
+					</div>
+					<div class="fl w10">
+						<span class="mui-icon mui-icon-arrowright c999999"></span>
+					</div>
+				</li>
+			{{/each}}
+		</script>
+		<script type="text/javascript">
+			mui.plusReady(function(){
+				mui.init({
+					pullRefresh : {
+						container:"#refreshContainer",//下拉刷新容器标
+						up: {
+							height:150,
+							contentrefresh: '正在加载...',
+							contentnomore:'到底了',
+							callback: upFn // 上拉执行函数
+						}
+					},
+					swipeBack:true
+				});
+				ca.init();
+				ca.whiteStatusBar();
+				var page=1,pagee=1,city=localStorage.getItem('city'),type='不限',jobs='不限',salarys='不限';
+				var zong=[],e_type=[],salary=[];
+				function upFn(){
+					if(pagee==0){
+						mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
+					}else{
+						page++;
+						findAll()
+						this.endPullupToRefresh(false);
+					}
+				}
+				if(mui.os.ios){
+					ca.id('refreshContainer').style.top=195+'px';
+				}else{
+					ca.id('refreshContainer').style.marginTop=196+'px';
+				}
+				findAll();
+				mui('.mui-scroll-wrapper1').scroll();
+				mui('#mui-scroll-wrapper2').scroll();
+				ca.id('w333').addEventListener('tap',function(){
+					if(!ca.emptyFun(zong)){
+					}else{
+						findZone();
+					}
+					mui('#middlePopover1').popover('show');
+					ca.id('middlePopover1').style.top=192+'px';
+					ca.className('mui-backdrop')[0].style.top=(194)+'px';
+					setTableClick(0);
+					ca.className('mui-backdrop')[0].addEventListener('tap',function(){
+						setTableClick(5);
+					})
+				})
+				ca.id('w334').addEventListener('tap',function(){
+					if(!ca.emptyFun(e_type)){
+					}else{
+						findEtype();
+					}
+					mui('#middlePopover2').popover('show');
+					ca.id('middlePopover2').style.top=192+'px';
+					ca.className('mui-backdrop')[0].style.top=(194)+'px';
+					setTableClick(1);
+					ca.className('mui-backdrop')[0].addEventListener('tap',function(){
+						setTableClick(5);
+					})
+				})
+				ca.id('w335').addEventListener('tap',function(){
+					mui('#middlePopover3').popover('show');
+					ca.id('middlePopover3').style.top=192+'px';
+					ca.className('mui-backdrop')[0].style.top=(194)+'px';
+					setTableClick(2);
+					ca.className('mui-backdrop')[0].addEventListener('tap',function(){
+						setTableClick(5);
+					})
+				})
+				ca.id('w336').addEventListener('tap',function(){
+					if(!ca.emptyFun(salary)){
+					}else{
+						findSalary();
+					}
+					mui('#middlePopover4').popover('show');
+					ca.id('middlePopover4').style.top=192+'px';
+					ca.className('mui-backdrop')[0].style.top=(194)+'px';
+					setTableClick(3);
+					ca.className('mui-backdrop')[0].addEventListener('tap',function(){
+						setTableClick(5);
+					})
+				})
+				function setTableClick(index){
+					var cell=ca.className('lh35');
+					for(var a=0;a<cell.length;a++){
+						if(a==index){
+							cell[a].classList.add('c18A3E5');
+							cell[a].classList.remove('c666666');
+						}else{
+							cell[a].classList.remove('c18A3E5');
+							cell[a].classList.add('c666666');
+						}
+					}
+				}
+				/**
+				 * 查询区域
+				 */
+				function findZone(){
+					ca.showWaiting();
+					ca.ajaxs({url:'findUserProvincecity',data:{
+							user_id:localStorage.getItem('userid')
+						},succFn:function(data){
+							if(data){
+								zong=data;
+								setZone();
+							}
+							ca.closeWaiting();
+						},errFn:function(err){
+							ca.closeWaiting();
+							mui.toast(err);
+						}
+					})
+				}
+				
+				/**
+				 * 设置区域内容
+				 */
+				function setZone(){
+					for(var a in zong){
+						var	temp=''
+						if(city==zong[a].name){
+							temp='<li class="mui-table-view-cell mui-selected">'	
+									+	'<a class="mui-navigate-right">'+zong[a].name+'</a>'
+									+'</li>';
+						}else{
+							temp='<li class="mui-table-view-cell">'	
+									+	'<a class="mui-navigate-right">'+zong[a].name+'</a>'
+									+'</li>';
+						}
+						
+						ca.id('zong_list').innerHTML+=temp;
+					}
+				}
+				
+				/**
+				 * 所属区域筛选
+				 */
+				mui('#middlePopover1').on('selected','.mui-table-view-cell',function(){
+					city=this.firstChild.innerText;
+					mui('#middlePopover1').popover('hide');
+					setTableClick(5);
+					page=1,pagee=1;
+					ca.id('rec_list').innerHTML='';
+					findAll();
+				})
+				
+				/**
+				 * 查询企业类型
+				 */
+				function findEtype(){
+					ca.showWaiting();
+					ca.ajaxs({url:'findEnterpriseType',data:{
+						},succFn:function(data){
+							if(data){
+								e_type=data;
+								setE_type();
+							}
+							ca.closeWaiting();
+						},errFn:function(err){
+							ca.closeWaiting();
+							mui.toast(err);
+						}
+					})
+				}
+				/**
+				 * 设置企业类型数据
+				 */
+				function setE_type(){
+					for(var a in e_type){
+						var	temp='<li class="mui-table-view-cell">'	
+								+	'<a class="mui-navigate-right">'+e_type[a].alias+'</a>'
+								+'</li>';
+						ca.id('e_type_list').innerHTML+=temp;
+					}
+				}
+				/**
+				* 企业类型筛选
+				*/
+				mui('#middlePopover2').on('selected','.mui-table-view-cell',function(){
+					type=this.firstChild.innerHTML;
+					mui('#middlePopover2').popover('hide');
+					setTableClick(5);
+					page=1,pagee=1;
+					ca.id('rec_list').innerHTML='';
+					findAll();
+				})
+				
+				/**
+				 * 查询薪资
+				 */
+				function findSalary(){
+					ca.showWaiting();
+					ca.ajaxs({url:'findRecruitSalary',data:{
+						},succFn:function(data){
+							if(data){
+								salary=data;
+								setSalary();
+							}
+							ca.closeWaiting();
+						},errFn:function(err){
+							ca.closeWaiting();
+							mui.toast(err);
+						}
+					})
+				}
+				/**
+				* 设置薪资数据
+				*/
+				function setSalary(){
+					for(var a in salary){
+						var	temp='<li class="mui-table-view-cell">'	
+								+	'<a class="mui-navigate-right">'+salary[a].name+'</a>'
+								+'</li>';
+						ca.id('salary_list').innerHTML+=temp;
+					}
+				}
+				/**
+				* 薪资数据筛选
+				*/
+				mui('#middlePopover4').on('selected','.mui-table-view-cell',function(){
+					salarys=this.firstChild.innerText;
+					mui('#middlePopover4').popover('hide');
+					setTableClick(5);
+					page=1,pagee=1;
+					ca.id('rec_list').innerHTML='';
+					findAll();
+				})
+				
+				/**
+				* 职位类型筛选
+				*/
+				mui('#middlePopover3').on('selected','.mui-table-view-cell',function(){
+					jobs=this.innerText;
+					jobs=jobs.replace(/\n/g,'');
+					mui('#middlePopover3').popover('hide');
+					setTableClick(5);
+					page=1,pagee=1;
+					ca.id('rec_list').innerHTML='';
+					findAll();
+				})
+				
+				/**
+				 * 公司自己发布的职位信息
+				 */
+				ca.id('tongzhi').addEventListener('tap',function(){
+					if(localStorage.getItem('isadmin')==0){
+						mui.toast('手机仅允许管理员管理招聘信息！');
+					}else{
+						ca.showWaiting();
+						var self=plus.webview.create('myself_recruit_index.html','myself_recruit_index',{},{});
+						setTimeout(function(){
+							self.show('slide-in-right',400);
+						},100)
+					}
+				})
+				/**
+				 * 查询所有招聘
+				 */
+				function findAll(){
+					ca.ajaxs({url:'findAllRecruitInfo',data:{
+							city:city,enterprise_type:type,types:jobs,pay:salarys,page:page
+						},succFn:function(data){
+							if(!ca.emptyFun(data.data)){
+								ca.id('refreshContainer').classList.add('disb');
+								ca.id('wushuju').classList.add('disn');
+								ca.id('refreshContainer').classList.remove('disn');
+								if(!data.next_item){
+									pagee=0;
+								}
+								show(data.data);
+							}else{
+								ca.id('wushuju').classList.add('disb');
+								ca.id('refreshContainer').classList.add('disn');
+								ca.id('wushuju').classList.remove('disn');
+							}
+							ca.closeWaiting();
+						},errFn:function(err){
+							mui.toast(err);
+							ca.closeWaiting();
+						}
+					})
+				}
+				
+				function show(data){
+					try{
+						ca.id('rec_list').innerHTML+=template('re_list',{
+							'list':data
+						})
+					}catch(e){
+						console.log(e);
+					}
+				}
+				
+				//查看职位详情
+				mui('#rec_list').on('tap','li',function(){
+					ca.showWaiting();
+					var id=this.getAttribute('data_id');
+					var self=plus.webview.create('recruitInfo_detail.html','recruitInfo_detail',{},{recruit_id:id});
+					setTimeout(function(){
+						self.show('slide-in-right',350);
+					},100)
+				})
+			})
+			
+		</script>
+	</body>
+
+</html>

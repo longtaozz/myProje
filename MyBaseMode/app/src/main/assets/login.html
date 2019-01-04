@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<script type="text/javascript" src="jquery-3.3.1.min.js"></script>
+		<script type="text/javascript" src="log.js"></script>
+		<style>
+			input::-webkit-input-placeholder{
+				color: #b2b2b2;
+				font-size: 15px;
+			}
+		</style>
+	</head>
+
+	<body style="background-image: url(img/loginbj-min.jpg);background-size: 100%;">
+		<div style="margin:25% 15% 0 15%;">
+			<div style="width: 100%;text-align: center;">
+				<span id="content" style="font-size: 33px;font-weight:bold ;color: #4F77AA;">优旅通</span>
+			</div>
+			<div style="border-bottom: 1px solid #CCCCCC;height: 40px;margin-top: 50px;">
+				<input type="text" style="border: 0px;background-color:rgba(0,0,0,0);" placeholder="请输入企业号"/>
+			</div>
+			<div style="border-bottom: 1px solid #CCCCCC;height: 40px;margin-top: 20px;">
+				<input type="text" style="border: 0px;background-color:rgba(0,0,0,0);" placeholder="请输入工号"/>
+			</div>
+			<div style="border-bottom: 1px solid #CCCCCC;height: 40px;margin-top: 20px;">
+				<input type="password"  style="border: 0px;background-color:rgba(0,0,0,0);" placeholder="请输入密码"/>
+			</div>
+			<div style="margin-top: 20px;overflow: hidden;" class="disn">
+				<span style="float: right;font-size:13px;color: #777777;">忘记密码？</span>
+
+			</div>
+			<div style="margin-top: 20px;">
+				<input type="button" onclick="changetext(this)" id="buttonmu" value="登  录" style="width: 100%;height: 40px;border-radius:20px ;background: #4F77AA;color: #FFFFFF;font-size: 16px;"/>
+			</div>
+			<div style="margin-top: 25px;text-align:center;" class="disn">
+				<span style="font-size: 14px;color: #666666;border-bottom: 1px solid #666666;">获取账号</span>
+			</div>
+		</div>
+		<script type="text/javascript">
+			function javaToJS(){
+				 document.getElementById("content").innerHTML =
+					 "<br\>JAVA调用了JS的无参函数";
+			}
+		</script>
+	</body>
+
+</html>

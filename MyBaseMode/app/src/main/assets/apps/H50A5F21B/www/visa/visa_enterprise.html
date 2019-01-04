@@ -1,0 +1,195 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/style.css" rel="stylesheet" />
+		<style>
+			.travel_agency_detail-d1{
+				margin-top:5px;background:#FFFFFF;height: 35px;line-height: 35px;border:1px solid #F0F0F0;border-radius:8px;box-shadow:0 0px 2px 0px rgba(0,0,0,0.1),0 0px 2px 0px rgba(0,0,0,0.1);
+			}
+			.travel_agency_detail-d1-d{
+				margin-top:5px;background:#FFFFFF;min-height:35px;line-height: 35px;border:1px solid #F0F0F0;border-radius:8px;box-shadow:0 2px 3px -1px #F0F0F0,0 -2px 3px -1px #F0F0F0;
+			}
+			.yc11{
+				overflow: hidden; 
+				text-overflow: ellipsis; 
+				-o-text-overflow: ellipsis;
+				white-space:nowrap;
+				display:block;
+				width:70%;
+			}
+			.visa-item-li-span{
+				border: 1px solid #B39869;border-radius:3px;padding: 1px 5px;color:#B39869 ;font-size: 12px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav mheader">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mback"></a>
+			<h1 class="mui-title">al1</h1>
+		</header>
+		<div class="mui-content bgwhite">
+			<div style="background:#EEFEFF;padding: 5px;">
+				<div class="travel_agency_detail-d1 oh jss">
+					<span class="ml10 fs15 fl">公司地址:</span>
+					<div class="fl yc11 fs14 ml3">
+						<span class="" id="city">dsajkdha打开撒了点卡拉斯科技的了解啦时间段来就来</span>
+					</div>
+					<span class="mui-icon mui-icon-arrowright fr lh35 mr5 c666666"></span>
+				</div>
+				<div class="travel_agency_detail-d1 jss">
+					<span class="ml10 fs15">联系电话:</span>
+					<span class="fs14 c333333" id="phone"></span>
+					<span class="mui-icon mui-icon-arrowright fr lh35 mr5 c666666"></span>
+				</div>
+				<div class="travel_agency_detail-d1-d mb20 jss">
+					<span class="ml10 fs15">公司简介:</span>
+					<span class="mui-icon mui-icon-arrowup fr lh35 mr10 c666666 jishao" data_status="0"></span>
+					<div class="fs13 ml10 mr10 disn" id="intro" style="line-height:18px;">
+					</div>
+				</div>
+			</div>
+			<div class="mt10">
+				<div style="background:#EEFEFF;padding-top:5px;text-align: center;padding-bottom: 5px;">
+					<span class="fs15 c666666">产品列表</span>
+				</div>
+				<div class="mt4">
+					<ul id="div_list">
+						
+					</ul>
+				</div>
+			</div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/castapp.js"></script>
+		<script src="../js/template-web.js"></script>
+		<script type="text/template" id="screen_list">
+			{{each list.product}}
+				<li class="bgwhite pl10 pt5 bbF02 screen_list_item" style="list-style-type:none" data_id="{{$value.id}}">
+					<div class="fs15 c333333">
+						<span>{{$value.name}}</span>
+					</div>
+					<div>
+						{{each $value.tags.split(',') as va i}}
+							<span class="visa-item-li-span">{{$value.tags.split(',')[i]}}</span>
+						{{/each}}
+					</div>
+					<div class="c999999">
+						<span class="iconfont icon-qianzheng fs15"></span>
+						<span class="fs12">{{list.en.name}}</span>
+						<span class="fs12 fr mr15" style="text-decoration:line-through">￥{{$value.price}}</span>
+					</div>
+					<div class="oh pb5">
+						<div class="fl fs12 c999999">
+							<span class="iconfont icon-time fs14"></span>
+							<span>{{$value.duration}}</span>
+						</div>
+						<div class="fr mr15">
+							<span style="background: #FD9502;color: #FFFFFF;border-radius:15px;font-size: 13px;padding: 1px 5px;">首本优惠</span>
+							<span style="color: #FD9502;font-size: 12px;margin-right: -5px;">￥</span>
+							<span class="" style="color: #FD9502;">{{$value.price2}}</span>
+						</div>
+					</div>
+				</li>
+			{{/each}}
+		</script>
+		<script type="text/javascript">
+			mui.plusReady(function(){
+				mui.init();
+				ca.init();
+				ca.blackStatusBar();
+				var self=plus.webview.currentWebview();
+				find();
+				function find(){
+					ca.ajaxs({url:'findVisaEnterpriseDetail',data:{
+							enterprise_id:self.enterprise_id,sign_id:self.sign_id
+						},succFn:function(data){
+							if(data){
+								ca.className('mui-title')[0].innerText=data.en.name;
+								ca.id('city').innerText=data.en.address;
+								if(data.en.coord.split(",")[1]){
+									ca.id('city').setAttribute('data_l',data.en.coord.split(",")[0]);
+									ca.id('city').setAttribute('data_w',data.en.coord.split(",")[1]);
+								}else if(data.en.coord.split("，")[1]){
+									ca.id('city').setAttribute('data_l',data.en.coord.split("，")[0]);
+									ca.id('city').setAttribute('data_w',data.en.coord.split("，")[1]);
+								}else{
+									ca.id('city').setAttribute('data_l',0);
+									ca.id('city').setAttribute('data_w',0);
+								}
+								ca.id('phone').innerText=data.en.principal+' '+data.en.phone;
+								ca.id('phone').setAttribute('phone',data.en.phone);
+								ca.id('intro').innerText=data.en.intro;
+								show(data);
+							}
+							ca.closeWaiting();
+						},errFn:function(err){
+							ca.closeWaiting();
+							mui.toast(err);
+						}
+					})
+				}
+				var cell=ca.className('jss');
+				cell[0].addEventListener('tap',function(){
+					var data_l=ca.id('city').getAttribute('data_l');
+					var data_w=ca.id('city').getAttribute('data_w');
+					if(data_l>0){
+						localStorage.setItem('map_l',data_l);
+						localStorage.setItem('map_w',data_w);
+						ca.newInterface({url:'../map/ditu_top.html',id:'ditu_top'});
+					}else{
+						
+					}
+				})
+				cell[1].addEventListener('tap',function(){
+					var phone=ca.id('phone').getAttribute('phone');
+					if(!ca.emptyFun(phone)){
+						ca.callPhone(phone);
+					}
+				})
+				cell[2].addEventListener('tap',function(){
+					var status=ca.className('jishao')[0].getAttribute('data_status');
+					if(status==0){
+						ca.className('jishao')[0].setAttribute('data_status',1);
+						ca.className('jishao')[0].classList.remove('mui-icon-arrowup');
+						ca.className('jishao')[0].classList.add('mui-icon-arrowdown');
+						ca.id('intro').classList.remove('disn');
+					}else{
+						ca.className('jishao')[0].setAttribute('data_status',0);
+						ca.className('jishao')[0].classList.remove('mui-icon-arrowdown');
+						ca.className('jishao')[0].classList.add('mui-icon-arrowup');
+						ca.id('intro').classList.add('disn');
+					}
+					
+				})
+				
+				function show(data){
+					try{
+						ca.id('div_list').innerHTML=template('screen_list', {
+							"list":data
+						});
+					}catch(err){
+						console.log(err);
+					}
+				}
+				mui('#div_list').on('tap','.screen_list_item',function(){
+					ca.showWaiting();
+					var id=this.getAttribute('data_id');
+					var pl=plus.webview.create(
+						'visa_list_item_detail.html',
+						'visa_list_item_detail',{},{product_id:id})
+					setTimeout(function(){
+						pl.show('pop-in',400);
+					},400)
+				})
+			})
+			
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,251 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/iconfont.css" />
+		<link rel="stylesheet" href="../css/style.css" />
+		
+		<link rel="stylesheet" href="../css/previewImage.css" />
+		<style>
+			.user_index1_top{
+				height: 185px;
+				width: 100%;
+				background-size: 100%;
+				color: #FFFFFF;
+				font-size: 15px;
+			}
+			.user_index1_top_img {
+				padding-top: 20px;
+			}
+			.user_index1_top_img img{
+				width: 70px;
+				height: 70px;
+				border-radius:100px ;
+			}
+			.user_index1_content_li_1_div{
+				width: 32px;
+				height: 32px;
+				border-radius:5px ;
+				text-align: center;
+				display:block;
+				margin: 0 auto;
+				line-height: 28px;
+				margin-top: 10px;
+			}
+			.user_index1_content_li_1_div span{
+				color: #b5b5b5;
+				font-size: 25px;
+			}
+			.user_index1_content_li_2{
+				float: left;
+				width: 75%;
+				height: 100%;
+				line-height: 45px;
+				color: #121212;
+				font-size: 14px;
+			}
+			.user_index_content_li{
+				border-bottom: 1px solid #B5B5B5;
+			}
+			.user_index1_content_li_3{
+				float: left;
+				width: 10%;
+				height: 100%;
+				line-height: 45px;
+				font-size: 16px;
+			}
+			.user_index1_content{
+				margin-top: 5px;
+			}
+			.user_index1_content ul li{
+				background: #FFFFFF;
+				height: 45px;
+				
+			}
+			.mui-slider{
+				height: 100%;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="">
+			<div class="user_index1_top" id="user_index1_top" >
+				<div style="text-align: center;padding-top: 25px;">
+					<div class="user_index1_top_img" id="touxiang">
+							<img src="../img/touxiang.jpg"  data-preview-src="" data-preview-group="1"/>
+					</div>
+					<div style="margin-top: 5px;">
+						<span id="name"></span>
+					</div>
+					
+				</div>
+				<div style="height: 0px;margin-top: 5px;border-top: 1px solid transparent;border-color: transparent;border-color: rgba(255,255,255,0.4);font-size: 13px;">
+					<div style="float: left;text-align: center;width: 50%;border-right: 1px solid transparent;border-color: transparent;border-color: rgba(255,255,255,0.4);margin-top: 2px;line-height: 30px;">
+						<span id="company">
+							
+						</span>
+						
+					</div>
+					<div style="float: left;text-align: center;width: 50%;line-height: 30px;margin-top: 2px;">
+						<span id="postion">
+							
+						</span>
+					</div>
+				</div>
+				<div>
+					<span style="position: absolute;right: 15px;top: 40px;" id="user_information">查看资料</span>
+				</div>
+			</div>
+			<div class="user_index1_content">
+				<ul>
+					<li class="user_index_content_li">
+						<div class="user_index_content_li_1">
+							<div class="user_index1_content_li_1_div">
+								<span class="iconfont icon-erweima1688"></span>
+							</div>
+						</div>
+						<div class="user_index1_content_li_2">
+							<span>我的名片</span>
+						</div>
+						<div class="user_index1_content_li_3">
+							<span class="mui-icon mui-icon-arrowright" style="color: #B5B5B5;"></span>
+						</div>
+					</li>
+					<li class="user_index_content_li">
+						<div class="user_index_content_li_1">
+							<div class="user_index1_content_li_1_div">
+								<span class="iconfont icon-all"></span>
+							</div>
+						</div>
+						<div class="user_index1_content_li_2">
+							<span>工作台</span>
+						</div>
+						<div class="user_index1_content_li_3">
+							<span class="mui-icon mui-icon-arrowright" style="color: #B5B5B5;"></span>
+						</div>
+					</li>
+					<li class="user_index_content_li">
+						<div class="user_index_content_li_1">
+							<div class="user_index1_content_li_1_div">
+								<span class="iconfont icon-iconfontqicheyongpin"></span>
+							</div>
+						</div>
+						<div class="user_index1_content_li_2">
+							<span>扫一扫</span>
+						</div>
+						<div class="user_index1_content_li_3">
+							<span class="mui-icon mui-icon-arrowright" style="color: #B5B5B5;"></span>
+						</div>
+					</li>
+					<li class="user_index_content_li" style="margin-top: 5px;">
+						<div class="user_index_content_li_1">
+							<div class="user_index1_content_li_1_div" >
+								<span class="iconfont icon-set"></span>
+							</div>
+						</div>
+						<div class="user_index1_content_li_2">
+							<span>设置</span>
+						</div>
+						<div class="user_index1_content_li_3">
+							<span class="mui-icon mui-icon-arrowright" style="color: #B5B5B5;"></span>
+						</div>
+					</li>
+					<li class="user_index_content_li">
+						<div class="user_index_content_li_1">
+							<div class="user_index1_content_li_1_div" >
+								<span class="iconfont icon-fankuiyijian"></span>
+							</div>
+						</div>
+						<div class="user_index1_content_li_2" style="border-bottom: 0px;">
+							<span>意见反馈</span>
+						</div>
+						<div class="user_index1_content_li_3" style="border-bottom: 0px;">
+							<span class="mui-icon mui-icon-arrowright" style="color: #B5B5B5;"></span>
+						</div>
+					</li>
+				</ul>
+		</div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/castapp.js" ></script>
+		<script type="text/javascript" src="../js/mui.zoom.js" ></script>
+		<script type="text/javascript" src="../js/mui.previewimage.js" ></script>
+		<script type="text/javascript">
+			mui.init();
+			ca.init();
+			ca.whiteStatusBar();
+			mui.previewImage();
+			var url=localStorage.getItem('url');
+			var user_id=localStorage.getItem('userid');
+			ca.receiveNotice('update',function(){
+				user_id=localStorage.getItem('userid');
+				show();
+			});
+			show();
+			 
+			function show(){
+				ca.checkTheNetwork();
+				mui.plusReady(function(){
+					plus.navigator.setStatusBarStyle('light');
+					plus.nativeUI.showWaiting();
+					ca.ajaxs({url:'findUserByid',data:{
+							user_id:user_id
+						},succFn:function(data){
+							if(data.msg==1){
+								var user=data.user;
+								var role=data.role;
+								ca.id('name').innerHTML=user.realname;
+								ca.id('company').innerHTML=user.enterprise.alias+' '+user.structure.name;
+								if(role.name=="" || role.name==null){
+									ca.id('postion').innerHTML="无"
+								}else{
+									ca.id('postion').innerHTML=role.name;
+								}
+								if(user.img_url==""){
+									ca.tagName('img')[0].src="../img/touxiang1.jpg"
+								}else{
+									ca.tagName('img')[0].src=user.img_url;
+								}
+							}
+							ca.closeWaiting();
+						},errFn:function(call){
+							ca.closeWaiting();
+							mui.toast(call);
+						}
+					})
+				})
+			}
+			
+			
+			ca.id('user_index1_top').style.backgroundImage="url(../img/bg0-lg.jpg)";
+			ca.id('user_index1_top').style.backgroundSize='100% 100%'
+			var cell=document.getElementsByClassName('user_index_content_li');
+			
+			cell[0].addEventListener('tap',function(){
+				ca.newInterface({url:'my_card.html',id:'my_card'});
+			})
+			cell[1].addEventListener('tap',function(){
+				ca.newInterface({url:'workbench1.html',id:'workbench1'});
+			})
+			cell[2].addEventListener('tap',function(){
+				ca.newInterface({url:'../Test/barcode.html',id:'barcode'});
+//				ca.newInterface({url:'../workbench/business_order.html',id:'business_order'})
+			})
+			cell[3].addEventListener('tap',function(){
+				ca.newInterface({url:'setting.html',id:'setting'});
+			})
+			cell[4].addEventListener('tap',function(){
+				ca.newInterface({url:'feedback.html',id:'feedback'});
+			})
+			ca.id('user_information').addEventListener('tap',function(){
+				ca.newInterface({url:'user_information.html',id:'user_information'})
+			})
+		</script>
+	</body>
+
+</html>

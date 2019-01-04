@@ -1,0 +1,520 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/style.css"  rel="stylesheet"/>
+		<link href="../../css/iconfont.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../css/mui.picker.min.css" />
+		<style>
+			.create_team_div1{
+				margin: 5px;background: #FFFFFF;border-radius:5px;
+			}
+			.create_team_div1_d1{
+				margin:0px 10px;border-bottom: 1px solid #F0F0F0;padding-top: 15px;
+				padding-bottom: 5px;
+			}
+			.create_team_div1_d2{
+				margin:0px 10px;border-bottom: 1px solid #F0F0F0;
+			}
+			.create_team_div1_d3{
+				margin:0px 10px;
+			}
+			input{
+				padding: 0px !important;
+			}
+			textarea{
+				padding: 0px !important;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav user-index-top-bg mheader">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left cffffff"></a>
+			<span class="cffffff fl fs15 ml20" style="line-height: 42px;">修改团队计划</span>
+		</header>
+		<div class="mui-content">
+			<div class="create_team_div1" >
+				<div class="create_team_div1_d1" style="">
+					<span>必选项:</span>
+				</div>
+				<div class="oh h40 lh40 create_team_div1_d2">
+					<div class="w30 fl c666666 fs15">
+						<span >团号</span>
+					</div>
+					<div class="w60 fl">
+						<input type="text"  readonly="readonly" value="ST20181110"  style="border: 0px;font-size: 14px;"/>
+					</div>
+				</div>
+				<div class="oh h40 lh40 create_team_div1_d2">
+					<div class="w30 fl c666666 fs15">
+						<span >状态</span>
+					</div>
+					<div class="w60 fl">
+						<input type="text"  readonly="readonly"   value="收客" style="border: 0px;font-size: 14px;"/>
+					</div>
+					<div class="c1296db fr mr10">
+						<span class="iconfont icon-arrLeft-fill fs16"></span>
+					</div>
+				</div>
+				<div class="oh h40 lh40 create_team_div1_d2">
+					<div class="w30 fl c666666 fs15">
+						<span >线路模板</span>
+					</div>
+					<div class="w60 fl">
+						<input type="text" readonly="readonly" placeholder="请选择线路模板" style="border: 0px;font-size: 14px;height: 37px;"/>
+					</div>
+					<div class="c1296db fr mr10">
+						<span class="iconfont icon-arrLeft-fill fs16"></span>
+					</div>
+				</div>
+				<div class="oh h40 lh40 create_team_div1_d2">
+					<div class="w30 fl c666666 fs15">
+						<span >起止日期</span>
+					</div>
+					<div class="w35 fl">
+						<input type="text" readonly="readonly"  style="border: 0px;font-size: 14px;height: 37px;width:70%;float: left;" />
+						<span class="iconfont icon-arrLeft-fill c1296db fl"></span>
+					</div>
+					<div class="w35 fl">
+						<input type="text" disabled="disabled" style="border: 0px;font-size: 14px;height: 37px;width:70%; float: left;" />
+						<span class="iconfont icon-arrLeft-fill c999999 fl"></span>
+					</div>
+				</div>
+			</div>
+			<div class="create_team_div1" >
+				<div class="create_team_div1_d1" style="">
+					<span>其他项:</span>
+				</div>
+				<div class="oh h40 lh40 create_team_div1_d2">
+					<div class="w30 fl c666666 fs15">
+						<span >操作计调</span>
+					</div>
+					<div class="w60 fl">
+						<input type="text" readonly="readonly" placeholder="选择计调" style="border: 0px;font-size: 14px;"/>
+					</div>
+					<div class="c1296db fr mr10">
+						<span class="iconfont icon-arrLeft-fill fs16"></span>
+					</div>
+				</div>
+				<div class="oh h40 lh40 create_team_div1_d2">
+					<div class="w30 fl c666666 fs15">
+						<span >自编档号</span>
+					</div>
+					<div class="w60 fl">
+						<input type="text" placeholder="填写自编档号" style="border: 0px;font-size: 14px;height: 37px;"/>
+					</div>
+				</div>
+				<div class="oh h40 lh40 create_team_div1_d2">
+					<div class="w30 fl c666666 fs15">
+						<span >计划人数</span>
+					</div>
+					<div class="w60 fl">
+						<input type="number" placeholder="填写计划人数" style="border: 0px;font-size: 14px;height: 37px;"/>
+					</div>
+					<div class="fs14 fr mr10 c999999">
+						<span>人</span>
+					</div>
+				</div>
+				<div class="oh h40 lh40 create_team_div1_d2 disn">
+					<div class="w30 fl c666666 fs15">
+						<span >导游名称</span>
+					</div>
+					<div class="w60 fl">
+						<input type="text" readonly="readonly" placeholder="请选择导游" style="border: 0px;font-size: 14px;height: 37px;"/>
+					</div>
+					<div class="c1296db fr mr10">
+						<span class="iconfont icon-arrLeft-fill fs16"></span>
+					</div>
+				</div>
+				<div class="oh h40 lh40 create_team_div1_d2">
+					<div class="w30 fl c666666 fs15">
+						<span>导游工资</span>
+					</div>
+					<div class="w60 fl">
+						<input type="number" placeholder="填写导游工资" style="border: 0px;font-size: 14px;height: 37px;"/>
+					</div>
+					<div class="fs14 fr mr10 c999999">
+						<span>元</span>
+					</div>
+				</div>
+				<div class="oh h40 lh40 create_team_div1_d2">
+					<div class="w30 fl c666666 fs15">
+						<span>导服费</span>
+					</div>
+					<div class="w60 fl">
+						<input type="number" placeholder="填写导服费" style="border: 0px;font-size: 14px;height: 37px;"/>
+					</div>
+					<div class="fs14 fr mr10 c999999">
+						<span>元</span>
+					</div>
+				</div>
+				<div class="oh h40 lh40 create_team_div1_d2">
+					<div class="w30 fl c666666 fs15">
+						<span>建议预领团款</span>
+					</div>
+					<div class="w60 fl">
+						<input type="number" placeholder="填写预领团款" style="border: 0px;font-size: 14px;height: 37px;"/>
+					</div>
+					<div class="fs14 fr mr10 c999999">
+						<span>元</span>
+					</div>
+				</div>
+				<div class="oh h40 lh40 create_team_div1_d2 disn">
+					<div class="w30 fl c666666 fs15">
+						<span>接送站预算</span>
+					</div>
+					<div class="w60 fl">
+						<input type="number" placeholder="填写送站预算" style="border: 0px;font-size: 14px;height: 37px;"/>
+					</div>
+					<div class="fs14 fr mr10 c999999">
+						<span>元</span>
+					</div>
+				</div>
+				<div class="oh h40 lh40 create_team_div1_d2 disn">
+					<div class="w30 fl c666666 fs15">
+						<span >车队名称</span>
+					</div>
+					<div class="w35 fl">
+						<input type="text" readonly="readonly" placeholder="选择车队" style="border: 0px;font-size: 14px;height: 37px;width:70%;float: left;" />
+						<span class="iconfont icon-arrLeft-fill c1296db fl"></span>
+					</div>
+					<div class="w35 fl">
+						<input type="text" placeholder="司机姓名" style="border: 0px;font-size: 14px;height: 37px;width:70%; float: left;" />
+					</div>
+				</div>
+				<div class="oh h40 lh40 create_team_div1_d2 disn">
+					<div class="w30 fl c666666 fs15">
+						<span >车队手机</span>
+					</div>
+					<div class="w60 fl">
+						<input type="text" placeholder="填写司机电话" style="border: 0px;font-size: 14px;height: 37px;"/>
+					</div>
+				</div>
+				<div class="oh h150 create_team_div1_d3">
+					<div class="w30 fl c666666 fs15 mt5">
+						<span >计划备注</span>
+					</div>
+					<div class="w70 fl mt5">
+						<textarea class="fs14 h120 w100" style="border: 0px;" placeholder="填写计划备注"></textarea>
+					</div>
+				</div>
+			</div>
+			<div class="" style="background: #FFFFFF;height:50px;">
+				<div class="w40 fl mt10 h40 lh40 tc" style="margin-left: 8%;background:#FE6F11;border-radius:3px ;">
+					<span class="cffffff">提交</span>
+				</div>
+				<div class="w40 fl mt10 h40 lh40 tc" style="margin-left:4%;background:#C9C9C9;border-radius:3px ;">
+					<span class="cffffff">取消</span>
+				</div>
+			</div>
+		</div>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/castapp.js"></script>
+		<script src="../../js/mui.picker.js"></script>
+		<script src="../../js/mui.poppicker.js"></script>
+		<script type="text/javascript">
+			mui.plusReady(function(){
+				mui.init()
+				ca.init();
+				ca.hiddenScroll();
+				var self=plus.webview.currentWebview();
+				var teamsk_id=self.teamsk_id;
+				var inputs=ca.tagName('input');
+				var picker1=new mui.PopPicker();
+				var picker2=new mui.PopPicker();
+				var picker3=new mui.PopPicker();
+				var picker4=new mui.PopPicker();
+				var datas=0;//线路天数
+				findTeamDetail();
+				function findTeamDetail(){
+					ca.ajaxs({url:'findTeamSkDetail',data:{
+							user_id:localStorage.getItem('userid'),team_id:teamsk_id
+						},succFn:function(data){
+							if(data){
+								inputs[0].value=data.team_num;
+								inputs[1].value=getStatusAttr(data.status);inputs[1].setAttribute('data_status',data.status);
+								inputs[2].value=data.line.alias;inputs[2].setAttribute('line_id',data.line.id);
+								inputs[3].value=data.start_date;inputs[4].value=data.end_date;
+								inputs[5].value=data.employee1.realname;inputs[5].setAttribute('employee_id',data.employee1.id);
+								inputs[6].value=data.doc_num;inputs[7].value=data.people_num;
+								inputs[8].value=data.guide?data.guide.name:'';inputs[8].setAttribute('guide_id',data.guide?data.guide.id:'');inputs[8].setAttribute('guide_union_id',data.guide_union_id);
+								inputs[9].value=data.guide_commission;inputs[10].value=data.guide_service;
+								inputs[11].value=data.draw_fee;inputs[12].value=data.pickup_amount;
+								inputs[13].value=data.car?data.car.name:'';inputs[13].setAttribute('car_id',data.car?data.car.id:'');
+								inputs[13].setAttribute('car_union_id',data.car_union_id);
+								inputs[14].value=data.driver_name;inputs[15].value=data.driver_tel;
+								ca.tagName('textarea')[0].value=data.mark;
+								datas=data.days;
+							}
+							ca.closeWaiting();
+						},errFn:function(err){
+							ca.closeWaiting();
+							mui.toast(err);
+						}
+					})
+				}
+				function getStatusAttr(value){
+				   var arr={1:'收客',2:'成团',3:'运行',4:'结束',5:'报账',6:'暂停',7:'取消',8:'完成'};
+				   return arr[value];
+				}
+				findALLMyLineDate();
+				//设置团号
+				function setTeamNum(id){
+					var thisDate = new Date();
+					var thisyear = thisDate.getFullYear(); //获取当前年份(2位)
+					var thismonth = thisDate.getMonth() + 1; //获取当前月份(0-11,0代表1月)
+					if(thismonth<10){
+						thismonth='0'+thismonth;
+					}
+					var thisday = thisDate.getDate(); ////获取当前日(1-31)
+					inputs[3].value=thisyear+'-'+thismonth+'-'+thisday;
+					if(id>0){
+						inputs[0].value='ST'+thisyear+thismonth+thisday+'L'+id;
+						team_num=inputs[0].value;
+					}else{
+						inputs[0].value='ST'+thisyear+thismonth+thisday;
+					}
+					
+				}
+				//设置起止日期    
+				function setStartAndStop(dates){
+					if(inputs[3].value && inputs[2].getAttribute('line_id')){
+						var thisDate = new Date(inputs[3].value);
+						var end=thisDate.getTime()+dates*24*60*60*1000;
+						var enddate=ca.timestampToTime(end);
+						inputs[4].value=enddate.slice(0,10);
+					}else{
+						mui.toast('请选择线路')
+					}
+				}
+				//查询线路时间
+				function findALLMyLineDate(){
+					ca.ajaxs({url:'findALLMyLineDate',data:{user_id:localStorage.getItem('userid')},
+						succFn:function(data){
+							if(!ca.emptyFun(data)){
+								var arr=new Array();
+								for(var i=0;i<data.length;i++){
+									var ob=new Object();
+									ob.value={id:data[i].id,dates:data[i].lineitems_simple.length};
+									ob.text=data[i].alias;
+									arr.push(ob)
+								}
+								picker1.setData(arr);
+							}
+							ca.closeWaiting();
+						},errFn:function(err){
+							ca.closeWaiting();
+						}
+					})
+				}
+				//添加附加团号
+				inputs[0].addEventListener('tap',function(e){
+					var line_id=inputs[2].getAttribute('line_id');
+					if(line_id==0){
+						mui.toast('请先选择线路，再填写附加团号。');
+					}else{
+						var fujiateam='',yuanteam='';
+						yuanteam=inputs[0].value.split('L'+line_id)[0]+'L'+line_id;
+						if(inputs[0].value.split('L'+line_id)[1]){
+							fujiateam=inputs[0].value.split('L'+line_id)[1];
+						}	
+						e.detail.gesture.preventDefault();
+						var btnArray = ['确定','取消'];
+						plus.nativeUI.prompt('添加附加团号，不能以数字开头', function(ee){
+							if(ee.index==0){
+								if(ca.isNumber(ee.value.slice(0,1)) && ee.value.slice(0,1)){
+									mui.toast('不能以数字开头');
+								}else{
+									inputs[0].value=yuanteam+ee.value;
+								}	
+							}else{
+							}
+						}, '添加', fujiateam, btnArray);
+					}
+				})
+				inputs[2].addEventListener('tap',function(){
+					picker1.show(function (selectItems) {
+						if(selectItems[0].text=="" || selectItems[0].text==null){
+							mui.toast('未发布线路');
+							return;
+						}
+						inputs[2].value=selectItems[0].text;
+						setTeamNum(selectItems[0].value.id);
+						datas=selectItems[0].value.dates;
+						setStartAndStop(selectItems[0].value.dates);
+						inputs[2].setAttribute('line_id',selectItems[0].value.id);
+						// selectItems[0].value.dates
+					})
+				})
+				inputs[3].addEventListener('tap',function(){
+					showdatapicker();
+				})
+				function showdatapicker(){
+					var date = new Date();
+					var year = date.getFullYear();//年
+					var month = date.getMonth() + 1;//月
+					var day = date.getDate();//日
+					var h = date.getHours();// 小时
+					var m = date.getMinutes(); // 分钟
+					ca.dateSelect({
+						defaultTime:year + '-' + month + '-' + day,
+						minTime:year + '-' + month+ '-' + day,
+						maxTime:year + '-'+ (month + 1) + '-' + day,
+						callback:function(data){
+							inputs[3].value=data;
+							var yuan=inputs[0].value.slice(2,10);
+							var xiandata=data.replace(/-/g,'');
+							inputs[0].value=inputs[0].value.replace(yuan,xiandata);
+							setStartAndStop(datas);
+						}
+					})
+				}
+				inputs[5].addEventListener('tap',function(){
+					ca.showWaiting();
+					ca.ajaxs({url:'getNameAndIdByStructure_id',data:{
+							structure_id:localStorage.getItem('structure_id')
+						},succFn:function(data){
+							if(!ca.emptyFun(data)){
+								var arr=new Array();
+								for(var i=0;i<data.length;i++){
+									var ob=new Object();
+									ob.value=data[i].id;
+									ob.text=data[i].realname;
+									arr.push(ob)
+								}
+								picker2.setData(arr);
+								ca.closeWaiting();
+								picker2.show(function (selectItems) {
+									if(selectItems[0].text=="" || selectItems[0].text==null){
+										mui.toast('没有计调');
+										return;
+									}
+									inputs[5].value=selectItems[0].text;
+									inputs[5].setAttribute('employee_id')=selectItems[0].value;
+								})
+							}
+							ca.closeWaiting();
+						},errFn:function(err){
+							ca.closeWaiting();
+							mui.toast(err);
+						}
+					
+					})
+				})
+				inputs[8].addEventListener('tap',function(){
+					ca.showWaiting();
+					ca.ajaxs({url:'findAllMyGuide',data:{user_id:localStorage.getItem('userid')},
+						succFn:function(data){
+							if(!ca.emptyFun(data)){
+								var arr=new Array();
+								for(var i=0;i<data.length;i++){
+									var ob=new Object();
+									ob.value={guideid:data[i].id,employee_id:data[i].employee_id};
+									ob.text=data[i].name;
+									arr.push(ob)
+								}
+								picker3.setData(arr);
+								ca.closeWaiting();
+								picker3.show(function (selectItems) {
+									if(selectItems[0].text=="" || selectItems[0].text==null){
+										mui.toast('没有签约导游');
+										return;
+									}
+									inputs[8].value=selectItems[0].text;
+									inputs[8].setAttribute('guide_id',selectItems[0].value.guideid);
+									inputs[8].setAttribute('guide_union_id',selectItems[0].value.employee_id);
+								})
+							}
+							ca.closeWaiting();
+						},errFn:function(err){
+							ca.closeWaiting();
+							mui.toast(err);
+						}
+					})
+				})
+				inputs[13].addEventListener('tap',function(){
+					ca.ajaxs({url:'findContractCar',data:{
+							enterprise_id:localStorage.getItem('e_id'),partment_id:localStorage.getItem('structure_id')
+						},succFn:function(data){
+							if(!ca.emptyFun(data)){
+								var arr=new Array();
+								for(var i=0;i<data.length;i++){
+									var ob=new Object();
+									ob.value={carid:data[i].id,union_id:data[i].union_id};
+									ob.text=data[i].name;
+									arr.push(ob)
+								}
+								picker4.setData(arr);
+								ca.closeWaiting();
+								picker4.show(function (selectItems) {
+									if(selectItems[0].text=="" || selectItems[0].text==null){
+										mui.toast('没有签约车队');
+										return;
+									}
+									inputs[13].value=selectItems[0].text;
+									inputs[13].setAttribute('car_id',selectItems[0].value.carid);
+									inputs[13].setAttribute('car_union_id',selectItems[0].value.union_id);
+								})
+							}
+							ca.closeWaiting();
+						},errFn:function(err){
+							ca.closeWaiting();
+							mui.toast(err);
+						}
+					})
+				})
+				var bts=ca.className('w40');
+				bts[0].addEventListener('tap',function(){//提交
+					if(!inputs[0].value){
+						mui.toast('请填写团号！');
+						return;
+					}
+					if(!inputs[2].value || !inputs[2].getAttribute('line_id') || datas<=0){
+						mui.toast('请选择线路！');
+						return;
+					}
+					if(!inputs[7].value){
+						mui.toast('请输入计划人数！');
+						return;
+					}
+					ca.ajaxs({url:'updateTeamSk',data:{
+							user_id:localStorage.getItem('userid'),id:teamsk_id,team_num:inputs[0].value,doc_num:inputs[6].value,
+							start_date:inputs[3].value,end_date:inputs[4].value,days:datas,employee_id:inputs[5].getAttribute('employee_id'),
+							guide_id:inputs[8].getAttribute('guide_id'),guide_union_id:inputs[8].getAttribute('guide_union_id'),people_num:inputs[7].value,
+							line_id:inputs[2].getAttribute('line_id'),line_name:inputs[2].value,single_commission:0,
+							guide_commission:inputs[9].value,guide_service:inputs[10].value,draw_fee:inputs[11].value,
+							car_id:inputs[13].getAttribute('car_id'),car_union_id:inputs[13].getAttribute('car_union_id'),driver_name:inputs[14].value,
+							driver_tel:inputs[15].value,mark:ca.tagName('textarea')[0].value
+						},succFn:function(data){
+							if(data.msg==1){
+								mui.toast(data.text);
+								var arr1 = ['team_list'];
+								ca.sendNotice(arr1,'update',{});
+								setTimeout(function(){
+									self.close();
+								},200)
+							}else{
+								mui.toast(data.text);
+							}
+							ca.closeWaiting();
+						},errFn:function(err){
+							ca.closeWaiting();
+							mui.toast(err);
+						}
+					})
+					
+				})
+				bts[1].addEventListener('tap',function(){//取消
+					self.close();
+				})
+			})
+			
+		</script>
+	</body>
+
+</html>

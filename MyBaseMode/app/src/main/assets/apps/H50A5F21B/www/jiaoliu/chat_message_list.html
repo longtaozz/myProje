@@ -1,0 +1,1132 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/style.css" />
+		<link rel="stylesheet" href="../css/iconfont.css" />
+		<link href="../css/hui.css" type="text/css"  rel="stylesheet"/>
+		<style>
+			.mui-btn-red{
+				background-color: #FF8201;
+			}
+			.mui-table-view-cell {
+				position: relative;
+				overflow: hidden;
+				padding: 0px;
+				-webkit-touch-callout: none;
+			}
+			.mui-table-view-cell>.tubiao{
+				-webkit-transition: -webkit-transform 0ms ease;
+				transition: transform 0ms ease;
+			}
+			.im-list-item{
+				/*border: 1px solid red;*/
+				overflow: hidden;
+			}
+			.im-list-item-l{
+				width: 60px;
+				float: left;
+				margin: 8px 0px 8px 10px;
+			}
+			.im-list-item-l img{
+				width: 49px;
+				height: 49px;
+				border-radius:5px ;
+			}
+			.im-list-item-c{
+				width: 77%;
+				float: left;
+				padding-top: 3px;
+				margin-top: 8px;
+			}
+			.ts-li-title{
+				overflow: hidden; 
+				text-overflow: ellipsis; 
+				-o-text-overflow: ellipsis;
+				white-space:nowrap;
+				display:block;
+				width: 80%;
+			}
+			.jianchawangluo{
+				z-index: 1000;
+				position: relative;
+				width: 100%;
+				height: 25px; 
+				background: #ffd2d2;
+			}
+			.divs{
+				position:fixed;
+				width: 20px;
+				height: 100px;
+				z-index: 1000;
+				bottom: 40px;
+			}
+			.div{
+				position: fixed;
+				right: 10px;
+				height: 60px;
+				width: 60px;
+				border-radius:100px;
+				/* background: red; */
+				
+			}
+			.div1{
+				position: fixed;
+				right: 70px;
+				/* bottom: 100px; */
+				height: 35px;
+				width: 120px;
+				background: #FFFFFF;
+				border-radius:15px ;
+				border: 1px solid #4F77AA;
+			}
+			.msg-content-arrowfuzhi{
+				position: absolute;
+				border: solid 1px #4F77AA;
+				border-left: none;
+				border-bottom: none;
+				/* background-color: #FFFFFF; */
+				width: 10px;
+				height: 10px;
+				top:35%;
+				right: -5px;
+				-webkit-transform: rotateZ(45deg);
+				transform: rotateZ(45deg);
+				background: #FFFFFF;
+				z-index: 100;
+			}
+			.hui-scroll-news{height:30px;}
+		</style>
+	</head>
+
+	<body>
+		<div style="" class="tc disn jianchawangluo" id="jianchawangluo">
+			<span class="fs12 cffffff" id="jianchawangluozi"></span>
+		</div>
+		<div id="refreshContainer" class="mui-scroll-wrapper" style="padding-bottom: 35px;">
+			<div class="mui-scroll" >
+				<ul class="ww" id="list_item">
+					
+				</ul>
+			</div>
+		</div>
+		<div id="div" class="divs">
+			<div class="div oh" >
+				<div class="fr mt20">
+					<span id="kefu" class="iconfont icon-kefu2 c4F77AA" style="font-size: 50px;"></span>
+				</div>
+			</div>
+			<div class="div1">
+				<div class="hui-scroll-news oh pl10 h35 lh30"  id="scrollnew1" style="z-index: 102;">
+					<div class="hui-scroll-news-items oh" >
+						<div style="float: left;width: 90%;">
+							<span class="fs12 c333333">平台问题,戳我哟！</span>
+						</div>
+					</div>
+					<div class="hui-scroll-news-items oh">
+						<div style="">
+							<span class="fs12 c333333">想问什么,尽管问！</span>
+						</div>
+					</div>
+				</div>
+				<div class="msg-content-arrowfuzhi">
+					
+				</div>
+			</div>
+		</div>
+		
+		<div id="refreshContainernone" class="disn">
+			<div style="padding-left: 43%;padding-top: 45%;">
+				<div><span class="fs16">暂无数据</span></div>
+			</div>
+		</div>
+		<script type="text/template" id="liebiao">
+			{{each list}}
+				<li class="mui-table-view-cell h65 bgwhite">
+					<div class="mui-slider-right mui-disabled">
+						<a class="mui-btn mui-btn-red information-list-delete" data_account="{{$value.Exchangeaccount}}">删除</a>
+					</div>
+					<div class="mui-slider-handle im-list-item" data_account="{{$value.Exchangeaccount}}" data_name="{{$value.Exchangename}}" data_userimg="{{$value.Exchangeimg}}">
+						<div class="im-list-item-l">
+							<img src="{{$value.Exchangeimg}}"/>
+							{{if $value.Exchangeunreadcount>0}}
+								{{if $value.Exchangeunreadcount>9}}
+									<div class="cffffff fs11 tubiao" style="position: absolute;top: 2px;left: 50px;background: red;border-radius:50%;height: 16px;width: 16px;z-index: 1000;">
+										<span class="ml5" style="position: absolute;top: -2px;left: -3px;">{{$value.Exchangeunreadcount}}</span>
+									</div>
+								{{else}}
+									<div class="cffffff fs11 tubiao" style="position: absolute;top: 2px;left: 50px;background: red;border-radius:50%;height: 16px;width: 16px;z-index: 1000;">
+										<span class="ml5" style="position: absolute;top: -2px;">{{$value.Exchangeunreadcount}}</span>
+									</div>
+								{{/if}}
+							{{/if}}
+						</div>
+						<div class="im-list-item-c">
+							<div class="fs16">
+								<span>{{$value.Exchangename}}</span>
+								<span class="fr fs12 c666666">{{$value.Exchangelasttime | dateFormat:''}}</span>
+							</div>
+							<div class="fs13 c666666">
+								<span class="ts-li-title">{{$value.Exchangelastcontent}}</span>
+							</div>
+						</div>
+					</div>
+				</li>
+			{{/each}}
+		</script>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/castapp.js" type="text/javascript"></script>
+		<script type="text/javascript" src="../js/NIM_Web_NIM_v5.9.1.js" ></script>
+		<script type="text/javascript" src="../js/template-web.js" ></script>
+		<script src="../js/hui.js"></script>
+		<script type="text/javascript">
+			var resume=true;
+			localStorage.removeItem('accounts');
+			mui.plusReady(function(){
+				mui.init({
+						pullRefresh : {
+							container:"#refreshContainer",//下拉刷新容器标识，querySelector能定位的cs
+							up: {
+								height:50,//可选.默认50.触发上拉加载拖动距离
+								auto:false,//可选,默认false.自动上拉加载一次
+								contentrefresh : "正在加载...",//可选，正在加载状态时，上拉加载控件上显示的标题内容
+								contentnomore:'',//可选，请求完毕若没有更多数据时显示的提醒内容；
+								callback: upFn // 上拉执行函数
+							}
+						},
+		    })
+				ca.init();
+				hui.scrollNews(scrollnew1);
+				document.addEventListener("netchange",checkTheNetwork,false);//检测网络环境发生变化
+				checkTheNetwork();
+				/**
+				 * 检查网络环境
+				 */
+				function checkTheNetwork(){
+					ca.getMachineInfo(function(data){
+						if(data.network=='未连接网络'){
+							if(plus.os.name=='iOS'){
+								ca.id('refreshContainer').style.marginTop='25px';
+							}
+							ca.id('jianchawangluo').style.display="block";
+							ca.id('jianchawangluozi').innerText='当前网络不可用，请检查网络！';
+						}else if(data.network=='2G蜂窝网络' || data.network=='3G蜂窝网络'){
+							if(plus.os.name=='iOS'){
+								ca.id('refreshContainer').style.marginTop='25px';
+							}
+							ca.id('jianchawangluo').style.display="block";
+							ca.id('jianchawangluozi').innerText='当前网络环境较差，请检查网络环境！';
+						}else{
+							ca.id('jianchawangluo').style.display="none";
+							ca.id('refreshContainer').style.marginTop='0px';
+						}
+					})
+						
+				}
+				var listItem=[];
+				var nim;
+				try{
+					isSelfUserImg();
+					WillReconnect();
+					showItem();
+				}catch(e){
+					console.log(e);
+				}
+				function upFn(){
+					mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
+				}
+// 				function downFn(){
+// 					WillReconnect();
+// 					mui('#refreshContainer').pullRefresh().endPulldownToRefresh();  //这行代码会隐藏掉 正在加载... 容器
+// 				}
+				ca.receiveNotice('update',function(){
+					// mui('#refreshContainer').pullRefresh().refresh(true);
+					WillReconnect();
+					showItem();
+				});
+				/**
+				 * 连接im
+				 * 
+				 */
+				
+				function WillReconnect(){
+					var account=localStorage.getItem('e_code')+'_'+localStorage.getItem('username');//自己的id
+					// plus.storage.removeItem(account+'_message_list')
+					listItem=JSON.parse(plus.storage.getItem(account+'_message_list'));
+					var accounts='';//计入房间的id
+					var Offlinedatas='';
+					var isfirst=true;
+					//初始化imSDK
+					 nim=NIM.getInstance({
+						appKey:'fc06054e7594d0cd2e17b1238c9fc296',
+						account:account,
+						token:localStorage.getItem('im_token'),
+						onconnect:onConnect,//连接Im
+						onwillreconnect:onWillReconnect,// 此时说明 SDK 已经断开连接, 而且正在重新建立连接
+						ondisconnect:onDisconnect,//此时说明 SDK 处于断开状态
+						// db:true,
+						onerror:onError,
+						onroamingmsgs:onRoamingMsgs,//收到漫游消息
+						onofflinemsgs:onOfflineMsgs,//收到离线消息
+						onmsg:onMsg,//收到在线消息
+						onofflinesysmsgs:onOfflineSysMsgs,//收到离线系统通知
+						onsysmsg:onSysMsg,//收到系统通知
+						// onupdateuser: onUpdateUser,
+						onupdatemyinfo:onUpdateMyInfo,
+						 onsyncdone: onSyncDone
+					});
+					function onConnect(optional) {
+						kefu();
+						ca.id('jianchawangluo').style.display="none";
+						ca.id('refreshContainer').style.marginTop='0px';
+						// updateImLIst(account);
+					}
+					function onWillReconnect(obj) {
+					  // 此时说明 SDK 已经断开连接,而且正在重新建立连接
+						if(plus.os.name=='iOS'){
+							ca.id('refreshContainer').style.marginTop='25px';
+						}
+						ca.id('jianchawangluo').style.display="block";
+						ca.id('jianchawangluozi').innerText='正在连接服务器...';
+					}
+					function onDisconnect(error) {
+					  // 此时说明 SDK 处于断开状态,
+					  if(plus.os.name=='iOS'){
+					  	ca.id('refreshContainer').style.marginTop='25px';
+					  }
+					  ca.id('jianchawangluo').style.display="block";
+					  ca.id('jianchawangluozi').innerText='与服务器断开连接';
+					}
+					function onError(error) {
+						
+					}
+					function onRoamingMsgs(obj) {
+// 						var da=obj.msgs;
+// 						for(var a in da){//对离线消息单条处理
+// 							if(da[a].scene=='p2p'){//聊天类型判断
+// 								onCustomMsg(da[a]);
+// 							}
+// 						}
+					}
+					function onOfflineMsgs(obj){
+						console.log('收到离线消息', obj);
+						// alert(JSON.stringify(obj))
+						Offlinedatas=obj.msgs;
+						onCustomMsg(Offlinedatas[0],1);
+// 						for(var a in da){//对离线消息单条处理
+// 							if(da[a].scene=='p2p'){//聊天类型判断
+// 								
+// 							}
+// 						}
+					}
+					//收到消息
+					function onMsg(msg) {
+						switch (msg.scene) {
+						case 'p2p'://处理点对点聊天
+							onCustomMsg(msg,0);
+							break;
+						case 'notification':// 处理群通知消息
+							break;
+						default://其它case
+							break;
+						}
+					}
+					function onOfflineSysMsgs(sysMsgs) {
+						console.log('收到离线系统通知', sysMsgs);
+						pushSysMsgss(sysMsgs);
+					}
+					function onSysMsg(sysMsg) {
+						console.log('收到系统通知',sysMsg);
+						pushSysMsgss(sysMsg);
+					}
+					function onUpdateUser(user) {
+						console.log('用户资料更新了',user);
+						plus.io.resolveLocalFileSystemURL('_downloads/'+account+'/'+user.account+'.png',function(entry){
+							entry.remove(function(){
+								setTimeout(function(){
+									ca.downloader({url:user.avatar,filePath:account+'/'+user.account+'.png',//下载用户头像
+										succFn:function(file){
+											findFileSystemURL({url:file.filename,succFn:function(fil){//根据路径读取文件
+												for(var a in listItem){
+													if(listItem[a].Exchangeaccount==user.account){//如果已有的列表有此人的消息
+														listItem[a].Exchangeimg=fil;
+														plus.storage.setItem(account+'_message_list',JSON.stringify(listItem));
+														showItem();
+														break;
+													}
+												}
+											}})
+										},errFn:function(){//下载失败 使用默认头像
+											// onUpdateUser(user);
+										}
+									})
+								},50)
+							},function(){
+								
+							});
+							
+						},function (e) {
+							setTimeout(function(){
+								ca.downloader({url:user.avatar,filePath:account+'/'+user.account+'.png',//下载用户头像
+									succFn:function(file){
+										findFileSystemURL({url:file.filename,succFn:function(fil){//根据路径读取文件
+											for(var a in listItem){
+												if(listItem[a].Exchangeaccount==user.account){//如果已有的列表有此人的消息
+													listItem[a].Exchangeimg=fil;
+													plus.storage.setItem(account+'_message_list',JSON.stringify(listItem));
+													showItem();
+													break;
+												}
+											}
+										}})
+									},errFn:function(){//下载失败 使用默认头像
+										// onUpdateUser(user);
+									}
+								})
+							},50)
+						})
+					}
+					function onUpdateMyInfo(user) {
+						plus.io.resolveLocalFileSystemURL('_downloads/'+account+'/'+user.account+'.png',function(entry){
+							entry.remove(function(){
+									setTimeout(function(){
+										ca.downloader({url:user.avatar,filePath:account+'/'+user.account+'.png',//下载用户头像
+											succFn:function(file){
+												findFileSystemURL({url:file.filename,succFn:function(fil){//根据路径读取文件
+													localStorage.setItem(user.account+'userimg',fil);
+												}})
+											},errFn:function(){//下载失败 使用默认头像
+											}
+										})
+									},50)
+							},function(){
+							});
+							
+						},function(e){
+							setTimeout(function(){
+								ca.downloader({url:user.avatar,filePath:account+'/'+user.account+'.png',//下载用户头像
+									succFn:function(file){
+										findFileSystemURL({url:file.filename,succFn:function(fil){//根据路径读取文件
+											localStorage.setItem(user.account+'userimg',fil);
+										}})
+									},errFn:function(){//下载失败 使用默认头像
+									}
+								})
+							},50)
+						})
+						
+					}
+				function onSyncDone() {
+					console.log('同步完成');
+					
+				}
+					
+					
+					/**
+					 * 处理消息
+					 */
+					function onCustomMsg(msg,isoff){
+						// if(isfirst){
+							
+						// }
+						//有未读消息
+						//消息列表
+						if(!ca.emptyFun(listItem)){//列表不为空
+							for(var a in listItem){
+								if(listItem[a].Exchangeaccount==msg.target){//如果已有的列表有此人的消息
+									updateMessageList(a,msg,isoff);//修改
+									break;
+								}else if(a==listItem.length-1){
+									addMessageList(msg,isoff);
+								}
+							}
+							
+						}else{//列表为空,添加
+							addMessageList(msg,isoff);
+						}
+						//消息详情
+					}
+					
+					// plus.storage.removeItem(account+'_message_list');
+					
+					/**
+					 * 修改消息列表
+					 */
+					function updateMessageList(index,msg,isoff){
+						var content='';
+						if(msg.type=='text'){content=msg.text;
+						}else if(msg.type=='audio'){content='[语音]';
+						}else if(msg.type=='image'){content='[图片]';
+						}else if(msg.type=='custom'){content='[产品]';
+						}
+						listItem[index].Exchangelasttime=msg.time;
+						listItem[index].Exchangelastcontent=content;
+						var count=0;
+						if(localStorage.getItem('accounts')!=msg.target &&msg.flow=='in'){
+							count=listItem[index].Exchangeunreadcount+1;
+						}
+						listItem[index].Exchangeunreadcount=count;
+						plus.storage.setItem(account+'_message_list',JSON.stringify(listItem));
+						if(msg.flow=='in' && msg.target!=localStorage.getItem('accounts')){//判断此消息的流向
+							addMessageListItemDetail(msg,isoff);
+							setBottomUnread();
+						}else{
+							if(isoff==1){
+								Offlinedatas.splice(0,1);
+								if(!ca.emptyFun(Offlinedatas[0])){
+									onCustomMsg(Offlinedatas[0],1);
+								}
+								
+							}
+						}
+						showItem();
+						if(!resume){
+							createLocalPushMsg(content);
+						}else if(msg.flow=='in'){
+							if(localStorage.getItem('setVibrate')!='true'){
+									plus.device.vibrate();
+							}
+							if(localStorage.getItem('setBeep')!='true'){
+								plus.device.beep();
+							}
+						}
+						if(isfirst=='true'){
+							getUserData({account:msg.target,succFn:function(data){//获取用户资料
+								if(!ca.emptyFun(data.avatar)){
+									ca.downloader({url:data.avatar,filePath:account+'/'+data.account+'.png',//下载用户头像
+										succFn:function(file){
+											alert(JSON.stringify(file))
+											findFileSystemURL({url:file.filename,succFn:function(fil){//根据路径读取文件
+												updateAvatar(fil,msg);//创建列表
+												isfirst=false;
+											}})
+										},errFn:function(){//下载失败 使用默认头像
+											console.log('下载失败');
+											// createMessageItem('../imag/NoHeadportrait.png',msg)
+										}
+									})
+								}
+							}})
+						}
+						
+					}
+					function updateAvatar(img,msg){
+						if(!ca.emptyFun(listItem)){//列表不为空
+							for(var a in listItem){
+								if(listItem[a].Exchangeaccount==msg.target){//如果已有的列表有此人的消息
+									listItem[a].Exchangeimg=img;//修改
+									break;
+								}else if(a==listItem.length-1){
+									addMessageList(msg,0);
+								}
+							}
+						}else{//列表为空,添加
+							addMessageList(msg,0);
+						}
+						plus.storage.setItem(account+'_message_list',JSON.stringify(listItem));
+						showItem();
+					}
+					/**
+					 * 添加消息列表
+					 */
+					function addMessageList(msg,isoff){
+						//1.获取用户资料,
+						//2.下载头像(没有头像，使用系统默认)
+						//3.生成列表对象
+						plus.io.resolveLocalFileSystemURL('_downloads/'+account+'/'+msg.target+'.png',function(entry){
+							entry.file(function(file){
+								createMessageItem(file.fullPath,msg,isoff);//创建列表
+							});
+						},function(e){//读取文件失败 //先创建 后重新下载完成再替换
+							getUserData({account:msg.target,succFn:function(data){//获取用户资料
+								if(!ca.emptyFun(data.avatar)){
+									createMessageItem(data.avatar,msg,isoff);
+									ca.downloader({url:data.avatar,filePath:account+'/'+data.account+'.png',//下载用户头像
+										succFn:function(file){
+											// alert(JSON.stringify(file))
+											findFileSystemURL({url:file.filename,succFn:function(fil){//根据路径读取文件
+												updateAvatar(fil,msg);//创建列表
+											}})
+										},errFn:function(){//下载失败 使用默认头像
+											// createMessageItem('../imag/NoHeadportrait.png',msg)
+										}
+									})
+								}else{
+									createMessageItem('../img/NoHeadportrait.png',msg,isoff)
+								}
+							}})
+						});
+						
+					}
+					/**
+					 * 生成聊天列表
+					 */
+					function createMessageItem(img,data,isoff){
+						
+						var content='';
+						if(data.type=='text'){content=data.text;
+						}else if(data.type=='audio'){content='[语音]';
+						}else if(data.type=='image'){content='[图片]'
+						}else if(data.type=='custom'){content='[产品]'};
+						
+						if(data.flow=='out'){
+							getUserData({account:data.target,succFn:function(da){//获取用户资料
+								if(!ca.emptyFun(da.nick)){
+									var ob={
+										Exchangeimg:img,
+										Exchangename:da.nick,
+										Exchangeaccount:data.target,
+										Exchangelasttime:data.time,
+										Exchangelastcontent:content,
+										Exchangeunreadcount:0,
+									}
+									if(ca.emptyFun(listItem)){listItem=[];}
+									listItem.unshift(ob);
+									plus.storage.setItem(account+'_message_list',JSON.stringify(listItem));
+									if(isoff==1){
+										Offlinedatas.splice(0,1);
+										if(!ca.emptyFun(Offlinedatas[0])){
+											onCustomMsg(Offlinedatas[0],1);
+										}
+									}
+								}
+							}})
+						}else{
+							var ob={
+								Exchangeimg:img,
+								Exchangename:data.fromNick,
+								Exchangeaccount:data.target,
+								Exchangelasttime:data.time,
+								Exchangelastcontent:content,
+								Exchangeunreadcount:1,
+							}
+							if(ca.emptyFun(listItem)){listItem=[];}
+							listItem.unshift(ob);
+							if(localStorage.getItem('accounts')!=data.target){
+								setBottomUnread();
+							}
+							plus.storage.setItem(account+'_message_list',JSON.stringify(listItem));
+							if(isoff==1){
+								Offlinedatas.splice(0,1);
+								if(!ca.emptyFun(Offlinedatas[0])){
+									onCustomMsg(Offlinedatas[0],1);
+								}
+								
+							}
+						}
+						
+						
+						if(data.flow=='in' && data.target!=localStorage.getItem('accounts')){//判断此消息的流向
+							addMessageListItemDetail(data,isoff);
+						}
+						showItem();
+						if(!resume){
+							createLocalPushMsg(content);
+						}else if(data.flow=='in'){
+							if(localStorage.getItem('setVibrate')!='true'){
+									plus.device.vibrate();
+							}
+							if(localStorage.getItem('setBeep')!='true'){
+								plus.device.beep();
+							}
+							
+							
+						}
+					}
+					/**
+					 * 根据路径读取到文件   
+					 */
+					function findFileSystemURL(data){
+						plus.io.resolveLocalFileSystemURL(data.url,function(entry){  
+							entry.file(function(file){
+								data.succFn && data.succFn(file.fullPath);
+							});  
+						});
+					}
+					
+					/**
+					 * 往列表详情里面添加数据
+					 */
+					function addMessageListItemDetail(msg,isoff){
+						//1.判断是否有此人的聊天记录
+						//2.否 下载用户头像(获取{he:_downloads/account/msg.from.png,self:_downloads/account/account.png}，再读取文件),创建记录
+						//3.是 添加记录
+						var storageName='chatList'+account+'and'+msg.from;
+// 						plus.storage.removeItem(storageName)
+// 						localStorage.setItem(account+'userimg','../img/NoHeadportrait.png')
+						var chatlistdetail=JSON.parse(plus.storage.getItem(storageName));
+						if(ca.emptyFun(chatlistdetail)){//如果没有
+							var selfimg=localStorage.getItem(account+'userimg');//获取用户自己的头像地址
+							var heimg='';//读取消息来源人的头像
+							plus.io.resolveLocalFileSystemURL('_downloads/'+account+'/'+msg.from+'.png',function(entry){  
+								entry.file(function(file){
+									heimg=file.fullPath;
+								});
+							});
+							setTimeout(function(){//防止文件资源还未读取到
+								var chat=new Object;
+								chat.selfname=localStorage.getItem('realname');
+								chat.selfimg=selfimg;
+								chat.selfaccount=account;
+								chat.hename=msg.fromNick;
+								chat.heimg=heimg;
+								chat.heaccount=msg.from;
+								chat.updatetime=new Date().getTime();
+								chat.content=[];
+								plus.storage.setItem(storageName,JSON.stringify(chat));
+							},100)
+						}
+						
+						
+						setTimeout(function(){
+							if(msg.type=="text"){
+								EncapsulationMessage(msg.flow,msg.time,msg.type,msg.status,msg.text,'',msg,0);
+								if(isoff==1){
+									Offlinedatas.splice(0,1);
+									if(!ca.emptyFun(Offlinedatas[0])){
+										onCustomMsg(Offlinedatas[0],1);
+									}
+									
+								}
+							}else if(msg.type=="audio"){
+								ca.downloader({url:msg.file.url,filePath:account+'/',//下载语音
+									succFn:function(file){
+										EncapsulationMessage(msg.flow,msg.time,msg.type,msg.status,'',file.filename,msg,msg.file.dur,0);
+										if(isoff==1){
+											Offlinedatas.splice(0,1);
+											if(!ca.emptyFun(Offlinedatas[0])){
+												onCustomMsg(Offlinedatas[0],1);
+											}
+											
+										}
+									},errFn:function(){//下载失败
+										addMessageListItemDetail(msg,isoff);
+									}
+								})
+							}else if(msg.type=="image"){
+								ca.downloader({url:msg.file.url,filePath:account+'/'+new Date().getTime()+'.png',//下载图片
+									succFn:function(file){
+										plus.io.resolveLocalFileSystemURL(file.filename,function(entry){  
+											entry.file(function(file){
+												EncapsulationMessage(msg.flow,msg.time,msg.type,msg.status,'',file.fullPath,msg,0,0);
+												if(isoff==1){
+													Offlinedatas.splice(0,1);
+													if(!ca.emptyFun(Offlinedatas[0])){
+														onCustomMsg(Offlinedatas[0],1);
+													}
+													
+												}
+											});  
+										});
+									},errFn:function(){//下载失败,
+										addMessageListItemDetail(msg,isoff);
+									}
+								})
+							}else if(msg.type=="custom"){
+								EncapsulationMessage(msg.flow,msg.time,msg.type,msg.status,msg.content,'',msg,0);
+								if(isoff==1){
+									Offlinedatas.splice(0,1);
+									if(!ca.emptyFun(Offlinedatas[0])){
+										onCustomMsg(Offlinedatas[0],1);
+									}
+									
+								}
+							}
+						},300)
+						
+					}
+					/*
+					* 封装消息
+					*/
+					function EncapsulationMessage(flow,time,type,status,contents,fileurl,msg,dur,islisten){
+						var storageName='chatList'+account+'and'+msg.from;
+						var chatlists=JSON.parse(plus.storage.getItem(storageName));
+						var length=1;
+						if(!ca.emptyFun(chatlists.content)){
+							length=chatlists.content.length+1
+						}
+						var ob={id:length,flow:flow,time:time,type:type,status:status,content:contents,fileurl:fileurl,dur:dur,islisten:islisten}
+						chatlists.content.unshift(ob);
+						// alert(JSON.stringify(chatlists))
+						plus.storage.setItem(storageName,JSON.stringify(chatlists));
+					}
+					
+				}
+				/**
+				* 获取用户资料
+				*/
+				function getUserData(data){
+					nim.getUser({
+						account: data.account,
+						done: getUserDone
+					});
+					function getUserDone(error, user){
+						//console.log('获取用户资料' + (!error?'成功':'失败'));
+						if (!error) {
+							data.succFn && data.succFn(user);
+						}
+					}
+				}
+				
+				/**
+				* 处理列表数据
+				*/
+				function showItem(){
+					if(!ca.emptyFun(listItem)){//如果用户消息列表不为空,展示
+						template.defaults.imports.dateFormat = function(arg1,arg2){
+							return transTime2(arg1);
+						};
+						if(!ca.emptyFun(listItem)){
+							ca.id('list_item').innerHTML=template('liebiao', {
+								"list":listItem.sort(ca.getSortFun('desc','Exchangelasttime'))
+							});
+						}
+						ca.id('refreshContainer').style.display='block';
+						ca.id('refreshContainernone').style.display='none';
+					}else{//如果为空
+						ca.id('refreshContainer').style.display='none';
+						// ca.id('refreshContainer').pullRefresh().setStopped(true);
+						ca.id('refreshContainernone').style.display='block';
+						
+					}
+				}
+				/**
+				* 判断是否有自己的头像
+				*/
+				function isSelfUserImg(){
+					var account=localStorage.getItem('e_code')+'_'+localStorage.getItem('username');//自己的id
+					var imgurl=localStorage.getItem(account+'userimg');
+					var userimg_url=localStorage.getItem('userimg_url');
+					if(imgurl){//有
+						
+					}else{
+						if(!userimg_url){
+							localStorage.setItem(account+'userimg','../img/NoHeadportrait.png');
+						}else{
+							ca.downloader({url:userimg_url,filePath:account+'/'+account+'.png',//下载用户头像
+								succFn:function(file){
+									plus.io.resolveLocalFileSystemURL(file.filename,function(entry){  
+										entry.file(function(file){
+											localStorage.setItem(account+'userimg',file.fullPath);
+										});  
+									});
+								},errFn:function(){//下载失败 使用默认头像
+									localStorage.setItem(account+'userimg','../img/NoHeadportrait.png');
+								}
+							})
+						}
+						
+					}
+				}
+				/**
+				 * 处理系统通知(加好友)
+				 */
+				function pushSysMsgss(sysMsg){
+					var account=localStorage.getItem('e_code')+'_'+localStorage.getItem('username');//自己的id
+					if(sysMsg.type=='applyFriend'){//判断是否加好友？
+						var arrlist=JSON.parse(plus.storage.getItem(account+'new_friend'));
+						var sysMsg=sysMsg;
+						if(ca.emptyFun(arrlist)){//如果没有数据  直接新增
+							getUserData({account:sysMsg.from,succFn:function(data){//获取用户资料
+								var img='../img/NoHeadportrait.png';
+								if(!ca.emptyFun(data.avatar)){img=data.avatar}
+								var arr={
+									unreadcount:1,
+									content:[{
+										friendaccount:data.account,
+										friendname:data.nick,
+										friendimg:img,
+										friendtime:sysMsg.time,
+										friendidserver:sysMsg.idServer,
+										state:sysMsg.state,
+										ps:sysMsg.ps
+									}]
+								}
+								plus.storage.setItem(account+'new_friend',JSON.stringify(arr));
+							}})
+							
+						}else{//如果有  先查询是否有
+							for(var a  in arrlist.content){
+								if(arrlist.content[a].friendaccount==sysMsg.from){//有 修改
+									arrlist.content[a].friendtime=sysMsg.time;
+									arrlist.content[a].ps=sysMsg.ps;
+									plus.storage.setItem(account+'new_friend',JSON.stringify(arrlist));
+									break;
+								}else if(a==arrlist.content.length-1){//没有 直接添加
+									getUserData({account:sysMsg.from,succFn:function(data){//获取用户资料
+										var img='../img/NoHeadportrait.png';
+										if(!ca.emptyFun(data.avatar)){img=data.avatar}
+											arrlist.unreadcount=arrlist.unreadcount+1;
+											arrlist.content.push({
+												friendaccount:data.account,
+												friendname:data.nick,
+												friendimg:img,
+												friendtime:sysMsg.time,
+												friendidserver:sysMsg.idServer,
+												state:sysMsg.state,
+												ps:sysMsg.ps
+											});
+											plus.storage.setItem(account+'new_friend',JSON.stringify(arrlist));
+									}})
+								}
+							}
+							
+						}
+					}
+				}
+				/**
+				 * 点击列表
+				 */
+				mui('body').on('tap','.im-list-item',function(){
+					ca.showWaiting();
+					var name=this.getAttribute('data_name');
+					var userimg=this.getAttribute('data_userimg');
+					accounts=this.getAttribute('data_account');
+					localStorage.setItem('accounts',accounts);
+					var styles={};
+					// 在Android5以上设备，如果默认没有开启硬件加速，则强制设置开启
+					if(!plus.webview.defaultHardwareAccelerated()&&parseInt(plus.os.version)>=5){
+						styles.hardwareAccelerated=true;
+					}
+					var web=plus.webview.create('chat_message_list_detail.html','chat_message_list_detail',styles,
+					// var web=plus.webview.create('im_list_detail.html','im_list_detail',styles,
+						{
+							accounts:accounts,
+							userimg:userimg,
+							name:name
+						}
+					);
+					setTimeout(function(){//延迟0.8s打开
+						plus.webview.show(web,'slide-in-right',400);
+						ProcessingmUnreadcount();
+						setBottomUnread();
+						// web.show();
+					},500)
+				})
+				//处理点击计入单聊后的未读数
+				function ProcessingmUnreadcount(){
+					var account=localStorage.getItem('e_code')+'_'+localStorage.getItem('username');//自己的id
+					var arr=JSON.parse(plus.storage.getItem(account+'_message_list'));
+					for(var a in arr){
+						if(arr[a].Exchangeaccount==localStorage.getItem('accounts')){
+							arr[a].Exchangeunreadcount=0;
+							break;
+						}
+					}
+					listItem=arr;
+					plus.storage.setItem(account+'_message_list',JSON.stringify(arr));
+					showItem()
+				}
+				
+				mui('body').on('tap','.information-list-delete',function(){
+					var accounts=this.getAttribute('data_account');
+					var account=localStorage.getItem('e_code')+'_'+localStorage.getItem('username');//自己的id
+					var btnArray = ['是','否'];
+					var storageName='chatList'+account+'and'+accounts;
+					mui.confirm('确认删除？','提示',btnArray,function(e){
+						if(e.index==0){
+							var arr=JSON.parse(plus.storage.getItem(account+'_message_list'));
+							for(var a in arr){
+								if(arr[a].Exchangeaccount==accounts){
+									arr.splice(a,1);
+									listItem=arr;
+									plus.storage.setItem(account+'_message_list',JSON.stringify(arr));
+									plus.storage.removeItem(storageName);
+									showItem();
+									if(accounts==localStorage.getItem('zgskefuchat')){
+										localStorage.removeItem('zgskefuchat');
+										localStorage.removeItem('zgskefuchatimg');
+										localStorage.removeItem('zgskefuchatname');
+									}
+									setBottomUnread();
+									break;
+								}
+							}
+						}
+					});
+				})
+				
+				
+				//创建本地推送
+				function createLocalPushMsg(content){
+					var options = {cover:false,};
+					plus.push.createMessage(content, "LocalMSG", options );
+// 					if(plus.os.name=="iOS"){
+// 						alert('*如果无法创建消息，请到"设置"->"通知"中配置应用在通知中心显示!');
+// 					}
+				}
+				//设置底部tab角标
+				function setBottomUnread(){
+					var BottomUnread=0;
+					for(var a in listItem){
+						if(listItem[a].Exchangeunreadcount && listItem[a].Exchangeunreadcount>0){
+							BottomUnread=parseInt(BottomUnread)+parseInt(listItem[a].Exchangeunreadcount);
+						}
+					}
+					localStorage.setItem('BottomUnread',BottomUnread);
+					var arr1 = ['index'];
+					ca.sendNotice(arr1,'updates',{});	
+				}
+				function kefu(){
+						
+							var flag = 0; //标记是拖曳还是点击
+							var oDiv = document.getElementById('div');
+							var disX,moveX,L,T,starX,starY,starXEnd,starYEnd;
+							oDiv.addEventListener('touchstart',function(e){
+								flag = 0;
+								e.preventDefault();//阻止触摸时页面的滚动，缩放
+								disX = e.touches[0].clientX - this.offsetLeft;
+								disY = e.touches[0].clientY - this.offsetTop;
+					//手指按下时的坐标
+								starX = e.touches[0].clientX;
+								starY = e.touches[0].clientY;
+					//console.log(disX);
+							});
+							oDiv.addEventListener('touchmove',function(e){
+								flag = 1;
+								L = e.touches[0].clientX - disX ;
+								T = e.touches[0].clientY - disY ;
+					//移动时 当前位置与起始位置之间的差值
+								starXEnd = e.touches[0].clientX - starX;
+								starYEnd = e.touches[0].clientY - starY;
+					//console.log(L);
+								if(L<0){//限制拖拽的X范围，不能拖出屏幕
+									L = 0;
+								}else if(L > document.documentElement.clientWidth - this.offsetWidth){
+									L=document.documentElement.clientWidth - this.offsetWidth;
+								}
+								if(T<0){//限制拖拽的Y范围，不能拖出屏幕
+									T=0;
+								}else if(T>document.documentElement.clientHeight - this.offsetHeight-40){
+									T = document.documentElement.clientHeight - this.offsetHeight-40;
+								}
+								moveX = L + 'px';
+								moveY = T + 'px';
+					//console.log(moveX);
+								this.style.left = moveX;
+								this.style.top = moveY;
+							});
+							ca.id('kefu').addEventListener('tap',function(){
+								// mui.toast('别戳我了，还没做！')
+								if(localStorage.getItem('zgskefuchat')){
+									// alert(localStorage.getItem('zgskefuchat'))
+									setTimeout(function(){
+										mui.openWindow({
+											url:'chat_message_list_detail.html',
+											id:'chat_message_list_detail',
+											extras:{
+												accounts:localStorage.getItem('zgskefuchat'),
+												userimg:localStorage.getItem('zgskefuchatimg'),
+												name:localStorage.getItem('zgskefuchatname')
+											}
+										});
+									},300)
+								}else{
+									plus.nativeUI.showWaiting()
+									ca.ajaxs({url:'findZGSCustomerservice',data:{},
+										succFn:function(data){
+											if(!ca.emptyFun(data)){
+												if(data.msg==1){
+													var accounts=data.data.e_code+'_'+data.data.username;
+													var userimg=data.data.img_url;
+													var name=data.data.realname;
+													localStorage.setItem('accounts',accounts);
+													var account=localStorage.getItem('e_code')+'_'+localStorage.getItem('username')
+													var storageName='chatList'+account+'and'+accounts;
+													var chatlistdetail=JSON.parse(plus.storage.getItem(storageName));
+													if(ca.emptyFun(chatlistdetail)){//如果没有
+														var selfimg=localStorage.getItem(account+'userimg');//获取用户自己的头像地址
+														var heimg='';//读取消息来源人的头像
+														plus.io.resolveLocalFileSystemURL('_downloads/'+account+'/'+accounts+'.png',function(entry){  
+															entry.file(function(file){
+																heimg=file.fullPath;
+																openwin();
+															});
+														},function(e){//读取文件失败 重新下载
+															if(!ca.emptyFun(userimg)){
+																ca.downloader({url:userimg,filePath:account+'/'+accounts+'.png',//下载用户头像
+																	succFn:function(file){
+																		// alert(JSON.stringify(file))
+																		plus.io.resolveLocalFileSystemURL(file.filename,function(entry){  
+																			entry.file(function(file){
+																				heimg=file;//创建列表
+																				openwin();
+																			});  
+																		});
+																	},errFn:function(){//下载失败 使用默认头像
+																		heimg='../imag/NoHeadportrait.png';
+																		openwin();
+																	}
+																})
+															}else{
+																heimg='../imag/NoHeadportrait.png';
+																openwin();
+															}
+														});
+														var openwin=function(){
+															setTimeout(function(){//防止文件资源还未读取到
+																var chat=new Object;
+																chat.selfname=localStorage.getItem('realname');
+																chat.selfimg=selfimg;
+																chat.selfaccount=account;
+																chat.hename=name;
+																chat.heimg=heimg;
+																chat.heaccount=accounts;
+																chat.updatetime=new Date().getTime();
+																chat.content=[];
+																plus.storage.setItem(storageName,JSON.stringify(chat));
+															},200)
+														}
+													}
+													setTimeout(function(){
+														localStorage.setItem('zgskefuchat',accounts)
+														localStorage.setItem('zgskefuchatimg',userimg)
+														localStorage.setItem('zgskefuchatname',name)
+														mui.openWindow({
+															url:'chat_message_list_detail.html',
+															id:'chat_message_list_detail',
+															extras:{
+																accounts:accounts,
+																userimg:userimg,
+																name:name
+															}
+														});
+													},300)	
+												}else{
+													mui.toast(data.data)
+												}
+											}
+											ca.closeWaiting();
+										},errFn:function(err){
+											mui.toast(err)
+											ca.closeWaiting();
+										}
+									})
+								}
+							})
+				}
+			})
+			
+			// 扩展API加载完毕后调用onPlusReady回调函数 
+			document.addEventListener("plusready", onPlusReady, false); 
+			function onPlusReady(){
+				document.addEventListener("pause", onAppPause, false);
+				document.addEventListener("resume", onAppReume, false);
+			}
+			function onAppPause(){
+				resume=false;
+				console.log("Application paused!"); 
+			}
+			function onAppReume(){
+				resume=true;
+				console.log("Application resumed!"); 
+			}
+			
+		</script>
+	</body>
+
+</html>

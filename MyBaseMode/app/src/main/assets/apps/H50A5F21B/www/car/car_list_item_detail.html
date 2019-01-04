@@ -1,0 +1,835 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/style.css" />
+		<link rel="stylesheet" href="../css/iconfont.css" />
+		<style>
+			.mui-icon-star {
+			    color: #B5B5B5;
+			    font-size: 22px;
+			}
+			.mui-icon-star-filled{
+				color: #FFB400;
+				font-size: 22px;
+			}
+			.bodt{
+				border-bottom:2px solid #FF8201
+			}
+			.mui-active a{
+				color: #121212;
+			}
+			.mui-active h1{
+				color: #121212;
+			}
+			.mui-slider{
+				height: 100%;
+			}
+			.mui-scroll-wrapper1
+			{
+			    position: absolute;
+			    z-index: 2;
+			    top: 0;
+			    bottom: 0;
+			    left: 0;
+			    overflow: hidden;
+			    width: 100%;
+			}
+			
+			.mui-scroll1
+			{
+			    position: absolute;
+			    z-index: 1;
+			    width: 100%;
+			    -webkit-transform: translateZ(0);
+			            transform: translateZ(0);
+			}
+			.mui-scroll-wrapper2
+			{
+			    position: absolute;
+			    z-index: 20;
+			    top: 0;
+			    bottom: 0;
+			    left: 0;
+			    overflow: hidden;
+			    width: 100%;
+			}
+			.mui-scroll2
+			{
+			    position: absolute;
+			    z-index: 1;
+			    width: 100%;
+			    -webkit-transform: translateZ(0);
+			            transform: translateZ(0);
+			}
+			.pinlunshaixuan-active{
+				border: 1px solid #FFB400;
+				padding: 3px;
+				border-radius:2px;
+				background: #fffff4;
+				color:#FFB400 ;
+			}
+			.pinlunshaixuan{
+				border: 1px solid #F0F0F0;
+				padding: 3px;
+				border-radius:2px;
+				background: #F0F0F0; 
+				color: #666666;
+			}
+			.mui-slider-item img{
+				height: 175px;
+			}
+		</style>
+	</head>
+
+	<body class="bgwhite">
+		<div>
+			<div class="item-top" style="height: 175px;position: fixed;top:0px;width: 100%;">
+				<div class="sy-banner" style="height: 175px;">
+							<div class="mui-slider" id="slider" style="height: 175px;">
+									<div class="mui-slider-group" id="banner">
+										
+								</div>
+					</div>
+					<div style="background: #C9C9C9;position: fixed;top:40px;z-index: 99;border-radius:100px;margin-left: 15px;padding: 2px 2px;">
+						<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mback"></a>
+					</div>
+					
+				</div>
+				<div class="car-top-title" style="z-index: 5;">
+					<span id="name"></span>
+				</div>
+			</div>
+			<div id="top1" class="bgwhite oh h40" style="position: fixed;top:175px;width:100%;line-height: 37px;border-bottom:1px solid #e0e0e0">
+				<div class="fl w33 tc">
+					<a class="mui-control-item mui-active "  href="#item1mobile" data-wid="tab-top-subpage-1.html" >
+						<span class="mui-active fs15" id="iddz1" style="font-weight:400;">车型</span>
+					</a>
+				</div>
+				<div class="fl w33 tc">
+					<a class="mui-control-item mui-active"  href="#item1mobile" data-wid="tab-top-subpage-1.html" >
+						<span class="mui-active fs15" id="iddz2">评价(0)</span>
+					</a>
+				</div>
+				<div class="fl w33 tc">
+					<a class="mui-control-item mui-active"  href="#item1mobile" data-wid="tab-top-subpage-1.html" >
+						<span class="mui-active fs15" id="iddz3">商家</span>
+					</a>
+				</div>
+			</div>
+			<div id="fangxin" class="item-content-list">
+				<div id="refreshContainer1" class="mui-scroll-wrapper1" style="margin-bottom: 55px;">
+		    		<div class="mui-scroll1" >
+						<ul id="list">
+							
+						</ul>
+					</div>    
+		    	</div>
+		    </div>
+			<div id="pinlun" class="disn">
+				<div id="refreshContainer2" class="mui-scroll-wrapper2 disn">
+		    		<div class="mui-scroll2" >
+		    			<ul id="pinlunlist">
+	    					
+		    			</ul>
+					</div>
+		    	</div>
+		    	<div class="disn tc" id="zanwupinlun" style="width: 100%;">
+		    		<span class="fs17 c666666">暂无评论</span>
+		   	 	</div>
+			</div>
+			<div id="shangjia" class="disn">
+				<div class="h65 bbF07 oh" id="item-content-weizhi-r-ditu">
+					<div class="fl w10 lh50 tc c666666">
+						<span class="iconfont icon-weizhi fs23"></span>
+					</div>
+					<div class="fl w70">
+						<div class="yc2 fs14 mt8 c333333 ml5" id="dizhi">
+							永定区大勇路三巴扎与机场交叉路
+						</div>
+					</div>
+					<div class="fr w20 lh50 c999999 tc">
+						<span class="fs13 c999999">地图</span>
+						<span class="mui-icon mui-icon-arrowright fs17"></span>
+					</div>
+				</div>
+				<div class="h40 bbF02 oh" id="introduce">
+					<div class="fl w10 lh40 tc c666666">
+						<span class="iconfont icon-jieshao fs18"></span>
+					</div>
+					<div class="fl w80 lh40 fs14 c333333">
+						<span class="ml10" style="margin-left: -3px;">车队介绍</span>
+					</div>
+					<div class="fr w10 lh40 c999999">
+						<span class="mui-icon mui-icon-arrowright fs17"></span>
+					</div>
+				</div>
+				<div class="h40 bbF02 oh" id="jiagexiangxi">
+					<div class="fl w10 lh40 tc c666666">
+						<span class="iconfont icon-16 fs18"></span>
+					</div>
+					<div class="fl w80 lh40 fs14 c333333">
+						<span class="ml10" style="margin-left: -3px;">价格详细</span>
+					</div>
+					<div class="fr w10 lh40 c999999">
+						<span class="mui-icon mui-icon-arrowright fs17"></span>
+					</div>
+				</div>
+				<div class="h40 bbF02 oh" id="phones" data_phone="">
+					<div class="fl w10 lh40 tc c666666">
+						<span class="iconfont icon-dianhua fs25"></span>
+					</div>
+					<div class="fl w80 lh40 fs14 c333333">
+						<span class="ml10" style="margin-left: -3px;" id="lianxifangshi">联系方式: 张三 18570442259</span>
+					</div>
+					<div class="fr w10 lh40 c999999">
+						<span class="mui-icon mui-icon-arrowright fs17"></span>
+					</div>
+				</div>
+				<div class="h40 bbF02 oh disn">
+					<div class="fl w10 lh40 tc c666666">
+						<span class="iconfont icon-kefu1 fs15"></span>
+					</div>
+					<div class="fl w80 lh40 fs14 c333333">
+						<span class="ml10" style="margin-left: -3px;">在线客服</span>
+					</div>
+					<div class="fr w10 lh40 c999999">
+						<span class="mui-icon mui-icon-arrowright fs17"></span>
+					</div>
+				</div>
+				<div>
+					<div class="fl w10 lh40 c666666 tc">
+						<span class="iconfont icon-tongzhi3 fs17"></span>
+					</div>
+					<div class="fl w88 pt7">
+						<!--<span class="c333333 fs14">预定须知:</span>-->
+						<span class="fs13 cFFB400" id="yudinxuzhi"></span>
+					</div>
+				</div>
+				<div class="item-content-time disn">
+					<div class="item-content-time-l">
+							<span class="item-content-time-l-1" id="item-content-time-l-1">03月18日</span>
+							<span class="item-content-time-l-2">入住</span>
+							<span class="item-content-time-l-3" id="item-content-time-l-3">03月19日</span>
+							<span class="item-content-time-l-4">离店</span>
+					</div>
+					<div class="item-content-time-r">
+						<span class="" id="item-content-time-r-tian">共1晚</span>
+						<span class="mui-icon mui-icon-arrowright"></span>
+					</div>
+				</div>
+				
+			</div>
+				<div class="tc bgwhite oh" style="position: fixed;bottom:0px;width:100%;height:55px;z-index: 100;border-top:1px solid #F0F0F0;box-shadow:0 -2px 10px -1px #999999;">
+					<div class="fl oh w100 c666666 mt5">
+						<div class="fl bgcaidan" style="width: 33%;">
+							<span class="iconfont icon-dianhua-copy fs23" style="text-align: center;
+			display:block;"></span>
+							<span class="fs12">电话咨询</span>
+						</div>
+						<div class="fl bgcaidan" style="width: 33%;">
+							<span class="iconfont icon-kefu fs18" style="text-align: center;
+			display:block;"></span>
+							<span class="fs12">在线咨询</span>
+						</div> 
+						<div class="fl bgcaidan" style="width: 33%;">
+							<span class="iconfont icon-wodeshoucang fs20" style="text-align: center;
+			display:block;"></span >
+							<span class="fs12">收藏</span>
+						</div>
+					</div>
+				</div>
+		</div>
+		<script id="pinlunlists" type="text/template">
+			{{each list.data.data}}
+				{{if list.data.current_page==1 && $index==0}}
+					<div class="oh" style="border-bottom: 7px solid #F0F0F0;">
+    					<div class="w25 tc h65 fl" style="padding-top: 10px;">
+    						<div id="pinfen" class="" style="color: #FFB400;font-weight:bold ;font-size: 26px;">4.5</div>
+    						<div class="fs13 mt3 c666666">车队评分</div>
+    					</div>
+    					<div class="fl w75 oh" style="line-height: 20px;padding-top: 15px;">
+    						<div class="fl shai pinlunshaixuan-active" data_id="0" data_shuju="{{list.com_num_level.num_hao+list.com_num_level.num_zhong+list.com_num_level.num_cha}}" style="">
+    							<span class="fs12">全部 {{list.com_num_level.num_hao+list.com_num_level.num_zhong+list.com_num_level.num_cha}}</span>
+    						</div>
+    						<div class="fl shai ml7 pinlunshaixuan" data_id="1" data_shuju="{{list.com_num_level.num_hao}}">
+    							<span class="fs12">好评 {{list.com_num_level.num_hao}}</span>
+    						</div>
+    						<div class="fl shai ml7 pinlunshaixuan" data_id="2" data_shuju="{{list.com_num_level.num_zhong}}">
+    							<span class="fs12">中评 {{list.com_num_level.num_zhong}}</span>
+    						</div>
+    						<div class="fl shai ml7 pinlunshaixuan" data_id="3" data_shuju="{{list.com_num_level.num_cha}}">
+    							<span class="fs12">差评 {{list.com_num_level.num_cha}}</span>
+    						</div>
+    					</div>
+    				</div>
+    				<li class="oh bbf0 pt5 pb5">
+						<div class="fl w15 pl10 pt5">
+							{{if $value.employee.img_url!=''}}
+								<img src="{{$value.employee.img_url}}" style="height: 30px;width: 30px;border-radius:50px ;"/>
+							{{else}}
+								<img src="../img/NoHeadportrait.png" style="height: 30px;width: 30px;border-radius:50px ;"/>
+							{{/if}}
+						</div>
+						<div class="fl w85">
+							<div class="oh">
+								<div class="fs14 fl">
+									<div>{{$value.employee.realname}}</div>
+									<div>
+										<div class="fl">
+											<span class="fs13 c999999">评分</span>
+										</div>
+										<div class="icons mui-inline fl fs13 ml10" style="">
+											<%for (var i=0;i<$value.grade;i++) {%>
+												<i data-index="1" class="mui-icon mui-icon-star-filled fs14"></i>
+										    <%}%>
+										    <%for (var i=0;i<5-$value.grade;i++) {%>
+												<i data-index="1" class="mui-icon mui-icon-star fs14"></i>
+										    <%}%>
+										</div>
+									</div>
+								</div>
+								<div class="fr mt5">
+									<span class="fs13 mr20 c999999">{{$value.create_time.slice(0,16)}}</span>
+								</div>
+							</div>
+							<div class="mt5">
+								<span class="fs14 c666666">{{$value.content}}</span>
+							</div>
+							{{if $value.review}}
+								<div class="btf0">
+								<span class="fs13 cred">用户追评</span>
+								<div>
+									<span class="fs14 c666666">{{$value.content}}</span>
+								</div>
+								</div>
+								<!--<div class="mt5 fs13 c999999 mb7 mr5" style="background: #F0F0F0;">
+									<span class="ml3">商家回复:</span><span class="">感谢亲</span>
+								</div>-->
+							{{/if}}
+						</div>
+					</li>
+				{{else}}
+					<li class="oh bbf0 pt5 pb5">
+						<div class="fl w15 pl10 pt5">
+							{{if $value.employee.img_url!=''}}
+								<img src="{{$value.employee.img_url}}" style="height: 30px;width: 30px;border-radius:50px ;"/>
+							{{else}}
+								<img src="../img/NoHeadportrait.png" style="height: 30px;width: 30px;border-radius:50px ;"/>
+							{{/if}}
+						</div>
+						<div class="fl w85">
+							<div class="oh">
+								<div class="fs14 fl">
+									<div>{{$value.employee.realname}}</div>
+									<div>
+										<div class="fl">
+											<span class="fs13 c999999">评分</span>
+										</div>
+										<div class="icons mui-inline fl fs13 ml10" style="">
+											<%for (var i=0;i<$value.grade;i++) {%>
+												<i data-index="1" class="mui-icon mui-icon-star-filled fs14"></i>
+										    <%}%>
+										    <%for (var i=0;i<5-$value.grade;i++) {%>
+												<i data-index="1" class="mui-icon mui-icon-star fs14"></i>
+										    <%}%>
+										</div>
+									</div>
+								</div>
+								<div class="fr mt5">
+									<span class="fs13 mr20 c999999">{{$value.create_time.slice(0,16)}}</span>
+								</div>
+							</div>
+							<div class="mt5">
+								<span class="fs14 c666666">{{$value.content}}</span>
+							</div>
+							{{if $value.review}}
+								<div class="btf0">
+								<span class="fs13 cred">用户追评</span>
+								<div>
+									<span class="fs14 c666666">{{$value.content}}</span>
+								</div>
+								</div>
+								<!--<div class="mt5 fs13 c999999 mb7 mr5" style="background: #F0F0F0;">
+									<span class="ml3">商家回复:</span><span class="">感谢亲</span>
+								</div>-->
+							{{/if}}
+						</div>
+					</li>
+				{{/if}}
+			{{/each}}
+		</script>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/castapp.js" ></script>
+		<script type="text/javascript" src="../js/template-web.js" ></script>
+		<script type="text/javascript">
+			var shifouyoupinlun=0;
+			var pinlunlist="";
+			var pages=1;
+			var pagess=1;
+			var level=0;
+			var car_id=0;
+			var comment_num=0;
+			var enterprise_id=0;
+			var data_grade=0;
+			mui.plusReady(function(){
+				mui.init({
+					swipeBack:true
+				})
+				ca.init();
+				ca.blackStatusBar();
+				ca.closeWaitings();
+				mui('#refreshContainer2').pullRefresh({
+				    up: {
+				        contentrefresh: "正在加载...",
+				        contentnomore: "没有更多数据了",
+				        callback: upFn2
+				    }
+				});
+	        	function upFn2(){
+	        		if(pagess==0){//判断是否有数据  0无 不再执行下拉刷新
+						this.endPullupToRefresh(true);
+					}else{
+						pages=pages+1;
+						showPinfen(pages,level);
+						this.endPullupToRefresh(false);
+					}
+		        }
+	        	window.addEventListener('car_item',function(event){
+					ca.whiteStatusBar();
+					var spa=ca.className('fs15');
+					var cell=ca.className('w33');
+					var aa=ca.tagName('a');
+					for(var i=0;i<cell.length;i++){
+						if(i==0){
+							spa[i].classList.add('c000000');
+							cell[i].classList.add('bodt');
+							spa[i].classList.remove('c666666');
+						}else{
+							spa[i].classList.add('c666666');
+							cell[i].classList.remove('bodt');
+							spa[i].classList.remove('c000000');
+						}
+					}
+					ca.id('fangxin').style.display='block';
+					ca.id('pinlun').style.display='none';
+					ca.id('shangjia').style.display='none';
+					function xunhuan(){
+						for(var i=0;i<cell.length;i++){
+							(function(index){
+								cell[i].addEventListener('tap',function(){
+									for(var a=0;a<cell.length;a++){
+										if(index==a){
+											spa[a].classList.add('c000000');
+											spa[a].classList.remove('c666666');
+											cell[a].classList.add('bodt');
+										}else{
+											spa[a].classList.add('c666666');
+											spa[a].classList.remove('c000000');
+											cell[a].classList.remove('bodt');
+										}
+									}
+									if(index==0){
+										ca.id('fangxin').style.display='block';
+										ca.id('pinlun').style.display='none';
+										ca.id('shangjia').style.display='none';
+									}else if(index==1){
+										ca.id('pinlun').style.display='block';
+										if(shifouyoupinlun<=0){
+											ca.id('zanwupinlun').style.marginTop='258px';
+											ca.id('refreshContainer2').style.display='none';
+											ca.id('zanwupinlun').style.display='block';
+										}else{
+											ca.id('refreshContainer2').style.display='block';
+											ca.id('zanwupinlun').style.display='none';
+										}
+										ca.id('fangxin').style.display='none';
+										ca.id('shangjia').style.display='none';		
+									}else{
+										ca.id('pinlun').style.display='none';
+										ca.id('fangxin').style.display='none';
+										ca.id('shangjia').style.display='block';
+									}
+								})
+							})(i);
+						}
+					}
+				  //获得事件参数
+				 shifouyoupinlun=0;
+				 pinlunlist="";
+				 pages=1;
+				 pagess=1;
+				 level=0;
+				  car_id = event.detail.car_id;
+				  enterprise_id = event.detail.enterprise_id;
+				  xunhuan();
+				  ca.id('list').innerHTML="";
+				  ca.id('pinlunlist').innerHTML="";
+				  mui('#refreshContainer2').pullRefresh().refresh(true);
+				  showItem(comment_num);
+				  showPinfen(pages,level);
+				  
+				  //根据id向服务器请求新闻详情
+				});
+				mui('.mui-scroll-wrapper1').scroll();
+				mui('.mui-scroll-wrapper2').scroll();
+				
+				ca.id('refreshContainer2').style.marginTop='218px';
+				ca.id('refreshContainer1').style.marginTop='218px';
+				ca.id('shangjia').style.marginTop='218px';
+				function shaixuan(){
+					var cell=ca.className('shai');
+					for(var i=0;i<cell.length;i++){
+						(function(index){
+							cell[i].addEventListener('tap',function(){
+								for(var a=0;a<cell.length;a++){
+									if(index==a){
+										level=cell[a].getAttribute('data_id');
+										var data_shuju=cell[a].getAttribute('data_shuju');
+										if(data_shuju>0){
+											ca.id('pinlunlist').innerHTML="";
+											pages=1;
+											pagess=1;
+											mui('#refreshContainer2').pullRefresh().refresh(true);
+											showPinfen(pages,level,data_grade);
+										}else{
+											mui.toast('没有数据!');
+										}
+										
+									}else{
+										
+									}
+								}
+							})	
+						})(i);
+					}
+				}
+				function xuanran(level){
+					var cell=ca.className('shai');
+					for(var i=0;i<4;i++){
+						if(level==i){
+							cell[level].classList.remove('pinlunshaixuan');
+							cell[level].classList.add('pinlunshaixuan-active');
+						}else{
+							cell[i].classList.remove('pinlunshaixuan-active');
+							cell[i].classList.add('pinlunshaixuan');
+						}
+					}
+				}
+				
+				function showItem(comment_num){
+					var self = plus.webview.currentWebview();
+					var id =car_id;
+// 					shifouyoupinlun=comment_num;
+// 					ca.id('iddz2').innerText='评论('+comment_num+')';
+					ca.ajaxs({url:'findSupplyCarByid',data:{
+							id:id
+						},
+						succFn:function(data){
+							if(!ca.emptyFun(data)){
+								var b="";
+								var list=ca.id('list');
+								var banner=ca.id('banner');
+								banner.innerHTML="";
+								ca.id('name').innerHTML=data.name;
+								if(data.pics){
+									var pics=data.pics.split(",");
+									var length=pics.length-1;
+									for(var pic in pics){
+										var temp="";
+										if(pic==0){
+											temp='<div class="mui-slider-item"><a href="#"><img src="'+pics[pic]+'" data-preview-src="" data-preview-group="2"/></a></div>';
+										}else if(pic==length){
+											temp='<div class="mui-slider-item"><a href="#"><img src="'+pics[pic]+'" data-preview-src="" data-preview-group="2"/></a></div>';
+										}else if(pic!=0 && pic<length){
+											temp='<div class="mui-slider-item"><a href="#"><img src="'+pics[pic]+'" data-preview-src="" data-preview-group="2"/></a></div>';
+										}
+										b+=temp;
+									}
+									banner.innerHTML=b;
+									var slider =mui("#slider").slider({
+										interval: 0
+									});
+								}
+								
+								if(data.enterprise.address==""){
+									ca.id('dizhi').innerHTML='无';
+								}else{
+									ca.id('dizhi').innerHTML=data.enterprise.address;
+									if(!ca.emptyFun(data.enterprise.coord)){
+										ca.id('item-content-weizhi-r-ditu').setAttribute('data_l',data.enterprise.coord.split(",")[0]);
+										ca.id('item-content-weizhi-r-ditu').setAttribute('data_w',data.enterprise.coord.split(",")[1]);
+										ditu();
+									}
+								}
+								jieshao();
+								if(data.enterprise.phone==null ||data.enterprise.phone==""){
+									ca.id('lianxifangshi').innerHTML="无";
+								}else{
+									ca.id('lianxifangshi').innerHTML='联系方式:'+data.enterprise.principal+' '+data.enterprise.phone;
+									ca.id('phones').setAttribute('data_phone',data.enterprise.phone)
+								}
+								ca.id('yudinxuzhi').innerHTML=data.notice;
+								
+								if(data.supply_car_info){
+									var da=data.supply_car_info;
+										for(var a in da){
+											var imgs="../img/errimg.png";
+										if(da[a].pic!=""){
+											imgs=da[a].pic;
+										}
+										var temp='<li class="item-content-list-item" style="height:105px">'
+											  	+	'<div class="item-content-list-item-l" style="width:28%;">'
+											  	+		'<img src="'+imgs+'" />'
+											  	+	'</div>'
+											  	+	'<div class="item-content-list-item-c" style="width:50%;padding-left: 5px;margin-top:-5px;">'
+											  	+		'<div class="item-content-list-item-c-1">'
+											  	+			'<span class="ts-li-title">'+da[a].name+'</span>'
+											  	+		'</div>'
+											  	+		'<div class="item-content-list-item-c-2">'
+											  	+			'<div class="item-content-list-item-c-2-l w100">'
+											  	+				'<span id="dataphone" data_phone="'+da[a].phone+'">司机:'+da[a].driver+'  '+da[a].phone+'</span>'
+											  	+			'</div>'
+											  	+			'<div class="item-content-list-item-c-2-l">'
+											  	+				'<span>车牌:'+da[a].car_num+'</span>'
+											  	+			'</div>'
+											  	+		'</div>'
+											  	+		'<div class="item-content-list-item-c-3">'
+											  	+			'<span>'+da[a].car_color+'</span><span class="ml5">'+da[a].seating+'座</span>'
+											  	+		'</div>'
+											  	+	'</div>'
+											  	+	'<div class="item-content-list-item-r disn">'
+											  	+		'<input type="button" class="btyudin" value="预 定"  id="1"/>'
+											  					
+											  	+	'</div>'
+											  +'</li>';
+									list.innerHTML+=temp;
+									}
+								}
+								ca.closeWaiting();
+							}else{
+								mui.toast('没有数据');
+							}
+							ca.closeWaiting();
+						},
+						errFn:function(call){
+							ca.closeWaiting();
+							mui.toast(call);
+						}
+						
+					})
+				}
+				function showPinfen(pages,level){
+					var id = enterprise_id;
+					ca.ajaxs({url:'findAllComment',data:{
+							type:'car',
+							product_id:id,
+							page:pages,
+							level:level
+						},
+						succFn:function(data){
+							var da1=data.data.next_item;
+							if(da1==null){
+								pagess=0;
+							}
+							if(da1!=null){
+								pagess==1;
+							}
+							if(data.data.data=="" && pages==1){
+								ca.id('iddz2').innerText='评论(0)';
+								shifouyoupinlun=0
+								ca.id('pinlunlist').innerHTML="暂无数据";
+								ca.closeWaiting();
+								return;
+							}
+							ca.id('iddz2').innerText='评论('+data.data.data.length+')';
+							shifouyoupinlun=1;
+							pinlunlist=data;
+							fuzhi();
+							ca.id('pinfen').innerText=data.grade;
+							shaixuan();
+							xuanran(level);
+							ca.closeWaiting();
+						},
+						errFn:function(call){
+							ca.closeWaiting();
+							mui.toast(call);
+						}
+					})
+				}
+				function fuzhi(){
+					try{
+						ca.id('pinlunlist').innerHTML+=template('pinlunlists', {
+							"list":pinlunlist
+						});
+						
+					}catch(err){
+						console.log(err);
+					}
+					
+				}
+				function ditu(){
+					var ditus=ca.id('item-content-weizhi-r-ditu');
+					ditus.addEventListener('tap',function(){
+						localStorage.setItem('map_l',ditus.getAttribute('data_l'))
+						localStorage.setItem('map_w',ditus.getAttribute('data_w'))
+						ca.newInterface({url:'../map/ditu_top.html',id:'ditu_top'});
+						
+					})
+				}
+				function dataphone(){
+					mui(".item-content-list-item").on('tap','#dataphone',function(){
+						  var id = this.getAttribute("data_phone");
+						  ca.callPhone(id);
+					}) 
+				}
+				mui('body').on('tap','#phones',function(){
+					ca.callPhone(this.getAttribute('data_phone'));
+				})
+//				mui("body").on('tap','.item-content-list-item',function(){
+//					var id=this.getAttribute('data_id');
+//					mui.openWindow({
+//					    url:'hotel_item_room_detail.html',
+//					    id:'hotel_item_room_detail',
+//					    extras:{
+//					        car_id:id
+//					    }
+//					});
+//				})
+
+				mui('body').on('tap','#introduce',function(){
+						var id = car_id;
+						mui.openWindow({
+								url:'car_item_detail_introduxe.html',
+								id:'car_item_detail_introduxe',
+								extras:{
+										car_id:id
+								}
+						});
+				})
+				function jieshao(){
+					
+				}
+					mui('body').on('tap','#jiagexiangxi',function(){
+						var id = car_id;
+						mui.openWindow({
+								url:'car_item_price_details.html',
+								id:'car_item_price_details',
+								extras:{
+										car_id:id
+								}
+						});
+					})
+				var cff=ca.className('bgcaidan');
+				cff[0].addEventListener('tap',function(){
+						ca.callPhone(ca.id('phones').getAttribute('data_phone'));
+				})
+				cff[1].addEventListener('tap',function(){
+					plus.nativeUI.showWaiting();
+						ca.ajaxs({url:'findEnterpriseCustomerservice',data:{
+								e_id:enterprise_id
+							},succFn:function(data){
+								if(data.msg==1){
+									var accounts=data.data.e_code+'_'+data.data.username;
+									var userimg=data.data.img_url;
+									var name=data.data.realname;
+										localStorage.setItem('accounts',accounts);
+										var account=localStorage.getItem('e_code')+'_'+localStorage.getItem('username')
+										var storageName='chatList'+account+'and'+accounts;
+					// 						plus.storage.removeItem(storageName)
+					// 						localStorage.setItem(account+'userimg','../img/NoHeadportrait.png')
+										var chatlistdetail=JSON.parse(plus.storage.getItem(storageName));
+										if(ca.emptyFun(chatlistdetail)){//如果没有
+											var selfimg=localStorage.getItem(account+'userimg');//获取用户自己的头像地址
+											var heimg='';//读取消息来源人的头像
+											plus.io.resolveLocalFileSystemURL('_downloads/'+account+'/'+accounts+'.png',function(entry){  
+												entry.file(function(file){
+													heimg=file.fullPath;
+												});
+											},function(e){//读取文件失败 重新下载
+												if(!ca.emptyFun(userimg)){
+													ca.downloader({url:userimg,filePath:account+'/'+accounts+'.png',//下载用户头像
+														succFn:function(file){
+															// alert(JSON.stringify(file))
+															findFileSystemURL({url:file.filename,succFn:function(fil){//根据路径读取文件
+																heimg=fil;//创建列表
+															}})
+														},errFn:function(){//下载失败 使用默认头像
+															heimg='../imag/NoHeadportrait.png';
+														}
+													})
+												}else{
+													heimg='../imag/NoHeadportrait.png';
+												}
+											});
+											setTimeout(function(){//防止文件资源还未读取到
+												var chat=new Object;
+												chat.selfname=localStorage.getItem('realname');
+												chat.selfimg=selfimg;
+												chat.selfaccount=account;
+												chat.hename=name;
+												chat.heimg=heimg;
+												chat.heaccount=accounts;
+												chat.updatetime=new Date().getTime();
+												chat.content=[];
+												plus.storage.setItem(storageName,JSON.stringify(chat));
+											},200)
+										}
+										setTimeout(function(){
+											mui.openWindow({
+												url:'../jiaoliu/chat_message_list_detail.html',
+												id:'chat_message_list_detail',
+												extras:{
+													accounts:accounts,
+													userimg:userimg,
+													name:name
+												}
+											});
+										},400)
+								}else{
+									mui.toast(data.data);
+								}
+								ca.closeWaiting();
+							},errFn:function(err){
+								mui.toast(err)
+								ca.closeWaiting();
+							}
+						})
+						
+				})
+				cff[2].addEventListener('tap',function(){
+					ca.ajaxs({url:'addMyFavorite',data:{
+								user_id:localStorage.getItem('userid'),
+								type:'car',enterprise_id:enterprise_id,
+								item_id:enterprise_id,partment_id:0
+						},succFn:function(data){
+							if(!ca.emptyFun(data)){
+								mui.toast(data.msgtext);
+							}
+							ca.closeWaiting();
+						},errFn:function(err){
+							mui.toast(err);
+							ca.closeWaiting();
+						}
+					})
+				})
+				/**
+				* 根据路径读取到文件   
+				*/
+				function findFileSystemURL(data){
+					plus.io.resolveLocalFileSystemURL(data.url,function(entry){  
+						entry.file(function(file){
+							data.succFn && data.succFn(file.fullPath);
+						});  
+					});
+				}
+			})
+			
+		</script>
+	</body>
+
+</html>

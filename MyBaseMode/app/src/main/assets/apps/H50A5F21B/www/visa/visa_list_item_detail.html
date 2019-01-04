@@ -1,0 +1,657 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/style.css" rel="stylesheet"/>
+		<link href="../css/iconfont.css" rel="stylesheet" />
+		<link href="../css/timelinestyle.css" rel="stylesheet"/>
+		<style>
+			.mui-bar-nav {
+				top: 0;
+				-webkit-box-shadow: 0 0px 0px #ccc;
+				/* box-shadow: 0 1px 6px #ccc; */
+			}
+			.mui-bar {
+				-webkit-box-shadow: 0 0 0px rgba(0, 0, 0, .85);
+				box-shadow: 0 0 0px rgba(0, 0, 0, .85);
+			}
+			.visa-list-item-detail-top-d1img{
+				width: 50px;height: 50px;border-radius:100px;border: 1px solid #FFFFFF;
+			}
+			.visa-detail-tab{
+				width: 20%;
+				float: left;
+				height: 39px;
+				line-height: 37px;
+				color: #666666;
+				text-align: center;
+			}
+			.visa-detail-tab-active{
+				width: 20%;
+				float: left;
+				height:39px;
+				line-height: 37px;
+				text-align: center;
+				color:#18A3E5;
+				border-bottom: 2px solid #18A3E5;
+			}
+			.visa-list-item-detail-pl img{
+				width: 25px;height: 25px;border-radius:100px ;
+			}
+			.visa-list-item-detail-pl-top{
+				margin:5px;border-radius:5px; height:40px;line-height: 40px;box-shadow:1px 2px 3px -2px rgba(0,0,0,0.2),1px -2px 3px -2px rgba(0,0,0,0.1);
+			}
+			.information-tab{
+				color: #999999;border: 1px solid #999999;
+				padding:2px 7px;font-size: 14px;border-radius:4px ;
+			}
+			.information-tab-active{
+				color: #18A3E5;border: 1px solid #18A3E5;
+				padding:2px 7px;font-size: 14px;border-radius:4px;
+			}
+			#visa-timeline{
+				position: relative;
+				margin-bottom: 2em;
+			}
+			#visa-timeline::before {
+			  /* this is the vertical line */
+			  content: '';
+			  position: absolute;
+			  top:20px;
+			  left:38px;
+			  height: 100%;
+			  width: 2px;
+			  background: #18A3E5;
+			}
+			.visa-timeline-d2{
+				position:absolute;top:0;left:30px;width:17px;height:17px;
+				border-radius:50px;background: #18A3E5;line-height: 17px;padding-left:1px;
+			}
+			.visa-timeline-d1{
+				margin-left:13px;font-size:14px;color: #18A3E5;margin-top:-2px;
+			}
+			.visa-timeline-d{
+				position: relative;
+				margin:15px 0;
+			}
+			.visa-timeline-d:after {
+			  content: "";
+			  display: table;
+			  clear: both;
+			}
+			.visa-timeline-d3 {
+			  position: relative;
+			  margin-left:60px;
+			  top:-23px;
+			  background: white;
+			}
+			.visa-timeline-d3:after {
+			  content: "";
+			  display: table;
+			  clear: both;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav mheader">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mback"></a>
+			<span class="fl fs16 ml20" id="title" style="line-height: 42px;"></span>
+		</header>
+		<div class="mui-content mui-scroll-wrapper" id="refreshContainer" style="margin-bottom:30px;">
+			<div class="mui-scroll">
+				<div style="height:230px;">
+					<img src="../img/visa_list_item_detail_bg.jpg" style="height:100%;width: 100%;"/>
+					<div style="position:absolute;top:25px;width: 100%;color: #FFFFFF;">
+						<div class="tc">
+							<img class="visa-list-item-detail-top-d1img" id="en_img" src="../img/1.png" />
+						</div>
+						<div class="tc mt10 yc2" id="name">
+						</div>
+						<div class="tc mt10 fs13" id="duration">
+						</div>
+						<div class="mt10 fs13" style="border-top: 1px solid #FFFFFF;padding-top: 10px;">
+							<div class="fl w33 tc" style="border-right: 1px solid #FFFFFF;">
+								<div id="expires">
+									
+								</div>
+								<div>
+									有效期
+								</div>
+							</div>
+							<div class="fl w33 tc" style="border-right: 1px solid #FFFFFF;">
+								<div id="stay">
+								</div>
+								<div >
+									最多停留
+								</div>
+							</div> 
+							<div class="fl w33 tc">
+								<div id="times">
+								</div>
+								<div>
+									入境次数
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- <div style="height: 8px;background: #FFFFFF;">
+					
+				</div> -->
+				<div class="brand-bar-wrapper bbf0 mt5">
+					<div id="tab" class="bgwhite brand-store-bar oh bbf0">
+						<div class="visa-detail-tab-active tab" data_id=0>
+							<span class="fs15">基本信息</span>
+						</div>
+						<div class="visa-detail-tab tab" data_id=1>
+							<span class="fs15">评论</span>
+						</div>
+						<div class="visa-detail-tab tab" data_id=2>
+							<span class="fs15">所需材料</span>
+						</div>
+						<div class="visa-detail-tab tab" data_id=3>
+							<span class="fs15">温馨提示</span>
+						</div>
+						<div class="visa-detail-tab tab" data_id=4>
+							<span class="fs15">办理流程</span>
+						</div>
+					</div>
+				</div>
+				<div>
+					<div id="div1" class="bgwhite pb5">
+						<div class="oh pt9">
+							<div class="fs13 w10 fl tc">
+								<span class="iconfont icon-account"></span>
+							</div>
+							<div class="fl w85 fs14">
+								<span>服务包含</span>
+							</div>
+						</div>
+						<div id="include" class="fs12" style="margin-left: 10%;">
+							
+						</div>
+						<div class="oh mt15">
+							<div class="fs13 w10 fl tc">
+								<span class="iconfont icon-account"></span>
+							</div>
+							<div class="fl w85 fs14">
+								<span>受理范围</span>
+							</div>
+						</div>
+						<div id="range" class="fs12" style="margin-left: 10%;">
+							
+						</div>
+					</div>
+					<div id="div2" class="bgwhite mt5 pt5">
+						<div class="oh bdF0F0F0 visa-list-item-detail-pl-top">
+							<div class="c333333 fs15 fl ml5">
+								<span>评价</span>
+							</div>
+							<div class="fr fs11 cF76211 mr5" id="commentall">
+								<span>查看全部 ></span>
+							</div>
+						</div>
+						<div id="comment_list">
+							<!-- <div class="m510 bbf0">
+								<div class="mui-slider-handle visa-list-item-detail-pl">
+									<div class="oh">
+										<img src="../img/ttyou.png" class="fl" />
+										<span class="fs11 fl ml10 c666666">李四</span>
+									</div>
+									<div class="mt3 pb5 c666666">
+										<span class="fs13">dajshdkj是的了解来看撒娇地离开静安寺立刻就打深刻理解的是的了解来看撒娇地离开静安寺立刻就打深刻理解的是的了解来看撒娇地离开静安寺立刻就打深刻理解的</span>
+									</div>
+									<div class=" fs12 c999999 mb7">
+										<span>201-12-16</span>
+										<span>15:16</span>
+									</div>
+								</div>	
+							</div> -->
+							
+						</div>
+						
+						
+					</div>
+					<div id="div3" class="bgwhite">
+						<div class="pt9">
+							<span class="ml10 visa-information-tab information-tab-active" data_index="0">在职</span>
+							<span class="information-tab visa-information-tab" data_index="1">自由职业者</span>
+							<span class="information-tab visa-information-tab" data_index="2">在校学生</span>
+							<span class="information-tab visa-information-tab" data_index="3">退休</span>
+							<span class="information-tab visa-information-tab" data_index="4">学龄前儿童</span>
+						</div>
+						<div id="information">
+							<div id="information-d1" class="mt10 visa-information-d">
+								
+							</div>
+							<div id="information-d2" class="disn mt10 visa-information-d">
+								
+							</div>
+							<div id="information-d3" class="disn mt10 visa-information-d">
+								
+							</div>
+							<div id="information-d4" class="disn mt10 visa-information-d">
+								
+							</div>
+							<div id="information-d5" class="disn mt10 visa-information-d">
+								
+							</div>
+						</div>
+					</div>
+					<div id="div4" class="bgwhite pl10 pr10 ">
+						
+					</div>
+					<div id="div5" class="bgwhite ">
+						<section class="oh" id="visa-timeline">
+							<!-- <div style="position: relative;top: 10px;margin-bottom: 2em">
+								<div class="visa-timeline-d1">
+									01
+								</div>
+								<div class="visa-timeline-d2">
+									<span class="mui-icon mui-icon-arrowdown fs15 cffffff"></span>
+								</div>
+								<div style=" position: absolute;margin-left:60px;top:0px; background: white;">
+									<div>
+										第一天:张家界市
+									</div>
+									<div>
+										sa圣诞节来看记录卡死了肯德基卢卡斯
+									</div>
+								</div>
+							</div> -->
+							
+						</section>
+					</div>
+					<div id="div6" class="bgwhite" style="margin-top: -20px;">
+						<div class="tc fs14 pt9">签证案例</div>
+						<div style="padding-bottom: 10px;margin-top: 10px;">
+							<img id="pic" style="width: 80%;margin-left: 10%;"/>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+			<div class="tc bgwhite oh" style="position: fixed;bottom:0px;width:100%;height:55px;z-index: 100;border-top:1px solid #F0F0F0;box-shadow:0 -2px 10px -1px #999999;">
+				<div class="fl oh w100 c666666 mt5">
+					<div class="fl w25 bgcaidan">
+						<span class="iconfont icon-dianhua-copy fs23" style="text-align: center;
+		display:block;"></span>
+						<span class="fs12">电话咨询</span>
+					</div>
+					<div class="fl w25 bgcaidan">
+						<span class="iconfont icon-kefu fs18" style="text-align: center;
+		display:block;"></span>
+						<span class="fs12">在线咨询</span>
+					</div> 
+					<div class="fl w25 bgcaidan">
+						<span class="iconfont icon-shangjia fs18" style="text-align: center;
+		display:block;"></span>
+						<span class="fs12">商家信息</span>
+					</div>
+					<div class="fl w25 bgcaidan">
+						<span class="iconfont icon-wodeshoucang fs20" style="text-align: center;
+		display:block;"></span >
+						<span class="fs12">收藏</span>
+					</div>
+				</div>
+				<div class="fl oh w33 disn">
+					<div  style="margin:5px 10px;background:#F8931E;height: 40px;line-height:40px;border-radius:5px ;">
+						<span class="cffffff fs16">我要预订</span>
+					</div>
+				</div>
+			</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/castapp.js"></script>
+		<script type="text/javascript">
+			mui.plusReady(function(){
+				mui.init({
+					pullRefresh : {
+						container:"#refreshContainer",
+						up: {
+							height:50,//可选.默认50.触发上拉加载拖动距离
+							auto:false,//可选,默认false.自动上拉加载一次
+							contentrefresh : "",//可选，正在加载状态时，上拉加载控件上显示的标题内容
+							contentnomore:'到底了',//可选，请求完毕若没有更多数据时显示的提醒内容；
+							callback: upFn // 上拉执行函数
+							}
+					},
+				});
+				function upFn(){
+					mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
+				}
+				ca.init();
+				ca.blackStatusBar();
+				var self=plus.webview.currentWebview();
+				var enterprise_id=0,sign_id=0;
+				findDetail();
+				function findDetail(){
+					ca.ajaxs({url:'findVisaProductDetail',data:{
+							user_id:localStorage.getItem('userid'),
+							product_id:self.product_id
+						},succFn:function(data){
+							if(data){
+								var comm=data.com;
+								var data=data.pr;
+								ca.id('title').innerText=data.country+'签证';
+								ca.id('name').innerText=data.name;
+								ca.id('duration').innerText='办理时长：'+data.duration;
+								ca.id('expires').innerText=data.expires;
+								ca.id('stay').innerText=data.stay;
+								ca.id('times').innerText=data.times;
+								ca.id('include').innerHTML=data.include;
+								ca.id('range').innerHTML=data.range;
+								ca.id('div4').innerHTML=data.notice;
+								ca.id('information-d1').innerHTML=data.data1;
+								ca.id('information-d2').innerHTML=data.data2;
+								ca.id('information-d3').innerHTML=data.data3;
+								ca.id('information-d4').innerHTML=data.data4;
+								ca.id('information-d5').innerHTML=data.data5;
+								ca.id('en_img').src=data.supplysign.pic;
+								ca.id('pic').src=data.pic;
+								enterprise_id=data.supplysign.enterprise_id;
+								sign_id=data.sign_id;
+								ca.className('bgcaidan')[0].setAttribute('data_phone',data.supplysign.enterprise.phone);
+								if(!ca.emptyFun(comm)){
+									for(var a in comm){
+										var temp='<div class="m510 bbf0">'
+												+	'<div class="visa-list-item-detail-pl">'
+												+	'<div class="oh">'
+												+		'<img src="'+comm[a].employee.img_url+'" class="fl" />'		
+												+		'<span class="fs11 fl ml10 c666666">'+comm[a].employee.realname+'</span>'
+												+	'</div>'
+												+	'<div class="mt3 pb5 c666666">'
+												+		'<span class="fs13">'+comm[a].content+'</span>'
+												+	'</div>'
+												+	'<div class=" fs12 c999999 mb7"><span>'+comm[a].create_time.slice(0,16)+'</span></div>'
+												+	'</div>'	
+												+'</div>';	
+										ca.id('comment_list').innerHTML+=temp;
+									}
+								}else{
+									ca.id('div2').classList.add('disn');
+								}
+								
+								
+								var da=JSON.parse(data.flow_path);
+								for(var a in da){
+									var temp='<div class="visa-timeline-d">'
+											+	'<div class="visa-timeline-d1">0'+(parseInt(a)+1)+'</div>'
+											+	'<div class="visa-timeline-d2">'
+											+		'<span class="mui-icon mui-icon-arrowdown fs15 cffffff"></span>'
+											+	'</div>'
+											+	'<div class="visa-timeline-d3">'
+											+		'<div class="fs15 c333333">'+da[a].name+'</div>'		
+											+		'<div class="fs13 c999999">'+da[a].mark+'</div>'		
+											+	'</div>'
+											+'</div>';
+									ca.id('visa-timeline').innerHTML+=temp;
+								}
+								ca.createHistory({
+									id:self.product_id,name:data.name,type:'visa',
+									data_comment_num:0,
+									data_grade:data.country,enterprise_id:enterprise_id,
+									date:new Date().getTime()
+								});
+							}
+							
+							ca.closeWaiting();
+						},errFn:function(err){
+							mui.toast(err);
+							ca.closeWaiting();
+						}
+					})
+				}
+				
+				
+				
+				var dockHeader = function(){
+					var wrapper= mui('#refreshContainer')[0],
+						barWrapper = mui('.brand-bar-wrapper')[0],
+						brandBar= mui('#tab')[0],
+						div1=mui('#div1')[0],
+						div2=mui('#div2')[0],
+						div3=mui('#div3')[0],
+						div4=mui('#div4')[0],
+						div5=mui('#div5')[0],
+						scroll= mui('#refreshContainer').scroll({
+							deceleration:0.002,
+						});
+					//顶部悬停
+					var dock = function(){
+						if (!brandBar.classList.contains('dock-header-bar')) {
+							wrapper.appendChild(brandBar);
+							brandBar.classList.add('dock-header-bar');
+						}
+					}
+					//复原
+					var reset = function(){
+						if (brandBar.classList.contains('dock-header-bar')) {
+							barWrapper.appendChild(brandBar);
+							brandBar.classList.remove('dock-header-bar');
+						}
+					}
+					//安卓停靠方式
+					var androidDock = function(){
+						document.addEventListener('scroll', function(e) {
+							var y=window.pageYOffset+69;
+							y > barWrapper.offsetTop ? dock() : reset();
+							setTimeout(function(){
+								y > (div1.offsetTop-40) ? setitem(1) : setitem(0);//设置颜色
+								if(y > (div1.offsetTop-40) && y < div2.offsetTop-40){setitem(0)}
+								else if(y > (div2.offsetTop-40) && y < div3.offsetTop-40){setitem(1)}
+								else if(y > (div3.offsetTop-40) && y < div4.offsetTop-40){setitem(2)}
+								else if(y > (div4.offsetTop-40) && y < div5.offsetTop-40){setitem(3)}
+								else if(y > (div5.offsetTop-40)){setitem(4)}
+							},100)
+						});
+					}
+					//IOS停靠方式
+					var iosDock = function(){
+						wrapper.addEventListener('scroll', function(e) {
+							var y=-(scroll.y) + 40;
+							scroll.y < -(barWrapper.offsetTop) ? dock() : reset();
+							y > (div1.offsetTop) ? setitem(1) : setitem(0);//设置颜色
+							if(y > (div1.offsetTop) && y < (div2.offsetTop)){setitem(0)}
+							else if(y > (div2.offsetTop) && y < (div3.offsetTop)){setitem(1)}
+							else if(y > (div3.offsetTop) && y < (div4.offsetTop)){setitem(2)}
+							else if(y > (div4.offsetTop) && y < (div5.offsetTop)){setitem(3)}
+							else if(y > (div5.offsetTop)){setitem(4)}
+						}, false);
+					}
+					//准备执行条件
+					var init = function(){
+						if (mui.os.ios) {
+							iosDock();
+						}else{
+							//安卓系统禁止系统滚动条
+							document.body.addEventListener('touchmove',moves, false);
+							androidDock();
+						}
+					}
+					init();
+				}
+				function moves(){
+					event.stopPropagation();
+				}
+				
+				var setitem=function(index){
+					var cell=document.getElementsByClassName('tab');
+					for(var a=0;a<cell.length;a++){
+						if(index==a){
+							cell[a].classList.add('visa-detail-tab-active');
+							cell[a].classList.remove('visa-detail-tab');
+						}else{
+							cell[a].classList.remove('visa-detail-tab-active');
+							cell[a].classList.add('visa-detail-tab');
+						}
+					}
+				}
+				dockHeader();
+				
+				mui('#div3').on('tap','.visa-information-tab',function(){
+					onclick(this.getAttribute('data_index'));
+				})
+				
+				function  onclick(index){
+					var cel=ca.className('visa-information-d');
+					var cell=ca.className('visa-information-tab');
+					for(var a=0;a<cell.length;a++){
+						if(index==a){
+							cell[a].classList.add('information-tab-active');
+							cell[a].classList.remove('information-tab');
+							cel[a].classList.add('disb');
+							cel[a].classList.remove('disn');
+						}else{
+							cell[a].classList.remove('information-tab-active');
+							cell[a].classList.add('information-tab');
+							cel[a].classList.add('disn');
+							cel[a].classList.remove('disb');
+						}
+					}
+				}
+				
+				ca.id('commentall').addEventListener('tap',function(){
+					ca.showWaiting();
+					var pl=plus.webview.create('visa_allcomment.html','visa_allcomment',{},{product_id:self.product_id});
+					setTimeout(function(){
+						pl.show('pop-in',400);
+					},300)
+				})
+				mui('body').on('tap','.tab',function(){
+					var id=this.getAttribute('data_id');
+					var scrolls=0;
+					if(id==0){
+						scrolls=ca.id('div1').offsetTop-40;
+					}else if(id==1){
+						scrolls=ca.id('div2').offsetTop-40;
+					}else if(id==2){
+						scrolls=ca.id('div3').offsetTop-35;
+					}else if(id==3){
+						scrolls=ca.id('div4').offsetTop-35;
+					}else if(id==4){
+						scrolls=ca.id('div5').offsetTop-35;
+					}
+					if(mui.os.ios){
+						mui('#refreshContainer').scroll().scrollTo(0,-scrolls,400);
+					}else{
+						window.scrollTo(0,scrolls);
+					}
+				})
+
+				
+				var caidan=ca.className('bgcaidan');
+				caidan[3].addEventListener('tap',function(){
+					ca.ajaxs({url:'addMyFavorite',data:{
+							user_id:localStorage.getItem('userid'),
+							type:'sign',enterprise_id:enterprise_id,
+							item_id:self.product_id,partment_id:0
+						},succFn:function(data){
+							if(!ca.emptyFun(data)){
+								mui.toast(data.msgtext);
+							}
+							ca.closeWaiting();
+						},errFn:function(err){
+							mui.toast(err);
+							ca.closeWaiting();
+						}
+					})
+				})
+				caidan[0].addEventListener('tap',function(){
+					ca.callPhone(caidan[0].getAttribute('data_phone'));
+				})
+				caidan[1].addEventListener('tap',function(){
+					plus.nativeUI.showWaiting();
+						ca.ajaxs({url:'findEnterpriseCustomerservice',data:{
+								e_id:enterprise_id
+							},succFn:function(data){
+								if(data.msg==1){
+									var accounts=data.data.e_code+'_'+data.data.username;
+									var userimg=data.data.img_url;
+									var name=data.data.realname;
+										localStorage.setItem('accounts',accounts);
+										var account=localStorage.getItem('e_code')+'_'+localStorage.getItem('username')
+										var storageName='chatList'+account+'and'+accounts;
+					// 						plus.storage.removeItem(storageName)
+					// 						localStorage.setItem(account+'userimg','../img/NoHeadportrait.png')
+										var chatlistdetail=JSON.parse(plus.storage.getItem(storageName));
+										if(ca.emptyFun(chatlistdetail)){//如果没有
+											var selfimg=localStorage.getItem(account+'userimg');//获取用户自己的头像地址
+											var heimg='';//读取消息来源人的头像
+											plus.io.resolveLocalFileSystemURL('_downloads/'+account+'/'+accounts+'.png',function(entry){  
+												entry.file(function(file){
+													heimg=file.fullPath;
+												});
+											},function(e){//读取文件失败 重新下载
+												if(!ca.emptyFun(userimg)){
+													ca.downloader({url:userimg,filePath:account+'/'+accounts+'.png',//下载用户头像
+														succFn:function(file){
+															// alert(JSON.stringify(file))
+															findFileSystemURL({url:file.filename,succFn:function(fil){//根据路径读取文件
+																heimg=fil;//创建列表
+															}})
+														},errFn:function(){//下载失败 使用默认头像
+															heimg='../imag/NoHeadportrait.png';
+														}
+													})
+												}else{
+													heimg='../imag/NoHeadportrait.png';
+												}
+											});
+											setTimeout(function(){//防止文件资源还未读取到
+												var chat=new Object;
+												chat.selfname=localStorage.getItem('realname');
+												chat.selfimg=selfimg;
+												chat.selfaccount=account;
+												chat.hename=name;
+												chat.heimg=heimg;
+												chat.heaccount=accounts;
+												chat.updatetime=new Date().getTime();
+												chat.content=[];
+												plus.storage.setItem(storageName,JSON.stringify(chat));
+											},200)
+										}
+										
+										setTimeout(function(){
+											var pl=plus.webview.create('../jiaoliu/chat_message_list_detail.html','chat_message_list_detail',{},{accounts:accounts,userimg:userimg,name:name});
+											setTimeout(function(){
+												pl.show('pop-in',400);
+												ca.closeWaiting();
+											},300)
+										},200)
+								}else{
+									mui.toast(data.data);
+								}
+							},errFn:function(err){
+								mui.toast(err)
+								ca.closeWaiting();
+							}
+						})
+				})
+				/**
+				* 根据路径读取到文件   
+				*/
+				function findFileSystemURL(data){
+					plus.io.resolveLocalFileSystemURL(data.url,function(entry){  
+						entry.file(function(file){
+							data.succFn && data.succFn(file.fullPath);
+						});  
+					});
+				}
+				caidan[2].addEventListener('tap',function(){
+					ca.showWaiting();
+					var pl=plus.webview.create('visa_enterprise.html','visa_enterprise',{},{enterprise_id:enterprise_id,sign_id:sign_id});
+					setTimeout(function(){
+						pl.show('pop-in',400);
+					},300)
+				})
+			})
+			
+		</script>
+	</body>
+
+</html>

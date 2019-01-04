@@ -1,0 +1,630 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/style.css" rel="stylesheet"/>
+		<link href="../css/iconfont.css" rel="stylesheet"/>
+		<link rel="stylesheet" href="../css/mui.picker.min.css" />
+		<style>
+			.add-recruit{
+				margin: 5px;background: #FFFFFF;border-radius:5px ;
+				box-shadow:1px -1px 2px rgba(0,0,0,0.1),-1px 1px 2px rgba(0,0,0,0.1);
+			}
+			.add-recruit input{
+				margin-bottom:0px;
+				padding:2px;
+				line-height:15px;
+				width: 100%;
+				height:42px;
+				border: 0px;
+			}
+			.add-recruit textarea{
+				border: 0px;
+				margin-top:5px;
+				margin-bottom:0px;
+				padding:2px;
+				height: 80px;
+				font-size: 14px;
+			}
+			.add-recruit-bt1{
+				margin-left: 6%;background: #959595;width: 41%;
+				float: left; height: 45px;text-align: center;
+				border-radius:2px ;
+			}
+			.add-recruit-bt2{
+				margin-left: 6%;background:#FE6F11;width: 41%;
+				float: left;height: 45px;text-align: center;
+				border-radius:2px ;
+			}
+			.add-recruit-bt11{
+				margin-left: 6%;background: #959595;width: 41%;
+				float: left; height:35px;text-align: center;
+				line-height: 35px;
+				border-radius:2px ;
+			}
+			.add-recruit-bt22{
+				margin-left: 6%;background:#FE6F11;width: 41%;
+				float: left;height: 35px;text-align: center;
+				border-radius:2px ;line-height: 35px;
+			}
+			
+			.qianfadi{
+				border: 1px solid #D0D0D0;color:#666666;font-size:13px;border-radius:3px;float: left;width: 20%;text-align: center;margin-left: 4%;margin-top:8px;
+				height: 28px;line-height:28px;
+			}
+			.qianfadi-active{
+				border: 1px solid #18A3E5;color:#18A3E5;font-size:13px;border-radius:3px;float: left;width: 20%;text-align: center;margin-left: 4%;margin-top:8px;height: 28px;line-height:28px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav user-index-top-bg mheader">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left cffffff"></a>
+			<span class="cffffff mtitle lh43 ml10">修改职位</span>
+		</header>
+		<div class="mui-content">
+			<div class="tc pt5 pb5">
+				<h4>我要招聘</h4>
+			</div>
+			<div class="add-recruit h45 lh45 ">
+				<div class="fl c333333 w25 fs15 tc">
+					<span class="cred">*</span><span>招聘职位:</span>
+				</div>
+				<div class="fl w65">
+					<input type="text" class="fs14" placeholder="大堂经理/计调"/>
+				</div>
+			</div>
+			<div class="add-recruit h45 lh45 shaixuan">
+				<div class="fl c333333 w25 fs15 tc">
+					<span class="cred">*</span><span>职位类型:</span>
+				</div>
+				<div class="fl w65">
+					<input type="text" readonly="readonly" class="fs14" placeholder="全职"/>
+				</div>
+				<div class="fl">
+					<span class="iconfont icon-arrLeft-fill c1296db fs18"></span>
+				</div>
+			</div>
+			<div class="add-recruit h45 lh45">
+				<div class="fl c333333 w25 fs15 tc">
+					<span class="cred">*</span><span>招聘人数:</span>
+				</div>
+				<div class="mui-numbox" data-numbox-min="1" style="height:40px;background-color: #FFFFFF;border: 0px;">
+					<button class="mui-btn mui-btn-numbox-minus" type="button">-</button>
+					<input class="mui-input-numbox" type="number" style="border-left: 0px !important;border-right: 0px !important;">
+					<button class="mui-btn mui-btn-numbox-plus" type="button">+</button>
+				</div>
+			</div>
+			<div class="add-recruit h45 lh45 shaixuan">
+				<div class="fl c333333 w25 fs15 tc">
+					<span class="cred">*</span><span>薪资水平:</span>
+				</div>
+				<div class="fl w65">
+					<input type="text" readonly="readonly" class="fs14" placeholder="5000-10000"/>
+				</div>
+				<div class="fl">
+					<span class="iconfont icon-arrLeft-fill c1296db fs18"></span>
+				</div>
+			</div>
+			<div class="add-recruit h45 lh45 shaixuan">
+				<div class="fl c333333 w25 fs15 tc">
+					<span class="cred">*</span><span>福利待遇:</span>
+				</div>
+				<div class="fl w65">
+					<input type="text" readonly="readonly" class="fs14" placeholder="五险一金,包吃,包住"/>
+				</div>
+				<div class="fl">
+					<span class="iconfont icon-arrLeft-fill c1296db fs18"></span>
+				</div>
+			</div>
+			<div class="add-recruit h100">
+				<div class="fl c333333 w25 fs15 tc h45 lh45">
+					<span class="cred">*</span><span>职位描述:</span>
+				</div>
+				<div class="fl w70">
+					<textarea placeholder="简要描叙职位信息"></textarea>
+				</div>
+			</div>
+			<div class="add-recruit h45 lh45 shaixuan">
+				<div class="fl c333333 w25 fs15 tc">
+					<span class="cred">*</span><span>学历要求:</span>
+				</div>
+				<div class="fl w65">
+					<input type="text" readonly="readonly" class="fs14" placeholder="小学"/>
+				</div>
+				<div class="fl">
+					<span class="iconfont icon-arrLeft-fill c1296db fs18"></span>
+				</div>
+			</div>
+			<div class="add-recruit h45 lh45 shaixuan">
+				<div class="fl c333333 w25 fs15 tc">
+					<span class="cred">*</span><span>工作经验:</span>
+				</div>
+				<div class="fl w65">
+					<input type="text" readonly="readonly" class="fs14" placeholder="应届生"/>
+				</div>
+				<div class="fl">
+					<span class="iconfont icon-arrLeft-fill c1296db fs18"></span>
+				</div>
+			</div>
+			<div class="add-recruit h45 lh45 shaixuan disn">
+				<div class="fl c333333 w25 fs15 tc">
+					<span class="cred">*</span><span>工作区域:</span>
+				</div>
+				<div class="fl w65">
+					<input type="text" readonly="readonly" class="fs14" placeholder="张家界 永定区"/>
+				</div>
+				<div class="fl">
+					<span class="iconfont icon-arrLeft-fill c1296db fs18"></span>
+				</div>
+			</div>
+			<div class="add-recruit h45 lh45 ">
+				<div class="fl c333333 w25 fs15 tc">
+					<span class="cred">*</span><span>工作地址:</span>
+				</div>
+				<div class="fl w65">
+					<input type="text"  class="fs14" placeholder="教场路86号4楼103号"/>
+				</div>
+			</div>
+			<div class="add-recruit h45 lh45 ">
+				<div class="fl c333333 w25 fs15 tc">
+					<span class="cred">*</span><span>联系方式:</span>
+				</div>
+				<div class="fl w65">
+					<input type="text"  class="fs14" placeholder="1888888888"/>
+				</div>
+			</div>
+			<div class="add-recruit h45 lh45 ">
+				<div class="fl c333333 w25 fs15 tc">
+					<span>电子邮箱:</span>
+				</div>
+				<div class="fl w65">
+					<input type="text"  class="fs14" placeholder="163.qq@.com"/>
+				</div>
+			</div>
+			<div class="add-recruit h100">
+				<div class="fl c333333 w25 fs15 tc h45 lh45">
+					<span>公司简介:</span>
+				</div>
+				<div class="fl w70">
+					<textarea placeholder="简要描叙公司介绍"></textarea>
+				</div>
+			</div>
+			<div class="mt20 bgwhite h50 lh50 cffffff fs15" style="padding: 5px 0px;">
+				<div class="add-recruit-bt1">
+					<span>删除</span>
+				</div>
+				<div class="add-recruit-bt2">
+					<span>保存</span>
+				</div>
+			</div>
+		</div>
+		<div class="mui-popover" id="popover1" style="position:fixed;left:10%;height:290px;top:25%;width:80%;border-radius:4px;background: #FFFFFF;z-index:1000;">
+			<div class="oh h30 lh30" style="margin-left: 14%;">
+				<div class="fl" style="width:30%;height: 2px;background: #E0E0E0;margin-top: 14px;"></div>
+				<div class="fl fs14 c666666 ml5 mr5">
+					<span>福利筛选</span>
+				</div>
+				<div class="fl" style="width:30%;height: 2px;background: #E0E0E0;margin-top: 14px;"></div>
+			</div>
+			<div id="popover1-content">
+				
+			</div>
+			<div class="cffffff" style="position: absolute;bottom:10px;width: 100%;">
+				<div class="add-recruit-bt11" id="add-recruit-bt11">
+					<span>清空</span>
+				</div>
+				<div class="add-recruit-bt22" id="add-recruit-bt22">
+					<span>确定</span>
+				</div>
+			</div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/castapp.js"></script>
+		<script src="../js/mui.picker.js"></script>
+		<script src="../js/mui.poppicker.js"></script>
+		<script type="text/javascript">
+			mui.plusReady(function(){
+				mui.init();
+				ca.init();
+				ca.hiddenScroll();
+				var recruit_pay=[],recruit_welfare=[],recruit_welfare_datas=[],
+				recruit_education=[],recruit_working_year=[],regions=[];
+				
+				var picker1=new mui.PopPicker();
+				var picker2=new mui.PopPicker();
+				var picker3=new mui.PopPicker();
+				var picker4=new mui.PopPicker();
+				var shaixuan=ca.className('shaixuan');
+				var inputs=ca.tagName('input');//所有input
+				var self=plus.webview.currentWebview();
+				find();
+				//查询修改信息
+				function find(){
+					ca.ajaxs({url:'findRecruitInfo',data:{
+							id:self.recruit_id
+						},succFn:function(data){
+							if(data){
+								inputs[0].value=data.name;
+								inputs[1].value=data.type;
+								inputs[2].value=data.people_num;
+								inputs[3].value=data.pay;
+								inputs[4].value=data.welfare;
+								recruit_welfare_datas=data.welfare.split(',');
+								ca.tagName('textarea')[0].value=data.description
+								inputs[5].value=data.education;
+								inputs[6].value=data.working_year;
+								// inputs[7].value=data.workplace.split('-')[0];
+								inputs[8].value=data.workplace;
+								inputs[9].value=data.contact_way;
+								inputs[10].value=data.email;
+								ca.tagName('textarea')[1].value=data.company_profile;
+							}
+							ca.closeWaiting();
+						},errFn:function(err){
+							mui.toast(err);
+							ca.closeWaiting();
+						}
+					})
+				}
+				
+				
+				
+				
+				
+				
+				
+				//职位筛选
+				shaixuan[0].addEventListener('tap',function(){
+					picker1.setData([{value:'专职',text:'专职'},{value:'兼职',text:'兼职'}]);
+					picker1.show(function (selectItems) {
+						inputs[1].value=selectItems[0].text;
+					})
+				})
+				
+				//薪资水平
+				shaixuan[1].addEventListener('tap',function(){
+					if(ca.emptyFun(recruit_pay)){
+						findRecruitSalary();
+					}else{
+						picker2.show(function (selectItems) {
+							inputs[3].value=selectItems[0].text;
+						})
+					}
+				})
+				//查询薪资
+				function findRecruitSalary(){
+					ca.showWaiting();
+					ca.ajaxs({url:'findRecruitSalary',data:{
+						},succFn:function(data){
+							if(data){
+								var arr=new Array();
+								for(var i=0;i<data.length;i++){
+									var ob=new Object();
+									ob.value=data[i].id;
+									ob.text=data[i].name;
+									arr.push(ob)
+								}
+								recruit_pay=arr;
+								picker2.setData(arr);
+								picker2.show(function (selectItems) {
+									inputs[3].value=selectItems[0].text;
+								})
+							}
+							ca.closeWaiting();
+						},errFn:function(err){
+							ca.closeWaiting();
+							mui.toast(err);
+						}
+					})
+				}
+				//选择福利待遇
+				shaixuan[2].addEventListener('tap',function(){
+					if(ca.emptyFun(recruit_welfare)){
+						recruitWelfare();
+					}else{
+						setrecruitWelfare();
+					}
+				})
+				//查询福利待遇
+				function recruitWelfare(){
+					ca.showWaiting();
+					ca.ajaxs({url:'findRecruitWelfare',data:{
+						},succFn:function(data){
+							if(data){
+								recruit_welfare=data;
+								setrecruitWelfare();
+							}
+							ca.closeWaiting();
+						},errFn:function(err){
+							ca.closeWaiting();
+							mui.toast(err);
+						}
+					})
+				}
+				/**
+				 * 设置福利待遇html
+				 */
+				function setrecruitWelfare(){
+					ca.id('popover1-content').innerHTML='';
+					if(ca.emptyFun(recruit_welfare_datas)){//判断是否有选中
+						//无 直接循环 赋值
+						for(var a in recruit_welfare){
+							var temp='<div class="fl w30 tag_list h30 lh30 qianfadi" data_name="'+recruit_welfare[a].name+'">'			
+							+		'<span>'+recruit_welfare[a].name+'</span>'
+							+		'</div>';
+							ca.id('popover1-content').innerHTML+=temp;
+						}	
+					}else{
+						//有 循环 比较
+						for(var a in recruit_welfare){
+							var aa=0;
+							var temp='';
+							for(var i in recruit_welfare_datas){
+								//查询数据 与选中数据相同 是改变颜色
+								if(recruit_welfare_datas[i]==recruit_welfare[a].name){
+									temp='<div class="fl w30 tag_list h30 lh30 qianfadi-active" data_name="'+recruit_welfare[a].name+'">'			
+									+		'<span>'+recruit_welfare[a].name+'</span>'
+									+		'</div>';
+									aa=1;
+								}
+							}
+							if(aa==0){
+								temp='<div class="fl w30 tag_list h30 lh30 qianfadi" data_name="'+recruit_welfare[a].name+'">'			
+								+		'<span>'+recruit_welfare[a].name+'</span>'
+								+		'</div>';
+							}
+							ca.id('popover1-content').innerHTML+=temp;
+						}
+					}
+					mui('#popover1').popover('show');
+				}
+				/**
+				* 福利待遇筛选
+				*/
+				mui('#popover1-content').on('tap','.tag_list',function(){
+					var name=this.getAttribute('data_name');
+					//如果点击选中
+					if(this.classList.contains('qianfadi-active')){
+						this.classList.remove('qianfadi-active');
+						this.classList.add('qianfadi');
+						for(var a=0;a<recruit_welfare_datas.length;a++){
+							if(recruit_welfare_datas[a]==name){
+								//移除
+								recruit_welfare_datas.splice(a,1);
+								break;
+							}
+						}
+					}else{
+						this.classList.remove('qianfadi');
+						this.classList.add('qianfadi-active');
+						recruit_welfare_datas.push(name);//添加
+					}
+				})
+				//福利筛选 清空
+				ca.id('add-recruit-bt11').addEventListener('tap',function(){
+					recruit_welfare_datas=[];inputs[4].value='';
+					mui('#popover1').popover('hide');
+					
+				})
+				//福利筛选 确定
+				ca.id('add-recruit-bt22').addEventListener('tap',function(){
+					inputs[4].value='';
+					for(var a in recruit_welfare_datas){
+						if(!inputs[4].value){
+							inputs[4].value=recruit_welfare_datas[a];
+						}else{
+							inputs[4].value=inputs[4].value+','+recruit_welfare_datas[a];
+						}
+						
+					}
+					mui('#popover1').popover('hide');
+				})
+				
+				//选择学历
+				shaixuan[3].addEventListener('tap',function(){
+					if(ca.emptyFun(recruit_education)){
+						recruitEducation();
+					}else{
+						picker3.show(function (selectItems) {
+							inputs[5].value=selectItems[0].text;
+						})
+					}
+				})
+				//查询学历
+				function recruitEducation(){
+					ca.showWaiting();
+					ca.ajaxs({url:'findRecruitEducation',data:{
+						},succFn:function(data){
+							if(data){
+								var arr=new Array();
+								for(var i=0;i<data.length;i++){
+									var ob=new Object();
+									ob.value=data[i].id;
+									ob.text=data[i].name;
+									arr.push(ob)
+								}
+								recruit_education=arr;
+								picker3.setData(arr);
+								picker3.show(function (selectItems) {
+									inputs[5].value=selectItems[0].text;
+								})
+							}
+							ca.closeWaiting();
+						},errFn:function(err){
+							ca.closeWaiting();
+							mui.toast(err);
+						}
+					})
+				}
+				
+				//选择工作经验
+				shaixuan[4].addEventListener('tap',function(){
+					if(ca.emptyFun(recruit_working_year)){
+						recruitWorkingYear();
+					}else{
+						picker4.show(function (selectItems) {
+							inputs[6].value=selectItems[0].text;
+						})
+					}
+				})
+				//查询工作经验
+				function recruitWorkingYear(){
+					ca.showWaiting();
+					ca.ajaxs({url:'findRecruitWorkingYear',data:{
+						},succFn:function(data){
+							if(data){
+								var arr=new Array();
+								for(var i=0;i<data.length;i++){
+									var ob=new Object();
+									ob.value=data[i].id;
+									ob.text=data[i].name;
+									arr.push(ob)
+								}
+								recruit_working_year=arr;
+								picker4.setData(arr);
+								picker4.show(function (selectItems) {
+									inputs[6].value=selectItems[0].text;
+								})
+							}
+							ca.closeWaiting();
+						},errFn:function(err){
+							ca.closeWaiting();
+							mui.toast(err);
+						}
+					})
+				}
+				//工作区域选择
+// 				shaixuan[5].addEventListener('tap',function(){
+// 					if(ca.emptyFun(regions)){
+// 						findUserRegion();
+// 					}else{
+// 						ca.combinationSelect1(2,regions,function(da){
+// 							inputs[7].value=da[0].te;
+// 						})
+// 					}
+// 				})
+				
+				//查询工作区域
+				function findUserRegion(){
+					ca.showWaiting();
+					ca.ajaxs({url:'findUserRegion',data:{
+							user_id:localStorage.getItem('userid')
+						},succFn:function(data){
+							if(data){
+								regions=data;
+								ca.combinationSelect1(2,data,function(da){
+									inputs[7].value=da[0].te;
+								})
+							}
+							ca.closeWaiting();
+						},errFn:function(err){
+							ca.closeWaiting();
+							mui.toast(err);
+						}
+					})
+				}
+				//保存
+				ca.className('add-recruit-bt2')[0].addEventListener('tap',function(){
+					if(!inputs[0].value){
+						mui.toast('请填写职位名称!');
+						return;
+					}if(!inputs[1].value){
+						mui.toast('请选择职位类型!');
+						return;
+					}if(!inputs[3].value){
+						mui.toast('请选择薪资水平!');
+						return;
+					}if(ca.emptyFun(inputs[4].value)){
+						mui.toast('请选择福利待遇!');
+						return;
+					}if(!ca.tagName('textarea')[0].value){
+						mui.toast('请填写职位描叙!');
+						return;
+					}if(!inputs[5].value){
+						mui.toast('请选择学历要求!');
+						return;
+					}if(!inputs[6].value){
+						mui.toast('请选择工作经验!');
+						return;
+					}if(!inputs[8].value){
+						mui.toast('请填写工作地址!');
+						return;
+					}if(!inputs[9].value){
+						mui.toast('请填写联系方式!');
+						return;
+					}
+					ca.showWaiting();
+					var datas={
+						user_id:localStorage.getItem('userid'),
+						id:self.recruit_id,
+						name:inputs[0].value,
+						type:inputs[1].value,
+						people_num:inputs[2].value,
+						pay:inputs[3].value,
+						welfare:inputs[4].value,
+						description:ca.tagName('textarea')[0].value,
+						education:inputs[5].value,
+						working_year:inputs[6].value,
+						workplace:inputs[8].value,
+						contact_way:inputs[9].value,
+						email:inputs[10].value,
+						company_profile:ca.tagName('textarea')[1].value,
+					}
+					ca.ajaxs({url:'updateRecruitInfo',data:datas
+						,succFn:function(data){
+							if(data.msg==1){
+								mui.toast(data.text);
+								ca.sendNotice(['myself_recruit_index'],'update',{});
+								setTimeout(function(){
+									mui.back();
+								},1000);
+							}else{
+								mui.toast(data.text);
+							}
+							ca.closeWaiting();
+						},errFn:function(err){
+							ca.closeWaiting();
+							mui.toast(err);
+						}
+					})					
+					
+				})
+				//删除
+				ca.className('add-recruit-bt1')[0].addEventListener('tap',function(){
+					var btnArray=['是','否'];
+					mui.confirm('确认删除该消息,删除后将不可恢复?', '提示', btnArray, function(e) {
+						if (e.index == 0) {
+							ca.ajaxs({url:'updateRecruitStatus',data:{
+									user_id:localStorage.getItem('userid'),
+									status:2,id:self.recruit_id
+								},succFn:function(data){
+									if(data.msg==1){
+										mui.toast(data.text);
+										ca.sendNotice(['myself_recruit_index'],'update',{});
+										setTimeout(function(){
+											mui.back();
+										},1000);
+									}else{
+										mui.toast(data.text);
+									}
+									ca.closeWaiting();
+								},errFn:function(err){
+									mui.toast(err);
+									ca.closeWaiting();
+								}
+							})
+						}
+					})
+				})
+			})
+			
+		</script>
+	</body>
+
+</html>

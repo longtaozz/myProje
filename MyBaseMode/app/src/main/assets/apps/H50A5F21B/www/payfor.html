@@ -1,0 +1,169 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+	</head>
+	<style>
+		.xuanzhongyanse{
+			background: #FF8201 !important;
+		}
+		.zhifufangshi span{
+			width: 25%;
+			background:#FED788 ;
+			padding: 5px;
+			margin-left: 5px;
+			border-radius:5px ;
+			color: #FFFFFF;
+			font-size: 16px;
+		}
+	</style>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+		    <!--<a class="mui-action-back mui-icon mui-icon mui-icon-closeempty mui-pull-left" style="font-size:30px ;color: #A6A6A6;"></a>-->
+		    <h1 class="mui-title" style="color: #4F77AA;font-weight: bold;">
+		    	订单支付
+		    </h1>
+		</header>
+		<div class="mui-content">
+		    <ul class="mui-table-view" style="margin-top: 0px;font-weight: bold;font-size: 16px;">
+		            <li class="" style="position: relative;overflow: hidden;padding: 11px 15px;-webkit-touch-callout: none;border-bottom: 1px solid #C8C7CC;">
+		               <div style="width: 30%;float: left;font-weight: bold;"><span>支付方式</span></div>
+		               <div style="width: 70%;float: left;" class="zhifufangshi">
+		               	<span style="" id="zaixianzhifu">在线支付</span>
+		               	<span id="daodianshifu">到店实付</span>
+		               	<span id="qiandan">签    单</span>
+		               </div>
+		            </li>
+		           <div class="" id='zaixianzhifudiv'>
+		            <li class="mui-table-view-cell">
+		                <div class="mui-navigate-right">
+		                     	<span>付款方式</span>
+		                     	<span style="float: right;margin-right: 20px;">银行卡</span>
+		                </div>
+		            </li>
+		            <li class="mui-table-view-cell">
+		                <div class="mui-navigate-right" style="height: 21px;">
+		                     <span style="">卡 号</span>
+		                     <input type="text" style="width: 50%;height: 25px; border: 0px;font-size: 14px;margin-left: 20px;" placeholder="请输入银行卡号" />
+		                </div>
+		            </li>
+		            <li class="mui-table-view-cell">
+		                <div class="mui-navigate-right">
+		                    <span>需付款</span>
+		                     <span style="float: right;margin-right: 20px;color: #FF8201;">189</span>
+		                    <span style="font-size: 12px;float: right;margin-right: 5px;color: #FF8201;">￥</span>
+		                   
+		                </div>
+		            </li>
+		            <div>
+		        		<input type="button" value="支  付" style="color:#FFFFFF;font-size:17px;font-weight: bold;width: 100%;background:#FF8201 ; border: 0px;border-radius:5px ;height: 35px;position: fixed;bottom: 1px;"/>
+		        	
+		        	</div>
+		            </div>
+		            <div  id="daodianshifudiv" >
+		            	<li class="mui-table-view-cell">
+			                <div class="" style="text-align: center;">
+			                    <span>联系人到店后与酒店付款</span>
+			                    
+				            </div>
+			            </li>
+			            <div>
+				        	<input type="button" value="完成" style="color:#FFFFFF;font-size:17px;font-weight: bold;width: 100%;background:#FF8201 ; border: 0px;border-radius:5px ;height: 35px;position: fixed;bottom: 1px;"/>
+				        	
+				        </div>
+		            </div>
+		            <div id="qiandandiv">
+		            	 <li class="mui-table-view-cell">
+			                <div class="" style="text-align: center;">
+			                    <span>联系人单位与酒店合作单位进行签单</span>
+			                    
+				            </div>
+			            </li>
+			            <div>
+				        	<input type="button" value="完成" style="color:#FFFFFF;font-size:17px;font-weight: bold;width: 100%;background:#FF8201 ; border: 0px;border-radius:5px ;height: 35px;position: fixed;bottom: 1px;"/>
+				        	
+				        </div>
+		            </div>
+		       </ul>
+		</div>
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init();
+			var daodian=document.getElementById('daodianshifu');
+			var zaixianzhifu=document.getElementById('zaixianzhifu');
+			var qiandan=document.getElementById('qiandan');
+			document.getElementById('zaixianzhifudiv').classList.add('mui-visibility');
+			document.getElementById('zaixianzhifu').classList.add('xuanzhongyanse');
+			document.getElementById('daodianshifudiv').classList.add('mui-hidden');
+			document.getElementById('qiandandiv').classList.add('mui-hidden');
+			
+			zaixianzhifu.addEventListener('tap',function(){
+				document.getElementById('zaixianzhifudiv').classList.remove('mui-hidden');
+				document.getElementById('zaixianzhifudiv').classList.add('mui-visibility');
+				document.getElementById('zaixianzhifu').classList.add('xuanzhongyanse');
+				
+				document.getElementById('daodianshifu').classList.remove('xuanzhongyanse');
+				document.getElementById('daodianshifudiv').classList.remove('mui-visibility');
+				document.getElementById('daodianshifudiv').classList.add('mui-hidden');
+				
+				document.getElementById('qiandan').classList.remove('xuanzhongyanse');
+				document.getElementById('qiandandiv').classList.remove('mui-visibility');
+				document.getElementById('qiandandiv').classList.add('mui-hidden');
+				
+				
+			});
+			
+			qiandan.addEventListener('tap',function(){
+				/*
+				 * 修改在线实付样式
+				 */
+				document.getElementById('zaixianzhifudiv').classList.remove('mui-visibility');
+				document.getElementById('zaixianzhifudiv').classList.add('mui-hidden');
+				document.getElementById('zaixianzhifu').classList.remove('xuanzhongyanse');
+				
+				/*
+				 * 修改到店实付样式
+				 */
+				document.getElementById('daodianshifu').classList.remove('xuanzhongyanse');
+				document.getElementById('daodianshifudiv').classList.remove('mui-visibility');
+				document.getElementById('daodianshifudiv').classList.add('mui-hidden');
+				
+				/**
+				 * 修改签单样式
+				 */
+				document.getElementById('qiandan').classList.add('xuanzhongyanse');
+				document.getElementById('qiandandiv').classList.remove('mui-hidden');
+				document.getElementById('qiandandiv').classList.add('mui-visibility');
+				
+				
+			});
+			daodian.addEventListener('tap',function(){
+				/*
+				 * 修改在线实付样式
+				 */
+				document.getElementById('zaixianzhifudiv').classList.remove('mui-visibility');
+				document.getElementById('zaixianzhifudiv').classList.add('mui-hidden');
+				document.getElementById('zaixianzhifu').classList.remove('xuanzhongyanse');
+				
+				/*
+				 * 修改到店实付样式
+				 */
+				document.getElementById('daodianshifu').classList.add('xuanzhongyanse');
+				document.getElementById('daodianshifudiv').classList.remove('mui-hidden');
+				document.getElementById('daodianshifudiv').classList.add('mui-visibility');
+				
+				/**
+				 * 修改签单样式
+				 */
+				document.getElementById('qiandandiv').classList.remove('mui-visibility');
+				document.getElementById('qiandandiv').classList.add('mui-hidden');
+				document.getElementById('qiandan').classList.remove('xuanzhongyanse');
+			});
+		</script>
+	</body>
+
+</html>

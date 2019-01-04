@@ -1,0 +1,343 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/style.css" />
+		<style>
+			
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav mheader oh user-index-top-bg">
+				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mback cffffff"></a>
+		    <h1 class="mui-title" style="font-size: 16px; color: #FFFFFF;">通 知</h1>
+				<span id="qingchu" class="fr lh44 cffffff fs15">清除全部</span>
+		</header>
+		<div id="refreshContainer" class="mui-scroll-wrapper mui-content" >
+				<div class="mui-scroll">
+					<ul class="ww" id="list_item">
+							
+					</ul>
+				</div>
+		</div>
+		<div class="disn" id="sc2" style="height: 100%;width: 100%;">
+			<div style="padding-left: 43%;padding-top: 45%;">
+				<div><span class="fs16">暂无数据</span></div>
+				<div class="mt20"><span class="fs13 mt20 c999999 pl5">点击重试!</span></div>
+
+			</div>
+			<div style="padding-left: 45%;padding-top: 45%;">
+
+			</div>
+		</div>
+		<script src="js/mui.min.js"></script>
+		<script src="js/castapp.js"></script>
+		<script type="text/javascript">
+				mui.plusReady(function() {
+								var userid = localStorage.getItem('userid');
+								var page = 1;
+								var pagess = 1;
+								var jingrutime = Date.parse(new Date()) / 1000;
+								mui.init({
+									pullRefresh: {
+										container: "#refreshContainer", //下拉刷新容器标识，
+										down: {
+											height: 50, //可选,默认50.触发下拉刷新拖动距离,
+											auto: false, //可选,默认false.首次加载自动下拉刷新一次
+											contentdown: "下拉可以刷新", //可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
+											contentover: "释放立即刷新", //可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
+											contentrefresh: "正在刷新...", //可选，正在刷新状态时，下拉刷新控件上显示的标题内容
+											callback: downFn //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+										},
+										up: {
+											contentrefresh: '正在加载...',
+											callback: upFn // 上拉执行函数
+										}
+									}
+								});
+								ca.init();
+								var list = ca.id('list_item');
+								ca.receiveNotice('update', function() {
+				// 					userid = localStorage.getItem('userid');
+				// 					list.innerHTML = "";
+				// 					pagess = 1;
+				// 					mui('#refreshContainer').pullRefresh().refresh(true);
+				// 					finditem(page);
+								});
+				
+								function downFn() {
+									//		         	page=1;
+									//		         	list.innerHTML="";
+									//		         	finditem(page);
+									downFnItem(jingrutime);
+				
+									mui('#refreshContainer').pullRefresh().endPulldownToRefresh(); //这行代码会隐藏掉 正在加载... 容器
+				
+								}
+								function upFn() {
+									if (pagess == 0) {
+										this.endPullupToRefresh(true);
+									} else {
+										page = page + 1;
+										finditem(page);
+										this.endPullupToRefresh(false);
+									}
+								}
+				
+				
+								finditem(page);
+				
+								function finditem(pages) {
+									ca.showWaiting();
+									ca.checkTheNetwork();
+									ca.ajaxs({
+										url: 'findPushMsgByuserid',
+										data: {
+											page: pages,
+											userid: userid
+										},
+										succFn: function(data) {
+											if (data.msg == 1) {
+												var da = data.data.data;
+												var da1 = data.data.next_item;
+												if (da1 == null) {
+													pagess = 0;
+												}
+												if (da1 != null) {
+													pagess == 1;
+												}
+												if (da == "" && pages == 1) {
+													ca.id('sc2').style.display = 'block';
+													ca.id('refreshContainer').style.display = 'none';
+													plus.nativeUI.closeWaiting();
+													click_chongshi();
+													return;
+												}
+												for (var a in da) {
+													ca.id('sc2').style.display = 'none';
+													ca.id('refreshContainer').style.display = 'block';
+													var time = da[a].create_time.slice(0, 16);
+													var zhuangtai;
+													if (da[a].read_time == null) {
+														zhuangtai = '<span class="cred fs13 ml10">未读</span>'
+													} else {
+														zhuangtai = "";
+													}
+													var img;
+													if (!da[a].employee.img_url) {
+														img = "img/touxiang1.jpg"
+													} else {
+														img = da[a].employee.img_url;
+													}
+													var temp = '<li class="information-list mui-table-view-cell list'+da[a].id+'" data_id="' + da[a].id + '">' +
+														'<div class="mui-slider-right mui-disabled information-list-delete" data_id="' + da[a].id + '">' +
+														'<a class="mui-btn mui-btn-red" >删除</a>' +
+														'</div>' +
+														'<div class="mui-slider-handle information-list-div" data_id="' + da[a].id + '">' +
+														'<div class="information-list-l"><img  src="' + img + '"/></div>' +
+														'<div class="information-list-c">' +
+														'<div class="information-list-c-1"><span>' + da[a].employee.realname + '</span></div>' +
+														'<div class="information-list-c-2"><span class="">' + da[a].title + '</span></div>' +
+														'</div>' +
+														'<div class="information-list-r">' +
+														'<div class="mr10">' + time + '</div>' +
+														'<div>' + zhuangtai + '</div>' +
+														'</div>' +
+														'</div>' +
+														'</li>';
+				
+													list.innerHTML += temp;
+				
+												}
+				
+												mui('#refreshContainer').pullRefresh().endPulldownToRefresh(true);
+												//							delete_onclick();
+											}
+											ca.closeWaiting();
+										},
+										errFn: function(call) {
+											ca.closeWaiting();
+											mui.toast(call);
+										}
+				
+									})
+				
+								}
+								//				
+								function downFnItem(tiem) {
+									ca.showWaiting();
+									var ul = document.body.querySelector('.ww');
+									ca.ajaxs({
+										url: 'findNewestPushMsg',
+										data: {
+											userid: userid,
+											createtiem: tiem
+										},
+										succFn: function(data) {
+											if (ca.emptyFun(data)) {} else {
+												var da = data;
+												for (var a in da) {
+													ca.id('sc2').style.display = 'none';
+													var time = da[a].create_time.slice(0, 16);
+													var zhuangtai;
+													if (da[a].read_time == null) {
+														zhuangtai = '<span class="cred fs13 ml10">未读</span>'
+													} else {
+														zhuangtai = "";
+													}
+													var img;
+													if (!da[a].employee.img_url) {
+														img = "img/touxiang1.jpg"
+													} else {
+														img = da[a].employee.img_url;
+													}
+													var li = document.createElement('li');
+													li.className = 'information-list list'+da[a].id+'" mui-table-view-cell';
+													li.setAttribute('data_id', da[a].id);
+													li.innerHTML = '<div class="mui-slider-right mui-disabled information-list-delete" data_id="' + da[a].id +
+														'">' +
+														'<a class="mui-btn mui-btn-red" >删除</a>' +
+														'</div>' +
+														'<div class="mui-slider-handle information-list-div" data_id="' + da[a].id + '">' +
+														'<div class="information-list-l"><img  src="' + img + '"/></div>' +
+														'<div class="information-list-c">' +
+														'<div class="information-list-c-1"><span>' + da[a].employee.realname + '</span></div>' +
+														'<div class="information-list-c-2"><span class="">' + da[a].title + '</span></div>' +
+														'</div>' +
+														'<div class="information-list-r">' +
+														'<div class="mr10">' + time + '</div>' +
+														'<div>' + zhuangtai + '</div>' +
+														'</div>' +
+														'</div>';
+													//									var temp='<li class="information-list mui-table-view-cell" data_id="'+da[a].id+'">'
+													//									      	+	'<div class="mui-slider-right mui-disabled information-list-delete" data_id="'+da[a].id+'">'
+													//											+		'<a class="mui-btn mui-btn-red" >删除</a>'
+													//											+	'</div>'
+													//											+	'<div class="mui-slider-handle information-list-div" data_id="'+da[a].id+'">'
+													//											+		'<div class="information-list-l"><img  src="'+img+'"/></div>'
+													//											+		'<div class="information-list-c">'	
+													//											+			'<div class="information-list-c-1"><span>'+da[a].employee.realname+'</span></div>'
+													//											+			'<div class="information-list-c-2"><span class="">'+da[a].title+'</span></div>'
+													//											+		'</div>'	
+													//											+		'<div class="information-list-r">'		
+													//											+			'<div class="mr10">'+time+'</div>'		
+													//											+			'<div>'+zhuangtai+'</div>'
+													//											+		'</div>'
+													//											+	'</div>'			
+													//											+'</li>';	
+													ul.insertBefore(li, ul.firstChild);
+												}
+											}
+											ca.closeWaiting();
+				
+										},
+										errFn: function(call) {
+											ca.closeWaiting();
+											mui.toast(call);
+										}
+									})
+								}
+				
+								mui("#list_item").on('tap', '.mui-btn', function() {
+									var that = this;
+									var li = that.parentNode.parentNode;
+									var ids = li.getAttribute('data_id');
+									var btnArray = ['是', '否'];
+									mui.confirm('确认删除该消息?', '提示', btnArray, function(e) {
+										if (e.index == 0) {
+											plus.nativeUI.showWaiting();
+											ca.ajaxs({
+												url: 'deletePushMsg',
+												data: {
+													id: ids
+												},
+												succFn: function(data) {
+													if (data.msg == 1) {
+														li.parentNode.removeChild(li);
+													} else {
+														mui.toast('删除失败')
+													}
+													tongzhi();
+													ca.closeWaiting();
+												},
+												errFn: function(call) {
+													ca.closeWaiting();
+													mui.toast(call);
+												}
+											});
+										} else {
+											mui.swipeoutClose(li);
+										}
+									})
+								})
+				
+								function tongzhi() {
+									var arr1 = ['shouye', 'shouye2'];
+									ca.sendNotice(arr1, 'updatePushMsgUnreadCount', {});
+								}
+				
+				
+				
+				
+				
+				
+				
+								mui("#list_item").on('tap', '.mui-table-view-cell', function() {
+									//获取id
+									ca.showWaiting();
+									var id = this.getAttribute("data_id");
+									var inn=this.innerHTML.replace(/未读/g,'');
+									ca.className('list'+id)[0].innerHTML=inn;
+									var self = plus.webview.create('information_item_detail.html', 'information_item_detail', {}, {
+										information_id: id
+									});
+									self.show('slide-in-right',400);
+									// 					
+									// 					localStorage.setItem('information_id',id);
+									// 					ca.newInterface({url:'.html',id:'information_item_detail'});
+								})
+				
+								function click_chongshi() {
+									ca.id('sc2').addEventListener('tap', function() {
+										ca.showWaiting();
+										setTimeout(function() {
+											finditem(page);
+										}, 1000)
+				
+									})
+								}
+								mui('body').on('tap','#qingchu',function(){
+									var btnArray = ['是', '否'];
+									mui.confirm('清除所有通知?', '提示', btnArray, function(e) {
+											if(e.index == 0){
+												ca.showWaiting();
+													ca.ajaxs({url:'deletePushMsgAll',data:{
+															user_id:localStorage.getItem('userid')
+														},succFn:function(data){
+																if(data.msg==1){
+																	finditem(1);
+																	tongzhi();
+																}else{
+																	mui.toast('清除失败！');
+																}
+																ca.closeWaiting();
+														},errFn:function(err){
+															mui.toast(err);
+															ca.closeWaiting();
+														}
+													})
+											}else{
+												
+											}
+									})
+								})
+							})
+		</script>
+	</body>
+
+</html>

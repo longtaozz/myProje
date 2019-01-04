@@ -1,0 +1,430 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/style.css" />
+		<link rel="stylesheet" href="../../css/mui.picker.min.css" />
+		<style>
+			.ts-li-titles{
+				overflow: hidden; 
+			    text-overflow: ellipsis; 
+			    -o-text-overflow: ellipsis;
+			    white-space:nowrap;
+			    width: 95%;
+				display: block;
+				
+			}
+			.ts-li-titles1{
+				overflow: hidden; 
+			    text-overflow: ellipsis; 
+			    -o-text-overflow: ellipsis;
+			    white-space:nowrap;
+			    width: 85%;
+				display: block;
+				
+			}
+			table{table-layout:fixed;word-break:break-all;}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav mheader ">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mback"></a>
+		    <h1 class="mui-title htitle">统计分析(景区门票)</h1>
+		</header>
+		<div class="mui-content bgwhite">
+		    <div class="bgwhite w100 pt5 bbc3" style="position:fixed;top: 69px;z-index: 88;">
+		    	<div class="oh h40 lh40">
+		    		<div class="fl w25">
+		    			<span class="ml10 fs14">选择客户</span>
+		    		</div>
+		    		<div class="fl w60 mt5">
+		    			<div class="w100 bde5 h30 lh30 borderr">
+		    				<span class="w80 ml10 ts-li-titles1 fl fs14" id="kehu"></span>
+		    				<div class="fr w10">
+		    					<span class="mui-icon mui-icon-arrowdown ca6a6a6 mt3"></span>
+		    				</div>
+		    				
+		    			</div>
+		    		</div>
+		    	</div>
+		    	<div class="oh h40 lh40">
+		    		<div class="fl w25 fs14">
+		    			<span class="ml10">选择日期</span>
+		    		</div>
+		    		<div class="fl w25 mt5">
+		    			<div class="bde5 w100 h30 borderr fs13 lh30 pl10">
+		    				
+		    			</div>
+		    		</div>
+		    		<div class="fl ml5 mr5 fs14">
+		    			<span>至</span>
+		    		</div>
+		    		<div class="fl w25 mt5">
+		    			<div class="bde5 w100 h30 borderr fs13 lh30 pl10">
+		    			</div>
+		    		</div>
+		    	</div>
+		    	<div class="oh h40 lh40">
+		    		<div class="fl w25 fs14">
+		    			<span class="ml10">每  &nbsp;&nbsp;&nbsp;页</span>
+		    		</div>
+		    		<div class="fl w20 mt5">
+		    			<div class="bde5 w100 h30 borderr lh30 ">
+		    				<span class="fs13 ml20" id="yeshu">15</span>
+		    				<span class="mui-icon mui-icon-arrowdown fr ca6a6a6 mt3"></span>
+		    			</div>
+		    		</div>
+		    		<div class="fl ml5 fs14">
+		    			<span>行</span>
+		    		</div>
+		    		<div class="fl w30 tc aaa h30 mt5 ml10 lh30" id="sousuo" style="border-radius:5px ;">
+		    			<span class="cffffff">搜索</span>
+		    		</div>
+		    	</div>
+		    </div>
+		    <div class="mt13" style="margin-top: 125px;z-index: 10;padding-bottom: 20px;">
+		    	<div>
+		    		<div>
+		    			<table border="1" width="100%" bordercolor="#a6a6a6" id="list">
+		    				
+		    			</table>
+		    			<table border="1" width="100%" bordercolor="#a6a6a6" id="heji">
+		    				
+		    			</table>
+		    		</div>
+		    	</div>
+		    	<div class="mui-content-padded tc">
+					<ul class="mui-pagination mui-pagination-sm" id="fenye">
+						
+					</ul>
+				</div>
+		    </div>
+		</div>
+		<script type="text/javascript" src="../../js/mui.min.js" ></script>
+		<script type="text/javascript" src="../../js/castapp.js" ></script>
+		<script type="text/javascript" src="../../js/mui.picker.min.js" ></script>
+		<script type="text/javascript">
+			mui.init({
+				swipeBack:true //启用右滑关闭功能
+			});
+			ca.init();
+			ca.blackStatusBar();
+			var e_id=localStorage.getItem('e_id');
+			var structure_id=localStorage.getItem('structure_id');
+			var type='ticket';
+			var page=1; 
+			var count=0;
+			var shouci=1;
+			var xiala=ca.className('borderr');
+			var list=ca.id('list');
+			var heji=ca.id('heji');
+			var fenye=ca.id('fenye');
+			var picker1 = new mui.PopPicker();
+			var picker2 = new mui.PopPicker();
+			var shujukong=0;
+			mui.plusReady(function(){
+				showfirst(page);
+				ca.ajaxs({url:'findContractTicket',data:{
+						enterprise_id:e_id,
+						partment_id:structure_id,
+					},
+					succFn:function(data){
+						if(!ca.emptyFun(data)){
+							var arr=new Array();
+							for(var i=0;i<data.length;i++){
+								var ob=new Object();
+								ob.value={client_id:data[i].id,union_id:data[i].union_id};
+								ob.text=data[i].name;
+								arr.push(ob)
+							}
+							picker1.setData(arr);
+						}else{
+							shujukong=1;
+						}
+					},
+					errFn:function(call){
+						
+					}
+				})
+				ca.closeWaiting();
+				xiala[0].addEventListener('tap',function(){
+					if(shujukong==1){
+						mui.toast('没有签约的客户!');
+					}else{
+						picker1.show(function (selectItems) {
+							ca.id('kehu').innerHTML=selectItems[0].text;
+							ca.id('kehu').setAttribute('union_id',selectItems[0].value.union_id);
+							ca.id('kehu').setAttribute('client_id',selectItems[0].value.client_id);
+						})
+					}
+					
+				})
+//				mui('.mui-poppicker').on('tap','.mui-poppicker-btn-cancel',function(){
+//					alert(this);
+//				})
+				xiala[1].addEventListener('tap',function(){
+					showdatapicker(this);
+				})
+				xiala[2].addEventListener('tap',function(){
+					showdatapicker(this);
+				})
+				xiala[3].addEventListener('tap',function(){
+					picker2.setData([{value:'15',text:'15'},{value:'30',text:'30'},{value:'50',text:'50'},{value:'100',text:'100'}]);
+					picker2.show(function (selectItems) {
+						ca.id('yeshu').innerHTML=selectItems[0].text;
+					})
+				})
+				ca.id('sousuo').addEventListener('tap',function(){
+					shouci=1;
+					list.innerHTML="";
+					fenye.innerHTML="";
+					heji.innerHTML="";
+					showfirst(page);
+				})
+				function showfirst(pa){
+					ca.ajaxs({url:'findAccoundGuideStatisticsbyType',data:{
+							type:type,
+							partment_id:structure_id,
+							size:ca.id('yeshu').innerHTML,
+							page:pa,
+							client_id:ca.id('kehu').getAttribute('client_id'),
+							union_id:ca.id('kehu').getAttribute('union_id'),
+							date1:xiala[1].innerText,
+							date2:xiala[2].innerText,
+						},
+						succFn:function(data){
+							if(!ca.emptyFun(data)){
+								if(data.msg==1){
+								var da=data.data.data;
+								var dannum=0;
+								var danz=0;
+								var shuangnum=0;
+								var shuangz=0;
+								var sannum=0;
+								var sanz=0;
+								var sinum=0;
+								var siz=0;
+								for(var a in da){
+									var temp="";
+									if(a==0){
+										temp='<tr class="w100 fs13 tc">'
+						    					+	'<td class="w15">日期</td>'
+						    					+	'<td class="w30">客户</td>'
+						    					+	'<td class="w15">标准</td>'
+						    					+	'<td class="w12">数量</td>'
+						    					+	'<td class="w12">价格</td>'
+						    					+	'<td class="w15">总额</td>'
+						    					+'</tr>'
+						    					+'<tr class="w100 fs12 tc h30">'
+						    					+	'<td colspan="2" rowspan="3" class=""><div>'+da[a].use_date+'</div><div>'+da[a].name+'</div></td>'
+						    					+	'<td class="w15">'+da[a].alias+'</td>'
+						    					+	'<td class="w15">'+(da[a].quantity+da[a].quantity2)+'</td>'
+						    					+	'<td class="w12">'+da[a].price+'</td>'
+						    					+	'<td class="w12 fs12">'+(da[a].price*da[a].quantity+da[a].price*da[a].quantity2)+'</td>'
+						    					+'</tr>'
+						    					+'<tr class="w100 fs12 tc h30">'
+						    					+	'<td class="w15">'+da[a].alias_two+'</td>'
+						    					+	'<td class="w15">'+(da[a].quantity_two+da[a].quantity2_two)+'</td>'
+						    					+	'<td class="w12">'+da[a].price_two+'</td>'
+						    					+	'<td class="w12 fs12">'+(da[a].price_two*da[a].quantity_two+da[a].price_two*da[a].quantity2_two)+'</td>'
+						    					+'</tr>'
+						    					+'<tr class="w100 fs12 tc h30">'
+						    					+	'<td class="w15">'+da[a].alias_three+'</td>'
+						    					+	'<td class="w15">'+(da[a].quantity_three+da[a].quantity2_three)+'</td>'
+						    					+	'<td class="w12">'+da[a].price_three+'</td>'
+						    					+	'<td class="w12 fs12">'+(da[a].price_three*da[a].quantity_three+da[a].price_three*da[a].quantity2_three)+'</td>'
+						    					+'</tr>';
+						    					
+									}else{
+										temp='<tr class="w100 fs12 tc h30">'
+						    					+	'<td colspan="2" rowspan="3" class=""><div>'+da[a].use_date+'</div><div>'+da[a].name+'</div></td>'
+						    					+	'<td class="w15">'+da[a].alias+'</td>'
+						    					+	'<td class="w15">'+(da[a].quantity+da[a].quantity2)+'</td>'
+						    					+	'<td class="w12">'+da[a].price+'</td>'
+						    					+	'<td class="w12 fs12">'+(da[a].price*da[a].quantity+da[a].price*da[a].quantity2)+'</td>'
+						    					+'</tr>'
+						    					+'<tr class="w100 fs12 tc h30">'
+						    					+	'<td class="w15">'+da[a].alias_two+'</td>'
+						    					+	'<td class="w15">'+(da[a].quantity_two+da[a].quantity2_two)+'</td>'
+						    					+	'<td class="w12">'+da[a].price_two+'</td>'
+						    					+	'<td class="w12 fs12">'+(da[a].price_two*da[a].quantity_two+da[a].price_two*da[a].quantity2_two)+'</td>'
+						    					+'</tr>'
+						    					+'<tr class="w100 fs12 tc h30">'
+						    					+	'<td class="w15">'+da[a].alias_three+'</td>'
+						    					+	'<td class="w15">'+(da[a].quantity_three+da[a].quantity2_three)+'</td>'
+						    					+	'<td class="w12">'+da[a].price_three+'</td>'
+						    					+	'<td class="w12 fs12">'+(da[a].price_three*da[a].quantity_three+da[a].price_three*da[a].quantity2_three)+'</td>'
+						    					+'</tr>';
+									}
+									list.innerHTML+=temp;
+									danz+=(da[a].price*da[a].quantity+da[a].price*da[a].quantity2);
+									dannum+=(da[a].quantity+da[a].quantity2);
+									shuangz+=(da[a].price_two*da[a].quantity_two+da[a].price_two*da[a].quantity2_two);
+									shuangnum+=(da[a].quantity_two+da[a].quantity2_two);
+									sanz+=(da[a].price_three*da[a].quantity_three+da[a].price_three*da[a].quantity2_three);
+									sannum+=(da[a].quantity_three+da[a].quantity2_three);
+									siz+=(da[a].price_four*da[a].quantity_four+da[a].price_four*da[a].quantity2_four);
+									sinum+=(da[a].quantity_four+da[a].quantity2_four);
+								}
+								function suan(qu,price,alias){
+									
+								}
+								heji.innerHTML='<tr>'
+					    					+'<td colspan="6" class="tc">合计</td>'
+						    				+'</tr>'
+						    				+'<tr class="tc fs13">'
+						    				+	'<td colspan="2">标准</td>'
+						    				+	'<td colspan="2">数量</td>'
+						    				+	'<td colspan="2">总额</td>'
+						    				+'</tr>'
+						    				+'<tr class="tc fs12">'
+						    				+	'<td colspan="2">全票</td>'
+						    				+	'<td colspan="2">'+dannum+'</td>'
+						    				+	'<td colspan="2">'+danz+'</td>'	
+						    				+'</tr>'
+						    				+'<tr class="tc fs12">'
+						    				+	'<td colspan="2">优惠票</td>'
+						    				+	'<td colspan="2">'+shuangnum+'</td>'
+						    				+	'<td colspan="2">'+shuangz+'</td>'
+						    				+'</tr>'
+						    				+'<tr class="tc fs12">'
+						    				+	'<td colspan="2">特惠票</td>'
+						    				+	'<td colspan="2">'+sannum+'</td>'
+						    				+	'<td colspan="2">'+sanz+'</td>'
+						    				+'</tr>'
+						    				+'<tr class="tc fs13 c52bcec">'
+						    				+	'<td colspan="2">总计</td>'
+						    				+	'<td colspan="2">'+(dannum+shuangnum+sannum+sinum)+'</td>'
+						    				+	'<td colspan="2">'+(danz+shuangz+sanz+siz)+'</td>'
+						    				+'</tr>';
+							    count=data.count;
+								if(shouci==1){
+									fenye.innerHTML="";
+									fenyes();
+									shouci=0;
+								}
+								}
+							}else{
+								mui.toast('没有数据!');
+								fenye.innerHTML="无数据";
+							}
+							ca.closeWaiting();
+						},
+						errFn:function(call){
+							ca.closeWaiting();
+							mui.toast(call);
+						}
+					})
+					
+				}
+				
+				function fenyes(){
+					var aa=(Math.ceil(count/parseInt(ca.id('yeshu').innerHTML)));
+		    		for(var i=0;i<aa;i++){
+		    			if(i==0){
+		    				temp='<li class="mui-previous">'
+								+	'<a href="#">«</a>'	
+								+'</li>'
+								+'<li class="mui-active">'
+								+	'<a href="#" >'+(i+1)+'</a>'	
+								+'</li>';	
+		    			}else if(i==(aa-1)){
+		    				temp='<li>'
+								+	'<a href="#">'+(i+1)+'</a>'	
+								+'</li>'
+								+'<li class="mui-next">'
+								+	'<a href="#" >»</a>'	
+								+'</li>';
+		    			}else{
+		    				temp='<li>'
+								+	'<a href="#">'+(i+1)+'</a>'	
+								+'</li>';
+		    			}
+		    			fenye.innerHTML+=temp;
+		    		}
+				}
+				
+				
+				mui('.mui-pagination').on('tap', 'a', function() {
+				var li = this.parentNode;
+				var classList = li.classList;
+				if (!classList.contains('mui-active') && !classList.contains('mui-disabled')) {
+					var active = li.parentNode.querySelector('.mui-active');
+					if (classList.contains('mui-previous')) {//previous
+						if (active) {
+							var previous = active.previousElementSibling;
+							if (previous && !previous.classList.contains('mui-previous')) {
+								mui.trigger(previous.querySelector('a'), 'tap');
+							} else {
+								classList.add('mui-disabled');
+							}
+						}
+						
+					} else if (classList.contains('mui-next')) {//next
+						if (active) {
+							var next = active.nextElementSibling;
+							if (next && !next.classList.contains('mui-next')) {
+								mui.trigger(next.querySelector('a'), 'tap');
+							} else {
+								classList.add('mui-disabled');
+							}
+						}
+						
+					} else {//page
+						active.classList.remove('mui-active');
+						classList.add('mui-active');
+						page= parseInt(this.innerText);
+						var previousPageElement = li.parentNode.querySelector('.mui-previous');
+						var nextPageElement = li.parentNode.querySelector('.mui-next');
+						previousPageElement.classList.remove('mui-disabled');
+						nextPageElement.classList.remove('mui-disabled');
+						if (page <= 1) {
+							previousPageElement.classList.add('mui-disabled');
+						} else if (page >= 5) {
+							nextPageElement.classList.add('mui-disabled');
+						}
+						list.innerHTML="";
+						showfirst(page);
+					}
+				}
+			});
+			})
+			
+		function showdatapicker(ob){
+				var date = new Date();
+				var year = date.getFullYear();//年
+				var month = date.getMonth() + 1;//月
+				var day = date.getDate();//日
+				ca.dateSelect({
+					defaultTime:year + '-' + month + '-' + day,
+					minTime:(year-2) + '-' + month + '-' + day,
+					maxTime:year + '-'+ (month + 2) + '-' + day,
+					callback:function(data){
+						if(data){
+							ob.innerHTML=data;
+						}
+						
+					}
+				})
+			}	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		</script>
+	</body>
+
+</html>

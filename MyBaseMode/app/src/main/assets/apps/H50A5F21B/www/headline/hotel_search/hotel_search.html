@@ -1,0 +1,336 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/style.css" rel="stylesheet" />
+		<link href="../../css/iconfont.css" rel="stylesheet" />
+		<style>
+			.imgs{
+				border-radius:100px;width: 35px;height: 35px;
+			}
+			.mui-scroll-wrapper1{
+				position: absolute;
+				z-index: 2;
+				top:35px;
+				bottom: 0;
+				left: 0;overflow: hidden;width: 100%;
+			}
+			.mui-scroll1{
+				position: absolute;
+				z-index: 1;width: 100%;-webkit-transform: translateZ(0);
+				transform: translateZ(0);
+			}
+			.quyu{
+				border: 1px solid #D0D0D0;color:#666666;font-size:13px;border-radius:3px;float: left;width:auto;text-align: center;margin-left: 4%;margin-top:8px;height:28px;line-height:28px;width:28%;
+			}
+			.quyu-active{
+				border: 1px solid #18A3E5;color:#18A3E5;font-size:13px;border-radius:3px;float: left;width: 28%;text-align: center;margin-left: 4%;margin-top:8px;height: 28px;line-height:28px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav mheader user-index-top-bg">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left cffffff"></a>
+			<h1 class="mui-title cffffff">团队找房</h1>
+			<span class="fr lh44 mr10 cffffff" id="add" style="position: relative;top:0px;z-index: 888;right: 0px;">
+				<span class="fs14 ">编辑动态</span><span class="iconfont icon-56 ml3 fs17 "></span>
+			</span>
+		</header>
+		<div class="mui-content">
+			<div class="pl10 lh35 h35 fs15 c333333 bgEFEFF4" style="position: fixed;top:69px;width:100%;z-index: 100;">
+				<span id="suozaiquyu" class="c24ABFE">所在区域</span>
+				<span class="iconfont icon-arrLeft-fill c24ABFE"></span>
+			</div>
+			<div id="refreshContainer" class="mui-scroll-wrapper" style="margin-top: 35px;">
+				<div class="mui-scroll">
+					<ul id="list">
+						<!-- <li class="bgwhite headline-div ml10 mr10 oh">
+							<div class="fl w12">
+								<img src="../img/touxiang1.jpg" class="fl ml10 mt10" style="border-radius:100px;width: 35px;height: 35px;"/>
+							</div>
+							<div class="fl w88">
+								<div class="oh h30 fs14 lh40 ">
+									<span class="fl ml10">用途运输有限公司</span>	
+									<span class="fr mr10 fs13 c666666">2017-02-15 15:30</span>
+								</div>
+								<div class="fs12 headline-div-text c666666">
+									<span>十大歌手搜嘎奥奥奥奥奥奥奥奥奥奥奥奥奥军开始嘎多个傻瓜按时间给大家很感动</span>
+								</div>
+								<div class="h30 oh lh30 fs12 c666666 mr10">
+									<span class="fl ml10 iconfont icon-account fs14" ></span><span class="ml3">da[i].employee</span>
+									<span class="fr ml3 phone">da[i].contact_tel</span><span class="fr ml3"></span><span class="fr iconfont icon-lianxiren fs14" ></span>
+								</div>
+							</div>
+						</li> -->
+					</ul>
+				</div>
+				
+			</div>
+			<div id="wushuju" class="disn">
+				<img src="../../img/wushuju.png" style="width: 100%;"/>
+			</div>
+		</div>
+		<div id="middlePopover0" class="mui-popover" style="position:fixed;height:250px;width:80%;left:10%;top:25%;z-index: 1000;">
+			<div class="oh">
+				
+			</div>
+			<div class="mt5">
+				<div style="margin-left:4%;width:92%;background:#D0D0D0;font-size:14px;padding-left:5px;color: #666666;text-align: center;height: 30px;line-height: 30px;">
+					<span>区域筛选</span>
+				</div>
+				<div class="mui-scroll-wrapper1" id="mui-scroll1">
+					<div class="mui-scroll1">
+						<ul id="city_list">
+							
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/castapp.js"></script>
+		<script src="../../js/template-web.js"></script>
+		<script id='list_ul' type="text/template">
+			{{each data}}
+				<li class="bgwhite  mt8 headline-div  ml10 mr10 oh">
+					<div class="fl w12">
+						<img src="{{$value.employee.img_url}}" class="fl ml10 mt10 imgs"/>
+					</div>
+					<div class="fl w88">
+						<div class="oh h30 fs14 lh40 ">
+							<span class="fl ml10">{{$value.employee.enterprise.alias}}</span>	
+							<span class="fr mr10 fs13">{{$value.update_time.slice(0,16)}}</span>
+						</div>
+						<div class="fs12 headline-div-text c666666 ml10 ">
+							<div>{{$value.city}} {{$value.county}}</div>
+							<div class="mr10">
+								<span>{{$value.name}}</span>
+								<span class="ml3">{{$value.content}}</span>
+							</div>
+							
+						</div>
+						<div class="h30 oh lh30 fs12 c666666 mr10">
+							<span class="fl ml10 iconfont icon-account fs14" ></span><span class="ml3">{{$value.employee.realname}}</span>
+							<span class="fr ml3 phone">{{$value.contact_tel}}</span><span class="fr ml3">{{$value.contact_name}}</span><span class="fr iconfont icon-lianxiren fs14" ></span>
+						</div>
+					</div>
+				</li>
+			{{/each}}
+		</script>
+		<script type="text/javascript">
+			mui.plusReady(function(){
+				mui.init({
+					pullRefresh : {
+						container:"#refreshContainer",
+						down : {
+							style:'circle',//必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
+							color:'#24ABFE', 
+							height:50,//可选,默认50.触发下拉刷新拖动距离,
+							auto: false,//可选,默认false.首次加载自动下拉刷新一次
+							contentdown : "下拉可以刷新",//可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
+							contentover : "释放立即刷新",//可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
+							contentrefresh : "正在刷新...",//可选，正在刷新状态时，下拉刷新控件上显示的标题内容
+							callback :downFn //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+						},
+						up: {
+							contentrefresh: '正在加载...',
+							callback: upFn // 上拉执行函数
+						}
+					},
+					swipeBack:true
+				});
+				ca.init();
+				var page=1,pages=1,time=getDate(),city='',city_data='',city_active=localStorage.getItem('city');
+				ca.id('suozaiquyu').innerText=city_active;
+				function downFn(){
+					 // mui('#refreshContainer').pullRefresh().endPulldown();
+					 dowFind();
+				}
+				function upFn(){
+					if(pages==0){
+						mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
+					}else{
+						page++;
+						findAll();
+						this.endPullupToRefresh(false);
+					}
+				}
+				findAll();
+				function findAll(){
+					ca.ajaxs({url:'findPostmsgHotelSearch',data:{
+							user_id:localStorage.getItem('userid'),page:page,time:'',city:city
+						},succFn:function(data){
+							if(!ca.emptyFun(data.data)){
+								ca.id('refreshContainer').classList.add('disb');
+								ca.id('wushuju').classList.add('disn');
+								ca.id('refreshContainer').classList.remove('disn');
+								if(ca.emptyFun(data.next_item)){
+									pages=0;
+								}
+								try{
+									ca.id('list').innerHTML+=template('list_ul',{
+										'data':data.data
+									})
+								}catch(e){
+									console.log(e);
+								}
+							}else{
+								ca.id('wushuju').classList.add('disb');
+								ca.id('refreshContainer').classList.add('disn');
+								ca.id('wushuju').classList.remove('disn');
+							}
+							ca.closeWaiting();
+						},errFn:function(err){
+							ca.closeWaiting();
+							mui.toast(err);
+						}
+					})
+				}
+				
+				ca.id('add').addEventListener('tap',function(){
+					ca.showWaiting();
+					var self=plus.webview.create('edit_hotel_search.html','edit_hotel_search');
+					self.show('slide-in-right',400);
+				})
+				/**
+				 * 显示区域筛选
+				 */
+				ca.className('bgEFEFF4')[0].addEventListener('tap',function(){
+					ca.id('city_list').innerHTML='';
+					if(!ca.emptyFun(city_data)){
+						setCity();
+					}else{
+						findcity();
+					}
+					
+				})
+				/**
+				 * 查询用户所在省份的city
+				 */
+				function findcity(){
+					ca.showWaiting();
+					ca.ajaxs({url:'findUserProvincecity',data:{
+							user_id:localStorage.getItem('userid'),
+						},succFn:function(data){
+							if(!ca.emptyFun(data)){
+								city_data=data;
+								setCity();
+							}
+							ca.closeWaiting();
+						},errFn:function(err){
+							ca.closeWaiting();
+							mui.toast(err);
+						}
+					})
+				}
+				/**
+				 * 设置内容
+				 */
+				function setCity(){
+					for(var a in city_data){
+						var temp='';
+						if(city_data[a].name==city_active){
+							temp='<li class="quyu-active">'+city_data[a].name+'</li>'
+						}else{
+							temp='<li class="quyu">'+city_data[a].name+'</li>';
+						}
+						ca.id('city_list').innerHTML+=temp;
+						mui('#middlePopover0').popover('show');
+						mui('.mui-scroll-wrapper1').scroll();
+					}
+				}
+				/**
+				 * 点击筛选列表
+				 */
+				mui('#city_list').on('tap','li',function(){
+					if(this.classList.contains('quyu-active')){
+					}else{
+						city_active=this.innerText;
+						city=this.innerText;
+					}
+					ca.id('suozaiquyu').innerText=city_active;
+					mui('#middlePopover0').popover('hide');
+					page=1;
+					pages=1;
+					ca.id('list').innerHTML='';
+					mui('#refreshContainer').pullRefresh().refresh(true);
+					findAll();
+				})
+				/**
+				 * 拨打电话号码
+				 */
+				mui('#list').on('tap','.phone',function(){
+					ca.callPhone(this.innerText);
+				})
+				/**
+				 * 下拉查询数据
+				 */
+				function dowFind(){
+					ca.ajaxs({url:'findPostmsgHotelSearch',data:{
+							user_id:localStorage.getItem('userid'),page:page,time:time,city:city
+						},succFn:function(data){
+							if(!ca.emptyFun(data)){
+								var datas=data;
+								for(var a in datas){
+									var li=document.createElement('li');
+									li.className='bgwhite  mt8 headline-div  ml10 mr10 oh';
+									li.innerHTML='<div class="fl w12">'
+												+	'<img src="'+datas[a].employee.img_url+'" class="fl ml10 mt10 imgs"/>'
+												+'</div>'
+												+'<div class="fl w88">'
+												+	'<div class="oh h30 fs14 lh40 ">'
+												+		'<span class="fl ml10">'+datas[a].employee.enterprise.alias+'</span>'
+												+		'<span class="fr mr10 fs13">'+datas[a].update_time.slice(0,16)+'</span>'
+												+	'</div>'
+												+	'<div class="fs12 headline-div-text c666666 ml10">'																	+		'<div>'+datas[a].city+' '+datas[a].county+'</div>'
+												+		'<div class="mr10">'
+												+			'<span>'+datas[a].name+'</span>'
+												+			'<span class="ml3">'+datas[a].content+'</span>'
+												+		'</div>'
+												+	'</div>'
+												+	'<div class="h30 oh lh30 fs12 c666666 mr10">'
+												+		'<span class="fl ml10 iconfont icon-account fs14" ></span><span class="ml3">'+datas[a].employee.realname+'</span>'
+												+		'<span class="fr ml3 phone">'+datas[a].contact_tel+'</span><span class="fr ml3">'+datas[a].contact_name+'</span><span class="fr iconfont icon-lianxiren fs14"></span>'
+												+	'</div>'	
+												+'</div>';
+									ca.id('list').insertBefore(li,ca.id('list').firstChild);
+								}
+							}
+							time=getDate();
+							mui('#refreshContainer').pullRefresh().endPulldown();
+							ca.closeWaiting();
+						},errFn:function(err){
+							ca.closeWaiting();
+							mui.toast(err);
+						}
+					})
+				}
+				
+				function getDate(){
+					var date = new Date();
+					var year = date.getFullYear();//年
+					var month = date.getMonth() + 1;//月
+					var days = date.getDate();//日
+					if(date.getHours() < 10){
+						var h = '0'+date.getHours();
+					}else{
+						var h = date.getHours();
+					}
+					if(date.getMinutes() < 10){
+						var m = '0'+date.getMinutes();
+					}else{
+						var m = date.getMinutes();
+					}
+					return year+'-'+month+'-'+days+' '+h+':'+m;
+				}
+			})
+			
+		</script>
+	</body>
+
+</html>

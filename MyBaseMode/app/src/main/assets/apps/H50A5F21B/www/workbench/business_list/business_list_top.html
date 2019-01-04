@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../css/style.css" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav user-index-top-bg mheader" >
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left cffffff"></a>
+		    <h1 class="mui-title" style="font-size: 18px !important;color: #FFFFFF !important;">业务录单</h1>
+		</header>
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/castapp.js" ></script>
+		<script type="text/javascript">
+			mui.init({
+				 subpages:[{
+			      url:'business_list.html',//下拉刷新内容页面地址
+			      id:'business_list',//内容页面标志
+			      styles:{
+			       top:'69px',
+			       bottom:'1px',
+			      }
+			    }]
+	       });
+	       ca.init();
+	       ca.whiteStatusBar();
+		</script>
+	</body>
+
+</html>

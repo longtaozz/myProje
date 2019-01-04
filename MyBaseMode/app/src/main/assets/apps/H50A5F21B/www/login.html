@@ -1,0 +1,209 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<style>
+			input::-webkit-input-placeholder{
+				color: #b2b2b2;
+				font-size: 15px;
+			}
+		</style>
+	</head>
+
+	<body style="background-image: url(img/loginbj-min.jpg);background-size: 100%;">
+		<div style="margin:25% 15% 0 15%;">
+			<div style="width: 100%;text-align: center;">
+				<span style="font-size: 33px;font-weight:bold ;color: #4F77AA;">优旅通</span>
+			</div>
+			<div style="border-bottom: 1px solid #CCCCCC;height: 40px;margin-top: 50px;">
+				<input type="text" style="border: 0px;background-color:rgba(0,0,0,0);" placeholder="请输入企业号"/>
+			</div>
+			<div style="border-bottom: 1px solid #CCCCCC;height: 40px;margin-top: 20px;">
+				<input type="text" style="border: 0px;background-color:rgba(0,0,0,0);" placeholder="请输入工号"/>
+			</div>
+			<div style="border-bottom: 1px solid #CCCCCC;height: 40px;margin-top: 20px;">
+				<input type="password"  style="border: 0px;background-color:rgba(0,0,0,0);" placeholder="请输入密码"/>
+			</div>
+			<div style="margin-top: 20px;overflow: hidden;" class="disn">
+				<span style="float: right;font-size:13px;color: #777777;">忘记密码？</span>
+			
+			</div>
+			<div style="margin-top: 20px;">
+				<input type="button" value="登  录" style="width: 100%;height: 40px;border-radius:20px ;background: #4F77AA;color: #FFFFFF;font-size: 16px;"/>
+			</div>
+			<div style="margin-top: 25px;text-align:center;" class="disn">
+				<span style="font-size: 14px;color: #666666;border-bottom: 1px solid #666666;">获取账号</span>
+			</div>
+		</div>
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript" src="js/castapp.js" ></script>
+		<script type="text/javascript" src="js/md5.js" ></script>
+		<script type="text/javascript">
+			alert(1)
+			mui.plusReady(function(){
+				mui.init();
+				ca.init();
+				var input=document.getElementsByTagName('input');
+				var url=localStorage.getItem('url');
+				var span=ca.tagName('span');
+				input[3].addEventListener('tap',function(){
+					var qiyehao=input[0].value;
+					var gonghao=input[1].value;
+					var mima=input[2].value;
+					if(!qiyehao){
+						mui.toast('请输入企业号');
+						return;
+					}
+					if(!gonghao){
+						mui.toast('请输入工号');
+						return;
+					}
+					if(!mima){
+						mui.toast('请输入密码');
+						return;
+					}
+					plus.nativeUI.showWaiting('努力加载中...');
+					ca.checkTheNetwork();
+					ca.ajaxs({url:'login',data:{
+							e_code:qiyehao,
+							username:gonghao,
+							password:mima,
+						},succFn:function(data){
+							var da=data;
+							if(da.msg==1){
+								mui.toast(da.msg_value);
+								input[0].focus();
+								ca.closeWaiting();
+								return;
+							}
+							if(da.msg==2){
+								mui.toast(da.msg_value);
+								input[1].focus();
+								ca.closeWaiting();
+								return;
+							}if(da.msg==3){
+								mui.toast(da.msg_value);
+								input[2].focus();
+								ca.closeWaiting();
+								return;
+							}
+							if(da.msg==4){
+								mui.toast(da.msg_value);
+								localStorage.setItem('loginlasttime',new Date().getTime());
+								localStorage.setItem('userid',da.data.id);
+								localStorage.setItem('isadmin',da.data.is_admin);
+								localStorage.setItem('username',da.data.username);
+								localStorage.setItem('password',da.data.password);
+								localStorage.setItem('e_id',da.data.e_id);
+								localStorage.setItem('province',da.data.enterprise.province);
+								localStorage.setItem('city',da.data.enterprise.city);
+								localStorage.setItem('e_name',da.data.enterprise.name);
+								localStorage.setItem('structure_id',da.data.structure_id);
+								localStorage.setItem('structure_name',da.data.structure.name);
+								localStorage.setItem('e_code',da.data.e_code);
+								localStorage.setItem('im_token',da.data.im_token)
+								localStorage.setItem('realname',da.data.realname);
+								localStorage.setItem('userimg_url',da.data.img_url);
+								var user=localStorage.getItem('account_switch');
+								var arrs = JSON.parse(user);
+								var arr = new Array();
+								if(arrs == null) {
+								} else {
+									if(arrs.length > 0) {
+										arr = arrs;
+									}
+								}
+								for(var i=0;i<arr.length;i++){
+									if(arr[i].userid==da.data.id){
+										arr.splice(i,1);
+									}
+								}
+								var ob=new Object;
+								ob.userid=da.data.id;
+								ob.istrue=1;
+								ob.loginlasttime=new Date().getTime();
+								ob.isadmin=da.data.is_admin;
+								ob.username=da.data.username;
+								ob.password=hex_md5(da.data.password);
+								ob.realname=da.data.realname;
+								ob.e_id=da.data.e_id;
+								ob.e_name=da.data.enterprise.name;
+								ob.structure_id=da.data.structure_id;
+								ob.structure_name=da.data.structure.name;
+								ob.e_code=da.data.e_code;
+								ob.im_token=hex_md5(da.data.username+da.data.password);
+								ob.userimg_url=da.data.img_url;
+								if(arr.length==5){
+									arr.splice(4,1);
+								}else{
+								}
+								arr.splice(0,0,ob);
+								localStorage.setItem('account_switch', JSON.stringify(arr));
+								var self=plus.webview.create('index.html','index')
+// 								var page = mui.preload({
+// 									url:'index.html',
+// 									id:'index',//默认使用当前页面的url作为id
+// 									styles:{},//窗口参数
+// 									extras:{}//自定义扩展参数
+// 								});
+								input[0].value="";
+								input[2].value="";
+								setTimeout(function(){
+									var vInfo = plus.push.getClientInfo();
+									ca.ajaxs({url:'we',data:{
+											id:localStorage.getItem('userid'),cid:vInfo.clientid
+										},succFn:function(data){
+										},errFn:function(err){
+											mui.toast(err);
+										}
+									})
+								},500)
+								
+								
+	//							var arr1 = ['user_index1'];
+	//							ca.sendNotice(arr1,'update',{});
+								setTimeout(function(){
+									self.show('slide-in-right',500);
+									ca.closeWaiting();
+	//								ca.newInterface({url:'index.html',id:'index'})
+								},1500);
+								
+							}
+						},errFn:function(call){
+							ca.closeWaiting();
+							mui.toast(call);
+						}
+					})
+					
+				})
+				//监听安卓返回键
+				var first = null;
+				mui.back = function() {
+					if (!first) {
+						first = new Date().getTime();
+						mui.toast('再按一次退出应用');
+						setTimeout(function() {
+							first = null;
+						}, 1000);
+					} else {
+						if (new Date().getTime() - first < 1000) {
+							plus.runtime.quit();
+						}
+					}
+				}
+				span[1].addEventListener('tap',function(){
+					mui.toast('请联系企业管理员！');
+				})
+				span[2].addEventListener('tap',function(){
+					var self=plus.webview.create('advertisement/account_description.html','account_description');
+					self.show('slide-in-right',400);
+				})
+			})
+		</script>
+	</body>
+
+</html>

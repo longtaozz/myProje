@@ -1,0 +1,196 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="css/mui.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="css/style.css"/>
+		<link rel="stylesheet" type="text/css" href="css/iconfont.css"/>
+		<style type="text/css">
+			.user-index-div2{
+				overflow: hidden;
+				height: auto;
+				background: #fff;
+				margin:0px 5px 0px 5px;
+				border-radius:5px ;
+			}
+			.user-index-div3{
+				overflow: hidden;
+				height: auto;
+				background: #fff;
+				margin:10px 5px 0px 5px;
+				border-radius:5px;
+				
+			}
+			.user-index-div3-d1{
+				overflow: hidden;
+			}
+			.user-index-div3-d2{
+				width:100%;
+				display: inline;
+				white-space: nowrap;/*规定段落中的文本不进行换行*/
+				overflow-x:scroll;/*水平方向，超出部分添加滚动机制*/
+				float:left;/*一定要设置左侧浮动*/
+				overflow-y:hidden
+			}
+			.user-index-div3-d2 div{
+				width: 20%;
+				display:inline-block;
+				margin-top: 5px;
+				margin-bottom: 10px;
+				text-align: center;
+				/* display:block; */
+			}
+			.user-index-div3-d2 .w20 span{
+				text-align: center;
+				display:block;
+			}
+			.user-index-div4{
+				overflow: hidden;
+				height: auto;
+				background: #fff;
+				margin:10px 5px 0px 5px;
+				border-radius:5px ;
+			}
+			.user-index-div4-d1{
+				overflow: hidden;
+			}
+			.user-index-div4-d2 .w20{
+				margin-top: 5px;
+				margin-bottom: 10px;
+				text-align: center;
+				display:block;
+			}
+			.user-index-div4-d2 .w20 span{
+				text-align: center;
+				display:block;
+			}
+			.user-index-div-sy{
+				height: auto;
+				background: #fff;
+				margin:10px 5px 10px 5px;
+				border-radius:5px ;
+				height: 45px;
+				line-height: 45px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav mheader user-index-top-bg">
+			<h1 class="mui-title cffffff">操作</h1>
+		</header>
+		<div class="mui-content">
+			<div class="user-index-div-sy" >
+				<div class="fl ml15">
+					<span class="iconfont icon-yemianshezhi" style="font-size: 28px;"></span>
+				</div>
+				<div class="fl fs15 ml7 c333333">
+					<span>使用说明</span>
+				</div>
+				
+			</div>
+			<div class="user-index-div2" id="div0">
+				
+			</div>
+			<div class="user-index-div4" id="div1">
+				
+			</div>
+			<div class="user-index-div4" id="div2">
+				
+			</div>
+			<div class="user-index-div4" id="div3">
+				
+			</div>
+			<div class="user-index-div4" id="div4">
+				
+			</div>
+		</div>
+		<script src="js/mui.js"></script>
+		<script src="js/castapp.js"></script>
+		<script type="text/javascript">
+			mui.plusReady(function(){
+				mui.init();
+				ca.init();
+				document.addEventListener("netchange",checkTheNetwork,false);//检测网络环境发生变化
+				function checkTheNetwork(){
+					ca.getMachineInfo(function(data){
+						if(data.network=='未连接网络'){
+							mui.toast('网络断开连接');
+						}else if(data.network=='2G蜂窝网络' || data.network=='3G蜂窝网络'){
+							mui.toast('网络断开连接')
+						}else{
+							findMenu();
+						}
+					})
+				}
+				findMenu();
+				function showMenu(data){
+					if(!ca.emptyFun(data)){
+						for(var a in data){
+							var child=data[a].children;
+							if(!ca.emptyFun(child)){
+								var chs="";
+								for(var c in child){
+									var ch='<div class="w20 fl menu" data-url="'+child[c].url.split('|')[0]+'" data_type="'+child[c].url.split('|')[1]+'">'
+										+		'<span class="iconfont icon-'+child[c].icon+' fs22 c666666"></span><span class="fs12 c666666">'+child[c].name+'</span>'
+										+	'</div>';
+									chs+=ch;	
+								}
+								var divv='<div class="user-index-div4-d1">'
+										+	'<div class="fl mt10 ml15"><span class="iconfont icon-'+data[a].parent.icon+' fs21 "></span></div>'
+										+	'<div class="fl mt6 ml7"><span class="fs15 lh30 c333333">'+data[a].parent.name+'</span></div>'	
+										+'</div>'
+										+'<div class="user-index-div4-d2">'
+										+	chs
+										+'</div>';
+								if(a==0){
+									ca.id('div0').innerHTML=divv;
+								}else{
+									var aaa='div'+a;
+									ca.id(aaa).innerHTML=divv;
+								}
+							}
+						}
+					}else{
+						ca.id('div1').innerHTML='无操作权限';
+					}
+				}
+				function findMenu(){
+					ca.ajaxs({url:'findMenu1',data:{
+						},succFn:function(data){
+							if(!ca.emptyFun(data)){
+								showMenu(data.data);
+								ca.closeWaiting();
+							}
+						},errFn:function(err){
+							mui.toast(err);
+							ca.closeWaiting();
+						}
+					})
+				}
+				mui('body').on('tap','.menu',function(){
+					ca.showWaiting();
+					var urls=this.getAttribute('data-url');
+					var type=this.getAttribute('data_type');
+					localStorage.setItem('business_sorder_type',type);
+					var ids=urls.substring(urls.lastIndexOf('/')+1,urls.lastIndexOf('.'));
+					var self=plus.webview.create(urls,ids,{},{});
+					setTimeout(function(){
+						self.show('slide-in-right',350)
+					},200)
+				})
+				mui('body').on('tap','.user-index-div-sy',function(){
+					var self=plus.webview.create('advertisement/instructions.html','instructions',{},{});
+					setTimeout(function(){
+						self.show('slide-in-right',350)
+					},200)
+				})
+			})
+			
+		</script>
+	</body>
+
+</html>

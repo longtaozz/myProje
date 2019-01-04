@@ -1,0 +1,623 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/style.css" rel="stylesheet" />
+		<style>
+			.team_list_li{
+				
+			}
+			.team_list_li_d1 div{
+				font-size: 14px;
+				color: #666666;
+			}
+			.team_list_li_d2{
+				border-radius:20px;padding: 1px 5px;
+			}
+			.team_list_screen{
+				height:35px;position:fixed;top:69px;width: 100%;z-index: 100;background: #FFFFFF;
+			}
+			.popovers{
+				position:fixed;height: 250px;width: 100%;border-radius:0px ;z-index: 1000;
+			}
+			.mui-scroll-wrapper1{
+				position:relative;
+				z-index: 2;
+				top: 0;
+				bottom: 0;
+				left: 0;overflow: hidden;width: 100%;
+			}
+			.mui-scroll1{
+				position: relative;
+				z-index: 1;width: 100%;-webkit-transform: translateZ(0);
+				transform: translateZ(0);
+			}
+			.popovers-div2{
+				float: left;
+				width: 50%;
+				text-align: center;
+				height: 35px;
+				line-height: 35px;
+				font-size: 14px;
+				color: #333333;
+			}
+			.popovers-div2-active{
+				float: left;
+				width: 50%;
+				text-align: center;
+				border-bottom: 1px solid #18A3E5;
+				height: 35px;
+				line-height: 35px;
+				color: #18A3E5;
+				font-size: 14px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav user-index-top-bg mheader">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left cffffff"></a>
+			<span class="cffffff fl fs15 ml20" style="line-height: 42px;">团队计划</span>
+		</header>
+		<div class="team_list_screen">
+			<div class="shaixuan-div" data_id="1">
+				<span class="shaixuan-divxiala-zi">状态筛选</span>
+				<span class="mui-icon mui-icon-arrowdown"></span>
+			</div>
+			<div class="shaixuan-div" data_id="2">
+				<span class="shaixuan-divxiala-zi">线路/导游</span>
+				<span class="mui-icon mui-icon-arrowdown"></span>
+			</div>
+			<div class="shaixuan-div" data_id="3">
+				<span class="shaixuan-divxiala-zi ts-li-title fl" style="width: 70%;">发班日期</span>
+				<span  class="mui-icon mui-icon-arrowdown fl mt5 ml3"></span>
+			</div>
+		</div>
+		<div id="pullrefresh" class="mui-content mui-scroll-wrapper" style="margin-top:60px;">
+			<div class="mui-scroll">
+				<ul class="" id="list_item">
+					<!-- <li class="team_list_li" style="background: #FFFFFF;margin: 5px;border-radius:5px;">
+						<div class="ml10 team_list_li_d1 bbf0 mr10" data_id="17">
+							<div class="pt5">
+								<span class="fs16 c333333">张家界三日游</span>
+							</div>
+							<div>
+								<span>团号:</span><span class="ml10">ST1216521345</span>
+							</div>
+							<div>
+								<span>团期:</span><span class="ml10">2018-10-26</span><span>--</span><span>2018-10-26</span>
+							</div>
+							<div>
+								<span>人数:</span><span class="ml10">39人(成人 31 儿童7)</span>
+							</div>
+							<div class="mb7">
+								<span>公司:</span><span class="ml10">湘西中旅 业务一部</span>
+								<span>业务计调:</span> <span>李四</span>
+							</div>
+						</div>
+						<div class="oh h40 pt6 ml10">
+							<div class="bdff8201 fl cff8201" style="border-radius:20px;padding: 1px 5px;">
+								<span class="fs14">审核报账</span>
+							</div>
+							<div class="bdff8201 fl cff8201 ml10" style="border-radius:20px;padding: 1px 5px;">
+								<span class="fs14">计划采购</span>
+							</div>
+						</div>
+					</li>		 -->	
+				</ul>
+			</div>
+		</div>
+		<div id="middlePopover0" class="mui-popover popovers">
+			<div class="mui-scroll-wrapper1" id="mui-scroll-wrapper1" style="height: 250px;">
+				<div class="mui-scroll1">
+					<ul class="mui-table-view mui-table-view-radio fs12" style="max-height: 1000px;">
+						<li class="mui-table-view-cell mui-selected" data_id=0 >
+							<a class="mui-navigate-right">全部</a>
+						</li>
+						<li class="mui-table-view-cell" data_id=1>
+							<a class="mui-navigate-right">收客</a>
+						</li>
+						<li class="mui-table-view-cell" data_id=2>
+							<a class="mui-navigate-right">成团</a>
+						</li>
+						<li class="mui-table-view-cell"  data_id=3>
+							<a class="mui-navigate-right">运行</a>
+						</li>
+						<li class="mui-table-view-cell" data_id=4>
+							<a class="mui-navigate-right">结束</a>
+						</li>
+						<li class="mui-table-view-cell" data_id=5>
+							<a class="mui-navigate-right">报账</a>
+						</li>
+						<li class="mui-table-view-cell"  data_id=6>
+							<a class="mui-navigate-right">暂停</a>
+						</li>
+						<li class="mui-table-view-cell" data_id=7>
+							<a class="mui-navigate-right">取消</a>
+						</li>
+						<li class="mui-table-view-cell"  data_id=9>
+							<a class="mui-navigate-right">完成</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div id="middlePopover1" class="mui-popover popovers" style="height:349px;">
+			<div class="oh bbf0">
+				<div class="popovers-div2-active popovers-d2" data_id="1">
+					<span>线路</span>
+				</div>
+				<div class="popovers-div2 popovers-d2" data_id="2">
+					<span>导游</span>
+				</div>
+			</div>
+			<div class="">
+				<div class="pt9">
+					<input type="text" placeholder="搜索线路" style="width:65%;border-radius:25px; height: 30px;margin-left: 15%;font-size: 14px;"/>
+					<span class="mui-icon mui-icon-search c666666"></span>
+				</div>
+				<div class="mui-scroll-wrapper1" style="height:259px;">
+					<div class="mui-scroll1">
+						<ul class="" id="popovers-d2-ul" style="max-height: 2000px;">
+							
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="disn" style="z-index:1000;position:fixed;background: #FFFFFF;width: 100%;top:69px;height: 350px;">
+			
+		</div>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/castapp.js"></script>
+		<script src="../../js/template-web.js"></script>
+		<script id="lists" type="text/template">
+			{{each list}}
+				<li class="team_list_li" style="background: #FFFFFF;margin: 5px;border-radius:5px;">
+					<div class="ml10 team_list_li_d1 bbf0 mr10" data_id="{{$value.id}}" data_end_date="{{$value.end_date}}" data_atatus="{{$value.status}}">
+						<div class="pt5">
+							<span class="fs16 c333333 yc1">{{$value.line_name}}</span>
+						</div>
+						<div>
+							<span>团号:</span><span class="ml10">{{$value.team_num}}</span>
+						</div>
+						<div>
+							<span>团期:</span><span class="ml10">{{$value.start_date}}</span><span>--</span><span>{{$value.end_date}}</span>
+						</div>
+						<div>
+							<span>人数:</span><span class="ml10">{{$value.man_num+$value.child_num}}人(成人{{$value.man_num}} 儿童{{$value.child_num}})</span>
+						</div>
+						<div class="mb7">
+							<span>公司:</span><span class="ml10">{{$value.structure.enterprise.alias}} {{$value.structure.name}}</span>
+							<span class="ml5">导游:</span> <span>{{$value.guide?$value.guide.alias:'无'}} </span><span>{{$value.guide?$value.guide.contact_tel:''}}</span>
+						</div>
+					</div>
+					<div class="oh h40 pt6 ml10">
+						<div class="fl fs15">
+							{{if $value.status==1}}
+								<span class="c1296db">收客</span>
+							{{else if $value.status==2}}
+								<span class="c18A3E5">成团</span>
+							{{else if $value.status==3}}
+								<span class="c3F99DE">运行</span>
+							{{else if $value.status==4}}
+								<span class="cF97B2C">结束</span>
+							{{else if $value.status==5}}
+								<span class="c52bcec">报账</span>
+							{{else if $value.status==6}}
+								<span class="cF97B2C">暂停</span>
+							{{else if $value.status==7}}
+								<span class="c999999">取消</span>
+							{{else if $value.status==8}}
+								<span class="c1296db"></span>
+							{{else if $value.status==9}}
+								<span class="cred">完成</span>
+							{{/if}}
+						</div>
+						{{#$value.status | dateFormat:$value.end_date,$value.id}}
+						{{#$value.status | dateFormat1:$value.end_date,$value.id,$value.team_num,$value.days,$value.start_date,$value.man_num+$value.child_num,$value.end_date}}
+						{{if $value.status>=3 && $value.status<7}}
+							<div class="bdff8201 fr mr5 cff8201 bz team_list_li_d2">
+								<span class="fs14">审核报账</span>
+							</div>
+						{{/if}}
+						{{if $value.status>=2 && $value.status<7}}
+							<!-- <div class="bdff8201 fr mr5 cff8201 ys team_list_li_d2">
+								<span class="fs14">团队预算</span>
+							</div> -->
+						{{/if}}
+					</div>
+				</li>
+			{{/each}}
+		</script>
+		<script type="text/javascript">
+			mui.plusReady(function(){
+				mui.init({
+					pullRefresh : {
+						container:"#pullrefresh",//下拉刷新容器标识
+						up: {
+							contentrefresh: '正在加载...',
+							callback: upFn // 上拉执行函数
+						}
+					}
+				});
+				mui('.mui-scroll-wrapper1').scroll({
+					deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+				});
+				ca.init();
+				ca.whiteStatusBar();
+				var page=1,pages=1;
+				var team_status=0,two_type="",two_id="",start_date="";
+				function upFn(){
+					if(pages==0){//判断是否有数据  0无 不再执行下拉刷新
+						this.endPullupToRefresh(true);
+					}else{
+						page=page+1;
+						findTeamSkList(0);
+						this.endPullupToRefresh(false);
+					}
+				}
+				ca.receiveNotice('update',function(){
+					
+				});
+				
+				findTeamSkList(0);
+				function findTeamSkList(ids){
+					ca.ajaxs({url:'findAllTeamSk',data:{
+							user_id:localStorage.getItem('userid'),page:page,team_status:team_status,two_type:two_type,two_id:two_id,start_date:start_date
+						},succFn:function(data){
+							var da1=data.next_item;
+							if(da1==null){
+								pages=0;
+							}
+							if(data.data=="" && page==1){
+								ca.id('list_item').innerHTML="暂无数据";
+								ca.closeWaiting();
+								return;
+							}
+							try{
+								template.defaults.imports.dateFormat = function(arg1,arg2,arg3){
+									var myDate = new Date();
+									var ye=myDate.getFullYear();
+									var mo=myDate.getMonth()+1; //获取当前月份(0-11,0代表1月)
+									var day=myDate.getDate();
+									var mmda=ye+'-'+mo+'-'+day;
+									var date = new Date(mmda.replace(/-/g, '/'));
+									var date1 = new Date(arg2.replace(/-/g, '/'));
+									if(date.getTime()<=date1.getTime() && arg1!=4 && arg1!=7 && arg1!=9){
+										return '<div class="bdff8201 fr mr5 cff8201 xg team_list_li_d2" data_id="'+arg3+'"><span class="fs14">修改</span></div>';
+									}else{ 
+										return '';
+									}
+								};
+								template.defaults.imports.dateFormat1 = function(arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8){
+									var myDate = new Date();
+									var ye=myDate.getFullYear();
+									var mo=myDate.getMonth()+1; //获取当前月份(0-11,0代表1月)
+									var day=myDate.getDate();
+									var mmda=ye+'-'+mo+'-'+day;
+									var date = new Date(mmda.replace(/-/g, '/'));
+									var date1 = new Date(arg2.replace(/-/g, '/'));
+									if(date.getTime()<=date1.getTime()){
+										if(arg1==2 || arg1==3 || arg1==1){
+											if(arg7>0){
+												return '<div class="bdff8201 fr cff8201 mr5 cg team_list_li_d2" data_id="'+arg3+'" data_start_date="'+arg6+'" data_end_date="'+arg8+'" data_days="'+arg5+'" data_team_num="'+arg4+'"><span class="fs14">计划采购</span></div><div class="bdff8201 fr cff8201 mr5 wpdy team_list_li_d2" data_id="'+arg3+'" data_start_date="'+arg6+'" data_days="'+arg5+'" data_team_num="'+arg4+'"><span class="fs14">委派导游</span></div>';
+											}else{
+												return '<div class="bdff8201 fr cff8201 mr5 wpdy team_list_li_d2" data_id="'+arg3+'" data_start_date="'+arg6+'" data_days="'+arg5+'" data_team_num="'+arg4+'"><span class="fs14">委派导游</span></div>';
+											}
+											
+										}else{
+											return '';	
+										}
+									}else{ 
+										return '';
+									}
+								};
+								if(ids==0){
+									ca.id('list_item').innerHTML+=template('lists', {
+										"list":data.data
+									});
+								}else{
+									ca.id('list_item').innerHTML=template('lists', {
+										"list":data.data
+									});
+								}
+								
+							}catch(err){
+								console.log(err);
+							}
+							ca.closeWaiting();
+						},errFn:function(err){
+							ca.closeWaiting();
+							mui.toast(err);
+						}
+					})
+				}
+				var chongxingfind=function(){
+					page=1;
+					pages=1;
+					ca.id('list_item').innerHTML='';
+					mui('#pullrefresh').pullRefresh().refresh(true);
+					findTeamSkList(0);
+				}
+				
+				/**
+				 * 筛选条件
+				 */
+				mui('.team_list_screen').on('tap','.shaixuan-div',function(){
+					var id=this.getAttribute('data_id');
+					var that=this;
+					this.children[0].classList.add('c18A3E5');
+					this.children[1].classList.add('c18A3E5');
+					if(id==1){
+						ca.id('middlePopover0').style.top=105+'px';
+						mui('#middlePopover0').popover('show');
+						ca.className('mui-backdrop')[0].style.top=120+'px';
+						ca.className('mui-backdrop')[0].addEventListener('tap',function(){
+							that.children[0].classList.remove('c18A3E5');
+							that.children[1].classList.remove('c18A3E5');
+						})
+					}else if(id==2){
+						findAll(1);
+						ca.id('middlePopover1').style.top=105+'px';
+						mui('#middlePopover1').popover('show');
+						ca.className('mui-backdrop')[0].style.top=120+'px';
+						ca.className('popovers-d2')[0].classList.add('popovers-div2-active');
+						ca.className('popovers-d2')[0].classList.remove('popovers-div2');
+						ca.className('popovers-d2')[1].classList.remove('popovers-div2-active');
+						ca.className('popovers-d2')[1].classList.add('popovers-div2');
+						ca.className('mui-backdrop')[0].addEventListener('tap',function(){
+							that.children[0].classList.remove('c18A3E5');
+							that.children[1].classList.remove('c18A3E5');
+						})
+					}else{
+						showdatapicker();
+					}
+				})
+				/**
+				 * 线路、导游选择
+				 */
+				var guiandline=1;
+				mui('#middlePopover1').on('tap','.popovers-d2',function(){
+					var id=this.getAttribute('data_id');
+					if(id==1){
+						this.classList.add('popovers-div2-active');
+						this.classList.remove('popovers-div2');
+						ca.className('popovers-d2')[1].classList.remove('popovers-div2-active');
+						ca.className('popovers-d2')[1].classList.add('popovers-div2');
+						ca.tagName('input')[0].setAttribute('placeholder','搜索线路');
+						findAll(1);
+						guiandline=1;
+					}else{
+						this.classList.add('popovers-div2-active');
+						this.classList.remove('popovers-div2');
+						ca.className('popovers-d2')[0].classList.remove('popovers-div2-active');
+						ca.className('popovers-d2')[0].classList.add('popovers-div2');
+						ca.tagName('input')[0].setAttribute('placeholder','搜索导游');
+						findAll(2);
+						guiandline=2
+					}
+				})
+				
+				
+				var lineall="",guideall="";
+				function findAll(id){
+					if(id==1){//线路
+						if(lineall){
+							showAllline_and_guide(lineall,1);
+						}else{
+							ca.showWaiting();
+							ca.ajaxs({url:'findContractLineTome',data:{
+									partment_id:localStorage.getItem('structure_id')
+								},succFn:function(data){
+									if(data){
+										lineall=data;
+										showAllline_and_guide(data,1);
+									}
+									ca.closeWaiting();
+								},errFn:function(err){
+									ca.closeWaiting();
+									mui.toast(err);
+								}
+							})
+						}
+					}else{//导游
+						if(guideall){
+							showAllline_and_guide(guideall,2);
+						}else{
+							ca.showWaiting();
+							ca.ajaxs({url:'findAllMyGuide',data:{
+									user_id:localStorage.getItem('userid')
+								},succFn:function(data){
+									if(data){
+										guideall=data;
+										showAllline_and_guide(data,2);
+									}
+									ca.closeWaiting();
+								},errFn:function(err){
+									ca.closeWaiting();
+									mui.toast(err);
+								}
+							})
+						}
+					}
+					
+				}
+				/**
+				 * 搜索导游、线路
+				 */
+				ca.className('mui-icon-search')[0].addEventListener('tap',function(){
+					ca.showWaiting();
+					if(guiandline==2){
+						ca.ajaxs({url:'searchGuide',data:{
+								user_id:localStorage.getItem('userid'),guidename:ca.tagName('input')[0].value
+							},succFn:function(data){
+								if(data){
+									showAllline_and_guide(data,2);
+								}else{
+									mui.toast('未查询到导游');
+								}
+								ca.closeWaiting();
+							},errFn:function(err){
+								ca.closeWaiting();
+								mui.toast(err);
+							}
+						})
+					}else{
+						ca.ajaxs({url:'searchLine',data:{
+								user_id:localStorage.getItem('userid'),linename:ca.tagName('input')[0].value
+							},succFn:function(data){
+								if(data){
+									showAllline_and_guide(data,1);
+								}else{
+									mui.toast('未查询到线路');
+								}
+								ca.closeWaiting();
+							},errFn:function(err){
+								ca.closeWaiting();
+								mui.toast(err);
+							}
+						})
+					}
+				})
+				function showAllline_and_guide(data,id){
+					ca.id('popovers-d2-ul').innerHTML="";
+					if(id==1){
+						for(var a in data){
+							var temp='<li class="bbf1 pl10 fs14 c666666" style="min-height:35px;" data_id="'+data[a].id+'" data_type="line">'+data[a].name+'</li>';
+							ca.id('popovers-d2-ul').innerHTML+=temp;
+						}
+					}else{
+						for(var a in data){
+							var temp='<li class="bbf1 pl10 h35 lh35 fs14 c666666"  data_id="'+data[a].id+'" data_type="guide">'+data[a].name+'</li>';
+							ca.id('popovers-d2-ul').innerHTML+=temp;
+						}
+					}
+				}
+				/**
+				 * 选择状态
+				 */
+				document.querySelector('.mui-table-view.mui-table-view-radio').addEventListener('selected',function(e){
+					// alert(e.detail.el.innerHTML);
+					team_status=e.detail.el.getAttribute('data_id');
+					mui('#middlePopover0').popover('hide');
+					ca.className('shaixuan-div')[0].children[0].classList.remove('c18A3E5');
+					ca.className('shaixuan-div')[0].children[1].classList.remove('c18A3E5');
+					chongxingfind();
+				});
+				
+				/**
+				 * 选择导游or线路
+				 */
+				mui('#middlePopover1').on('tap','.bbf1',function(){
+					two_id=this.getAttribute('data_id');
+					two_type=this.getAttribute('data_type');
+					mui('#middlePopover1').popover('hide');
+					ca.className('shaixuan-div')[1].children[0].classList.remove('c18A3E5');
+					ca.className('shaixuan-div')[1].children[1].classList.remove('c18A3E5');
+					chongxingfind();
+				})	
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				/**
+				 * 修改
+				 */
+				mui('#list_item').on('tap','.xg',function(){
+					var id=this.getAttribute('data_id');
+					ca.showWaiting();
+					var self=plus.webview.create('update_team.html','update_team',{scrollIndicator: 'none'},{teamsk_id:id});
+					setTimeout(function(){
+						self.show('slide-in-right',400);
+					},200)
+					
+				})
+				/**
+				 * 查看团队详情
+				 */
+				mui('#list_item').on('tap','.team_list_li_d1',function(){
+					var id=this.getAttribute('data_id');
+					ca.showWaiting();
+					var self=plus.webview.create('team_detail.html','team_detail',{scrollIndicator: 'none'},{teamsk_id:id});
+					setTimeout(function(){
+						self.show('slide-in-right',450);
+					},250)
+					
+				})
+				/**
+				 * 采购
+				 */
+				mui('#list_item').on('tap','.cg',function(){
+					var id=this.getAttribute('data_id');
+					var data_start_date=this.getAttribute('data_start_date');
+					var data_end_date=this.getAttribute('data_end_date');
+					var days=this.getAttribute('data_days');
+					var team_num=this.getAttribute('data_team_num');
+					mui.openWindow({
+						url:'purchase/purchase_for_day.html',
+						id:'purchase_for_day',
+						extras:{
+							team_id:id,
+							start_date:data_start_date,
+							end_date:data_end_date,
+							days:days,
+							team_num:team_num
+						}
+					})
+				})
+				//委派导游
+				mui('#list_item').on('tap','.wpdy',function(){
+					var id=this.getAttribute('data_id');
+					mui.openWindow({
+						url:'delegate_guide.html',
+						id:'delegate_guide',
+						extras:{
+							team_id:id
+						}
+					})
+					
+				})
+				function showdatapicker(){
+					var date = new Date();
+					var year = date.getFullYear();//年
+					var month = date.getMonth() + 1;//月
+					var day = date.getDate();//日
+					ca.dateSelect({
+						defaultTime:year + '-' + month + '-' + day,
+						minTime:(year-2) + '-' + month + '-' + day,
+						maxTime:year + '-'+ (month + 2) + '-' + day,
+						callback:function(data){
+							if(data){
+								start_date=data;
+								ca.className('shaixuan-div')[2].children[0].classList.remove('c18A3E5');
+								ca.className('shaixuan-div')[2].children[1].classList.remove('c18A3E5');
+								chongxingfind();
+							}else{
+								start_date='';
+								ca.className('shaixuan-div')[2].children[0].classList.remove('c18A3E5');
+								ca.className('shaixuan-div')[2].children[1].classList.remove('c18A3E5');
+								chongxingfind();
+							}
+							
+						}
+					})
+				}
+			})
+			
+		</script>
+	</body>
+
+</html>

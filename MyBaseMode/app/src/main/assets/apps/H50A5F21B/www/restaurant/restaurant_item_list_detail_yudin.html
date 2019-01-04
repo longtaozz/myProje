@@ -1,0 +1,113 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/style.css" />
+		<link rel="stylesheet" href="../css/iconfont.css" />
+	</head>
+
+	<body style="background: #FFFFFF;">
+		<header class="mui-bar mui-bar-nav" style="background: #FFFFFF;height: 69px;padding-top: 25px;">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: #4F77AA;"></a>
+		    <h1 class="mui-title">198元 5-6人套餐</h1>
+		</header>
+		<div class="mui-content" style="background: #FFFFFF;">
+		    <div class="restaurant-item-list-detail-yudin-c-title">
+		    	<span class="iconfont icon-shangjia"></span>
+		    	<span class="">土家特色餐厅</span>
+		    </div>
+		    <div class="restaurant-item-list-detail-yudin-c-img">
+		    	<img src="../img/2.jpg"/>
+		    	<img src="../img/3.jpg"/ style="margin-left: 20px;">
+		    </div>
+		    <div class="restaurant-item-list-detail-yudin-c-renshu" style="height: 44px;border-bottom: 1px solid #f0f0f0;">
+		    	<span style="line-height: 44px;font-size: 16px;">人 数</span>
+		    	<span style="border: 1px solid #C3C3C3;padding: 5px;float: right;margin-right: 10px;">
+		    		<span id="cantin-yudin-jian">一</span>
+		    		<span id="renshu">1</span>
+		    		<span id="cantin-yudin-jia" style="margin-right: 10px;">＋</span>
+		    	</span>
+		    </div>
+		    <div class="restaurant-item-list-detail-yudin-c-renshu" style="height: 44px;border-bottom: 1px solid #f0f0f0;">
+		    	<span style="line-height: 44px;font-size: 16px;">小 计</span>
+		    	<span  style="float: right;line-height: 30px;color: #FF8201;font-size:18px ;"><span style="margin-right: -10px;">￥</span><span id="qian" style="margin-right: 20px;">198</span></span>
+		    </div>
+		    <div style="height: 44px;border-bottom: 1px solid #f0f0f0;padding-left: 10px;">
+		    	<div class="mui-input-row" >
+				    <span style="width: 30%;font-size: 16px;">联系人</span>
+				    <input type="text" class="mui-input-clear" placeholder="请输入联系人姓名" style="width: 70%;border: 0px;">
+				</div>
+		    </div>
+		    <div style="height: 44px;border-bottom: 1px solid #f0f0f0;padding-left: 10px;">
+		    	<div class="mui-input-row" >
+				    <span style="width: 30%;font-size: 16px;">手机号</span>
+				    <input type="text" class="mui-input-clear" placeholder="请输入联系人号码" style="width: 70%;border: 0px;">
+				</div>
+		    </div>
+		    <div style="padding-left: 10px;padding-top: 10px;">
+		    	<span style="font-size: 18px;color: #333333;font-weight: bold;">菜单</span>
+		    	<div class="restaurant-item-list-detail-yudin-c-caidan">
+		    		<ul style="font-size: 16px;color: #333333;margin-top: 5px;">
+		    			<li><span class="iconfont icon-dian"></span>三下锅</li>
+		    			<li><span class="iconfont icon-dian"></span>农家小炒肉</li>
+		    			<li><span class="iconfont icon-dian"></span>湘西外婆菜</li>
+		    			<li><span class="iconfont icon-dian"></span>湘西凉面</li>
+		    			<li><span class="iconfont icon-dian"></span>三下锅</li>
+		    			<li><span class="iconfont icon-dian"></span>农家小炒肉</li>
+		    			<li><span class="iconfont icon-dian"></span>湘西外婆菜</li>
+		    			<li><span class="iconfont icon-dian"></span>湘西凉面</li>
+		    			<li><span class="iconfont icon-dian"></span>三下锅</li>
+		    			<li><span class="iconfont icon-dian"></span>农家小炒肉</li>
+		    			<li><span class="iconfont icon-dian"></span>湘西外婆菜</li>
+		    			<li><span class="iconfont icon-dian"></span>湘西凉面</li>
+		    			<li><span class="iconfont icon-dian"></span>三下锅</li>
+		    			<li><span class="iconfont icon-dian"></span>农家小炒肉</li>
+		    			<li><span class="iconfont icon-dian"></span>湘西外婆菜</li>
+		    			<li><span class="iconfont icon-dian"></span>湘西凉面</li>
+		    		</ul>
+		    	</div>
+		    </div>
+		    <div style="position: fixed;bottom: 0;width: 100%;">
+		    	<input type="button" value="提交订单" style="width: 100%;background: #FF8201;border: 0px;height: 49px;color: #FFFFFF;font-size: 18px;"/>
+		    </div>
+		</div>
+		
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/castapp.js" ></script>
+		<script type="text/javascript">
+			mui.init();
+			ca.init();
+			ca.blackStatusBar();
+			var jian=document.getElementById('cantin-yudin-jian');
+			var jia=document.getElementById('cantin-yudin-jia');
+			var renshu=document.getElementById('renshu');
+			var qian=document.getElementById('qian');
+			var q=qian.innerHTML;
+			jian.addEventListener('tap',function(){
+				var ren=renshu.innerHTML;
+				if(ren=='1'){
+					
+				}
+				else{
+					ren=ren-1;
+				}
+				renshu.innerHTML=ren;
+				qian.innerHTML=Number(q)*ren;
+				
+			
+			})
+			jia.addEventListener('tap',function(){
+				var ren=renshu.innerHTML;
+				ren= parseInt(ren) + 1;
+				renshu.innerHTML=ren;
+				qian.innerHTML=Number(q)*ren;
+			})
+			
+		</script>
+	</body>
+
+</html>

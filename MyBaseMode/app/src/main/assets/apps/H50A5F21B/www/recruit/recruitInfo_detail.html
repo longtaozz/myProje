@@ -1,0 +1,156 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/style.css" rel="stylesheet" />
+		<link href="../css/iconfont.css" rel="stylesheet" />
+		<style>
+			.recruit-detail{
+				margin: 5px;background: #FFFFFF;border-radius:5px ;
+				box-shadow:1px -1px 2px rgba(0,0,0,0.1),-1px 1px 2px rgba(0,0,0,0.1);
+			}
+			
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav user-index-top-bg mheader">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left cffffff"></a>
+			<span class="cffffff mtitle lh43 ml10">职位信息</span>
+			<!-- <span class="fr iconfont icon-iconfontxingxing cffffff lh44 fs25 mr10" id="shoucang"></span> -->
+		</header>
+		<div class="mui-content">
+			<div class="tc pt5 pb5">
+				<h4>职位信息</h4>
+			</div>
+			<div class="recruit-detail h45 lh45 oh">
+				<div class="fl ml10 fwb">
+					<span id="name"></span>
+				</div>
+				<div class="fr cF97B2C mr10">
+					<span id="pay"></span>
+					<span class="fs13">/月</span>
+				</div>
+			</div>
+			<div class="recruit-detail h45 lh45 fs15">
+				<span class="ml10 c333333" id="people_num"></span>
+				<span class="ml10 c333333" id="education"></span>
+				<span class="ml10 c333333" id="working_year"></span>
+				<span class="ml10 c333333" id="language"></span>
+			</div>
+			<div class="recruit-detail ">
+				<div class="ml10 bbf0 h35 lh35 mr10 fs15 c333333">
+					<span>福利待遇</span>
+				</div>
+				<div class="c666666 fs13 ml10" style="padding: 5px;">
+					<span id="welfare"></span>
+				</div>
+			</div>
+			<div class="recruit-detail ">
+				<div class="ml10 bbf0 h35 lh35 mr10 fs15 c333333">
+					<span>工作地点</span>
+				</div>
+				<div class="c666666 ml10  fs13" style="padding: 5px;">
+					<span id="workplace"></span>
+				</div>
+			</div>
+			<div class="recruit-detail ">
+				<div class="ml10 bbf0 h35 lh35 mr10 fs15 c333333">
+					<span>联系方式</span>
+				</div>
+				<div class="c666666 ml10  fs13" style="padding: 5px;">
+					<span id="contact_way"></span>
+					<span id="email"></span>
+				</div>
+			</div>
+			<div class="recruit-detail ">
+				<div class="ml10 bbf0 h35 lh35 mr10 fs15 c333333">
+					<span>职位描述</span>
+				</div>
+				<div class="c666666 ml10 mt10 mr10 fs13 pb5" id="description">
+				</div>
+			</div>
+			<div class="recruit-detail" id="company_profiles">
+				<div class="ml10 bbf0 h35 lh35 mr10 fs15 c333333">
+					<span>公司介绍</span>
+				</div>
+				<div class="c666666 ml10 mt10 mr10 fs13 pb5" id="company_profile">
+					
+				</div>
+			</div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/castapp.js"></script>
+		<script type="text/javascript">
+			mui.plusReady(function(){
+				mui.init({
+					swipeBack:true
+				});
+				ca.init();
+				ca.hiddenScroll();
+				var self=plus.webview.currentWebview();
+				var partment_id=0;
+				ca.ajaxs({url:'findRecruitInfo',data:{
+						id:self.recruit_id
+					},succFn:function(data){
+						if(data){
+							ca.id('name').innerText=data.name;
+							ca.id('pay').innerText=data.pay;
+							ca.id('language').innerText=data.language;
+							ca.id('working_year').innerText=data.working_year;
+							ca.id('people_num').innerText='招'+data.people_num+'人';
+							ca.id('education').innerText=data.education;
+							ca.id('welfare').innerText=data.welfare;
+							ca.id('workplace').innerText=data.workplace;
+							ca.id('contact_way').innerHTML=data.contact_way;
+							ca.id('email').innerHTML=data.email;
+							ca.id('description').innerHTML=data.description;
+							if(data.company_profile){
+								ca.id('company_profile').innerHTML=data.company_profile;
+							}else{
+								ca.id('company_profiles').classList.add('disn');
+							}
+							partment_id=data.partment_id;
+							ca.createHistory({
+								id:self.recruit_id,name:data.name,type:'recruit',
+								data_comment_num:0,
+								data_grade:0,enterprise_id:0,
+								date:new Date().getTime()
+							});
+						}
+						ca.closeWaiting();
+					},errFn:function(err){
+						ca.closeWaiting();
+						mui.toast(err);
+					}
+				});
+				
+				
+				
+// 				ca.id('shoucang').addEventListener('tap',function(){
+// 					ca.ajaxs({url:'addMyFavorite',data:{
+// 							user_id:localStorage.getItem('userid'),
+// 							type:'recruit',enterprise_id:0,
+// 							item_id:self.recruit_id,partment_id:partment_id
+// 						},succFn:function(data){
+// 							if(!ca.emptyFun(data)){
+// 								mui.toast(data.msgtext);
+// 							}
+// 							ca.closeWaiting();
+// 						},errFn:function(err){
+// 							mui.toast(err);
+// 							ca.closeWaiting();
+// 						}
+// 					})
+// 				})
+				
+			})
+			
+		</script>
+	</body>
+
+</html>

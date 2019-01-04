@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/style.css" />
+		<style>
+			img{
+				max-width: 100%;
+			}
+		</style>
+	</head>
+
+	<body style="background: #FFFFFF;">
+		<header class="mui-bar mui-bar-nav mheader">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mback"></a>
+		    <h1 class="mui-title htitle"></h1>
+		</header>
+		<div class="mui-content" id="content" style="margin: 25px 5px 5px 5px;background: #FFFFFF;">
+			<div class="mt10">
+				<div >
+					<span class="fs15 pl10">位置</span>
+				</div>
+				<div id="weizhi" class="pl5 pt5 fs14">
+					
+				</div>
+			</div>
+			<div class="mt10">
+				<div >
+					<span class="fs15 pl10">介绍</span>	
+				</div>
+				<div id="jieshao" class="pl5 pt5">
+					
+				</div>
+			</div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/castapp.js" ></script>
+		<script type="text/javascript">
+			mui.init({
+				swipeBack:true
+			});
+			ca.init();
+			ca.blackStatusBar();
+			mui.plusReady(function(){
+				var self = plus.webview.currentWebview();
+				var id = self.hotel_id;//获得参数
+				ca.ajaxs({url:'findHoteldetailsByid',data:{
+						id:id
+					},succFn:function(data){
+						ca.tagName('h1')[0].innerText=data.name;
+						ca.id('weizhi').innerHTML=data.distance;
+						ca.id('jieshao').innerHTML=data.details;
+						ca.closeWaiting();
+					},errFn:function(){
+						ca.closeWaiting();
+					}
+				})
+			})
+		</script>
+	</body>
+
+</html>

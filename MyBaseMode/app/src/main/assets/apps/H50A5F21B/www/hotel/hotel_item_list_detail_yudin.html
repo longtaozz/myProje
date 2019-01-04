@@ -1,0 +1,167 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<script type="text/javascript" src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/mui.picker.min.js" ></script>
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/mui.picker.min.css" />
+		<link rel="stylesheet" href="../css/style.css" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav bar-hotel-yudin" style="-webkit-box-shadow:0px 0px 0px;height: 69px;padding-top: 25px;">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" ></a>
+		    <h1 class="mui-title" id="mui-title" >张家界大成上水国际酒店</h1>
+		</header>
+		<div class="mui-content">
+		    <div class="content-hotel-yudin-top">
+		    	<div class="content-hotel-yudin-top-c">
+		    		<div class="content-hotel-yudin-top-c-t">
+		    			<span id="zhudianriqi">3月18日</span>  <span>--</span> <span id="lidianriqi">3月19日</span><span style="margin-left: 10px;" id="jiwan">共一晚</span>
+		    		</div>
+		    		<div class="content-hotel-yudin-top-c-c">
+		    			<span>豪华单人间</span>
+		    		</div>
+		    		<div class="content-hotel-yudin-top-c-b">
+		    			<span>36m²</span><span>|</span>
+		    			<span>免费WiFi</span><span>|</span>
+		    			<span>免费停车</span>
+		    		</div>
+		    	</div>
+		    </div>
+		    <ul class="mui-table-view" >
+		        <li class="mui-table-view-cell" style="height: 44px;">
+		                <a class="mui-navigate-right" id="content-hotel-yudin-xzfjs">
+		                    <span class="content-hotel-yudin-fjs">房间数</span><span class="content-hotel-yudin-fjsn" id="content-hotel-yudin-fjsn">1</span><span style="font-size:16px ;color: #333333;">间</span>
+		                </a>
+		        </li> 
+		    </ul>
+		    <div class="content-hotel-yudin-c">
+		    	<form class="mui-input-group" >
+			        <div class="mui-input-row">
+			            <label>入住人数</label>
+			            <input type="text" class="mui-input-clear" placeholder="请填写入住人数">
+			        </div>
+			        <div class="mui-input-row">
+			            <label>联系人</label>
+			            <input type="text" class="mui-input-clear" placeholder="请填写联系人">
+			        </div>
+			        <div class="mui-input-row">
+			            <label>手 机</label>
+			            <input type="text" class="mui-input-clear" placeholder="请填写联系人号码">
+			        </div>
+		    	</form>
+		    </div>
+		    <div class="hotel-yudin-bottom">
+		    	<div class="hotel-yudin-bottom-l">
+		    		<span style="font-size:12px ;">应付总额</span>
+		    		<span style="font-size:17px ;padding-left: 5px;">￥</span>
+		    		<span style="font-size:19px ;">198</span>
+		    	</div>
+		    	<div class="hotel-yudin-bottom-r">
+		    		<div class="hotel-yudin-bottom-r-1">
+		    			<span >查看明细</span>
+		    		</div >
+		    		<div class="hotel-yudin-bottom-r-2" >
+		    			<span id="submitOrderBtn">提交订单</span>
+		    		</div>
+		    	</div>
+		    </div>
+		</div>
+		<script type="text/javascript" src="../js/castapp.js" ></script>
+		<script type="text/javascript">
+			mui.init();
+			ca.init();
+			ca.whiteStatusBar();
+//			document.getElementById('mui-title').innerHTML=innerHTML=localStorage.getItem('item_id')
+			var xuanzerenshu=document.getElementById('content-hotel-yudin-xzfjs');
+			var jiwan=document.getElementById('jiwan');
+			jiwan.innerHTML=localStorage.getItem('tianshu');
+			document.getElementById('zhudianriqi').innerHTML=localStorage.getItem('zhudianriqi');
+			document.getElementById('lidianriqi').innerHTML=localStorage.getItem('lidianriqi');		
+			xuanzerenshu.addEventListener('tap',function(){
+				var picker = new mui.PopPicker();
+				 picker.setData([{value:'1',text:'1'},{value:'2',text:'2'},{value:'3',text:'3'},{value:'4',text:'4'}]);
+				 picker.show(function (selectItems) {
+				 	document.getElementById('content-hotel-yudin-fjsn').innerHTML=selectItems[0].text
+				    	
+				  })
+
+			});
+			mui.plusReady(function(){
+				    //确认订单
+				    //关闭splash页面
+				    plus.navigator.closeSplashscreen();
+				    var payfor;  //支付页面
+				    var self=null;//当前页面
+				    //支付页面           点击提交订单则创建支付webview
+				    document.getElementById("submitOrderBtn").addEventListener('tap',function(){
+				    	
+				        //获取当前webview
+				        self=plus.webview.currentWebview();
+				
+				        if(payfor){//如果已经存在该窗口，则返回，避免快速点击创建多个窗口
+				            return
+				        }
+				
+				        //不存在则创建支付窗口
+				        //支付页面距离顶端距离            自定义，需要多高则设置多高
+				        var top=plus.display.resolutionHeight-415;
+				        var href='../payfor.html'
+				
+				        //创建的webview显示payfor.html的内容
+				        payfor=plus.webview.create(href,'payfor.html',{
+				            width:'100%',
+				            height:'435px',
+				            top:top,
+				            scrollIndicator:'none',
+				            scalable:false,
+				            popGesture:'none'
+				        },{//传送到创建的webview页面的数据
+				            payforInfo:{
+				                'url':'test',
+				                'title':'测试',
+				                'content':'测试',
+				                'pageSourceId':self.id
+				            }
+				        });
+				
+				        //显示支付窗口   并且显示遮罩层
+				        payfor.addEventListener('loaded',function(){
+				            payfor.show('slide-in-bottom',300);
+				        },false);
+				        self.setStyle({
+				            mask:'rgba(0,0,0,0.5)'
+				        });
+				
+				        //遮罩层点击事件
+				        self.addEventListener('maskClick',function(){
+				        	
+				            //关闭遮罩层
+				            self.setStyle({
+				                mask:'none'
+				            });
+				            //避免出现特殊情况，确保支付页面子在初始化时关闭
+				            if(!payfor){
+				                payfor=plus.webview.getWebviewById('payfor.html');
+				            }
+				            //关闭支付页面   并设为空，如果不为空就不会创建，直接return在一开始时候有判断
+				            if(payfor){
+				                payfor.close();
+				                payfor=null;
+				            }
+				        },false);
+				
+				    },false);
+				});
+				
+			
+			
+		</script>
+	</body>
+
+</html>

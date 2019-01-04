@@ -1,0 +1,571 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/style.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../css/iconfont.css"/>
+		<style>
+			.mui-scroll-wrapper1{
+				position: absolute;
+				z-index: 2;
+				top: 0;
+				bottom: 0;
+				left: 0;
+				overflow: hidden;
+				width: 100%;
+			}
+			.mui-scroll1{
+				position: absolute;
+				z-index: 1;
+				width: 100%;
+				-webkit-transform: translateZ(0);
+				transform: translateZ(0);
+			}
+			.mui-scroll-wrapper2{
+				position: absolute;
+				z-index: 2;
+				top: 0;
+				bottom: 0;
+				left: 0;
+				overflow: hidden;
+				width: 100%;
+			}
+			.mui-scroll2{
+				position: absolute;
+				z-index: 1;
+				width: 100%;
+				-webkit-transform: translateZ(0);
+				transform: translateZ(0);
+			}
+			.li-title{
+				overflow: hidden; 
+				text-overflow: ellipsis; 
+				-o-text-overflow: ellipsis;
+				white-space:nowrap;
+				width: 100%;
+				display:block;
+			}
+			.sp-icon{
+				width:20%;
+				
+			}
+			.shaixuan-div{
+				padding: 5px 15px;
+			}
+			.mui-table-view-chevron .mui-table-view-cell {
+				padding-right: 0px;
+				padding: 5px 10px 0px 15px; 
+			}
+			.mt1{
+				margin-top: 1px;
+			}
+			.mt3{
+				margin-top: 3px;
+			}
+			.order-list-1-l-div{
+				width: 20px;
+				height: 20px;
+				background: #4F77AA;
+				border-radius:5px ;
+				margin: 11px auto;
+				padding-left: 3px;
+			}
+			.order-list-1-l-div span{
+				font-size: 14px;
+				color: #FFFFFF;
+				
+			}
+			.xianlus{
+				font-size: 14px;
+			}
+			.zhuangtais{
+				font-size: 14px;
+			}
+			.order-list{
+				margin-top: 5px;
+				height: 170px;
+				background: #FFFFFF;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav mheader">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mback"></a>
+			<h1 class="mui-title htitle">转交订单</h1>
+		</header>
+		<div id="ccc"  class="shaixuan " style="height:35px;position:fixed;top:69px;width: 100%;z-index: 100;background: #FFFFFF;">
+			<div class="shaixuan-div">
+				<div class="w75 fl">
+					<span class="shaixuan-divxiala-zi li-title">线路筛选</span>
+				</div>
+				<div class="fl" style="margin-left: -5px;">
+					<span class="mui-icon mui-icon-arrowdown sp-icon"></span>
+				</div>
+			</div>
+			<div class="shaixuan-div">
+				<div class="w75 fl">
+					<span class="shaixuan-divxiala-zi li-title">日期筛选</span>
+				</div>
+				<div class="fl" style="margin-left: -5px;">
+					<span class="mui-icon mui-icon-arrowdown sp-icon"></span>
+				</div>
+				
+			</div>
+			<div class="shaixuan-div">
+				<div class="w75 fl">
+					<span class="shaixuan-divxiala-zi li-title">状态筛选</span>
+				</div>
+				<div class="fl" style="margin-left: -5px;">
+					<span class="mui-icon mui-icon-arrowdown sp-icon"></span>
+				</div>
+				
+			</div>
+		</div>
+		<div id="pullrefresh" class="mui-content mui-scroll-wrapper" style="margin-top:60px;">
+			<div class="mui-scroll">
+				<ul class="" id="list_item">
+					
+				</ul>
+			</div>
+		</div>
+		<div id="wushuju" class="disn" style="margin-top:100px;">
+			<img src="../../img/wushuju.png" style="width: 100%;"/>
+		</div>
+		<div id="middlePopover0" class="mui-popover" style=" position:fixed;height: 300px;width: 100%;border-radius:0px ;border-top: 1px solid #DADADD;z-index: 1000;">
+			<div class="mui-scroll-wrapper1" id="mui-scroll-wrapper1">
+				<div class="mui-scroll1">
+					<ul class="mui-table-view" id="xianlu" style="max-height: 4000px;">
+						
+					</ul>
+				</div>
+			</div>
+		</div>
+		
+		<div id="middlePopover2" class="mui-popover" style=" position:fixed;height:250px;width: 100%;border-radius:0px ;border-top: 1px solid #DADADD;z-index: 1000;">
+			<div class="mui-scroll-wrapper2" id="mui-scroll-wrapper2">
+				<div class="mui-scroll2">
+					<ul class="mui-table-view" id="zhuangtai">
+						<li class="mui-table-view-cell zhuangtais" data_id="-2">全部订单</li>
+						<li class="mui-table-view-cell zhuangtais" data_id="-1">草稿单</li>
+						<li class="mui-table-view-cell zhuangtais" data_id="0">等待确认</li>
+						<li class="mui-table-view-cell zhuangtais" data_id="2">地接确认</li>
+						<li class="mui-table-view-cell zhuangtais" data_id="1">待确认地接报价</li>
+						<li class="mui-table-view-cell zhuangtais" data_id="8">取消订单</li>
+						<li class="mui-table-view-cell zhuangtais" data_id="99">订单完成</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/castapp.js"></script>
+		<script src="../../js/template-web.js"></script>
+		<script type="text/template" id="item_list">
+			{{each list}}
+				<li class="order-list mui-table-view-cell mt5" data_id="{{$value.id}}">
+					<div class="mui-slider-handle information-list-div bbf2 pb5" data_id="{{$value.id}}">
+						<div class="order-list-1" style="height: 35px;">
+							<div class="order-list-1-l">
+								<div class="order-list-1-l-div">
+									<span class="iconfont icon-cart"></span>
+								</div>
+							</div>
+							<div class="order-list-1-c"style="color: #121212;width:55%;">
+								<span  class="li-title fs15">{{$value.line_name}}</span>
+							</div>
+							<div class="order-list-1-r">
+								<span>{{$value.create_time.slice(0,16)}}</span>
+							</div>
+						</div>
+						<div class="order-list-2" style="height: 90px;padding: 0px 15px;">
+							<div class="order-list-2-top mt3">
+								<span class="li-title" style="color: #121212;">{{$value.structure.enterprise.alias}} {{$value.structure.name}}</span>
+							</div>
+							<div class="order-list-2-c mt1" style="color: #121212;">
+								<span>成人:</span><span>{{$value.man_num}}</span><span class="ml5">儿童:</span><span>{{$value.child_num}}</span>
+							</div>
+							<div class="order-list-2-b mt1" style="color: #121212;">
+								<span>总额:</span><span>{{$value.total_amount}}</span>
+							</div>
+							<div class="order-list-2-b mt1" style="color: #121212;">
+								<span>出发日期</span><span>:</span><span>{{$value.start_date}}</span>
+							</div>
+							<!-- <div style="position: absolute;right:0px;bottom: 10px;margin-right:15px;">
+								<div style="font-size: 14px;border-radius:5px ;padding: 2px;">
+									{{#$value.status | dateFormat}}
+								</div>
+							</div> -->
+						</div>
+					</div>
+					<div style="">
+						<div class="fr mt5 mr15" style="font-size:14px;border-radius:5px ;padding:2px;font-weight:bold ;">
+							{{#$value.status | dateFormat}}
+						</div>
+						{{if $value.status==99 && $value.comment<=0}}
+							<div class="bdF9 fr pingjia  mt5 mr15 cF97B2C" style="font-size: 14px;border-radius:100px ;padding: 2px 15px;" data_id="{{$value.id}}" data_line_id="{{$value.line_id}}">
+								<span>评价</span>
+							</div>
+						{{/if}}
+					</div>
+				</li>
+			{{/each}}
+		</script>
+		<script type="text/javascript">
+			mui.plusReady(function(){
+				mui.init({
+					pullRefresh : {
+						container:"#pullrefresh",//下拉刷新容器标识
+						up: {
+							height:50,//可选.默认50.触发上拉加载拖动距离
+							auto:false,//可选,默认false.自动上拉加载一次
+							contentrefresh : "正在加载...",//可选，
+							contentnomore:'没有更多数据了',
+							callback: upFn // 上拉执行函数
+						}
+					}
+				});
+				ca.init();
+				ca.blackStatusBar();
+				var page=1,pages=1;
+				var linid=0;
+				var createtime=0;
+				var cell0=0;
+				var cell1=0;
+				var cell2=0;
+				var status=localStorage.getItem('business_sorder_type');
+				function upFn(){
+					if(pages==0){//判断是否有数据  0无 不再执行下拉刷新
+						this.endPullupToRefresh(true);
+					}else{
+						page=page+1;
+						plus.nativeUI.showWaiting();
+						find(0);
+						this.endPullupToRefresh(false);
+					}
+				}
+				find();
+				function find(){
+					ca.ajaxs({url:'findLineOrderBylinid_createtime_status',data:{
+						linid:linid,createtime:createtime,status:status,page:page,user_id:localStorage.getItem('userid')
+						},succFn:function(da){
+							if(!ca.emptyFun(da.data)){
+								var data=da.data;
+								var next_item=da.next_item;
+								if(ca.emptyFun(next_item)){
+									pages=0;
+								}
+								
+								show(data);
+							}else{
+								ca.id('wushuju').classList.add('disb');
+								ca.id('pullrefresh').classList.add('disn');
+								ca.id('wushuju').classList.remove('disn');
+							}
+							ca.closeWaiting();
+						},errFn:function(err){
+							mui.toast(err);
+							ca.closeWaiting();
+						}
+					})
+				}
+				function show(data){
+					
+					try{
+						template.defaults.imports.dateFormat = function(arg1){
+							return getStatus(arg1);
+							
+						};
+						
+						ca.id('list_item').innerHTML+=template('item_list', {
+							"list":data
+						});
+					}catch(e){
+						console.log(e)
+					}
+				}
+				
+				/**
+				* 列表点击
+				*/
+				mui('#list_item').on('tap','.information-list-div',function(){
+					ca.showWaiting();
+					var lineOrder_id=this.getAttribute('data_id');
+					var self=plus.webview.create('business_order_detail.html','business_order_detail',{},{lineOrder_id:lineOrder_id});
+					self.show('slide-in-right',400);
+				})
+				//订单开始与当前时间比较
+				function timeCompare(arg2){
+					var myDate = new Date();
+					var ye=myDate.getFullYear();
+					var mo=myDate.getMonth()+1; //获取当前月份(0-11,0代表1月)
+					var day=myDate.getDate();
+					var mmda=ye+'-'+mo+'-'+day;
+					var date = new Date(mmda.replace(/-/g, '/'));
+					var date1 = new Date(arg2.replace(/-/g, '/'));
+					if(date.getTime()>date1.getTime() ){
+						return false;
+					}else{
+						return true;
+					}
+				}
+				mui('#mui-scroll-wrapper1').scroll();
+				mui('#mui-scroll-wrapper2').scroll();
+				xila_onclick();
+				function xila_onclick(){
+					var cell=document.getElementsByClassName('shaixuan-div');
+					var select_input = ca.className('shaixuan-divxiala-zi');
+					var arrowdown=ca.className('mui-icon-arrowdown');
+					ca.id('middlePopover0').style.top='104px';
+					cell[0].addEventListener('tap',function(){
+						if(cell0==0){
+						select_input['0'].style.color='#4F77AA';
+						arrowdown['0'].style.color='#4F77AA';
+						select_input[2].style.color='#323232';
+						arrowdown[2].style.color='#323232';
+						select_input[1].style.color='#323232';
+						arrowdown[1].style.color='#323232';
+						mui('#middlePopover0').popover('show');
+						cell0=1;
+						cell1=0;
+						cell2=0;
+						ca.className('mui-backdrop')[0].style.top='104px';
+						ca.className('mui-backdrop')[0].addEventListener('tap',function(){
+							select_input[0].style.color='#323232';
+							arrowdown[0].style.color='#323232';
+							mui("#middlePopover0").popover('hide');
+							cell0=0;
+						})
+						
+					}else{
+						select_input[0].style.color='#323232';
+						arrowdown[0].style.color='#323232';
+						mui('#middlePopover0').popover('hide');
+						cell0=0;
+					}
+					})
+					cell[1].addEventListener('tap',function(){
+						if(cell1==0){
+							select_input[2].style.color='#323232';
+							arrowdown[2].style.color='#323232';
+							select_input[1].style.color='#4F77AA';
+							arrowdown[1].style.color='#4F77AA';
+							select_input['0'].style.color='#323232';
+							arrowdown['0'].style.color='#323232';
+							cell1=1;
+							cell2=0;
+							cell0=0;
+							showdate();
+							function showdate(){
+								// 使用原生js获取时间对象
+								var date = new Date();
+								var year = date.getFullYear();//年
+								var month = date.getMonth() + 1;//月
+								var day = date.getDate();//日
+								ca.dateSelect({
+									defaultTime:year + '-' + month + '-' + day,
+									minTime:(year-2) + '-' + month + '-' + day,
+									maxTime:year + '-'+ (month+1) + '-' + day,
+									callback:function(data){
+										if(data){
+											select_input[1].innerHTML=data;
+											page=1;
+											pages=1;
+											createtime=data;
+											ca.id('list_item').innerHTML="";
+											find();
+											mui('#pullrefresh').pullRefresh().refresh(true);
+											cell1=0;
+										}else{
+											select_input[1].innerHTML="日期筛选";
+											select_input[1].style.color='#323232';
+											arrowdown[1].style.color='#323232';
+											page=1;
+											pages=1;
+											createtime=0;
+											ca.id('list_item').innerHTML="";
+											find();
+											mui('#pullrefresh').pullRefresh().refresh(true);
+											cell1=0;
+										}
+									}
+								})
+							}
+						}else{
+							select_input[1].style.color='#323232';
+							arrowdown[1].style.color='#323232';
+							cell1=0;
+						}
+					})
+					ca.id('middlePopover2').style.top='104px';
+					cell[2].addEventListener('tap',function(){
+						if(cell2==0){
+							select_input[1].style.color='#323232';
+							arrowdown[1].style.color='#323232';
+							select_input[2].style.color='#4F77AA';
+							arrowdown[2].style.color='#4F77AA';
+							select_input['0'].style.color='#323232';
+							arrowdown['0'].style.color='#323232';
+							mui('#middlePopover2').popover('show');
+							cell2=1;
+							cell1=0;
+							cell0=0;
+							ca.className('mui-backdrop')[0].style.top='104px';
+							ca.className('mui-backdrop')[0].addEventListener('tap',function(){
+								select_input[2].style.color='#323232';
+								arrowdown[2].style.color='#323232';
+								mui("#middlePopover2").popover('hide');
+								cell2=0;
+							})
+							
+						}else{
+							select_input[2].style.color='#323232';
+							arrowdown[2].style.color='#323232';
+							mui('#middlePopover2').popover('hide');
+							cell2=0;
+						}
+					})
+					zhuangtaixuanze();
+					 function zhuangtaixuanze(){
+						var cell11=ca.className('zhuangtais');
+						for(var i=0;i<cell11.length;i++){
+								(function(index1){
+									cell11[i].addEventListener('tap',function(){
+										leixingid=cell11[index1].getAttribute('data_id');
+										if(leixingid==-2){
+											select_input[2].innerHTML='状态筛选';
+										}else{
+											select_input[2].innerHTML=cell11[index1].innerHTML;
+										}
+										status=leixingid;
+										page=1;
+										pages=1;
+										ca.id('list_item').innerHTML="";
+										find();
+										mui('#pullrefresh').pullRefresh().refresh(true);
+										mui('#middlePopover2').popover('hide');
+										cell2=0;
+									})
+								})(i);
+						 }
+					 }
+					
+					findxianlu();
+					function findxianlu(){
+						var eid=localStorage.getItem('e_id');
+						var partment_id=localStorage.getItem('structure_id')
+						var list=ca.id('xianlu');
+						var html=[];
+								ca.ajaxs({url:'findContractLine',data:{
+										partment_id:partment_id
+									},succFn:function(data){
+										if(data){
+											for(var a in data){
+												if(a==0){
+													html.push('<li class="mui-table-view-cell xianlus" data_id="0">全部线路</li>')
+													html.push('<li class="mui-table-view-cell xianlus" data_id="'+data[0].id+'">'+data[0].alias+'</li>')
+												}else{
+													html.push('<li class="mui-table-view-cell xianlus" data_id="'+data[a].id+'">'+data[a].alias+'</li>')
+												}
+												
+											}
+											list.innerHTML = html.join('');
+											xianluxuanze();
+										}
+										ca.closeWaiting();
+									},errFn:function(err){
+										ca.closeWaiting();
+										mui.toast(err);
+									}
+								})
+					}
+					 function xianluxuanze(){
+						var cell11=ca.className('xianlus');
+						for(var i=0;i<cell11.length;i++){
+								(function(index1){
+									cell11[i].addEventListener('tap',function(){
+										if(index1==0){
+											select_input[0].innerHTML="线路筛选";
+										}else{
+											select_input[0].innerHTML=cell11[index1].innerHTML;
+										}
+										linid=cell11[index1].getAttribute('data_id');
+										page=1;
+										pages=1;
+										ca.id('list_item').innerHTML="";
+										find();
+										mui('#pullrefresh').pullRefresh().refresh(true);
+										mui('#middlePopover0').popover('hide');
+										cell0=0;
+									})
+								})(i);
+						 }
+					 }
+			
+				 }
+				function getStatus(arg1){
+					var stu='';
+					switch (arg1){
+						case -1:
+							stu='<span style="color:#2F99D7">草稿订单</span>'
+							break;
+						case 0:
+							stu='<span style="color:#E56266">等待确认</span>'
+							break;
+						case 1:
+							stu='<span style="color:#7A8DF9">地接报价</span>'
+							break;
+						case 2:
+							stu='<span style="color:#F39D21">地接确认</span>'
+							break;
+						case 3:
+							stu='<span style="color:#668738">组团确认</span>'
+							break;
+						case 4:
+							stu='<span style="color:#FD6C9D">组团变更</span>'
+							break;
+						case 5:
+							stu='<span style="color:#A772CB">组团取消</span>'
+							break;
+						case 6:
+							stu='<span style="color:#FF7A44">地接拒绝</span>'
+							break;
+						case 7:
+							stu='<span style="color:#B59B12">同意取消</span>'
+							break;
+						case 8:
+							stu='<span style="color:#919DAB">订单取消</span>'
+							break;
+						case 99:
+							stu='<span style="color:#91C124">完成交易</span>'
+							break;
+						default:
+							break;
+					}
+					return stu;
+				}
+				
+				mui('#list_item').on('tap','.pingjia',function(){
+					var lineOrder_id=this.getAttribute('data_id');
+					var product_id=this.getAttribute('data_line_id');
+					alert(product_id)
+					mui.openWindow({
+						url:'../comment/add_comment.html',
+						id:'add_comment',
+						extras:{
+							comment_order_id:lineOrder_id,
+							comment_type:'line',
+							comment_product_id:product_id
+						}
+					})
+				})
+				
+			})
+			
+		</script>
+	</body>
+
+</html>

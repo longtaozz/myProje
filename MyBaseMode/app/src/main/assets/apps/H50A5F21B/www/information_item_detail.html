@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/style.css" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav mheader">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mback"></a>
+		    <h1 class="mui-title htitle c121212">通知详细</h1>
+		</header>
+		<div class="mui-content">
+			<div class="tc c121212 fs15" style="margin-top: 20px;">
+				<span ></span>
+			</div>
+		    <div class="c666666 fs14" style="margin:20px 15px;">
+		    	<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span></span></span>
+		    </div>
+		    <div class="fr fs14 c666666 mr35" style="">
+		    	<span></span>
+		    </div>
+		</div>
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript" src="js/castapp.js" ></script>
+		<script type="text/javascript">
+			mui.plusReady(function(){
+				mui.init();
+				ca.init(true);
+				var self=plus.webview.currentWebview();
+				var id=self.information_id;
+				ca.blackStatusBar();
+				ca.checkTheNetwork();
+				ca.ajaxs({url:'findPushMsgbyid',data:{
+						id:id
+					},succFn:function(data){
+						if(data.msg==1){
+							var sp=ca.tagName('span');
+							sp[0].innerHTML=data.data.title;
+							sp[2].innerHTML=data.data.content;
+							sp[3].innerHTML=data.data.create_time.slice(0,16);
+						}
+						var arr1 = ['information_item'];
+						ca.sendNotice(arr1,'update',{});
+						var arr1 = ['shouye'];
+						ca.sendNotice(arr1,'updatePushMsgUnreadCount',{});
+						ca.closeWaiting();
+					},errFn:function(call){
+						ca.closeWaiting();
+						mui.toast(call);
+					}
+				}),
+				function tongzhi(){
+					
+				}
+			})
+		</script>
+	</body>
+
+</html>

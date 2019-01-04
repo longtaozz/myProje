@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" href="../css/style.css" />
+		<link rel="stylesheet" href="../css/iconfont.css" />
+		<style>
+			html,
+			body {
+				background-color: #efeff4;
+			}
+			
+			.title {
+				padding: 20px 15px 10px;
+				color: #6d6d72;
+				font-size: 15px;
+				background-color: #fff;
+			}
+			.mui-table-view-cell{
+				padding: 8px 10px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="pullrefresh" class="mui-content mui-scroll-wrapper" style="margin: 0px;">
+			<div class="mui-scroll">
+				<ul class="" id="div_list">
+			      	
+				</ul>
+			</div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/castapp.js" ></script>
+		<script>
+			var url=localStorage.getItem('url');
+			var page=1;
+			var pagess=1;
+			mui.plusReady(function(){
+				mui.init({
+					swipeBack: false,
+					keyEventBind: {
+						backbutton: false //关闭back按键监听
+					},
+					pullRefresh: {
+						container: '#pullrefresh',
+						up: {
+							height:300,
+							contentrefresh: '正在加载...',
+							callback: pullupRefresh
+						}
+					}
+				});
+				ca.init();
+				/**
+				 * 上拉加载具体业务实现
+				 */
+				function pullupRefresh() {
+					if(pagess==0){
+						this.endPullupToRefresh(true);
+					}else{
+						page=page+1;
+						findAll(page);
+						this.endPullupToRefresh(false);
+						plus.nativeUI.closeWaiting();
+					}
+						
+				}
+				var list=ca.id('div_list');
+				findAll(page);
+				function findAll(pages){
+					plus.nativeUI.showWaiting();
+					mui.get(url+'findAllArt',{page:pages},function(data){
+						if(data.msg==1){
+							var da=data.data.data;
+							var da1=data.data.next_item;
+							if(da1==null){
+								pagess=0;
+							}
+							if(da1!=null){
+								pagess==1;
+							}
+							if(da=="" && pages==1){
+								list.innerHTML="暂无数据";
+								plus.nativeUI.closeWaiting();
+								return;
+							}
+							for(var a in da){
+								var time=da[a].create_time.slice(0,16);
+								var img;
+								if(da[a].employee.img_url==""){
+									img="../img/touxiang1.jpg"
+								}else{
+									img=da[a].employee.img_url;
+								}
+								var temp='<li class="mui-table-view-cell ts-li" data_id="'+da[a].id+'">'
+									     + 		'<div class="fl w70">'
+									     + 			'<div><span class="fs16 c121212 ts-li-title">'+da[a].title+'</span></div>'
+									     +			'<div class="mt5 oh">' 				
+									     +			'<div class="fl"><img src="'+img+'" style="border-radius:100px;width: 30px;height: 30px;" /></div>' 			
+									     +			'<div class="fl lh30 ml15"><span class="fs14 c666666">'+da[a].employee.realname+'</span></div>' 			
+									     + 			'</div>'	
+									     + 			'<div class="fs14 c999999">'		
+									     + 				'<span>'+time+'</span>'
+									     + 				'<span class="iconfont icon-liulan ml10"></span> <span>'+da[a].hits+'</span>'
+									     + 				'<span class="iconfont icon-dianzan ml10"></span><span class="ml5">'+da[a].useful+'</span>'		
+									     +			'</div>' 				
+									     +		 '</div>'
+									     +		 '<div class="fl w30" style="height: 100%;">' 			
+									     + 			'<img  src="'+da[a].pic+'" style="width: 100%;height: 100%;border-radius:5px ;"/>'	
+									     + 		  '</div>'		
+									     +  '</li>';
+								list.innerHTML+=temp;
+							}
+							plus.nativeUI.closeWaiting();
+							click_item();
+						}
+					})
+				}
+				
+				function click_item(){
+					var	cell=ca.className('ts-li');
+					for(var i=0;i<cell.length;i++){
+						(function(index){
+							cell[i].addEventListener('tap',function(){
+								var art_id=cell[index].getAttribute('data_id');
+								localStorage.setItem('art_id',art_id);
+								ca.newInterface({url:'tourism_strategy_detail.html',id:'tourism_strategy_detail'});
+							})
+						})(i);
+					}
+				}
+			})
+		</script>
+	</body>
+
+</html>

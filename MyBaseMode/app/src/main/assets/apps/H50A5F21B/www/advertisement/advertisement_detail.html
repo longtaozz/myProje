@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/style.css"  rel="stylesheet"/>
+		<style>
+			.bgwhite img{
+				max-width: 100%;
+			}
+		</style>
+	</head>
+
+	<body>
+		
+		<header class="mui-bar mui-bar-nav mheader user-index-top-bg">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left cffffff"></a>
+			<h1 class="mui-title cffffff"></h1>
+		</header>
+		<div class="mui-content bgwhite">
+			
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/castapp.js"></script>
+		<script type="text/javascript">
+			mui.plusReady(function(){
+				mui.init({
+					swipeBack:true //启用右滑关闭功能
+				});
+				ca.init();
+				ca.whiteStatusBar();
+				var self=plus.webview.currentWebview();
+				self.setStyle({scrollIndicator:'none'});
+				var id=self.detail_id;
+				ca.ajaxs({url:'findAdvertisingDetail',data:{
+						id:id
+					},succFn:function(data){
+						if(data){
+							ca.className('mui-title')[0].innerText=data.title;
+							ca.className('bgwhite')[0].innerHTML=data.content;
+						}
+						ca.closeWaiting();
+					},errFn:function(err){
+						mui.toast(err);
+						ca.closeWaiting();
+					}
+				})
+			})
+			
+		</script>
+	</body>
+
+</html>

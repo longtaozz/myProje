@@ -1,0 +1,327 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/style.css" rel="stylesheet"/>
+		<link href="../css/iconfont.css" rel="stylesheet" />
+		<style>
+			.myself-recruit-xz{
+				margin:5px;background: #FE7B07;border-radius:5px;
+				text-align: center;height:50px;line-height: 50px;
+			}
+			.myself-recruit-zt1{
+				width:35px;height:3px; background: #FE7B07;
+				float: left;border-radius:2px;margin-top: 10px;
+				margin-left: 25px;
+			}
+			.myself-recruit-zt2{
+				width:35px;height:3px; background: #666666;float: left;border-radius:2px ;margin-top: 10px;
+				margin-left: 25px;
+			}
+			.myself-recruit-li{
+				height: 53px;line-height: 53px;margin: 5px;border-radius:5px;
+				box-shadow:1px -1px 2px rgba(0,0,0,0.1),-1px 1px 2px rgba(0,0,0,0.1);
+			}
+			.myself-recruit-li-zt1{
+				background:#FE7B07;height: 20px;width: 20px;margin: 0 auto;margin-top: 15px;
+			}
+			.myself-recruit-li-zt2{
+				background:#666666;height: 20px;width: 20px;margin: 0 auto;margin-top: 15px;
+			}
+			.mui-table-view{
+				background:#EFEFF4 ;
+			} 
+			.mui-table-view-cell {
+				padding: 0px;
+			}
+			.mui-table-view-cell:after{
+				height: 0px;
+			}
+			.mui-table-view:after{
+				height: 0px;
+			}
+			.mui-table-view:before{
+				height: 0px;
+			}
+			.bgFE7B07{
+				background: #FE7B07;
+			}
+			.bg666666{
+				background: #666666;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav user-index-top-bg mheader">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left cffffff"></a>
+			<h1 class="mui-title cffffff mtitle">我的招聘</h1>
+		</header>
+		<div class="mui-content">
+			<div style="position:fixed;width:100%;height:90px;z-index:89;background:#EFEFF4;">
+				<div class="myself-recruit-xz" id="add">
+					<span class="cffffff fs16">新 增</span>
+				</div>
+				<div class="mt10 oh">
+					<div class="myself-recruit-zt1" ></div>
+					<div class="fl fs14 c666666 ml5">
+						正在招聘
+					</div>
+					<div class="myself-recruit-zt2"></div>
+					<div class="fl fs14 c666666 ml5">
+						停止招聘
+					</div>
+				</div>
+			</div>
+			<div class="mui-scroll-wrapper" id="refreshContainer">
+				<div class="mui-scroll">
+					<ul class="mui-table-view" id="rec_list">
+						<!-- <li class="mui-table-view-cell mui-transitioning myself-recruit-li">
+							<div class="mui-slider-right mui-disabled">
+								<a class="mui-btn bg666666">停止</a>
+								<a class="mui-btn mui-btn-grey">删除</a>
+							</div>
+							<div class="mui-slider-handle oh">
+								<div class="fl w80 ml7">
+									<div class="yc1 c323232 fs14">
+										<span>永定区</span>
+										<span>|</span>
+										<span>大唐锦鲤/临班</span>
+										<span>4000-8000元/月</span>
+									</div>
+								</div>
+								<div class="fl w18">
+									<div class="myself-recruit-li-zt1"></div>
+								</div>
+							</div>
+						</li>
+						<li class="mui-table-view-cell mui-transitioning myself-recruit-li">
+							<div class="mui-slider-right mui-disabled">
+								<a class="mui-btn bgFE7B07">招聘</a>
+								<a class="mui-btn mui-btn-grey">删除</a>
+							</div>
+							<div class="mui-slider-handle oh">
+								<div class="fl w80 ml7">
+									<div class="yc1 c323232 fs14">
+										<span>永定区</span>
+										<span>|</span>
+										<span>大唐锦鲤/临班</span>
+										<span>4000-8000元/月</span>
+									</div>
+								</div>
+								<div class="fl w18">
+									<div class="myself-recruit-li-zt2"></div>
+								</div>
+							</div>
+						</li> -->
+					</ul>
+				</div>
+			</div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/castapp.js"></script>
+		<script src="../js/template-web.js"></script>
+		<script type="text/template" id="re_list">
+			{{each list}}
+				{{if $value.status==1}}
+					<li class="mui-table-view-cell mui-transitioning myself-recruit-li">
+						<div class="mui-slider-right mui-disabled" data_id="{{$value.id}}">
+							<a class="mui-btn bg666666">停止</a>
+							<a class="mui-btn mui-btn-grey">删除</a>
+						</div>
+						<div class="mui-slider-handle oh" data_id="{{$value.id}}">
+							<div class="fl w80 ml7">
+								<div class="yc1 c323232 fs14">
+									<span>{{$value.city}}</span>
+									<span>|</span>
+									<span>{{$value.name}}</span>
+									<span>{{$value.pay}}</span>
+								</div>
+							</div>
+							<div class="fl w18">
+								<div class="myself-recruit-li-zt1"></div>
+							</div>
+						</div>
+					</li>
+				{{else}}
+					<li class="mui-table-view-cell mui-transitioning myself-recruit-li">
+						<div class="mui-slider-right mui-disabled" data_id="{{$value.id}}">
+							<a class="mui-btn bgFE7B07">招聘</a>
+							<a class="mui-btn mui-btn-grey">删除</a>
+						</div>
+						<div class="mui-slider-handle oh" data_id="{{$value.id}}">
+							<div class="fl w80 ml7">
+								<div class="yc1 c323232 fs14">
+									<span>{{$value.city}}</span>
+									<span>|</span>
+									<span>{{$value.name}}</span>
+									<span>{{$value.pay}}</span>
+								</div>
+							</div>
+							<div class="fl w18">
+								<div class="myself-recruit-li-zt2"></div>
+							</div>
+						</div>
+					</li>
+				{{/if}}
+			{{/each}}
+		</script>
+		<script type="text/javascript">
+			mui.plusReady(function(){
+				mui.init({
+					pullRefresh : {
+						container:"#refreshContainer",//下拉刷新容器标
+						up: {
+								height:150,
+								contentrefresh: '正在加载...',
+								contentnomore:'到底了',
+								callback: upFn // 上拉执行函数
+							}
+					},
+					swipeBack:true
+				})
+				ca.init();
+				var page=1,pagee=1;
+				function upFn(){
+					if(pagee==0){
+						mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
+					}else{
+						page++;
+						findMySelfRecruit();
+						this.endPullupToRefresh(false);
+					}
+				}
+				if(mui.os.ios){
+					ca.id('refreshContainer').style.top=158+'px';
+				}else{
+					ca.id('refreshContainer').style.marginTop=89+'px';
+				}
+				/**
+				 * 新增
+				 */
+				ca.id('add').addEventListener('tap',function(){
+					mui.openWindow({
+						url:'add_recruit.html',
+						id:'add_recruit',
+						extras:{
+							
+						}
+					})
+				})
+				findMySelfRecruit();
+				//查询自己添加的招聘
+				function findMySelfRecruit(){
+					ca.showWaiting();
+					ca.ajaxs({url:'findEnterpriseRecruit',data:{
+							user_id:localStorage.getItem('userid'),
+							page:page
+						},succFn:function(data){
+							if(!ca.emptyFun(data.data)){
+								if(ca.emptyFun(data.next_item)){
+									pagee=0;
+								}
+								show(data.data);
+							}
+							ca.closeWaiting();
+						},errFn:function(err){
+							mui.toast(err);
+							ca.closeWaiting();
+						}
+					})
+				}
+				
+				function show(data){
+					try{
+						ca.id('rec_list').innerHTML+=template('re_list',{
+							'list':data
+						})
+					}catch(e){
+						//TODO handle the exception
+						console.log(e);
+					}	
+				}
+				
+				//招聘
+				mui('#rec_list').on('tap','.bgFE7B07',function(){
+					var id=this.parentNode.getAttribute('data_id');
+					update(1,id);
+				})
+				//停止
+				mui('#rec_list').on('tap','.bg666666',function(){
+					var id=this.parentNode.getAttribute('data_id');
+					update(0,id);
+				})
+				//删除
+				mui('#rec_list').on('tap','.mui-btn-grey',function(){
+					var id=this.parentNode.getAttribute('data_id');
+					var li = this.parentNode.parentNode;
+					var btnArray=['是','否'];
+					mui.confirm('确认删除该消息,删除后将不可恢复?', '提示', btnArray, function(e) {
+						if (e.index == 0) {
+							ca.ajaxs({url:'updateRecruitStatus',data:{
+									user_id:localStorage.getItem('userid'),
+									status:2,id:id
+								},succFn:function(data){
+									if(data.msg==1){
+										li.parentNode.removeChild(li);
+									}else{
+										mui.toast(data.text);
+									}
+									ca.closeWaiting();
+								},errFn:function(err){
+									mui.toast(err);
+									ca.closeWaiting();
+								}
+							})
+						}
+					})
+				})
+				
+				//修改状态
+				function update(status,id){
+					ca.showWaiting();
+					ca.ajaxs({url:'updateRecruitStatus',data:{
+							user_id:localStorage.getItem('userid'),
+							status:status,id:id
+						},succFn:function(data){
+							if(data.msg==1){
+								mui.toast(data.text);
+								page=1,pagee=1;
+								ca.id('rec_list').innerHTML='';
+								findMySelfRecruit();
+							}else{
+								mui.toast(data.text);
+							}
+							ca.closeWaiting();
+						},errFn:function(err){
+							mui.toast(err);
+							ca.closeWaiting();
+						}
+					})
+				}
+				
+				//修改职位信息
+				mui('#rec_list').on('tap','.mui-slider-handle',function(){
+					ca.showWaiting();
+					var id=this.getAttribute('data_id');
+					var self=plus.webview.create('update_recruit.html','update_recruit',{},{recruit_id:id});
+					setTimeout(function(){
+						self.show('slide-in-right',350);
+					},100)
+				})
+				
+				ca.receiveNotice('update',function(){
+					page=1,pagee=1;
+					ca.id('rec_list').innerHTML='';
+					findMySelfRecruit();
+				})
+			})
+			
+		</script>
+	</body>
+
+</html>

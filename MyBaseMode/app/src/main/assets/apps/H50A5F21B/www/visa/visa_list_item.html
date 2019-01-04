@@ -1,0 +1,804 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../css/mui.css" rel="stylesheet" />
+		<link href="../css/style.css" rel="stylesheet" />
+		<link href="../css/iconfont.css" rel="stylesheet" />
+		<style>
+			.mui-bar-nav {
+				top: 0;
+				-webkit-box-shadow: 0 0px 0px #ccc;
+				/* box-shadow: 0 1px 6px #ccc; */
+			}
+			.mui-bar {
+				-webkit-box-shadow: 0 0 0px rgba(0, 0, 0, .85);
+				box-shadow: 0 0 0px rgba(0, 0, 0, .85);
+			}
+			.mui-scroll-wrapper0{
+				position: absolute;
+				z-index:2;top:30px;bottom:5px;
+				left: 0;overflow: hidden;width:100%;
+			}
+			.mui-scroll0{
+				position: absolute;
+				z-index:2;width: 100%;
+				-webkit-transform: translateZ(0);
+				transform: translateZ(0);
+			}
+			.mui-scroll-wrapper1{
+				position: absolute;
+				z-index: 20;top:63px;bottom:5px;
+				left: 0;overflow: hidden;width:100%;
+			}
+			.mui-scroll1{
+				position: absolute;
+				z-index: 19;width: 100%;-webkit-transform: translateZ(0);
+				transform: translateZ(0);
+			}
+			.mui-scroll-wrapper3{
+				position: absolute;
+				z-index: 20;top:0px;bottom:5px;
+				left: 0;overflow: hidden;width:100%;
+			}
+			.mui-scroll3{
+				position: absolute;
+				z-index: 19;width: 100%;-webkit-transform: translateZ(0);
+				transform: translateZ(0);
+			}
+			
+			.visa-list-item-top{
+				
+			}
+			.visa-list-item-top-d{
+				width:40%;background:rgba(0,0,0,0.7); position: absolute;top:55px;height:35px;border-radius:20px ;border: 1px solid #FCFCFC;margin-left: 30%;line-height:35px;font-size: 13px;color: #FFFFFF;text-align: center;
+			}
+			.visa-item-li-span{
+				border: 1px solid #B39869;border-radius:3px;padding: 1px 5px;color:#B39869 ;font-size: 12px;
+			}
+			.brand-store-bar.dock-header-bar{position: fixed;top: 69px;z-index: 99;width: 100%;}
+			.brand-bar-wrapper{height:35px;}
+			
+			.qianfadi{
+				border: 1px solid #D0D0D0;color:#666666;font-size:13px;border-radius:3px;float: left;width: 20%;text-align: center;margin-left: 4%;margin-top:8px;
+				height: 28px;line-height:28px;
+			}
+			.qianfadi-active{
+				border: 1px solid #18A3E5;color:#18A3E5;font-size:13px;border-radius:3px;float: left;width: 20%;text-align: center;margin-left: 4%;margin-top:8px;height: 28px;line-height:28px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav mheader">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mback"></a>
+			<span class="fl fs16 ml20" id="title" style="line-height: 42px;"></span>
+		</header>
+		<div class="mui-content mui-scroll-wrapper" id="refreshContainer">
+			<div class="mui-scroll">
+				<div style="height: 150px;" class="visa-list-item-top">
+					<img src="" id="country_img" style="width: 100%;height: 150px;"/>
+					<div class="visa-list-item-top-d" id="qianfadi">
+						<div class="fl ml5 tc">
+							<span >护照签发地</span>
+						</div>
+						<div class="fl tc" style="margin-left: -2px;">
+							<span class="iconfont icon-shuxian2 fs22" style="font-weight:bold;"></span>
+						</div>
+						<div class="fl lh35 tc" id="qianfadi_text" style="margin-left: -2px;">
+						</div>
+						<div class="fl tc">
+							<span class="iconfont icon-arrLeft-fill fs16 mt3"></span>
+						</div>
+						
+					</div>
+				</div>
+				<div class="brand-bar-wrapper">
+					<div id="tab" class="bgwhite brand-store-bar oh bbfa">
+						<div class="fl h35 lh35 c666666 w33" id="w333">
+							<div class="fl ml15">
+								<span class="fs13">常住地</span>
+							</div>
+							<div class="fl" style="margin-top:1px;">
+								<span class="iconfont icon-arrLeft-fill fs16 ml5"></span>
+							</div>
+						</div>
+						<div class="fl h35 lh35 w33 c666666" id="w334">
+							<div class="fl ml15">
+								<span class="fs13">综合排序</span>
+							</div>
+							<div class="fl" style="margin-top:1px;">
+								<span class="iconfont icon-arrLeft-fill fs16 ml5"></span>
+							</div>
+						</div>
+						<div class="fl h35 lh35 w33 c666666" id="w335">
+							<div class="fl ml15" style="margin-top: -1px;">
+								<span class="iconfont icon-shaixuan1 fs10 ml5 "></span>
+							</div>
+							<div class="fl ml5">
+								<span class="fs13">筛选</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="content">
+					<ul>
+						<!-- <li class="bgwhite h100 pl10 pt5 mt5">
+							<div class="fs15 c333333">
+								<span>北京领区-陪同面签-不含EVUS登记</span>
+							</div>
+							<div>
+								<span class="visa-item-li-span">多次签证</span>
+								<span class="visa-item-li-span ml5" >多次签证</span>
+							</div>
+							<div class="c999999">
+								<span class="iconfont icon-qianzheng fs15"></span>
+								<span class="fs12">张家界签证</span>
+								<span class="fs12 fr mr15" style="text-decoration:line-through">￥2150</span>
+							</div>
+							<div>
+								<div class="fl fs12 c999999">
+									<span class="iconfont icon-time fs14"></span>
+									<span>办理10-11工作日</span>
+								</div>
+								<div class="fr mr15">
+									<span style="background: #FD9502;color: #FFFFFF;border-radius:15px;font-size: 13px;padding: 1px 5px;">首本优惠</span>
+									<span style="color: #FD9502;font-size: 12px;margin-right: -5px;">￥</span>
+									<span class="" style="color: #FD9502;">1850</span>
+								</div>
+							</div>
+						</li> -->
+					</ul>
+				</div>
+				<div id="wushuju" class="disn" >
+					<img src="../img/wushuju.png" style="width: 100%;"/>
+				</div>
+			</div>
+		</div>
+		<div id="middlePopover0" class="mui-popover" style="position:fixed;height:330px;left:12%;top:200px;width:76%;border-radius:3px ;border-top: 1px solid #DADADD;z-index: 1000;">
+			<div class="tc fs14 c666666 bbd0 h30 lh30">
+				<span>选择申请人的护照签发地</span>
+			</div>
+			<div class="mui-scroll-wrapper0">
+				<div class="mui-scroll0">
+					<ul id="zong1_list">
+						<!-- <li class="qianfadi-active">
+							<span>北京</span>
+						</li>
+						<li class="qianfadi">
+							<span>上海</span>
+						</li>
+						<li class="qianfadi">
+							<span>内蒙古</span>
+						</li>
+						<li class="qianfadi">
+							<span>河北</span>
+						</li> -->
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div id="middlePopover1" class="mui-popover" style="position:fixed;height:330px;width:100%;border-radius:0px ;border-top: 1px solid #DADADD;z-index: 1000;">
+			<div class="oh">
+				<div class="qianfadi-active zong2" data_index="0">
+					<span>不限</span>
+				</div>
+				
+			</div>
+			<div class="mt5">
+				<div style="margin-left: 4%;width: 92%;background: #D0D0D0;font-size: 14px;padding-left: 5px;color: #666666;">
+					<span>全部</span>
+				</div>
+				<div class="mui-scroll-wrapper1" id="mui-scroll1">
+					<div class="mui-scroll1">
+						<ul id="zong2_list">
+							<!-- <li class="qianfadi-active">
+								<span>北京</span>
+							</li>
+							<li class="qianfadi">
+								<span>上海</span>
+							</li>
+							<li class="qianfadi">
+								<span>内蒙古</span>
+							</li>
+							<li class="qianfadi">
+								<span>河北</span>
+							</li> -->
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="middlePopover2" class="mui-popover" style=" position:fixed;height: 150px;width: 100%;border-radius:0px ;border-top: 1px solid #DADADD;z-index: 1000;">
+			<div class="mui-scroll-wrapper2" id="mui-scroll-wrapper2">
+				<div class="mui-scroll2" >
+					<ul class="mui-table-view mui-table-view-radio fs12">
+						<li class="mui-table-view-cell mui-selected" data_id=0 >
+							<a class="mui-navigate-right">
+								推荐排序
+							</a>
+						</li>
+						<li class="mui-table-view-cell" data_id=1>
+							<a class="mui-navigate-right" >
+								近期销量最高
+							</a>
+						</li>
+						<li class="mui-table-view-cell" data_id=2>
+							<a class="mui-navigate-right" >
+								产品评分最高
+							</a>
+						</li>
+						<li class="mui-table-view-cell"  data_id=3>
+							<a class="mui-navigate-right" >
+								价格从高到低
+							</a>
+						</li>
+						<li class="mui-table-view-cell" data_id=4>
+							<a class="mui-navigate-right" >
+								价格从低到高
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div id="middlePopover3" class="mui-popover" style="position:fixed;left: 15%;height:50%;width: 85%;border-radius:4px ;z-index: 10001;border-top: 1px solid #DADADD;">
+			<div class="mui-scroll-wrapper3" style="max-height: 1000px;">
+				<div class="mui-scroll3" style="max-height: 1000px;">
+					
+				</div>
+			</div>
+		</div>
+			
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/castapp.js"></script>
+		<script src="../js/template-web.js"></script>
+		<script type="text/template" id="screen_list">
+			{{each list}}
+				<li class="bgwhite pl10 pt5 mt5 screen_list_item" style="list-style-type:none" data_id="{{$value.id}}">
+					<div class="fs15 c333333">
+						<span>{{$value.name}}</span>
+					</div>
+					<div>
+						{{each $value.tags.split(',') as va i}}
+							<span class="visa-item-li-span">{{$value.tags.split(',')[i]}}</span>
+						{{/each}}
+					</div>
+					<div class="c999999">
+						<span class="iconfont icon-qianzheng fs15"></span>
+						<span class="fs12">{{$value.supplysign.name}}</span>
+						<span class="fs12 fr mr15" style="text-decoration:line-through">￥{{$value.price}}</span>
+					</div>
+					<div class="oh pb5">
+						<div class="fl fs12 c999999">
+							<span class="iconfont icon-time fs14"></span>
+							<span>{{$value.duration}}</span>
+						</div>
+						<div class="fr mr15">
+							<span style="background: #FD9502;color: #FFFFFF;border-radius:15px;font-size: 13px;padding: 1px 5px;">首本优惠</span>
+							<span style="color: #FD9502;font-size: 12px;margin-right: -5px;">￥</span>
+							<span class="" style="color: #FD9502;">{{$value.price2}}</span>
+						</div>
+					</div>
+				</li>
+			{{/each}}
+			
+		</script>
+		<script type="text/javascript">
+			mui.plusReady(function(){
+				mui.init({
+					pullRefresh : {
+						container:"#refreshContainer",//下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
+						up: {
+							height:50,//可选.默认50.触发上拉加载拖动距离
+							auto:false,//可选,默认false.自动上拉加载一次
+							contentrefresh : "正在加载...",//可选，正在加载状态时，上拉加载控件上显示的标题内容
+							contentnomore:'没有更多数据了',//可选，请求完毕若没有更多数据时显示的提醒内容；
+							callback: upFn // 上拉执行函数
+							}
+					},
+				});
+				ca.init();
+				ca.blackStatusBar();
+				var self=plus.webview.currentWebview();
+				ca.id('title').innerText=self.country+'签证';
+				ca.id('qianfadi_text').innerText=localStorage.getItem('province');
+				ca.id('country_img').src=self.country_img;
+				var screen='',zong='',user_zong1=localStorage.getItem('province'),user_zong2='';
+				var tag_names=[];var services=[];var type_name='',page=1,pages=1,isgg=true;
+				function upFn(){
+					if(pages==0){
+						mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
+					}else{
+						page=page+1;
+						// findLine();
+						this.endPullupToRefresh(false);
+					}
+					
+				}
+				var dockHeader = function(){
+					var wrapper= mui('#refreshContainer')[0],
+						barWrapper = mui('.brand-bar-wrapper')[0],
+						brandBar= mui('#tab')[0],
+						scroll= mui('#refreshContainer').scroll();
+					//顶部悬停
+					var dock = function(){
+						if (!brandBar.classList.contains('dock-header-bar')) {
+							wrapper.appendChild(brandBar);
+							brandBar.classList.add('dock-header-bar');
+						}
+					}
+					//复原
+					var reset = function(){
+						if (brandBar.classList.contains('dock-header-bar')) {
+							barWrapper.appendChild(brandBar);
+							brandBar.classList.remove('dock-header-bar');
+						}
+					}
+					//安卓停靠方式
+					var androidDock = function(){
+						document.addEventListener('scroll', function(e) {
+							window.pageYOffset > barWrapper.offsetTop ? dock() : reset();
+						});
+					}
+					//IOS停靠方式
+					var iosDock = function(){
+						wrapper.addEventListener('scroll', function(e) {
+							scroll.y < -(barWrapper.offsetTop) ? dock() : reset();
+						}, false);
+					}
+					//准备执行条件
+					var init = function(){
+						if (mui.os.ios) {
+							iosDock();
+						}else{
+							// 安卓系统禁止系统滚动条
+							document.body.addEventListener('touchmove',moves, false);
+							androidDock();
+						}
+					}
+					init();
+				}
+				/**
+				 * 禁止滚动
+				 */
+				function moves(){
+					event.stopPropagation();
+				}
+				dockHeader();
+				mui('.mui-scroll-wrapper0').scroll();
+				mui('.mui-scroll-wrapper3').scroll();
+				ca.id('qianfadi').addEventListener('tap',function(){
+					document.body.removeEventListener('touchmove',moves,false);
+					mui('#middlePopover0').popover('show');
+					ca.className('mui-backdrop')[0].addEventListener('tap',function(){
+						if(mui.os.android){
+							document.body.addEventListener('touchmove',moves, false);
+						}
+					})
+					if(zong){
+						showZong1();
+					}else{
+						findZone(1);
+					}
+					
+				})
+				ca.id('w333').addEventListener('tap',function(){
+					document.body.removeEventListener('touchmove',moves,false);
+					var top=this.getBoundingClientRect().top; 
+					ca.id('middlePopover1').style.top=(top+35)+'px';
+					mui('#middlePopover1').popover('show');
+					mui('.mui-scroll-wrapper1').scroll();
+					ca.className('mui-backdrop')[0].style.top=(top+35)+'px';
+					ca.className('mui-backdrop')[0].addEventListener('tap',function(){
+						setTableClick(4);
+						if(mui.os.android){
+							document.body.addEventListener('touchmove',moves, false);
+						}
+					})
+					
+					 setTableClick(0);
+					if(zong){
+						showZong2();
+					}else{
+						findZone(2);
+					}
+				})
+				ca.id('w334').addEventListener('tap',function(){
+					var top=this.getBoundingClientRect().top;
+					ca.id('middlePopover2').style.top=(top+35)+'px';
+					mui('#middlePopover2').popover('show');
+					ca.className('mui-backdrop')[0].style.top=(top+35)+'px';
+					ca.className('mui-backdrop')[0].addEventListener('tap',function(){
+						setTableClick(4);
+						if(mui.os.android){
+							document.body.addEventListener('touchmove',moves, false);
+						}
+					})
+					 setTableClick(1);
+				})
+				ca.id('w335').addEventListener('tap',function(){
+					document.body.removeEventListener('touchmove',moves,false);
+					var top=this.getBoundingClientRect().top;
+					var bottom=window.innerHeight-top;
+					ca.id('middlePopover3').style.height=(bottom-35)+'px';
+					ca.id('middlePopover3').style.top=(top+35)+'px';
+					mui('#middlePopover3').popover('show');
+					ca.className('mui-backdrop')[0].style.top=(top+35)+'px';
+					ca.className('mui-backdrop')[0].addEventListener('tap',function(){
+						setTableClick(4);
+						if(mui.os.android){
+							document.body.addEventListener('touchmove',moves, false);
+						}
+					})
+					 setTableClick(2);
+					if(screen){
+						showScreen();
+					}else{
+						findScreen();
+					}
+				})
+				
+				function setTableClick(index){
+					var cell=ca.className('w33');
+					for(var a=0;a<cell.length;a++){
+						if(a==index){
+							cell[a].classList.add('c18A3E5');
+							cell[a].classList.remove('c666666');
+						}else{
+							cell[a].classList.remove('c18A3E5');
+							cell[a].classList.add('c666666');
+						}
+					}
+					
+				}
+				function findZone(index){
+					ca.showWaiting();
+					ca.ajaxs({url:'findVisaZong',data:{
+						},succFn:function(data){
+							if(data){
+								zong=data;
+								if(index==2){
+									showZong2();
+								}else{
+									showZong1();
+								}
+							}
+							ca.closeWaiting();
+						},errFn:function(err){
+							ca.closeWaiting();
+							mui.toast(err);
+						}
+					})
+				}
+				/**
+				 * 签发地
+				 */
+				function showZong1(){
+					ca.id('zong1_list').innerHTML='';
+					for(var a in zong){
+						if(zong[a].name==user_zong1){
+							var temp='<li class="qianfadi-active zong1" data_index="'+a+'" data_id="'+zong[a].id+'"><span>'+zong[a].name+'</span></li>';
+						}else{
+							var temp='<li class="qianfadi zong1" data_index="'+a+'" data_id="'+zong[a].id+'"><span>'+zong[a].name+'</span></li>';
+						}
+						ca.id('zong1_list').innerHTML+=temp;
+					}
+				}
+				/**
+				 * 常驻地
+				 */
+				function showZong2(){
+					ca.id('zong2_list').innerHTML='';
+					for(var a in zong){
+						if(zong[a].name==user_zong2){
+							var temp='<li class="qianfadi-active zong2" data_index="'+(parseInt(a)+1)+'" data_id="'+zong[a].id+'"><span>'+zong[a].name+'</span></li>';
+							ca.className('zong2')[0].classList.add('qianfadi');
+							ca.className('zong2')[0].classList.remove('qianfadi-active');
+						}else{
+							var temp='<li class="qianfadi zong2" data_index="'+(parseInt(a)+1)+'" data_id="'+zong[a].id+'"><span>'+zong[a].name+'</span></li>';
+						}
+						ca.id('zong2_list').innerHTML+=temp;
+					}
+				}
+				
+				
+				
+				
+				/**
+				 * 查询筛选条件
+				 */
+				function findScreen(){
+					ca.showWaiting();
+					ca.ajaxs({url:'findVisaScreenCondition',data:{
+						},succFn:function(data){
+							screen=data;
+							showScreen();
+							ca.closeWaiting();
+						},errFn:function(err){
+							ca.closeWaiting();
+							mui.toast(err);
+						}
+					})
+				}
+				/**
+				 * 显示筛选条件
+				 */
+				function showScreen(){
+					var temp1='',temp2='',temp3='',temp4='',zong='';
+					if(!ca.emptyFun(screen.type)){
+						var da=screen.type;
+						for(var i in da){
+							if(type_name==da[i].name){
+								var temp='<div class="fl w30 type_list h30 lh30 popover2-div2-d-active" data_name="'+da[i].name+'">'			
+								+		'<span>'+da[i].name+'</span>'
+								+		'</div>';
+							}else{
+								// popover2-div2-d-active
+								var temp='<div class="fl w30 type_list h30 lh30 popover2-div2-d" data_name="'+da[i].name+'">'			
+								+		'<span>'+da[i].name+'</span>'
+								+		'</div>';
+							}
+							
+							temp1+=temp;
+						}
+						var temps='<div class="fs13 c666666 mt8">'
+							+		'<div class="mt5">'
+							+			'<span class="ml15">签证类型</span>'
+							+			'<span class="fr c18A3E5 mr15"></span>'
+							+		'</div>'
+							+		'<div class="oh">'
+							+	temp1
+							+	'</div>';
+						zong=temps;
+						
+					}if(!ca.emptyFun(screen.tag)){
+						var da=screen.tag;
+						for(var i in da){
+							var aa=0;
+							for(var a in tag_names){
+								if(da[i].name==tag_names[a]){
+									var temp='<div class="fl w30 tag_list h30 lh30 popover2-div2-d-active" data_name="'+da[i].name+'">'			
+									+		'<span>'+da[i].name+'</span>'
+									+		'</div>';
+									aa=1;
+									break;
+								}
+							}
+							if(aa==0){
+								var temp='<div class="fl w30 tag_list h30 lh30 popover2-div2-d" data_name="'+da[i].name+'">'			
+								+		'<span>'+da[i].name+'</span>'
+								+		'</div>';
+							}
+							
+							temp2+=temp;
+						}
+						var temps='<div class="fs13 c666666 mt8">'
+							+		'<div class="mt5">'
+							+			'<span class="ml15">产品标签</span>'
+							+			'<span class="fr c18A3E5 mr15" ></span>'
+							+		'</div>'
+							+		'<div class="oh">'
+							+	temp2
+							+'</div>';
+						zong+=temps;
+					}
+					if(!ca.emptyFun(screen.service)){
+						var da=screen.service;
+						for(var i in da){
+							var temp='<div class="fl w30 services_list h30 lh30 popover2-div2-d" data_name="'+da[i].name+'">'
+							+		'<span>'+da[i].name+'</span>'
+							+		'</div>';
+							temp3+=temp;
+						}
+						var temps='<div class="fs13 c666666 mt8">'
+							+		'<div class="mt5">'
+							+			'<span class="ml15">特色服务</span>'
+							+			'<span class="fr c18A3E5 mr15" ></span>'
+							+		'</div>'
+							+		'<div class="oh">'
+							+	temp3
+							+	'</div>';
+						zong+=temps;
+					}
+					var temp4='<div class="oh mb7 mt10 ">'
+						+			'<div class="fl w46 popover2-div2-d h35 lh35 c666666" id="qingkong2">'
+						+				'<span>清空</span>'	
+						+			'</div>'
+						+		'<div class="fl w46 popover2-div2-d h35 lh35 cffffff" id="chakan2" style="background:#FF6D0D ;">'
+						+			'<span>查看</span>'	
+						+'</div>'
+						+'</div>';
+					zong+=temp4;
+					ca.className('mui-scroll3')[0].innerHTML=zong;
+				}
+				/**
+				 * 签证类型筛选
+				 */
+				mui('.mui-scroll3').on('tap','.type_list',function(){
+					this.parentNode.children[0].classList.add('popover2-div2-d');
+					this.parentNode.children[0].classList.remove('popover2-div2-d-active');
+					this.parentNode.children[1].classList.add('popover2-div2-d');
+					this.parentNode.children[1].classList.remove('popover2-div2-d-active');
+					this.classList.remove('popover2-div2-d');
+					this.classList.add('popover2-div2-d-active');
+					type_name=this.getAttribute('data_name');
+				})
+				/**
+				* 产品标签筛选
+				*/
+				mui('.mui-scroll3').on('tap','.tag_list',function(){
+					var name=this.getAttribute('data_name');
+					if(this.classList.contains('popover2-div2-d-active')){
+						this.classList.remove('popover2-div2-d-active');
+						this.classList.add('popover2-div2-d');
+						for(var a=0;a<tag_names.length;a++){
+							if(tag_names[a]==name){
+								tag_names.splice(a,1);
+								break;
+							}
+							
+						}
+					}else{
+						this.classList.remove('popover2-div2-d');
+						this.classList.add('popover2-div2-d-active');
+						tag_names.push(name);
+					}
+				})
+				/**
+				 * 特色服务筛选
+				 */
+				mui('.mui-scroll3').on('tap','.services_list',function(){
+					var name=this.getAttribute('data_name');
+					if(this.classList.contains('popover2-div2-d-active')){
+						this.classList.remove('popover2-div2-d-active');
+						this.classList.add('popover2-div2-d');
+						for(var a=0;a<services.length;a++){
+							if(services[a]==name){
+								services.splice(a,1);
+								break;
+							}
+							
+						}
+					}else{
+						this.classList.remove('popover2-div2-d');
+						this.classList.add('popover2-div2-d-active');
+						services.push(name);
+					}
+					
+					// popover2-div2-d-active
+				})
+				var chongxingfind=function(){
+					page=1;
+					pages=1;
+					ca.id('content').innerHTML='';
+					mui('#refreshContainer').pullRefresh().refresh(true);
+					findAll();
+				}
+				
+				/**
+				* 签发地筛选
+				*/
+				mui('#middlePopover0').on('tap','.zong1',function(){
+					if(mui.os.android){
+						document.body.addEventListener('touchmove',moves, false);
+					}
+					var index=this.getAttribute('data_index');
+					setActive(index,'zong1');
+					user_zong1=this.children[0].innerText;
+					ca.id('qianfadi_text').innerText=user_zong1;
+					chongxingfind();
+					mui('#middlePopover0').popover('hide');
+				})
+				/**
+				 * 常住地筛选
+				 */
+				mui('#middlePopover1').on('tap','.zong2',function(){
+					var index=this.getAttribute('data_index');
+					if(mui.os.android){
+						document.body.addEventListener('touchmove',moves, false);
+					}
+					user_zong2=this.children[0].innerText;
+					mui('#middlePopover1').popover('hide');
+					chongxingfind();
+					setActive(index,'zong2');
+					
+				})
+				/**
+				 * 综合排序
+				 */
+				document.querySelector('.mui-table-view.mui-table-view-radio').addEventListener('selected',function(e){
+					sort=e.detail.el.getAttribute('data_id');
+					if(mui.os.android){
+						document.body.addEventListener('touchmove',moves, false);
+					}
+					mui('#middlePopover2').popover('hide');
+				});
+				function setActive(index,classname){
+					var cell=ca.className(classname);
+					for (var a=0;a<cell.length;a++) {
+						if(a==index){
+							cell[a].classList.add('qianfadi-active');
+							cell[a].classList.remove('qianfadi');
+						}else{
+							cell[a].classList.add('qianfadi');
+							cell[a].classList.remove('qianfadi-active');
+						}
+					}
+				}
+				mui('.mui-scroll3').on('tap','#chakan2',function(){
+					if(mui.os.android){
+						document.body.addEventListener('touchmove',moves, false);
+					}
+					mui('#middlePopover3').popover('hide');
+					chongxingfind();
+				})
+				mui('.mui-scroll3').on('tap','#qingkong2',function(){
+					if(mui.os.android){
+						document.body.addEventListener('touchmove',moves, false);
+					}
+					type_name='';
+					services=[];
+					tag_names=[];
+					mui('#middlePopover3').popover('hide');
+					chongxingfind();
+				})
+				
+				findAll();
+				function findAll(){
+					if(user_zong2=='不限'){
+						user_zong2='';
+						
+					}
+					ca.showWaiting();
+					ca.ajaxs({url:'findVisaProduct',data:{
+							sign_place:user_zong1,live_place:user_zong2,sort:0,type:type_name,
+							services:services,tags:tag_names,page:page,country:self.country
+						},succFn:function(data){
+							if(!ca.emptyFun(data)){
+								ca.id('content').classList.add('disb');
+								ca.id('wushuju').classList.add('disn');
+								ca.id('content').classList.remove('disn');
+								showAll(data);
+							}else{
+								ca.id('wushuju').classList.add('disb');
+								ca.id('content').classList.add('disn');
+								ca.id('wushuju').classList.remove('disn');
+							}
+							ca.closeWaiting();
+						},errFn:function(err){
+							ca.closeWaiting();
+							mui.toast(err);
+						}
+					})
+				}
+				
+				function showAll(data){
+					try{
+						ca.id('content').innerHTML+=template('screen_list',{
+							'list':data
+						})
+					}catch(e){
+						console.log(e);
+					}
+				}
+				
+				mui('#content').on('tap','.screen_list_item',function(){
+					ca.showWaiting();
+					var id=this.getAttribute('data_id');
+					var pl=plus.webview.create(
+						'visa_list_item_detail.html',
+						'visa_list_item_detail',{},{product_id:id,country:self.country})
+					setTimeout(function(){
+						pl.show('slide-in-right',400);
+					},400)
+				})
+			})
+			
+		</script>
+	</body>
+
+</html>

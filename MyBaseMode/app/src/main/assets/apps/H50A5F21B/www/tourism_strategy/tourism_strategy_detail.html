@@ -1,0 +1,122 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/style.css" />
+		<link rel="stylesheet" href="../css/iconfont.css" />
+		<link rel="stylesheet" href="../css/previewImage.css" />
+		<style>
+			img{
+				width: 100%;
+			}
+			.mui-slider{
+				height: 100%;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav mheader">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mback"></a>
+		    <h1 class="mui-title htitle">旅游攻略详情</h1>
+		</header>
+		<div class="mui-content">
+			<div class="" style="padding: 10px 10px;">
+				<div>
+		    		<span id="title" class="fs16" style="font-weight:bold ;">张家界真好玩sakhdj大华科技的按时打卡机哈萨克较好的奥斯卡</span>
+		   		</div>
+		   		<div class="mt10 fs14 c666666 oh">
+		   			<div class="fl"><span style="background:#24B2C8 ;padding: 5px 7px;border-radius:4px ;color: #FFFFFF;font-size: 10px;">实 用</span></div>
+		   			<div class="fl"><span class="ml10" id="time">2015-05-16</span></div>
+		   			<div class="fl ml10"><img src="" style="border-radius:100px;width: 25px;height: 25px;" /></div>
+		   			<div class="fl"><span id="username" class="ml10" style="color: #186991;">zz</span></div>
+		   			<div class="fl"><span  class="iconfont icon-liulan ml10"></span><span class="ml3" id="liulan"></span></div>
+		   			<div class="fl"><span class="iconfont icon-dianzan ml10"></span><span class="ml3" id="dianzanshu" ></span></div>
+		   		</div>
+		   		<div id="content" style="max-width: 100%;">
+		   			
+		   		</div>
+			</div>
+		    <div style="position: fixed;bottom: 40px;right: 20px;color: #444444;">
+		    	<div id="backtop">
+		    		<span class="mui-icon mui-icon-arrowup" style="font-size: 35px;font-weight:bold ;"></span>
+		    	</div>
+		    	<div style="margin-left: 6px;margin-top: 10px;" id="dianzan">
+		    		<span class="iconfont icon-dianzan" style="font-size: 26px;"></span>
+		    	</div>
+		    </div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/castapp.js" ></script>
+		<script type="text/javascript" src="../js/mui.zoom.js" ></script>
+		<script type="text/javascript" src="../js/mui.previewimage.js" ></script>
+		<script type="text/javascript">
+			mui.init();
+			ca.init(true);
+			ca.blackStatusBar();
+			var url=localStorage.getItem('url');
+			mui.plusReady(function(){
+				ca.id('backtop').addEventListener('tap',function(){
+					scrollTo(0,0);
+				});
+				findArtDetail();
+				var title=ca.id('title');
+				var content=ca.id('content');
+				var time=ca.id('time');
+				var username=ca.id('username');
+				var liulan=ca.id('liulan');
+				var dianzanshu=ca.id('dianzanshu');
+				function findArtDetail(){
+					plus.nativeUI.showWaiting();
+					mui.get(url+'findArtDetailByArt_id',{art_id:localStorage.getItem('art_id')},function(data){
+						if(data.msg==1){
+							var da=data.data;
+							title.innerHTML=da.title;
+							content.innerHTML=da.content;
+							time.innerHTML=da.create_time.slice(0,10);
+							username.innerHTML=da.employee.realname;
+							if(da.employee.img_url==""){
+								ca.tagName('img')[0].src="../img/touxiang1.jpg";
+							}else{
+								ca.tagName('img')[0].src=da.employee.img_url;
+							}
+							
+							liulan.innerHTML=da.hits;
+							dianzanshu.innerHTML=da.useful;
+							var im=ca.tagName('img');
+							mui.previewImage();
+							for(var i=1;i<im.length;i++){
+								im[i].setAttribute('data-preview-src','');
+								im[i].setAttribute('data-preview-group',1);
+							}
+						}
+						
+						
+						
+						plus.nativeUI.closeWaiting();
+					})
+					setUseful();
+				}
+				function setUseful(){
+					ca.id('dianzan').addEventListener('tap',function(){
+						mui.post(url+'setArtUsefulByArt_id',{art_id:localStorage.getItem('art_id')},function(data){
+							if(data.msg==1){
+								mui.toast('点赞成功');
+							}
+						})
+					})
+				}
+				
+			})
+//			ca.id('backtop').addEventListener('tap',function(){
+//					scrollTo(0,0);
+//					plus.nativeUI
+//			})
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,219 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/style.css" />
+	</head>
+
+	<body>
+		<div id="pullrefresh" class="mui-content mui-scroll-wrapper" style="margin: 0px;padding-bottom:60px;">
+			<div class="mui-scroll">
+				<ul class="" id="list_item">
+				      	
+				   </ul>
+			</div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/castapp.js" ></script>
+		<script type="text/javascript">
+			var url=localStorage.getItem('url');
+			var user_id=localStorage.getItem('userid');
+			var page=1;
+			var pages=1;
+			mui.plusReady(function(){
+				mui.init({
+				 	pullRefresh : {
+					    container:"#pullrefresh",//下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
+//					    down : {
+//					      height:50,//可选,默认50.触发下拉刷新拖动距离,
+//					      auto: false,//可选,默认false.首次加载自动下拉刷新一次
+//					      contentdown : "下拉可以刷新",//可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
+//					      contentover : "释放立即刷新",//可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
+//					      contentrefresh : "正在刷新...",//可选，正在刷新状态时，下拉刷新控件上显示的标题内容
+//					      callback :downFn //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+//					    },
+				        up: {
+				            contentrefresh: '正在加载...',
+				            callback: upFn // 上拉执行函数
+				        }
+					}
+	        	});
+	        	ca.init(true);
+	        	var list=ca.id('list_item');
+	        	function upFn(){
+					if(pages==0){
+						this.endPullupToRefresh(true);
+					}else{
+						page=page+1;
+						showItem(page);
+						this.endPullupToRefresh(false);
+						plus.nativeUI.closeWaiting();
+					}
+				}
+	        	showItem(page);
+	        	function showItem(page){
+	        		ca.showWaiting();
+	        		ca.ajaxs({url:'findAllAccountingByGuide_id',data:{
+	        				e_id:user_id,page:page
+	        			},succFn:function(data){
+									if(!data){
+										list.innerHTML="暂无数据";
+										ca.closeWaiting();
+										return;
+									}
+									if(data.msg==1){
+									var da=data.data;
+									if(data.length>=page*10){
+										pages=1;
+									}else{
+										pages=0;
+									}
+							if(data=="" && page==1){
+								list.innerHTML="暂无数据";
+								plus.nativeUI.closeWaiting();
+								return;
+							}
+								for(var a in da){
+									var zhuangtai;
+									if(da[a].is_check==0){
+//										if(new Date(Date.parse(da[a].end_date))>=new Date()){
+//											zhuangtai='<div  class=""><input class="no" style="height: 30px;color: #FFFFFF;background: #a6a6a6;font-size: 13px;border-radius:5px ;border: 0px;" type="button" data_isok="0" value="提交报账" data_id="'+da[a].id+'" /></div>'
+//										}else{
+											zhuangtai='<div style="" class="tour-guide-list-b-r-2" ><input class="ok" type="button" value="提交报账" data_id="'+da[a].id+'" data_isok="1"/></div>'
+//										}
+										
+									}
+									if(da[a].is_check==1){
+										zhuangtai='<div class="tour-guide-list-b-r-1 c4F77AA"><span>等待审核</span></div>'
+									}
+									if(da[a].is_check==2){
+										zhuangtai='<div class="tour-guide-list-b-r-1 c4F77AA"><span>审核失败</span></div>'
+									}
+									if(da[a].is_check==3){
+										zhuangtai='<div class="tour-guide-list-b-r-1 c4F77AA"><span>审核成功</span></div>'
+									}
+									var temp='<li class="tour-guide-list mui-table-view-cell" >'	
+// 										     + 		'<div class="mui-slider-right mui-disabled ">'
+// 											 +			'<a class="mui-btn mui-btn-red" >删除</a>'
+// 											 +		'</div>'
+											 +      '<div class="mui-slider-handle">'		
+											 +			'<div class="tour-guide-list-t" data_id="'+da[a].id+'" data_is_check="'+da[a].is_check+'">'
+											 +				'<div class="tour-guide-list-t-1">'
+											 +					'<span class="ts-li-title">'+da[a].line_name+'</span>'
+											 +				'</div>'
+											 +				'<div class="tour-guide-list-t-2">'
+											 +					'<span>团号：</span><span>'+da[a].team_num+'</span>'
+											 +				'</div>'
+											 +				'<div class="tour-guide-list-t-2">'
+											 +					'<span>团期：</span><span>'+da[a].start_date+'——'+da[a].end_date+'</span>'
+											 +				'</div>'
+											 +				'<div class="tour-guide-list-t-2">'
+											 +					'<span>人数：</span><span>'+(da[a].man_num+da[a].child_num)+'人(成人'+da[a].man_num+'  儿童'+da[a].child_num+')</span>'
+											 +				'</div>'
+											 +				'<div class="tour-guide-list-t-2">'
+											 +					'<span>公司：</span><span>'+da[a].enterprise.alias+'</span><span class="ml15">业务计调：</span><span>'+da[a].employee1.realname+'</span>'
+											 +				'</div>'
+											 +				'<div style="position: absolute;right: 0;top: 50px;color: #4F77AA;">'
+											 +					'<span class="fs15">点击查看</span><span class="mui-icon mui-icon-arrowright"></span>'
+											 +				'</div>'
+											 +			'</div>'
+											 +			'<div class="tour-guide-list-b">'
+											 +				'<div class="tour-guide-list-b-l">'
+//											 +					'<span>收入：</span><span>'+arry1[a]+'</span><span>元</span>'
+											 +				'</div>'
+											 +				'<div class="tour-guide-list-b-r">'+zhuangtai+'</div>'
+											 +			'</div>'
+											 +		'</div>'
+										     + 	'</li>';
+									list.innerHTML+=temp;
+								}
+		        			}
+		        			plus.nativeUI.closeWaiting();
+// 		        			click_item();
+// 		        			tijiao();
+	        			},errFn:function(call){
+	        				ca.closeWaiting();
+	        				mui.toast(call);
+	        			}
+	        		})
+	        	}
+	        	
+	        	mui('#list_item').on('tap','.tour-guide-list-t',function(){
+								var teamsk_id=this.getAttribute('data_id');
+								var data_is_check=this.getAttribute('data_is_check');
+								localStorage.setItem('teamsk_id',teamsk_id);
+								var self=plus.webview.create('tour_guide_information.html','tour_guide_information',{},{teamsk_id:teamsk_id,data_is_check:data_is_check});
+								setTimeout(function(){
+									self.show('pop-in','300');
+								},200)
+						})
+
+						mui('#list_item').on('tap','.ok',function(){
+								var btnArray = ['是','否'];
+								var teamsk_id=this.getAttribute('data_id');
+								mui.confirm('确认提交报账?', '提交报账', btnArray, function(e) {
+									if (e.index == 0) {
+											ca.ajaxs({url:'updateTeamSkbyid',data:{
+												id:teamsk_id
+											},succFn:function(data){
+												if(data.code>0){
+													mui.toast('提交成功');
+													list.innerHTML="";
+													page=1;
+													showItem(page);
+												}else{
+													mui.toast(data.msg)
+												}
+												ca.closeWaiting();
+											},errFn:function(call){
+												ca.closeWaiting();
+												mui.toast(call)
+											}
+										})
+									}
+								})
+						})
+				
+			});
+
+//			window.onload = function(){
+//			     	delete_onclick();
+//			}
+//			function delete_onclick(){
+//			     	var cell=document.getElementsByClassName('information-list-delete');
+//			     	for(var i=0;i<cell.length;i++){
+//			     		(function(index){
+//			     			var btnArray = ['确认', '取消'];
+//							cell[i].addEventListener('tap',function(){
+//								mui.confirm('确认删除该条记录？', 'Hello MUI', btnArray, function(e) {
+//									if (e.index == 0) {
+//										
+//									} else {
+//										setTimeout(function() {
+//											
+//										}, 0);
+//									}
+//								});
+//								
+//							})
+//						})(i);
+//			     	}
+//			     }
+			
+//			ca.init();
+//			var cell=ca.className('tour-guide-list-t');
+//			for(var i=0;i<cell.length;i++){
+//				(function(index){
+//					cell[i].addEventListener('tap',function(){
+//						ca.newInterface({url:'tour_guide_information.html',id:'tour_guide_information'});
+//					})
+//				})(i);
+//			}
+		</script>
+	</body>
+
+</html>

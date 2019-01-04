@@ -1,0 +1,399 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/style.css" />
+		<link rel="stylesheet" href="../css/mui.picker.min.css" />
+		<link rel="stylesheet" href="../css/iconfont.css" />
+		<link rel="stylesheet" href="../css/previewImage.css" />
+		<style>
+			.mui-bar-nav {
+			    top: 0;
+			    -webkit-box-shadow: 0 0px 0px #ccc;
+			    /* box-shadow: 0 1px 6px #ccc; */
+			}
+			.fukuanxuanze{
+				border: 1px solid #e5e5e5;
+				width: 21%;
+				font-size: 13px!important;
+				line-height:30px!important ;
+				border-radius:8px ;
+			}
+			.active{
+				background: #52BCEC;
+				color: #FFFFFF;
+				border: 0px;
+			}
+			.mui-slider{
+				height: 100%;
+			}
+			textarea{
+				padding:3px;
+			}
+		</style>
+	</head>
+
+	<body style="background: #F2F2F2;">
+		<header class="mui-bar mui-bar-nav mheader">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mback"></a>
+		    <h1 class="mui-title htitle">房费支出(2018-5-21)</h1>
+		    <span id="jizhang" class="mui-pull-right fs16 " style="line-height: 44px;">保存</span>
+		</header>
+		<div class="mui-content">
+		    <div class="bgwhite h40 bbf2 oh">
+		    	<div class="fl w25 fs14 c121212 pl20 lh40">
+		    		<span>酒店名称</span>
+		    	</div>
+		    	<div class="fl w50 lh40 ">
+		    		<input type="text" readonly="readonly" class="w95 tc fs12" style="width:95%;border:1px solid #e5e5e5;border-radius:4px ;height: 28px;" placeholder="请选择酒店名称" data_id=""/>
+		    	</div>
+		    	<div class="fl w10 lh40 " id="liebiao" >
+		    		<span class="mui-icon mui-icon-arrowdown"></span>
+		    	</div>
+		    </div>
+		    <div class="bgwhite h40 bbf2 oh">
+		    	<div class="fl w25 fs14 c121212 pl20 lh40">
+		    		<span>入住日期</span>
+		    	</div>
+		    	<div class="fl w70 lh40 ">
+		    		<input type="text" readonly="readonly" class="w70 tc fs12" style="width:70%;border:1px solid #e5e5e5;border-radius:4px ;height: 28px;" placeholder="请输入入住时间"/>
+		    	</div>
+		    </div>
+		    <div class="bgwhite h40 bbf2 oh">
+		    	<div class="fl lh40 fs14 c121212 w25 pl20">
+		    		<span>单人间</span>
+		    	</div>
+		    	<div class="fl w75 lh40">
+		    		<input type="number" onblur="jisuan();" id="dan1"  class="tc fs12" style="width:24%;border:1px solid #e5e5e5;border-radius:4px ;height: 28px;" placeholder="输入单价"/>
+		    		<input type="number" onblur="jisuan();" id="dan2"  class="tc fs12" style="width:35%;border:1px solid #e5e5e5;border-radius:4px ;height: 28px;" placeholder="计划内数量"/>
+		    		<input type="number" onblur="jisuan();" id="dan3"  class="tc fs12" style="width:35%;border:1px solid #e5e5e5;border-radius:4px ;height: 28px;" placeholder="额外增加数量"/>
+		    	</div>
+		    </div>
+		    <div class="bgwhite h40 bbf2 oh">
+		    	<div class="fl lh40 fs14 c121212 w25 pl20">
+		    		<span>双人间</span>
+		    	</div>
+		    	<div class="fl w75 lh40">
+		    		<input type="number" onblur="jisuan();" id="shuang1"  class="tc fs12" style="width:24%;border:1px solid #e5e5e5;border-radius:4px ;height: 28px;" placeholder="输入单价"/>
+		    		<input type="number" onblur="jisuan();" id="shuang2"  class="tc fs12" style="width:35%;border:1px solid #e5e5e5;border-radius:4px ;height: 28px;" placeholder="计划内数量"/>
+		    		<input type="number" onblur="jisuan();" id="shuang3"  class="tc fs12" style="width:35%;border:1px solid #e5e5e5;border-radius:4px ;height: 28px;" placeholder="额外增加数量"/>
+		    	</div>
+		    </div>
+		    <div class="bgwhite h40 bbf2 oh">
+		    	<div class="fl lh40 fs14 c121212 w25 pl20">
+		    		<span>三人间</span>
+		    	</div>
+		    	<div class="fl w75 lh40">
+		    		<input type="number" onblur="jisuan();" id="san1"  class="tc fs12" style="width:24%;border:1px solid #e5e5e5;border-radius:4px ;height: 28px;" placeholder="输入单价"/>
+		    		<input type="number" onblur="jisuan();" id="san2"  class="tc fs12" style="width:35%;border:1px solid #e5e5e5;border-radius:4px ;height: 28px;" placeholder="计划内数量"/>
+		    		<input type="number" onblur="jisuan();" id="san3"  class="tc fs12" style="width:35%;border:1px solid #e5e5e5;border-radius:4px ;height: 28px;" placeholder="额外增加数量"/>
+		    	</div>
+		    </div>
+		    <div class="bgwhite h40 bbf2 oh">
+		    	<div class="fl lh40 fs14 c121212 w25 pl20">
+		    		<span>司陪房</span>
+		    	</div>
+		    	<div class="fl w75 lh40">
+		    		<input type="number" onblur="jisuan();" id="si1"  class="tc fs12" style="width:24%;border:1px solid #e5e5e5;border-radius:4px ;height: 28px;" placeholder="输入单价"/>
+		    		<input type="number" onblur="jisuan();" id="si2"  class="tc fs12" style="width:35%;border:1px solid #e5e5e5;border-radius:4px ;height: 28px;" placeholder="计划内数量"/>
+		    		<input type="number" onblur="jisuan();" id="si3"  class="tc fs12" style="width:35%;border:1px solid #e5e5e5;border-radius:4px ;height: 28px;" placeholder="额外增加数量"/>
+		    	</div>
+		    </div>
+		    <div class="bgwhite h40  oh ">
+		    	<div class="fl w25 fs14 c121212 pl20 lh40">
+		    		<span>总金额</span>
+		    	</div>
+		    	<div class="fl w70 lh40">
+		    		<input type="text" id="zonge" readonly="readonly" value="0" class="w70 tc fs12" style="width:70%;border:1px solid #e5e5e5;border-radius:4px ;height: 28px;" />
+		    	</div>
+		    </div>
+		    
+		    <div class="bgwhite h40 bbf2 oh mt10">
+		    	<div class="fl w30 fs14 c121212 pl20 lh40">
+		    		<span>付款方式</span>
+		    	</div>
+		    </div>
+		    <div class="bgwhite h40  bbf2 oh">
+		    	<div class="fl w25 fs14 c121212 pl20 lh40">
+		    		<span>导游付</span>
+		    	</div>
+		    	<div class="fl w70 lh40 ">
+		    		<input type="number" onblur="yanzhen();" value="0.00" class="w70 fu tc fs12" style="width:70%;border:1px solid #e5e5e5;border-radius:4px ;height: 28px;" />
+		    	</div>
+		    </div>
+		    <div class="bgwhite h40 bbf2  oh">
+		    	<div class="fl w25 fs14 c121212 pl20 lh40">
+		    		<span>未付(签单)</span>
+		    	</div>
+		    	<div class="fl w70 lh40">
+		    		<input type="number" onblur="yanzhen();" value="0.00" class="w70 tc fu fs12" style=" width:70%;border:1px solid #e5e5e5;border-radius:4px ;height: 28px;" />
+		    	</div>
+		    </div>
+		    <div class="bgwhite h100  bbf2 oh">
+		    	<div class="fl w25 fs14 c121212 pl20 lh50">
+		    		<span>备注</span>
+		    	</div>
+		    	<div class="fl w70">
+		    		<textarea rows="3" placeholder="额外增加或减少的费用在此说明。" id="textarea" style="width: 90%;height: 90px;font-size: 13px;margin-top: 5px;"></textarea>
+		    	</div>
+		    </div>
+		     <div class="bgwhite h150  bbf2 oh">
+		    	<div class=" w70 fs14 c121212 pl20 lh40">
+		    		<span>票据</span><span class="fs13"> (提供票据图片，大小5M以下)</span>
+		    	</div>
+		    	<div class="pl20">
+		    		<div class="fl disn" id="tu1" style="width: 55px;height: 55px;">
+		    			<img id="tu"  class="" style="width: 100%;height: 100%;" data-preview-src="" data-preview-group="1"/>
+		    		</div>
+		    		<div class="fl ml10">
+		    			<span class="mui-icon mui-icon-plusempty" id="tupian" style="padding: 5px;font-size: 45px;border: 1px solid #666666;"></span>
+		    		</div>
+		    	</div>
+		    </div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/castapp.js" ></script>
+		<script type="text/javascript" src="../js/mui.picker.min.js" ></script>
+		<script type="text/javascript" src="../js/mui.zoom.js" ></script>
+		<script type="text/javascript" src="../js/mui.previewimage.js" ></script>
+		<script type="text/javascript">
+			mui.previewImage();
+			var teamsk_id=localStorage.getItem('teamsk_id');
+			var day=localStorage.getItem('jizhangday');
+			var user_id=localStorage.getItem('userid');
+			var accounting_guide_id=localStorage.getItem('accounting_guide_id');
+			var upload_imgurl=localStorage.getItem('upload_imgurl');
+			var is_check=0;
+			var imgurl="";
+			var wucantin=0;
+			mui.plusReady(function(){
+				mui.init();
+				ca.init(true);
+				ca.blackStatusBar();
+				ca.checkTheNetwork();
+				var input=ca.tagName('input');
+				ca.className('htitle')[0].innerHTML='修改房费支出'+'('+day+')'
+				input[1].value=day;
+				ca.id('liebiao').style.display='none';
+				var picker1 = new mui.PopPicker();
+				var picker2 = new mui.PopPicker();
+				plus.nativeUI.showWaiting();
+				ca.ajaxs({url:'findAccountingGuideByid',data:{
+						id:accounting_guide_id
+					},
+					succFn:function(data){
+						if(data.procurement_id>=1){
+							if(data.is_confirm>0){
+								ca.id('dan1').value=data.price;
+								ca.id('shuang1').value=data.price_two;
+								ca.id('san1').value=data.price_three;
+								ca.id('si1').value=data.price_four;
+								ca.id('dan2').value=data.quantity;
+								ca.id('shuang2').value=data.quantity_two;
+								ca.id('san2').value=data.quantity_three;
+								ca.id('si2').value=data.quantity_four;
+							}else{
+								ca.id('dan1').value=data.procurement_price;
+								ca.id('shuang1').value=data.procurement_price_two;
+								ca.id('san1').value=data.procurement_price_three;
+								ca.id('si1').value=data.procurement_price_four;
+								ca.id('dan2').value=data.procurement_quantity;
+								ca.id('shuang2').value=data.procurement_quantity_two;
+								ca.id('san2').value=data.procurement_quantity_three;
+								ca.id('si2').value=data.procurement_quantity_four;
+							}
+						}else{
+							ca.id('dan1').value=data.price;
+							ca.id('shuang1').value=data.price_two;
+							ca.id('san1').value=data.price_three;
+							ca.id('si1').value=data.price_four;
+							ca.id('dan2').value=data.quantity;
+							ca.id('shuang2').value=data.quantity_two;
+							ca.id('san2').value=data.quantity_three;
+							ca.id('si2').value=data.quantity_four;
+						}
+						ca.id('dan3').value=data.quantity2;
+						ca.id('shuang3').value=data.quantity2_two;
+						ca.id('san3').value=data.quantity2_three;
+						ca.id('si3').value=data.quantity2_four;
+						is_check=data.is_check;
+						input[0].value=data.name;
+						input[0].setAttribute('guide_relation_id',data.client_id);
+						input[0].setAttribute('guide_union_id',data.union_id);
+						input[15].value=data.guide_pay;
+						input[16].value=data.sign_bill;
+						ca.id('textarea').value=data.guide_mark;
+						imgurl=data.img_url;
+						if(!ca.emptyFun(data.img_url)){
+							ca.id('tu').src=data.img_url;
+							ca.id('tu1').style.display='block';
+						}
+						jisuan();
+						ca.closeWaiting();
+					},
+					errFn:function(call){
+						ca.closeWaiting();
+						mui.toast(call);
+					}
+				})
+//				ca.ajaxs({url:'findContractHotelBy',data:{
+//						teamsk_id:teamsk_id
+//					},succFn:function(data){
+//						if(ca.emptyFun(data)){
+//							wucantin=1;
+//						}else{
+//							if(data.msg==1){
+//								var da=data.data;
+//								var arr=new Array();
+//								for(var i=0;i<da.length;i++){
+//									var ob=new Object();
+//									ob.value={id:da[i].id,union_id:da[i].union_id,price1:da[i].price1,
+//										price2:da[i].price2,price3:da[i].price3,price4:da[i].price4};
+//									ob.text=da[i].name;
+//									arr.push(ob)
+//								}
+//								picker1.setData(arr);
+//							
+//							}
+//						}
+//						show();
+//						ca.closeWaiting();
+//					},errFn:function(call){
+//						ca.closeWaiting();
+//						mui.toast(call);
+//					}
+//				})
+				
+//				function show(){
+//					ca.id('liebiao').addEventListener('tap',function(){
+//						if(wucantin==1){
+//							mui.toast('无签约餐厅!');
+//							return;
+//						}
+//						picker1.show(function (selectItems) {
+//							input[0].value=selectItems[0].text;
+//							input[0].setAttribute('guide_relation_id',selectItems[0].value.id);
+//							input[0].setAttribute('guide_union_id',selectItems[0].value.union_id);
+//						})
+//					})
+//				}
+				
+				ca.id('jizhang').addEventListener('tap',function(){
+					if(input[0].value==""){
+						mui.toast('请输入酒店名称');
+						input[0].focus();
+						return;
+					}
+					if(input[1].value==""){
+						mui.toast('请输入时间');
+						input[1].focus();
+						return;
+					}
+					
+					if(input[15].value==""){
+						mui.toast('请输入导游付金额');
+						input[15].focus();
+						return;
+					}
+					if(input[16].value==""){
+						mui.toast('请输入签单金额');
+						input[16].focus();
+						return;
+					}
+					var inp=ca.className('fu');
+					var fu_zong=parseFloat(inp[0].value)+parseFloat(inp[1].value);
+					var zongs=parseFloat(ca.id('zonge').value);
+					if(zongs<=0){
+						mui.toast('请填写正确的单价,数量');
+					}else if(fu_zong!=zongs){
+						mui.toast('请填写付款签单金额');
+					}else{
+					
+					ca.ajaxs({url:'updateAccountingGuide',data:{
+							id:accounting_guide_id,
+							user_id:user_id,
+							type:'hotel',
+							teamsk_id:teamsk_id,
+							client_id:input[0].getAttribute('guide_relation_id'),
+							union_id:input[0].getAttribute('guide_union_id'),
+							use_date:day,end_date:'',
+							is_check:is_check,
+							name:input[0].value,
+							alias:'单人间',alias_two:'双人间',alias_three:'三人间',alias_four:'司陪房',
+							price:ca.id('dan1').value,price_two:ca.id('shuang1').value,price_three:ca.id('san1').value,price_four:ca.id('si1').value,
+							quantity:ca.id('dan2').value,quantity_two:ca.id('shuang2').value,quantity_three:ca.id('san2').value,quantity_four:ca.id('si2').value,
+							quantity2:ca.id('dan3').value,quantity2_two:ca.id('shuang3').value,quantity2_three:ca.id('san3').value,quantity2_four:ca.id('si3').value,
+							unit:'间',
+							mark:ca.id('textarea').value,
+							guide_pay:input[15].value,
+							sign_bill:input[16].value,
+							img_url:imgurl,
+						},
+						succFn:function(data){
+							if(data.msg==1){
+								mui.toast('修改成功');
+								var arr1 = ['housing_expenditure'];
+								ca.sendNotice(arr1,'update',{});
+								setTimeout(function(){
+								    ca.closeCurrentInterface();
+								},300);
+							}
+							else{
+								mui.toast('修改失败');
+							}
+							ca.closeWaiting();
+						},
+						errFn:function(call){
+							ca.closeWaiting();
+							mui.toast(call);
+						}
+						
+					})
+					}
+				})
+				
+				ca.id('tupian').addEventListener('tap',function(){
+					var arr = ['照相机','相册'];
+					ca.actionSheet(arr,{succFn:function(data){
+						ca.id('tu1').style.display='block';
+						var t=ca.id('tu');
+						t.style.display='block';
+						t.src=data;
+						imgurl=data;
+					},
+					//是否开启上传
+					isUpload:true,
+					uploadUrl:upload_imgurl,
+					})
+				})
+			})
+			function yanzhen(){
+				var inp=ca.className('fu');
+				if(ca.emptyFun(inp[0].value)){
+					inp[0].value=0;
+				}
+				if(ca.emptyFun(inp[1].value)){
+					inp[1].value=0;
+				}
+				inp[1].value=ca.id('zonge').value-inp[0].value;
+			}
+			function jisuan(){
+				var zong1=0,zong2=0,zong3=0,zong4=0,zongs1=0,zongs2=0,zongs3=0,zongs4=0;
+				zong1=ca.id('dan2').value*ca.id('dan1').value;
+				zongs1=ca.id('dan3').value*ca.id('dan1').value;
+				zong2=ca.id('shuang2').value*ca.id('shuang1').value;
+				zongs2=ca.id('shuang3').value*ca.id('shuang1').value;
+				zong3=ca.id('san2').value*ca.id('san1').value;
+				zongs3=ca.id('san3').value*ca.id('san1').value;
+				zong4=ca.id('si2').value*ca.id('si1').value;
+				zongs4=ca.id('si3').value*ca.id('si1').value;
+				ca.id('zonge').value=zong1+zong2+zong3+zong4+zongs1+zongs2+zongs3+zongs4;
+				}
+		</script>
+	</body>
+
+</html>

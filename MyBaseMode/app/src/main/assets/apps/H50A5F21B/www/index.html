@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+    <title></title>
+    <link href="css/mui.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/iconfont.css" />
+	<link href="css/style.css" rel="stylesheet" />
+    <style>
+		.mui-bar-tab .mui-tab-item .mui-icon{
+			font-size: 22px;
+		}
+		.mui-active{
+			color: #24ABFE !important;
+		}
+		.mui-bar-tab .mui-tab-item{
+			color: #666666;
+		}
+    </style>
+</head>
+<body>
+	<nav class="mui-bar mui-bar-tab">
+	    <a id="defaultTab" class="mui-tab-item mui-active" href="shouye.html">
+	        <span class="mui-icon iconfont icon-index"></span>
+	        <span class="mui-tab-label">首页</span>
+	    </a>
+	    <a class="mui-tab-item" href="shouye2.html">
+	        <span class="mui-icon iconfont icon-yemianshezhi " style="font-size:28px;top:1px;width: 32px;height: 30px;"><span style="display: none;" class="mui-badge">1</span></span>
+	        <span class="mui-tab-label" style="margin-top: -6px;">地接</span>
+	    </a>
+		<a class="mui-tab-item" href="operating_table.html">
+			<span class="mui-icon iconfont icon-bianjiwenjian" style="font-size:23px;top:3px;width: 32px;height: 30px;"><span style="display: none;" class="mui-badge">1</span></span>
+			<span class="mui-tab-label" style="margin-top: -6px;">操作</span>
+		</a>
+	    <a class="mui-tab-item" href="jiaoliu.html">
+	        <span class="mui-icon iconfont icon-guke" style="font-size: 32px;top:-3px;width: 32px;height: 30px;"></span>
+	        <span class="mui-tab-label" style="margin-top: -8px;">朋友</span>
+	        <div class="cffffff fs10 disn" id="tubiao" style="position: absolute;top:3px;left:71%;background: red;border-radius:50%;height:14px;width:14px;z-index:100;">
+				<span  id="weidu" style="position: absolute;top:-3px;left:4px;"></span>
+				<!-- <span id="weidu" style="position: absolute;top:-4px;left:2px;">12</span> -->
+			</div>
+	    </a>
+	    
+	    <a class="mui-tab-item" href="user/user_index.html">
+	        <span class="mui-icon iconfont icon-wode"></span>
+	        <span class="mui-tab-label">我的</span>
+	</nav>
+</body>
+<script type="text/javascript" src="js/mui.min.js" ></script>
+<script type="text/javascript" src="js/castapp.js" ></script>
+<script type="text/javascript" charset="utf-8">
+		mui.init();
+		ca.init(false);
+		ca.whiteStatusBar();
+		var pathArray = ['shouye.html','shouye2.html','operating_table.html','jiaoliu.html','user/user_index.html'];
+		ca.tabBar(pathArray);
+		ca.dblclickExit();
+      	//监听安卓返回键
+      	
+      	mui.plusReady(function(){
+			tihuan();
+//    		plus.runtime.setBadgeNumber(0);
+			localStorage.setItem('BottomUnread',0);
+      		plus.push.addEventListener("click", function(msg) {
+				switch(msg.payload) {
+					case "LocalMSG":
+						// outSet("点击本地创建消息启动：");
+						// alert(1);
+						break;
+					default:
+						// outSet("点击离线推送消息启动：");
+						// alert(2);
+						break;
+				}      			
+      			
+//				var payload=(plus.os.name=='iOS')?msg.payload:JSON.parse(msg.payload);
+				pushGetRun();
+			}, false);
+			// 监听在线消息事件
+			plus.push.addEventListener("receive", function(msg) {
+				if(msg.aps){
+			        // alert('接收到在线APNS消息');
+			    }else{
+			        // alert('接收到在线透传消息');
+			    }
+				if ( msg.payload){
+					if ( typeof(msg.payload)=="string" ) {
+						// console.log("payload(String): "+msg.payload )
+// 					alert( "payload(String): "+msg.payload );
+// 					alert('payload(String)'+msg.content);
+// 					// pushGetRun(JSON.parse(msg.content).url,JSON.parse(msg.content).urlid);
+// //					alert(JSON.parse(msg.content).id);
+// 					createLocalPushMsg(msg.content)
+					} else {
+						// alert(22)
+					}
+				} else {
+// 					createLocalPushMsg(msg.content)
+// 					alert('2'+msg.payload)
+				//alert( "payload: undefined" );
+				}
+			}, false);
+				//创建本地推送
+					function createLocalPushMsg(content){
+					    var options = {cover:false,};
+					    plus.push.createMessage(content, "LocalMSG", options );
+					    if(plus.os.name=="iOS"){
+					        alert('*如果无法创建消息，请到"设置"->"通知"中配置应用在通知中心显示!');
+					    }
+					}
+				
+					function pushGetRun(url,urlid) {
+//						ca.newInterface({url:url,id:urlid})
+					}
+					
+					
+				});
+				
+				ca.receiveNotice('updates',function(){
+					tihuan();
+				});
+				function tihuan(){
+					var Unread=localStorage.getItem('BottomUnread');
+					if(Unread>=1 && Unread<10){
+						ca.id('tubiao').classList.remove('disn');
+						ca.id('tubiao').classList.add('disb');
+						ca.id('weidu').innerText=Unread;
+						ca.id('weidu').style.left=4+'px';
+					}else if(Unread>=10){
+						ca.id('tubiao').classList.remove('disn');
+						ca.id('tubiao').classList.add('disb');
+						ca.id('weidu').innerText=Unread;
+						ca.id('weidu').style.left=2+'px';
+					}else{
+						ca.id('tubiao').classList.remove('disb');
+						ca.id('tubiao').classList.add('disn');
+					}
+				}
+</script>
+</html>

@@ -1,0 +1,366 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/style.css" />
+		<link href="../css/mui.picker.css" rel="stylesheet" />
+		<link href="../css/mui.poppicker.css" rel="stylesheet" />
+		<style>
+			.li-title{
+				overflow: hidden; 
+			    text-overflow: ellipsis; 
+			    -o-text-overflow: ellipsis;
+			    white-space:nowrap;
+			    width: 100%;
+			    display:block;
+			}
+			.sp-icon{
+				width:20%;
+				
+			}
+			.shaixuan-div{
+				padding: 5px 15px;
+			}
+			.mui-table-view-chevron .mui-table-view-cell {
+			     padding-right: 0px;
+			     padding: 5px 10px 0px 15px; 
+			}
+			.mt1{
+				margin-top: 1px;
+			}
+			.mt3{
+				margin-top: 3px;
+			}
+			.order-list-1-l-div{
+				width: 20px;
+				height: 20px;
+				background: #4F77AA;
+				border-radius:5px ;
+				margin: 11px auto;
+				padding-left: 3px;
+			}
+			.order-list-1-l-div span{
+				font-size: 14px;
+				color: #FFFFFF;
+				
+			}
+			.xianlus{
+				font-size: 14px;
+			}
+			.zhuangtais{
+				font-size: 14px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav bgwhite" style="z-index: 9998;height: 69px;padding-top: 25px;">
+				<div class="fl w10">
+					<span class="mui-icon mui-icon-arrowleft mui-action-back">
+						
+					</span>
+				</div>
+				<div class="fl w80 mt8">
+					<div class="top-neirong w90" >
+					<div class="top-dinwei">
+						<span class="top-dinwei-name">张家界</span>
+						<span class="iconfont icon-shuxian2"></span>
+					</div>
+					<div class="top-input">
+						<input type="text" readonly="readonly" placeholder="张家界火车站" id="top-search-input"/>
+					</div>
+				</div>
+				</div>
+		</header>
+		<div id="ccc"  class="shaixuan" style="height: 35px;width: 100%;position: fixed;top: 69px;border-bottom: 1px solid #4F77AA;">
+			<div class="shaixuan-div" data_id="0">
+				<span class="shaixuan-divxiala-zi">评分排序</span>
+				<span class="mui-icon mui-icon-arrowdown paixu"></span>
+			</div>
+			<div class="shaixuan-div" data_id="0">
+				<span class="shaixuan-divxiala-zi">销量排序</span>
+				<span class="mui-icon mui-icon-arrowdown paixu"></span>
+			</div>
+			<div class="shaixuan-div" data_id="0">
+				<span class="shaixuan-divxiala-zi  fl" style="width: 70%;">默认排序</span>
+				<span  class="mui-icon mui-icon-arrowdown paixu fl mt5 ml3"></span>
+			</div>
+		</div>
+		<div class="body " >
+				<div id="pullrefresh" class="mui-content mui-scroll-wrapper pt5" style="margin-top: 98px;">
+	    			<div class="mui-scroll">		
+						<ul  id="div_list">
+				             <!--<li class="car-li cb" style="border-bottom: 1px solid #C3C3C3;">
+				             	<div class="w30 fl car-li-l">
+				             		<div class="car-li-l-d">
+				             			<img src="../img/1.jpg"/>
+				             		</div>
+				             	</div>
+				             	<div class="w65 fl car-li-r">
+				             		<div class="car-li-r-1">
+				             			<span class="ts-li-title fs15 c323232">啥都看见啊时刻记得哈的哈萨克大家哈空间</span>
+				             		</div>
+				             		<div class="mt1">
+				             			<span class="fenshu">5分</span>
+										<span class="">/</span>
+										<span class="small-txt">5条评论</span>
+				             		</div>
+				             		<div class="mt3">
+				             			<span class="fs13 ca6a6a6">地区：湖南 张家界</span>
+				             		</div>
+				             		<div class="mt3">
+				             			<span class="yudinrenshu">本月已售15笔</span>
+				             		</div>
+				             	</div>
+				             </li>-->
+						</ul>
+					</div>
+				</div>
+				<div id="wushuju" class="disn" style="margin-top: 98px;">
+					<img src="../img/wushuju.png" style="width: 100%;"/>
+				</div>
+			</div>
+		<script id="list_item" type="text/template">
+			{{each list}}
+				<li class="car-li cb oh" style="border-bottom: 1px solid #C3C3C3;" data_name="{{$value.name}}" data_id="{{$value.id}}" data_enterprise_id="{{$value.enterprise_id}}"  data_comments_num="{{$value.comments_num}}" data_grade="{{$value.grade}}">
+	             	<div class="w30 fl car-li-l">
+	             		<div class="car-li-l-d">
+	             			{{if $value.pic==""}}
+	             				<img src="../img/noimg.jpg"/>
+	             			{{else}}
+	             				<img src="{{$value.pic}}"/>
+	             			{{/if}}
+	             		</div>
+	             	</div>
+	             	<div class="w65 fl car-li-r">
+	             		<div class="car-li-r-1">
+	             			<span class="ts-li-title fs15 c323232">{{$value.name}}</span>
+	             		</div>
+	             		<div class="mt1">
+	             			{{if $value.grade==0}}
+								<span class="fs12 c999999">商家评论不足</span>
+							{{else}}
+								<span class="fenshu">{{$value.grade}}分</span>
+								<span class="">/</span>
+								<span class="small-txt">{{$value.comments_num}}条评论</span>
+							{{/if}}
+	             		</div>
+	             		<div class="mt3">
+	             			<span class="fs13 ca6a6a6">地区：{{$value.enterprise.province}} {{$value.enterprise.city}}</span>
+	             		</div>
+	             		<div class="mt3">
+	             			<span class="yudinrenshu">本月已售{{$value.comment_num}}笔</span>
+	             		</div>
+	             	</div>
+	            </li>
+							
+			{{/each}}
+		</script>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/castapp.js" ></script>
+		<!-- <script src="../js/city.data.js" type="text/javascript" charset="utf-8"></script> -->
+		<script type="text/javascript" src="../js/template-web.js" ></script>
+		<script type="text/javascript">
+			var volume=0;
+			var grade=0;
+			var page=1;
+			var pages=1;
+			var user_id=localStorage.getItem('userid');
+			mui.plusReady(function(){
+				mui.init({
+					pullRefresh : {
+					    container:"#pullrefresh",//下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
+				        up: {
+				        	height:150,
+				            contentrefresh: '正在加载...',
+				            callback: upFn // 上拉执行函数
+				        }
+					},
+					swipeBack:true
+		     	});
+				ca.init();
+				ca.blackStatusBar();
+				ca.checkTheNetwork()
+				ca.closeWaitings();
+				var list=ca.id('div_list');
+				function upFn(){
+					if(pages==0){
+						this.endPullupToRefresh(true);
+					}else{
+						page=page+1;
+//						showitem(jige,quyucity,province,pages);
+						findItem(grade,volume,page);
+						this.endPullupToRefresh(false);
+						
+					}
+				}
+				var cell=ca.className('shaixuan-div');
+				var select_input = ca.className('shaixuan-divxiala-zi');
+			    var arrowdown=ca.className('paixu');
+				cell[0].addEventListener('tap',function(){
+					select_input['0'].style.color='#4F77AA';
+					arrowdown['0'].style.color='#4F77AA';
+					select_input[2].style.color='#323232';
+					arrowdown[2].style.color='#323232';
+					select_input[1].style.color='#323232';
+					arrowdown[1].style.color='#323232';
+					arrowdown['1'].classList.remove('mui-icon-arrowup');
+					arrowdown['1'].classList.add('mui-icon-arrowdown');
+					arrowdown['2'].classList.remove('mui-icon-arrowup');
+					arrowdown['2'].classList.add('mui-icon-arrowdown');
+					if(grade==0){
+						grade=1;
+					}else if(grade==1){
+						grade=2;
+						arrowdown['0'].classList.remove('mui-icon-arrowdown');
+						arrowdown['0'].classList.add('mui-icon-arrowup');
+					}else{
+						grade=1;
+						arrowdown['0'].classList.remove('mui-icon-arrowup');
+						arrowdown['0'].classList.add('mui-icon-arrowdown');
+					}
+					volume=0;
+					page=1;
+					mui('#pullrefresh').pullRefresh().refresh(true);
+					ca.id('div_list').innerHTML="";
+					findItem(grade,volume,page);
+				})
+				cell[1].addEventListener('tap',function(){
+					select_input['1'].style.color='#4F77AA';
+					arrowdown['1'].style.color='#4F77AA';
+					select_input[2].style.color='#323232';
+					arrowdown[2].style.color='#323232';
+					select_input[0].style.color='#323232';
+					arrowdown[0].style.color='#323232';
+					arrowdown['0'].classList.remove('mui-icon-arrowup');
+					arrowdown['0'].classList.add('mui-icon-arrowdown');
+					arrowdown['2'].classList.remove('mui-icon-arrowup');
+					arrowdown['2'].classList.add('mui-icon-arrowdown');
+					if(volume==0){
+						volume=1;
+					}else if(volume==1){
+						volume=2;
+						arrowdown['1'].classList.remove('mui-icon-arrowdown');
+						arrowdown['1'].classList.add('mui-icon-arrowup');
+					}else{
+						volume=1;
+						arrowdown['1'].classList.remove('mui-icon-arrowup');
+						arrowdown['1'].classList.add('mui-icon-arrowdown');
+					}
+					ca.id('div_list').innerHTML="";
+					grade=0;
+					page=1;
+					mui('#pullrefresh').pullRefresh().refresh(true);
+					findItem(grade,volume,page);
+				})
+				cell[2].addEventListener('tap',function(){
+					select_input['2'].style.color='#4F77AA';
+					arrowdown['2'].style.color='#4F77AA';
+					select_input[1].style.color='#323232';
+					arrowdown[1].style.color='#323232';
+					select_input[0].style.color='#323232';
+					arrowdown[0].style.color='#323232';
+					arrowdown['0'].classList.remove('mui-icon-arrowup');
+					arrowdown['0'].classList.add('mui-icon-arrowdown');
+					arrowdown['1'].classList.remove('mui-icon-arrowup');
+					arrowdown['1'].classList.add('mui-icon-arrowdown');
+					grade=0;
+					volume=0;
+					page=1;
+					ca.id('div_list').innerHTML="";
+					findItem(grade,volume,page);
+				})
+				
+				findItem(volume,grade,page);
+				function findItem(volume,grade,page){
+					var id=localStorage.getItem('e_id');
+					ca.ajaxs({url:'findAllPickupByProvinces',data:{
+							volume:volume,grade:grade,page:page
+						},succFn:function(data){
+							if(!ca.emptyFun(data)){
+								if(data.msg==1){
+									if(data.length>=page*10){
+										pages=1;
+									}else{
+										pages=0;
+									}
+									if(data=="" && page==1){
+										ca.id('wushuju').classList.add('disb');
+										ca.id('pullrefresh').classList.add('disn');
+										ca.id('wushuju').classList.remove('disn');
+										plus.nativeUI.closeWaiting();
+										return;
+									}
+									fuzhi(data.data);
+								}else{
+								ca.id('wushuju').classList.add('disb');
+								ca.id('pullrefresh').classList.add('disn');
+								ca.id('wushuju').classList.remove('disn');
+							}
+							}else{
+								ca.id('wushuju').classList.add('disb');
+								ca.id('pullrefresh').classList.add('disn');
+								ca.id('wushuju').classList.remove('disn');
+							}
+							setTimeout(function(){
+								ca.closeWaiting();
+							},250)
+							
+						},errFn:function(call){
+							ca.closeWaiting();
+							mui.toast(call);
+						}
+					})
+				}
+				function fuzhi(data){
+					try{
+						ca.id('div_list').innerHTML+=template('list_item', {
+							"list":data
+						});
+					}catch(err){
+						console.log(err);
+					}
+				}
+				var detailPage = mui.preload({
+					id:'pickup_list_item_detail',
+					url:'pickup_list_item_detail.html'
+				});
+				mui('#div_list').on('tap','.car-li',function(){
+					var id = this.getAttribute('data_id');
+					var data_comments_num=this.getAttribute('data_comments_num');
+					var data_grade=this.getAttribute('data_grade');
+					var enterprise_id=this.getAttribute('data_enterprise_id');
+					var data_name=this.getAttribute('data_name');
+					if(!detailPage){
+					  detailPage = plus.webview.getWebviewById('pickup_list_item_detail');
+					}
+					  //触发详情页面的newsId事件
+				 	mui.fire(detailPage,'pickup_item',{
+				    	car_id:id,
+					    comment_num:data_comments_num,
+					    data_grade:data_grade,
+					    enterprise_id:enterprise_id
+				  	});
+					plus.webview.show('pickup_list_item_detail','slide-in-right','500');
+// 					mui.openWindow({
+// 						id:'pickup_list_item_detail',
+// 					})
+					ca.createHistory({
+						id:id,name:data_name,type:'pickup_item',
+						data_comment_num:data_comments_num,
+						data_grade:data_grade,enterprise_id:enterprise_id,
+						date:new Date().getTime()
+					});
+				})
+				ca.className('top-input')[0].addEventListener('tap',function(){
+					ca.newInterface({url:'../search.html',id:'search'});
+				})
+			});
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,150 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/style.css" />
+		<style>
+			.mui-table-view-cell span{
+				font-size:13px ;
+				color: #333333;
+			}
+			.cell-l{
+				font-size:15px !important;
+			}
+			.cell-r{
+				margin-right: 5px;
+			}
+			.mui-icon-arrowright{
+				font-size: 20px!important;
+				color: #52bcec!important;
+			}
+		</style>
+	</head>
+	
+	<body>
+		<header class="mui-bar mui-bar-nav" style="background: #FFFFFF;height: 69px;padding-top: 25px;">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: #333333;"></a>
+		    <h1 class="mui-title" style="color: #333333;">团信息</h1>
+		</header>
+		<div class="mui-content">
+		    <div class="" style="background: #FFFFFF;padding-left: 15px;padding-bottom: 10px;">
+		    	<div class="tour-guide-list-t-1" style="padding-top: 10px;">
+					<span></span>
+				</div>
+				<div class="tour-guide-list-t-2">
+					<span>团号：</span><span></span>
+				</div>
+				<div class="tour-guide-list-t-2">
+					<span>团期：</span><span></span>
+				</div>
+				<div class="tour-guide-list-t-2">
+					<span>人数：</span><span></span>
+				</div>
+				<div class="tour-guide-list-t-2">
+					<span>公司：</span><span></span><span class="ml15">业务计调：</span><span></span><span class="ml10" id="jdphone"></span>
+				</div>
+		    </div>
+		    <div style="background: #FFFFFF;margin-top: 5px;">
+		    	<ul class="mui-table-view">
+    				<li class="mui-table-view-cell">
+    					<span class="cell-l">预领团款</span><span class="mui-pull-right cell-r"></span>
+    				</li>
+    				<li class="mui-table-view-cell" id="sijiphone">
+    					<span class="cell-l">司机</span><span class="mui-icon mui-icon-arrowright mui-pull-right"></span><span class="mui-pull-right cell-r"></span><span class="mui-pull-right cell-r"></span>
+    				</li>
+    				<li class="mui-table-view-cell">
+    					<span class="cell-l">计划详情</span><span class="mui-icon mui-icon-arrowright mui-pull-right"></span>
+    				</li>
+    			</ul>
+		    </div>
+		    <!--<div style="background: #FFFFFF;margin-top: 5px;margin-bottom: 60px;">
+		    	<ul class="mui-table-view">
+    				<li class="mui-table-view-cell">
+    					<span class="cell-l">团款代收</span><span class="mui-icon mui-icon-arrowright mui-pull-right"></span><span class="mui-pull-right cell-r" >(10)</span><span class="mui-pull-right cell-r">1000</span>
+    				</li>
+    				<li class="mui-table-view-cell">
+    					<span class="cell-l">导补佣金</span><span class="mui-icon mui-icon-arrowright mui-pull-right"></span><span class="mui-pull-right cell-r">6000</span>
+    				</li>
+    				<li class="mui-table-view-cell">
+    					<span class="cell-l">导游现付</span><span class="mui-icon mui-icon-arrowright mui-pull-right"></span><span class="mui-pull-right cell-r" >(1000)</span><span class="mui-pull-right cell-r">5000</span>
+    				</li>
+    				<li class="mui-table-view-cell">
+    					<span class="cell-l">账面退补</span><span class="mui-icon mui-icon-arrowright mui-pull-right"></span><span class="mui-pull-right cell-r">10000</span>
+    				</li>
+    			</ul>
+		    </div>-->
+		</div>
+		<div id="jizhang" style="background: #52bcec;color: #FFFFFF;height: 50px;line-height: 50px;text-align: center;position: fixed;bottom: 0;width: 100%;">
+			<span class="mui-icon mui-icon-compose"></span><span>我要记账</span>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/castapp.js" ></script>
+		<script type="text/javascript">
+			mui.plusReady(function(){
+				mui.init();
+				ca.init(true);
+				ca.blackStatusBar();
+				var self=plus.webview.currentWebview();
+				var user_id=localStorage.getItem('userid');
+				var teamsk_id=self.teamsk_id;
+				var cell=ca.tagName('span');
+				show(teamsk_id);
+				function show(teamsk_id){
+					ca.ajaxs({url:'findTeamSkById',data:{
+							teamsk_id:teamsk_id,user_id:user_id
+						},succFn:function(data){
+							var da=data.data;
+							var nums=data.nums;
+	//						cell[0].innerHTML=(da.line_name.replace('（','z')).replace('/）/',')');
+							cell[0].innerHTML=da.line_name;
+							cell[2].innerHTML=da.team_num;
+							cell[4].innerHTML=da.start_date+'——'+da.end_date;
+							cell[6].innerHTML=(nums.child_num+nums.man_num)+'(成人'+nums.man_num  +'儿童'+nums.child_num+')';
+							cell[8].innerHTML=da.enterprise.name;
+							cell[10].innerHTML=da.employee1.realname;
+							cell[11].innerHTML=da.employee1.phone;
+							ca.id('jdphone').addEventListener('tap',function(){
+								jdphone(da.employee1.phone);
+							})
+							ca.id('sijiphone').addEventListener('tap',function(){
+								jdphone(da.driver_tel);
+							})
+							cell[13].innerHTML=da.draw_fee;
+	//						cell[14].innerHTML=da.employee2.realname;
+							cell[16].innerHTML=da.driver_tel;
+							cell[17].innerHTML=da.driver_name;
+	//						cell[22].innerHTML=data.driver_name;
+	//						cell[35].innerHTML=da.guide_commission;
+							localStorage.setItem('teamsk_is_check',da.is_check);
+							localStorage.setItem('teamsk_end_date',da.end_date);
+							ca.closeWaiting();
+						},errFn:function(call){
+							ca.closeWaiting();
+							mui.toast(call);
+						}
+					})
+				}
+				ca.id('jizhang').addEventListener('tap',function(){
+					ca.newInterface({url:'../bookkeeping/account_for_the_day.html',id:'account_for_the_day'});
+				})
+				
+				var cell1=ca.className('mui-table-view-cell');
+				cell1[2].addEventListener('tap',function(){
+					ca.newInterface({url:'../bookkeeping/tourist_information.html',id:'tourist_information'})
+				})
+				
+				function jdphone(phone){
+					ca.callPhone(phone);
+				}
+				
+			})
+			
+			
+		</script>
+	</body>
+
+</html>

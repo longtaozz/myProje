@@ -1,0 +1,547 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/style.css" />
+		<style>
+			.mui-backdrop {
+			    position: fixed;
+			    top: 100px !important;
+			    right: 0;
+			    bottom: 0;
+			    left: 0;
+			    z-index: 998;
+			    background-color: rgba(0,0,0,0.2);
+			}
+			.mui-popover{
+				-webkit-box-shadow: 0 0 0px rgba(0,0,0,0.1);
+    		 box-shadow: 0 0 0px rgba(0,0,0,0.1)
+			}
+			.mui-row.mui-fullscreen>[class*="mui-col-"] {
+				height: 100%;
+			}
+			.mui-col-xs-3,
+			.mui-control-content {
+				overflow-y: auto;
+				height: 100%;
+			}
+			.mui-segmented-control .mui-control-item {
+				line-height: 50px;
+				width: 100%;
+			}
+			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
+				background-color: #fff;
+				color: #4F77AA;
+			}
+			.mui-scroll-wrapper1{
+			    position: absolute;
+			    z-index: 2;
+			    top: 0;
+			    bottom: 0;
+			    left: 27%;overflow: hidden;width: 100%;
+			}
+			.mui-scroll1{
+			    position: absolute;
+			    z-index: 1;width: 100%;-webkit-transform: translateZ(0);
+			   transform: translateZ(0);
+			}
+			.mui-scroll-wrapper2{
+			    position: absolute;
+			    z-index: 20;
+			    top: 0;
+			    bottom: 0;
+			    left: 0;overflow: hidden;width: 22%;
+			}
+			
+			.mui-scroll2{
+			    position: absolute;
+			    z-index: 19;width: 100%;-webkit-transform: translateZ(0);
+			    transform: translateZ(0);
+			}
+			.mui-scroll-wrapper3{
+			    position: absolute;
+			    z-index: 2;
+			    top: 0;
+			    bottom: 0;
+			    left: 0;overflow: hidden;width: 100%;
+			}
+			.mui-scroll3{
+			    position: absolute;
+			    z-index: 1;width: 100%;-webkit-transform: translateZ(0);
+			     transform: translateZ(0);
+			}
+			.mui-scroll-wrapper4{
+			    position: absolute;
+			    z-index: 2;
+			    top: 0;
+			    bottom: 0;
+			    left: 0;overflow: hidden;width: 100%;
+			}
+			.mui-scroll4{
+			    position: absolute;
+			    z-index: 1;width: 100%;-webkit-transform: translateZ(0);
+			    transform: translateZ(0);
+			}
+		</style>
+	
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav bgwhite" style="z-index: 9998;height: 69px;padding-top: 25px;">
+				<div class="fl w10">
+					<span class="mui-icon mui-icon-arrowleft mui-action-back">
+						
+					</span>
+				</div>
+				<div class="fl w80 mt8">
+					<div class="top-neirong w90" >
+					<div class="top-dinwei">
+						<span class="top-dinwei-name">张家界</span>
+						<span class="iconfont icon-shuxian2"></span>
+					</div>
+					<div class="top-input">
+						<input type="text" readonly="readonly" placeholder="张家界火车站" id="top-search-input"/>
+					</div>
+				</div>
+				</div>
+		</header>
+		<div id="ccc"  class="shaixuan" style="height: 35px;position:fixed;top: 69px;width: 100%;border-bottom: 1px solid #4F77AA;">
+				<div class="shaixuan-div" >
+					<span class="shaixuan-divxiala-zi">类型筛选</span>
+					<span class="mui-icon mui-icon-arrowdown"></span>
+					
+				</div>
+				<div class="shaixuan-div">
+					<span class="shaixuan-divxiala-zi">星级筛选</span>
+					<span class="mui-icon mui-icon-arrowdown"></span>
+				</div>
+				<div class="shaixuan-div">
+					<span class="shaixuan-divxiala-zi ts-li-title fl" style="width: 70%;">区域筛选</span>
+					<span  class="mui-icon mui-icon-arrowdown fl mt5 ml3"></span>
+				</div>
+				
+		</div>
+		<div class="body " >
+			<div id="pullrefresh" class="mui-content mui-scroll-wrapper pt5" style="margin-top: 98px;">
+	    		<div class="mui-scroll">		
+					<ul  id="div_list">
+				             
+					</ul>
+				</div>
+			</div>
+			<div id="wushuju" class="disn" style="margin-top: 98px;">
+				<img src="../img/wushuju.png" style="width: 100%;"/>
+			</div>
+		</div>
+		<div id="middlePopover1" class="mui-popover" style=" position:fixed;height: 300px;width: 100%;border-radius:0px ;border-top: 1px solid #DADADD;z-index: 1000;">
+			<div class="mui-content mui-row mui-fullscreen" >
+				<div class="mui-col-xs-3 mui-scroll-wrapper2">
+					<div id="segmentedControls" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-vertical mui-scroll2">
+						
+					</div>
+				</div>
+				<div  id="segmentedControlContents" class="mui-col-xs-9" style="border-left: 1px solid #c8c7cc;width: 80%;">
+				
+				</div>
+			</div>
+		</div>
+		<div id="middlePopover2" class="mui-popover" style=" position:fixed;height: 300px;width: 100%;border-radius:0px ;border-top: 1px solid #DADADD;z-index: 1000;">
+			<div class="mui-scroll-wrapper4" id="mui-scroll-wrapper2">
+				<div class="mui-scroll4" >
+					<ul class="mui-table-view" id="xingji" >
+					</ul>
+				</div>
+			</div>
+			
+		</div>
+		<div id="middlePopover0" class="mui-popover" style=" position:fixed;height: 150px;width: 100%;border-radius:0px ;border-top: 1px solid #DADADD;z-index: 1000;">
+			<div class="mui-scroll-wrapper3" id="mui-scroll-wrapper1">
+				<div class="mui-scroll3" >
+					<ul class="mui-table-view" id="leixing" style="max-height: 4000px;">
+						<li class="mui-table-view-cell leixings" data_id="0">默认排序</li>
+						<li class="mui-table-view-cell leixings" data_id="1">酒店</li>
+						<li class="mui-table-view-cell leixings" data_id="2">客栈</li>
+						
+					</ul>
+				</div>
+			</div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/castapp.js" ></script>
+		<script type="text/javascript" src="../js/template-web.js" ></script>
+		<script id="lists" type="text/template">
+			{{each list}}
+				<li class="hl-list" data_id="{{$value.id}}" data_name="{{$value.name}}" data_enterprise_id="{{$value.enterprise_id}}"  data_comment_num="{{$value.comment_num}}" data_grade="{{$value.grade}}">
+					<div class="hl-list-div">
+						<div class="hl-list-div-l">
+							{{if $value.pic==''}}
+								<img src="../img/noimg.jpg"/>
+							{{else}}
+								<img src="{{$value.pic}}"/>
+							{{/if}}
+						</div>
+						<div class="hl-list-div-r">
+							<div class="hl-list-div-r-o">
+								<div class="hl-list-div-r-o-l">			
+									<h4>{{$value.name}}</h4>
+								</div>
+							</div>
+							<div class="hl-list-div-r-t">
+								<div class="hl-list-div-r-t-l">
+									{{if $value.grade==0}}
+										<span class="fs12 c999999">商家评论不足</span>
+									{{else}}
+										<span class="fenshu">{{$value.grade}}分</span>
+										<span class="">/</span>
+										<span class="small-txt">{{$value.comment_num}}条评论</span>
+									{{/if}}
+									
+								</div>
+							</div>
+							<div class="hl-list-div-r-t">
+								{{if $value.hotel_star=='' || $value.hotel_star==null}}
+								<span class="small-txt">无</span>
+								{{else}}
+								<span class="small-txt">{{$value.hotel_star.name}}</span>
+								{{/if}}
+								<span class="mt3 small-txt">/</span>
+								{{if $value.type==1}}
+									<span class="small-txt">酒店</span>
+								{{else}}
+									<span class="small-txt">客栈名宿</span>
+								{{/if}}
+							</div>
+							<div class="hl-list-div-r-tt">
+								<span class="yudinrenshu">本月已售{{$value.count}}笔</span>
+								<div class="hl-list-div-r-o-r">
+										<h5><span>¥</span><span class="big-txt">{{$value.price}}</span>起</h5>
+								</div>
+							</div>
+						</div>
+					</div>
+				</li>
+			{{/each}}
+		</script>	
+		<script type="text/javascript">
+			var leixingid=0,xingjiid=0,quyuid=0;
+			var pages=1;
+			var page=1;
+			var cell0=0;
+			var cell1=0;
+			var cell2=0;
+			mui.plusReady(function(){
+				mui.init({
+					pullRefresh : {
+					    container:"#pullrefresh",//下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
+					    up: {
+				        	height:150,
+				            contentrefresh: '正在加载...',
+				            callback: upFn // 上拉执行函数
+				        }
+					},
+					swipeBack:true
+		       });
+		        ca.init();
+		        ca.blackStatusBar();
+		        /**
+		         * 上拉加载
+		         */
+		        function upFn(){
+		        	if(pages==0){//判断是否有数据  0无 不再执行下拉刷新
+						this.endPullupToRefresh(true);
+					}else{
+						page=page+1;
+						showItem();
+						this.endPullupToRefresh(false);
+					}
+		        }
+		        /**
+		         * 根据类型，星级，区域查询酒店
+		         */
+		        showItem()
+				function showItem(){
+					var eid=localStorage.getItem('e_id');
+					ca.ajaxs({url:'findAllHotelBylevel_zone_type',data:{
+							type:leixingid,level:xingjiid,zone:quyuid,page:page
+						},
+						succFn:function(data){
+							if(!ca.emptyFun(data.data)){
+								ca.id('pullrefresh').classList.add('disb');
+								ca.id('wushuju').classList.add('disn');
+								ca.id('pullrefresh').classList.remove('disn');
+								if(ca.emptyFun(data.next_item)){
+									pages=0;
+								}
+								fuzhi(data.data);
+
+							}else{
+								ca.id('wushuju').classList.add('disb');
+								ca.id('pullrefresh').classList.add('disn');
+								ca.id('wushuju').classList.remove('disn');
+							}
+							ca.closeWaiting();
+						},
+						errFn:function(call){
+							ca.closeWaiting();
+							mui.toast(call);
+						}
+					})
+				}
+				function fuzhi(data){
+					try{
+						ca.id('div_list').innerHTML+=template('lists', {
+							"list":data
+						});
+					}catch(err){
+						console.log(err);
+					}
+				}
+				var setItem=function(){
+					ca.id('div_list').innerHTML="";
+					mui('#pullrefresh').pullRefresh().refresh(true);
+					mui('#middlePopover1').popover('hide');
+					pages=1;
+					page=1;
+					showItem();
+				}
+				
+				
+				
+				
+				mui('#div_list').on('tap','.hl-list',function(){
+					ca.showWaiting();
+					var id = this.getAttribute('data_id');
+					var data_comment_num=this.getAttribute('data_comment_num');
+					var data_grade=this.getAttribute('data_grade');
+					var enterprise_id=this.getAttribute('data_enterprise_id');
+					var data_name=this.getAttribute('data_name');
+					var self=plus.webview.create('hotel_list_detail.html','hotel_list_detail',{},{hotel_id:id,data_comment_num:data_comment_num});
+					self.addEventListener('loaded', function(e){
+						setTimeout(function(){
+							self.show('slide-in-right',400);
+						},100)
+					}, false);
+					ca.createHistory({
+						id:id,name:data_name,type:'hotel_item',
+						data_comment_num:data_comment_num,
+						data_grade:data_grade,enterprise_id:enterprise_id,
+						date:new Date().getTime()
+						});
+						
+				});
+				
+				/**
+				 * 刷选条件
+				 */
+				xila_onclick();
+				function xila_onclick(){
+			     	var cell=document.getElementsByClassName('shaixuan-div');
+			     	var select_input = ca.className('shaixuan-divxiala-zi');
+			     	var arrowdown=ca.className('mui-icon-arrowdown');
+			     	ca.id('middlePopover0').style.top='104px';
+			     	mui('#mui-scroll-wrapper1').scroll();
+			     	mui('.mui-scroll-wrapper3').scroll();
+					cell[0].addEventListener('tap',function(){
+						if(cell0==0){
+						select_input['0'].style.color='#4F77AA';
+						arrowdown['0'].style.color='#4F77AA';
+						select_input[2].style.color='#323232';
+						arrowdown[2].style.color='#323232';
+						select_input[1].style.color='#323232';
+						arrowdown[1].style.color='#323232';
+						mui('#middlePopover0').popover('show');
+						cell0=1;
+						cell1=0;
+						cell2=0;
+						ca.className('mui-backdrop')[0].addEventListener('tap',function(){
+							select_input[0].style.color='#323232';
+							arrowdown[0].style.color='#323232';
+							mui("#middlePopover0").popover('hide');
+							cell0=0;
+						})
+						
+					}else{
+						select_input[0].style.color='#323232';
+						arrowdown[0].style.color='#323232';
+						mui('#middlePopover0').popover('hide');
+						cell0=0;
+					}
+					})
+					ca.id('middlePopover2').style.top='104px';
+					mui('#mui-scroll-wrapper2').scroll();
+					cell[1].addEventListener('tap',function(){
+						if(cell1==0){
+							select_input[2].style.color='#323232';
+							arrowdown[2].style.color='#323232';
+							select_input[1].style.color='#4F77AA';
+							arrowdown[1].style.color='#4F77AA';
+							mui('#middlePopover2').popover('show');
+							select_input['0'].style.color='#323232';
+							arrowdown['0'].style.color='#323232';
+							cell1=1;
+							cell2=0;
+							cell0=0;
+							ca.className('mui-backdrop')[0].addEventListener('tap',function(){
+								select_input[1].style.color='#323232';
+								arrowdown[1].style.color='#323232';
+								mui("#middlePopover2").popover('hide');
+								cell1=0;
+							})
+							
+						}else{
+							select_input[1].style.color='#323232';
+							arrowdown[1].style.color='#323232';
+							mui('#middlePopover2').popover('hide');
+							cell1=0;
+						}
+					})
+					
+					cell[2].addEventListener('tap',function(){
+						if(cell2==0){
+							select_input[1].style.color='#323232';
+							arrowdown[1].style.color='#323232';
+							select_input[2].style.color='#4F77AA';
+							arrowdown[2].style.color='#4F77AA';
+							select_input['0'].style.color='#323232';
+							arrowdown['0'].style.color='#323232';
+							mui('#middlePopover1').popover('show');
+							cell2=1;
+							cell1=0;
+							cell0=0;
+							ca.className('mui-backdrop')[0].addEventListener('tap',function(){
+								select_input[2].style.color='#323232';
+								arrowdown[2].style.color='#323232';
+								mui("#middlePopover1").popover('hide');
+								cell2=0;
+							})
+
+							
+							
+						}else{
+							select_input[2].style.color='#323232';
+							arrowdown[2].style.color='#323232';
+							mui('#middlePopover1').popover('hide');
+							cell2=0;
+						}
+					})
+					leixingxuanze();
+					 function leixingxuanze(){
+					 	var cell11=ca.className('leixings');
+			        	for(var i=0;i<cell11.length;i++){
+					     		(function(index1){
+									cell11[i].addEventListener('tap',function(){
+										select_input[0].innerHTML=cell11[index1].innerHTML;
+										leixingid=cell11[index1].getAttribute('data_id');
+										if(leixingid==0){
+											xingjiid=0;
+											quyuid=0;
+											select_input[1].innerHTML='星级筛选';
+											select_input[2].innerHTML='区域筛选';
+										}
+										setItem();
+										mui('#middlePopover0').popover('hide');
+										cell0=0;
+									})
+								})(i);
+					     }
+					 }
+					
+					findxinji();
+					function findxinji(){
+						var urls=localStorage.getItem('url');
+				       	var eid=localStorage.getItem('e_id');
+				       	var list=ca.id('xingji');
+				       	var html=[];
+						ca.ajaxs({url:'findAllHotelStar',data:{
+							},succFn:function(data){
+								if(data){
+									for(var a in data){
+										html.push('<li class="mui-table-view-cell xingjis" data_id="'+data[a].id+'">'+data[a].name+'</li>')
+									}
+									list.innerHTML = html.join('');
+									xingjixuanze();
+								}
+								ca.closeWaiting();
+							},errFn:function(err){
+								ca.closeWaiting();
+								mui.toast(err);
+							}
+						})
+				       	mui('.mui-scroll-wrapper4').scroll();
+					}
+					 function xingjixuanze(){
+					 	var cell11=ca.className('xingjis');
+			        	for(var i=0;i<cell11.length;i++){
+							(function(index1){
+								cell11[i].addEventListener('tap',function(){
+									select_input[1].innerHTML=cell11[index1].innerHTML;
+									xingjiid=cell11[index1].getAttribute('data_id');
+									setItem();
+									mui('#middlePopover2').popover('hide');
+									cell1=0;
+								})
+							})(i);
+					     }
+					 }
+					 findquyushaixuan();
+			       	function findquyushaixuan(){
+						ca.ajaxs({url:'findUserRegion',data:{
+								user_id:localStorage.getItem('userid')
+							},succFn:function(data){
+								if(data){
+									ca.id('middlePopover1').style.top='78px';			
+									var controls = document.getElementById("segmentedControls");
+									var contents = document.getElementById("segmentedControlContents");
+									var html1 = '';
+									var html2='';
+									for(var a in data){
+										var temp1='<a class="mui-control-item" href="#content' + a + '"><span>'+data[a].text+'</span></a>';				
+										html1+=temp1;
+										var html22='';
+										for(var i in data[a].children){
+											var da=data[a].children;
+											var tempc='<li style="background: #FFFFFF;" class="mui-table-view-cell quyuxuanze" data_id="'+da[i].value+'">'+da[i].text+'</li>';
+											html22+=tempc;
+										}
+										var temp2='<div  id="content' + a + '" class="mui-control-content mui-scroll-wrapper1" ><div class="mui-scroll1"><ul class="mui-table-view" style="max-height:2000px;">'+html22+'</ul></div></div>';
+										html2+=temp2;
+										
+									}
+									controls.innerHTML=html1;
+									contents.innerHTML = html2;
+									mui('.mui-scroll-wrapper1').scroll();
+									mui('.mui-scroll-wrapper2').scroll();
+									controls.querySelector('.mui-control-item').classList.add('mui-active');
+									contents.querySelector('.mui-control-content').classList.add('mui-active');
+								}
+							},errFn:function(err){
+								ca.closeWaiting();
+								mui.toast(err);
+							}
+						})
+			       	}
+					mui('#middlePopover1').on('tap','.quyuxuanze',function(){
+						ca.showWaiting();
+						quyuid=this.innerText;
+						select_input[2].innerHTML=quyuid;
+						setItem();
+						mui('#middlePopover1').popover('hide');
+						cell2=0;
+					})
+			        
+			     }
+			   ca.className('top-input')[0].addEventListener('tap',function(){
+					ca.newInterface({url:'../search.html',id:'search'});
+			   })
+			})
+			
+			
+			
+		</script>
+	</body>
+
+</html>

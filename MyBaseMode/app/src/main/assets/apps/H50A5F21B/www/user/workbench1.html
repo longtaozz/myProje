@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/style.css" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav" style="background: #4F77AA;height: 69px;padding-top: 25px;">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: #FFFFFF !important;"></a>
+		    <h1 class="mui-title" style="font-size: 18px !important;color: #FFFFFF !important;">工作台</h1>
+		</header>
+		<div class="" style="margin-top: 75px;">
+		    <div class="mui-card">
+				<ul class="mui-table-view" id="menu">
+					
+				</ul>
+			</div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/castapp.js" ></script>
+		<script type="text/javascript">
+			mui.init();
+			ca.init();
+			ca.whiteStatusBar();
+			ca.checkClientid('../login.html','login');
+			var url=localStorage.getItem('url');
+			var user_id=localStorage.getItem('userid');
+			var listview=ca.id('menu');
+			
+			mui.plusReady(function(){
+				plus.statistic.eventTrig( "Access_workbench", {"type":"book","quantity":"3"} );
+				plus.nativeUI.showWaiting();
+				ca.checkTheNetwork();
+				ca.ajaxs({url:'findMenu',data:{
+						user_id:user_id,structure_id:localStorage.getItem('structure_id')
+					},succFn:function(data){
+						var da=data;
+						if(da.msg==1){
+							showMenu(da.data);
+						}else{
+							listview.innerHTML='暂时无操作权限'
+						}
+						ca.closeWaiting();
+					},errFn:function(call){
+						ca.closeWaiting();
+						mui.toast(call);
+					}
+				})
+			})
+			
+			
+			function showMenu(data){
+				for(var a in data){
+					if(data[a].children!=""){
+						var child=data[a].children;
+						var chs="";
+						for(var c in child){
+							var ch='<li class="mui-table-view-cell onclick" data-url="'+child[c].url.split('|')[0]+'" data_type="'+child[c].url.split('|')[1]+'">'
+									+'<a class="mui-navigate-right">'+child[c].name+'</a>'
+									+'</li>';
+							chs+=ch;
+						}
+						
+						var temp='<li class="mui-table-view-cell mui-collapse"   >'
+			        		+		'<a class="mui-navigate-right">'+data[a].parent.name+'</a>'
+			   		 		+		'<div class="mui-collapse-content" style="background: #F0F0F0;">'
+			   		 		+			'<ul class="mui-table-view" style="margin-top: 0px;" id="childrens">'+chs+'</ul>'
+			   		 		+		'</div>'
+			   		 		+'</li>';
+			   		 	
+					}else{
+						var temp='<li class="mui-table-view-cell onclick"   data-url="'+data[a].parent.url+'" data_type="0">'
+			        		+'<a class="mui-navigate-right">'+data[a].parent.name+'</a>'
+			   		 		+'</li>';
+					}	
+			   		listview.innerHTML+=temp;
+				}
+				onclick_iten();
+			}
+			function onclick_iten(){
+				var cell=ca.className('onclick');
+				for(var a=0;a<cell.length;a++){
+					(function(index){
+						cell[a].addEventListener('tap',function(){
+							urls=cell[index].getAttribute('data-url');
+							var type=cell[index].getAttribute('data_type');
+							localStorage.setItem('business_sorder_type',type);
+							ids=urls.substring(urls.lastIndexOf('/')+1,urls.lastIndexOf('.'));
+							ca.newInterface({url:urls,id:ids});
+						})
+					})(a);
+				}
+			}
+		</script>
+	</body>
+
+</html>

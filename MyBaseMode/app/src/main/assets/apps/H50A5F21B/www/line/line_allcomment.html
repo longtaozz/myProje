@@ -1,0 +1,278 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/style.css" rel="stylesheet" />
+		<style>
+			.line_allcomment_topdiv_active{
+				border-radius:5px;background:#FE6F11 ;float: left;
+				font-size:14px;padding: 2px 14px;color: #FFFFFF;
+				margin-top: 15px;
+			}
+			.line_allcomment_topdiv{
+				border-radius:5px;background:#E5E5E5;float: left;
+				font-size:14px;padding: 2px 14px;color: #666666;
+				margin-top: 15px;
+			}
+			.line_allcomment_li{
+				margin: 5px;background: #FFFFFF;border-radius:5px ;
+				overflow: hidden;
+			}
+			.line_allcomment_li_d1{
+				padding: 10px 10px 2px 10px;
+				overflow: hidden;
+			}
+			.line_allcomment_li_d1 .fl img{
+				width: 25px;height: 25px;border-radius:100px;
+			}
+			.line_allcomment_li_d2{
+				padding:0px 10px;
+				font-size: 14px;
+				color: #333333;
+			}
+			.line_allcomment_li_d3{
+				font-size:12px ;
+				color: #999999;
+				margin-right: 10px;
+				height: 25px;
+			}
+			.line_allcomment_li_d4{
+				border-top:1px solid #E1E1E1;
+				margin:0px 10px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav mheader user-index-top-bg">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left cffffff"></a>
+			<h1 class="fl fs15 ml20 cffffff" style="line-height: 32px;">评论</h1>
+		</header>
+		<div class="mui-content">
+			<div class="bgwhite h55 pl15">
+				
+			</div>
+			<div id="refreshContainer" class="mui-scroll-wrapper" >
+				<div class="mui-scroll" >
+					<ul id="all_comment">
+						<!-- <li class="line_allcomment_li">
+							<div class="line_allcomment_li_d1">
+								<div class="fl">
+									<img src="../img/touxiang1.jpg" />
+								</div>
+								<div class="fl ml10">
+									zz
+								</div>
+								<div class="icons mui-inline fr fs13 ">
+									<i data-index="1" class="mui-icon mui-icon-star-filled fs14 cFE6F11" ></i>
+									<i data-index="1" class="mui-icon mui-icon-star-filled fs14 cFE6F11"></i>
+									<i data-index="1" class="mui-icon mui-icon-star-filled fs14 cFE6F11"></i>
+									<i data-index="1" class="mui-icon mui-icon-star-filled fs14 cFE6F11"></i>
+									<i data-index="1" class="mui-icon mui-icon-star fs14"></i>
+								</div>	
+							</div>
+							<div class="line_allcomment_li_d2">
+								<span>sdkhajdsakjdjkshakj多少空间划分空间啊数据库后付款就好</span>
+							</div>
+							<div class="line_allcomment_li_d3">
+								<span class="fr">发表</span>
+								<span class="fr mr5">2018-12-01 09:58</span>
+							</div>
+						</li>
+						<li class="line_allcomment_li">
+							<div class="line_allcomment_li_d1">
+								<div class="fl">
+									<img src="../img/touxiang1.jpg" />
+								</div>
+								<div class="fl ml10">
+									zz
+								</div>
+								<div class="icons mui-inline fr fs13 ">
+									<i data-index="1" class="mui-icon mui-icon-star-filled fs14 cFE6F11" ></i>
+									<i data-index="1" class="mui-icon mui-icon-star-filled fs14 cFE6F11"></i>
+									<i data-index="1" class="mui-icon mui-icon-star-filled fs14 cFE6F11"></i>
+									<i data-index="1" class="mui-icon mui-icon-star-filled fs14 cFE6F11"></i>
+									<i data-index="1" class="mui-icon mui-icon-star fs14"></i>
+								</div>	
+							</div>
+							<div class="line_allcomment_li_d2">
+								<span>sdkhajdsakjdjkshakj多少空间划分空间啊数据库后付款就好sdkhajdsakjdjkshakj多少空间划分空间啊数据库后付款就好</span>
+							</div>
+							<div class="line_allcomment_li_d3">
+								<span class="fr">发表</span>
+								<span class="fr mr5">2018-12-01 09:58</span>
+							</div>
+							<div class="line_allcomment_li_d4 ">
+								<div class="oh mt4">
+									<div class="fl w12 cFE6F11 fs14">
+										<span>追评:</span>
+									</div>
+									<div class="fl w85 fs14 c333333">
+										<span>skahdkjhaskjhdkjshakjddsadjlaksdsaj圣诞节开始啦基督教老师看见</span>
+									</div>
+								</div>
+								<div class="mb7 oh">
+									<span class="fr fs12 c999999">2018-12-01 09:58</span>
+								</div>
+								
+							</div>
+						</li> -->
+					</ul>
+				</div>
+			</div>
+		</div>
+		<script type="text/template" id="comment_list">
+			{{each list}}
+				<li class="line_allcomment_li">
+					<div class="line_allcomment_li_d1">
+						<div class="fl">
+							<img src="{{$value.employee.img_url}}" />
+						</div>
+						<div class="fl ml10 fs15">
+							{{$value.employee.realname}}
+						</div>
+						<div class="icons mui-inline fr fs13 ">
+							<%for (var i=0;i<$value.grade;i++) {%>
+								<i data-index="1" class="mui-icon mui-icon-star-filled fs14 cFE6F11"></i>
+							<%}%>
+							<%for (var i=0;i<5-$value.grade;i++) {%>
+								<i data-index="1" class="mui-icon mui-icon-star fs14"></i>
+							<%}%>
+						</div>	
+					</div>
+					<div class="line_allcomment_li_d2">
+						<span>{{$value.content}}</span>
+					</div>
+					<div class="line_allcomment_li_d3">
+						<span class="fr">发表</span>
+						<span class="fr mr5">{{$value.create_time.slice(0,16)}}</span>
+					</div>
+					{{if $value.review}}
+						<div class="line_allcomment_li_d4 ">
+							<div class="oh mt4">
+								<div class="fl w12 cFE6F11 fs14">
+									<span>追评:</span>
+								</div>
+								<div class="fl w85 fs14 c333333">
+									<span>{{$value.review.content}}</span>
+								</div>
+							</div>
+							<div class="mb7 oh">
+								<span class="fr fs12 c999999">{{$value.review.create_time.slice(0,16)}}</span>
+							</div>
+						</div>
+					{{/if}}
+				</li>
+			{{/each}}
+		</script>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/castapp.js"></script>
+		<script src="../js/template-web.js"></script>
+		<script type="text/javascript">
+			mui.plusReady(function(){
+				mui.init({
+					pullRefresh : {
+							container:"#refreshContainer",//下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
+							up: {
+								height:50,//可选.默认50.触发上拉加载拖动距离
+								auto:false,//可选,默认false.自动上拉加载一次
+								contentrefresh : "正在加载...",//可选，正在加载状态时，上拉加载控件上显示的标题内容
+								contentnomore:'没有更多数据了',//可选，请求完毕若没有更多数据时显示的提醒内容；
+								callback: upFn // 上拉执行函数
+							}
+					},
+					swipeBack:true
+				})
+				ca.init();
+				ca.whiteStatusBar();
+				var self=plus.webview.currentWebview();
+				var level=0,page=1,pages=1,isone=true;
+				function upFn(){
+					if(pages==0){
+						mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
+					}else{
+						page++;
+						findMyComments(page);
+						this.endPullupToRefresh(false);
+					}
+				}
+				if(plus.os.name=='iOS'){
+					ca.id('refreshContainer').style.marginTop='125px';
+				}else{
+					ca.id('refreshContainer').style.marginTop='0px';
+				}
+				mui('.bgwhite').on('tap','.item',function(){
+					var index=this.getAttribute('data_id');
+					var data_num=this.getAttribute('data_zong');
+					if(data_num>0){
+						setOnclick(index);
+						ca.id('all_comment').innerHTML="";
+						findMyComments(index,page);
+					}
+					
+				})
+				findMyComments(level,page);
+				function findMyComments(level,page){
+					ca.showWaiting();
+					ca.ajaxs({url:'findAllComment',data:{
+							type:'line',product_id:self.line_id,
+							level:level,page:page
+						},succFn:function(data){
+							if(!ca.emptyFun(data.data.data)){
+								if(ca.emptyFun(data.data.next_item)){
+									pages=0;
+								}else{
+									pages=1;
+								}
+								showAllComment(data);
+								if(page==1 && isone){
+									showtopitem(data.com_num_level);
+									isone=false;
+								}
+							}
+							ca.closeWaiting();
+						},errFn:function(err){
+							mui.toast(err);
+							ca.closeWaiting();
+						}
+					})
+				}
+				function showtopitem(da1){
+					var temp='<div class="item line_allcomment_topdiv_active" data_id="0" data_zong="'+(da1.num_hao+da1.num_zhong+da1.num_cha)+'"><span>全部</span></div>'
+							+'<div class="item line_allcomment_topdiv ml7" data_id="1" data_zong="'+da1.num_hao+'"><span>好评('+da1.num_hao+')</span></div>'
+							+'<div class="item line_allcomment_topdiv ml7" data_id="2" data_zong="'+da1.num_zhong+'"><span>中评('+da1.num_zhong+')</span></div>'
+							+'<div class="item line_allcomment_topdiv ml7" data_id="3" data_zong="'+da1.num_cha+'"><span>差评('+da1.num_cha+')</span></div>';
+					ca.className('h55')[0].innerHTML=temp;
+				}
+				function showAllComment(data){
+					try{
+						ca.id('all_comment').innerHTML+=template('comment_list', {
+							"list":data.data.data
+						});
+					}catch(e){
+						console.log(e);
+					}
+				}
+				
+				function setOnclick(index){
+					var cell=ca.className('item');
+					for(var i=0;i<cell.length;i++){
+						if(i==index){
+							cell[i].classList.add('line_allcomment_topdiv_active');
+							cell[i].classList.remove('line_allcomment_topdiv');
+						}else{
+							cell[i].classList.add('line_allcomment_topdiv');
+							cell[i].classList.remove('line_allcomment_topdiv_active');
+						}
+					}
+				}
+			})
+			
+		</script>
+	</body>
+
+</html>

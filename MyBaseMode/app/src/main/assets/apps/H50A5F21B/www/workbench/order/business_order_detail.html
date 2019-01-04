@@ -1,0 +1,341 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../css/style.css" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav mheader">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mback"></a>
+		    <h1 class="mui-title htitle">订单详情</h1>
+		</header>
+		<div class="mui-content" id="mui-content">
+		    
+		</div>
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/castapp.js" ></script>
+		<script type="text/javascript">
+			mui.plusReady(function(){
+				mui.init();
+				ca.init(true);
+				var lineOrder_id=plus.webview.currentWebview().lineOrder_id;
+				var mui_content=ca.id('mui-content');
+				ca.showWaiting();
+				ca.ajaxs({url:'findLineOrderById',data:{
+						lineOrder_id:lineOrder_id
+					},succFn:function(data){
+						if(data.msg==1){
+						var da=data.data;
+						var zhuangtai;
+						var jiesongzhan="";
+						if(da.status==-1){
+							zhuangtai="草稿单";
+							jiesongzhan='<div class="oh w100"><span data_status="1" class="fr fs12 mr20 mt10 ca6a6a6 bbc3" id="tijiao">提交订单</span></div>';
+						}
+						if(da.status==0){
+							zhuangtai="等待确认";
+							jiesongzhan='<div class="oh w100"><span data_status="8" class="fr fs12 mr20 mt10 ca6a6a6 bbc3" id="quxiaodindan">取消订单</span></div>';
+						}
+						if(da.status==2){
+							zhuangtai="地接确认";
+							if(ca.emptyFun(da.class_num)){
+								jiesongzhan='<div class="oh w100"><span data_status="5" class="fr fs12 mr20 mt10 ca6a6a6 bbc3" id="quxiaodindan">取消订单</span></div>';
+							}
+						}
+						if(da.status==4)zhuangtai="组团变更";
+						if(da.status==5)zhuangtai="组团取消";
+						if(da.status==6)zhuangtai="地接拒绝";
+						if(da.status==7)zhuangtai="同意取消";
+						if(da.status==8)zhuangtai="订单取消";
+						if(da.status==1){
+							zhuangtai="待确认地接报价";
+							jiesongzhan='<div class="oh"><span class="tc" data_status="8" id="quxiaodindan" style="background: #e5e5e5;color: #FFFFFF;border-radius:5px ;height:35px;width: 40%;display: block;float: left;margin: 5px 15px;padding-top:8px">取消订单</span><span class="tc" style="background: #FF7F00;color: #FFFFFF;border-radius:5px ;height:35px;width: 40%;display: block;float: left;margin: 5px 15px;padding-top:8px" id="queren">确定</span></div>'
+						}
+						if(da.status==99)zhuangtai="完成交易";
+						if(da.status==1  || da.status==0 || da.status==-1){
+							if(!timeCompare(da.start_date)){
+									jiesongzhan='<div class="oh w100"><span class="fr fs12 mr20 mt10 ca6a6a6 bbc3" >已过期</span></div>';
+							}
+						}
+						var youkexinxi="";
+						for(var d in da.tourist_info){
+							var te='<div class="oh b-o-d-div2"><div class="fl w30">'+da.tourist_info[d].name+'</div><div class="fl w40">'+da.tourist_info[d].card+'</div><div class="fl w30 pl10">'+da.tourist_info[d].phone+'</div></div>';
+							youkexinxi+=te;
+						}
+						var go_stay,go_food,back_stay,back_food;
+						if(da.go_stay==1){
+							go_stay="有"
+						}else{
+							go_stay="无"
+						};
+						if(da.go_food==1){
+							go_food="有"
+						}else{
+							go_food="无"
+						};
+						if(da.back_stay==1){
+							back_stay="有"
+						}else{
+							back_stay="无"
+						};
+						if(da.back_food==1){
+							back_food="有"
+						}else{
+							back_food="无"
+						};
+						var order_mark;
+						if(da.order_mark==null || da.order_mark==""){
+							order_mark="无";
+						}else{
+							order_mark=da.order_mark;
+						}
+						var hotelstarname='',hotelstarname1='';
+						if(da.hotelstar==null){
+							hotelstarname="";
+						}else{
+							hotelstarname=da.hotelstar.name;
+						}
+						if(da.hotelstar1==null){
+							hotelstarname1="";
+						}else{
+							hotelstarname1=da.hotelstar1.name;
+						}
+						
+						var cost_mark;
+						if(da.cost_mark==null || da.cost_mark==""){
+							cost_mark="无";
+						}else{
+							cost_mark=da.cost_mark;
+						}
+						var team_num="无";
+						var guide="无";
+						var guidephone="";
+						if(ca.emptyFun(da.class_num)){
+							team_num="无";
+							guide="无";
+						}else{
+							team_num=da.class_num;
+							if(ca.emptyFun(data.team.guide_union_id)){
+								guide="无";
+							}else{
+								guide=data.team.employee2.realname;
+								guidephone=data.team.employee2.phone;
+							}
+						}
+						jszje=0;
+						if(!ca.emptyFun(da.pickup_cost)){
+							jszje=da.pickup_cost;
+						}
+						var temp='<div class="b-o-d-div">'
+							    +	'<div class="b-o-d-div-d1"><span>'+da.line_name+'</span></div>'
+							    +	'<div class="b-o-d-div-d2">'	
+							    +		'<div class="b-o-d-div-d2-d1">'
+							    +			'<div class=""><span>'+ da.line_standard+'</span></div>	'
+							    +			'<div class="mb7"><span>成人：</span><span>'+da.man_num +'</span><span class="ml10">儿童：</span><span>'+da.child_num+'</span></div>'
+							    +		'</div>'		
+							    +		'<div class="b-o-d-div-d2-d2"><span>出发日期：</span><span>'+da.start_date+'</span><span class="ml20">结束日期：</span><span>'+da.end_date+'</span></div>'	
+							    +	 '</div>'		
+							    +'</div>'				
+							    +'<div class="b-o-d-div">'
+							    +	'<div class="b-o-d-div-d1"><span >订单信息</span><span class="fr mr20 fs12 ca6a6a6">'+da.create_time.slice(0,16)+'</span></div>'
+							    +	'<div class="b-o-d-div-d2">'	
+							    +		'<div class="oh b-o-d-div2" >'		
+							    +			'<div class="fl w30"><span>联系人</span></div>'
+							    +			'<div class="fl"><span>'+da.contact_name+'</span></div>'
+							    +	     '</div>'
+							    +		'<div class="oh b-o-d-div2" >'	
+							    +			'<div class="fl w30"><span>手机号</span></div>'	
+							    +			'<div class="fl"><span class="phone">'+da.contact_tel+'</span></div>'	
+							    +		 '</div>'	
+							    +		'<div class="oh b-o-d-div2" >'	
+							    +			'<div class="fl w30"><span>订单号</span></div>'	
+							    +			'<div class="fl"><span>'+da.order_num+'</span></div>'	
+							    +		 '</div>'
+							    +		'<div class="oh b-o-d-div2" >'	
+							    +			'<div class="fl w30"><span>团  号</span></div>'	
+							    +			'<div class="fl"><span>'+team_num+'</span></div>'	
+							    +		 '</div>'
+							    +		'<div class="oh b-o-d-div2" >'	
+							    +			'<div class="fl w30"><span>导游</span></div>'	
+							    +			'<div class="fl"><span>'+guide+'</span><span class="phone">'+guidephone+'</span></div>'	
+							    +		 '</div>'
+							    +		'<div class="oh b-o-d-div2" >'	
+							    +			'<div class="fl w30"><span>供应客户</span></div>'	
+							    +			'<div class="fl"><span>'+da.structure.enterprise.alias+' '+da.structure.name+'</span></div>'	
+							    +		 '</div>'
+							     +		'<div class="oh b-o-d-div2" >'	
+							    +			'<div class="fl w30"><span>接单计调</span></div>'	
+							    +			'<div class="fl"><span>'+da.employee1.realname+'</span><span class="phone">'+da.employee1.phone+'</span></div>'	
+							    +		 '</div>'
+							    +		'<div class="oh b-o-d-div2" >'			
+							    +	        '<div class="fl w30"><span>接站服务</span></div>'	
+							    +           '<div class="fl"><span>'+da.go_date+'</span><span class="ml5">'+da.go_time+'</span><span class="ml5">'+da.go_traffic+'</span></div>'		
+							    +		'</div>'	
+							    +		'<div class="oh b-o-d-div2" >'			
+							    +	        '<div class="fl w30"><span>接站宿餐</span></div>'	
+							    +           '<div class="fl"><span>'+go_stay+'</span><span class="ml5">'+hotelstarname+'</span><span class="ml5">'+go_food+'</span></div>'		
+							    +		'</div>'		
+							    +		'<div class="oh b-o-d-div2" >'			
+							    +	        '<div class="fl w30"><span>送站服务</span></div>'	
+							    +           '<div class="fl"><span>'+da.back_date+'</span><span class="ml5">'+da.back_time+'</span><span class="ml5">'+da.back_traffic+'</span></div>'		
+							    +		'</div>'	
+							    +		'<div class="oh b-o-d-div2" >'			
+							    +	        '<div class="fl w30"><span>送站住宿</span></div>'	
+							   +           '<div class="fl"><span>'+back_stay+'</span><span class="ml5">'+hotelstarname1+'</span><span class="ml5">'+back_food+'</span></div>'		
+							    +		'</div>'
+								+		'<div class="oh b-o-d-div2" >'
+							    +			'<div class="fl w30"><span>接送站金额</span></div>'	
+							    +			'<div class="fl"><span class="cred">'+jszje+'元</span></div>'	
+							    +		 '</div>'
+							    +		'<div class="oh b-o-d-div2" >'	
+							    +			'<div class="fl w30"><span>附加金额</span></div>'	
+							    +			'<div class="fl"><span class="cred">'+da.other_cost+'元</span></div>'	
+							    +		 '</div>'
+							    +		'<div class="oh b-o-d-div2" >'	
+							    +			'<div class="fl w30"><span>附加金额备注</span></div>'	
+							    +			'<div class="fl w70"><span>'+cost_mark+'</span></div>'	
+							    +		 '</div>'	
+							    +		'<div class="oh b-o-d-div2" >'	
+							    +			'<div class="fl w30"><span>结算金额</span></div>'	
+							    +			'<div class="fl"><span class="cred">'+da.total_amount+'元</span></div>'	
+							    +		 '</div>'	
+							    +		'<div class="oh b-o-d-div2" >'	
+							    +			'<div class="fl w30"><span>代收金额</span></div>'	
+							    +			'<div class="fl"><span class="cred">'+da.collect_amount+'元</span></div>'	
+							    +		 '</div>'			
+							    +		'<div class="oh b-o-d-div2" >'	
+							    +			'<div class="fl w30"><span>订单备注</span></div>'	
+							    +			'<div class="fl w70"><span>'+order_mark+'</span></div>'	
+							    +		 '</div>'			
+							    +	  '</div>'
+							    +'</div>'		
+							    +'<div style="border-radius:5px ;margin: 5px 10px 0px 10px;background: #4F77AA;font-size:18px ;color: #FFFFFF;text-align: center;padding: 5px;">'
+		    					+	''+zhuangtai+'</div>'
+		    					+	jiesongzhan
+		    					+'<div class="b-o-d-div">'
+							    +	'<div class="b-o-d-div-d1"><span >游客信息</span></div>'	
+							    +	'<div class="b-o-d-div-d2">'+youkexinxi+'</div>'
+							    +'</div>';
+						
+						mui_content.innerHTML=temp;	
+						clickphone();
+					}else{
+						mui_content.innerHTML="无内容";
+					}
+					ca.closeWaiting();
+					},errFn:function(call){
+						ca.closeWaiting();
+						mui.toast(call);
+					}
+				})
+				mui('#mui-content').on('tap','#queren',function(){
+						var btnArray = ['是','否'];
+						mui.confirm('确认该订单报价?', '提示', btnArray, function(e) {
+							if (e.index == 0) {
+								ca.ajaxs({url:'updatePickupCoststatus',data:{id:lineOrder_id,user_id:localStorage.getItem('userid')},
+										succFn:function(data){
+											if(data.code>0){
+												mui.toast('操作成功');
+												location.reload();
+											}else{
+												mui.toast('操作失败');
+											}
+										},errFn:function(call){
+											ca.closeWaiting();
+											mui.toast(call);
+										}
+									})
+								} 
+						})
+				})
+				mui('#mui-content').on('tap','#tijiao',function(){
+						var btnArray = ['是','否'];
+						mui.confirm('确认提交该订单?', '提示', btnArray, function(e) {
+								if (e.index == 0) {
+									ca.ajaxs({url:'cancelLineOrder',data:{
+											id:lineOrder_id,
+											user_id:localStorage.getItem('userid'),
+											status:0
+										},succFn:function(data){
+											if(data.code>0){
+												mui.toast('操作成功');
+												location.reload();
+											}else{
+												mui.toast('操作失败');
+											}
+											ca.closeWaiting();
+										},errFn:function(call){
+											ca.closeWaiting();
+											mui.toast(call);
+										}
+									})
+								}
+						})
+				})
+				
+				mui('#mui-content').on('tap','#quxiaodindan',function(){
+					var status=this.getAttribute('data_status');
+					var btnArray = ['是','否'];
+					mui.confirm('确认取消该订单?', '提示', btnArray, function(e) {
+						if (e.index == 0) {
+							ca.ajaxs({url:'cancelLineOrder',data:{
+									id:lineOrder_id,
+									user_id:localStorage.getItem('userid'),
+									status:status
+								},succFn:function(data){
+									if(data.code>0){
+										mui.toast('操作成功');
+										location.reload();
+									}else{
+										mui.toast('操作失败');
+									}
+									ca.closeWaiting();
+								},errFn:function(call){
+									ca.closeWaiting();
+									mui.toast(call);
+								}
+							})
+						}
+					})
+				})
+				
+				//订单开始与当前时间比较
+				function timeCompare(arg2){
+					var myDate = new Date();
+					var ye=myDate.getFullYear();
+					var mo=myDate.getMonth()+1; //获取当前月份(0-11,0代表1月)
+					var day=myDate.getDate();
+					var mmda=ye+'-'+mo+'-'+day;
+					var date = new Date(mmda.replace(/-/g, '/'));
+					var date1 = new Date(arg2.replace(/-/g, '/'));
+					if(date.getTime()>date1.getTime() ){
+						return false;
+					}else{
+						return true;
+					}
+				}
+				
+				function clickphone(){
+					var cell=ca.className('phone');
+					for(var i=0;i<cell.length;i++){
+						(function(index){
+							cell[i].addEventListener('tap',function(){
+								jdphone(cell[index].innerHTML);
+							})
+						})(i);
+					}
+				}
+				function jdphone(phone){
+					ca.callPhone(phone);
+				}
+			})
+			
+		</script>
+	</body>
+
+</html>

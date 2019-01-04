@@ -1,0 +1,195 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../css/style.css" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav mheader">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mback"></a>
+		    <h1 class="mui-title htitle">订单详情</h1>
+		</header>
+		<div class="mui-content" id="mui-content">
+		    
+		</div>
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/castapp.js" ></script>
+		<script type="text/javascript">
+			mui.plusReady(function(){
+				mui.init({
+					swipeBack:true
+				})
+				ca.init();
+				ca.blackStatusBar();
+				ca.checkTheNetwork();
+				ca.closeWaitings();
+				var mui_content=ca.id('mui-content');
+				var self=plus.webview.currentWebview();
+				var lineOrder_id=self.order_id;
+				ca.ajaxs({url:'findLineOrderById',data:{
+						lineOrder_id:lineOrder_id
+					},succFn:function(data){
+						if(!ca.emptyFun(data)){
+							if(data.msg==1){
+								var da=data.data;
+								var youkexinxi="";
+								for(var d in da.tourist_info){
+									var te='<div class="oh b-o-d-div2"><div class="fl w30">'+da.tourist_info[d].name+'</div><div class="fl w40">'+da.tourist_info[d].card+'</div><div class="fl w30 pl10">'+da.tourist_info[d].phone+'</div></div>';
+									youkexinxi+=te;
+								}
+								var go_stay,go_food;
+								if(da.go_stay==1){
+									go_stay="有"
+								}else{
+									go_stay="无"
+								};
+								if(da.go_food==1){
+									go_food="有"
+								}else{
+									go_food="无"
+								};
+								var order_mark;
+								if(da.order_mark==null || da.order_mark==""){
+									order_mark="无";
+								}else{
+									order_mark=da.order_mark;
+								}
+								var hotelstarname;
+								if(da.hotelstar==null){
+									hotelstarname="";
+								}else{
+									hotelstarname=da.hotelstar.name;
+								}
+								
+								
+								var cost_mark;
+								if(da.cost_mark==null || da.cost_mark==""){
+									cost_mark="无";
+								}else{
+									cost_mark=da.cost_mark;
+								}
+								
+								var team_num="无";
+								var guide="无";
+								var guidephone="";
+								if(ca.emptyFun(da.class_num)){
+									team_num="无";
+									guide="无";
+								}else{
+									team_num=da.class_num;
+									if(ca.emptyFun(data.team.guide_union_id)){
+										guide="无";
+									}else{
+										guide=data.team.employee2.realname;
+										guidephone=data.team.employee2.phone;
+									}
+								}
+								var temp='<div class="b-o-d-div">'
+									    +	'<div class="b-o-d-div-d1"><span>'+da.line_name+'</span></div>'
+									    +	'<div class="b-o-d-div-d2">'	
+									    +		'<div class="b-o-d-div-d2-d1">'
+									    +			'<div class=""><span>'+ da.line_standard+'</span></div>	'
+									    +			'<div class="mb7"><span>成人：</span><span>'+da.man_num +'</span><span class="ml10">儿童：</span><span>'+da.child_num+'</span></div>'
+									    +		'</div>'		
+									    +		'<div class="b-o-d-div-d2-d2"><span>出发日期：</span><span>'+da.start_date+'</span><span class="ml20">结束日期：</span><span>'+da.end_date+'</span></div>'	
+									    +	 '</div>'		
+									    +'</div>'				
+									    +'<div class="b-o-d-div">'
+									    +	'<div class="b-o-d-div-d1"><span >订单信息</span><span class="fr mr20 fs12 ca6a6a6">'+da.create_time.slice(0,16)+'</span></div>'
+									    +	'<div class="b-o-d-div-d2">'	
+									    +		'<div class="oh b-o-d-div2" >'		
+									    +			'<div class="fl w30"><span>联系人</span></div>'
+									    +			'<div class="fl"><span>'+da.contact_name+'</span></div>'
+									    +	     '</div>'
+									    +		'<div class="oh b-o-d-div2" >'	
+									    +			'<div class="fl w30"><span>手机号</span></div>'	
+									    +			'<div class="fl"><span class="phone">'+da.contact_tel+'</span></div>'	
+									    +		 '</div>'	
+									    +		'<div class="oh b-o-d-div2" >'	
+									    +			'<div class="fl w30"><span>订单号</span></div>'	
+									    +			'<div class="fl"><span>'+da.order_num+'</span></div>'	
+									    +		 '</div>'
+									    +		'<div class="oh b-o-d-div2" >'	
+									    +			'<div class="fl w30"><span>供应客户</span></div>'	
+									    +			'<div class="fl"><span>'+da.structure.enterprise.alias+' '+da.structure.name+'</span></div>'	
+									    +		 '</div>'
+									     +		'<div class="oh b-o-d-div2" >'	
+									    +			'<div class="fl w30"><span>接单计调</span></div>'	
+									    +			'<div class="fl"><span>'+da.employee1.realname+'</span><span class="phone">'+da.employee1.phone+'</span></div>'	
+									    +		 '</div>'
+									    +		'<div class="oh b-o-d-div2" >'			
+									    +	        '<div class="fl w30"><span>接站服务</span></div>'	
+									    +           '<div class="fl"><span>'+da.go_date+'</span><span class="ml5">'+da.go_time+'</span><span class="ml5">'+da.go_traffic+'</span></div>'		
+									    +		'</div>'	
+									    +		'<div class="oh b-o-d-div2" >'			
+									    +	        '<div class="fl w30"><span>接站宿餐</span></div>'	
+									    +           '<div class="fl"><span>'+go_stay+'</span><span class="ml5">'+hotelstarname+'</span><span class="ml5">'+go_food+'</span></div>'		
+									    +		'</div>'		
+									    +		'<div class="oh b-o-d-div2" >'			
+									    +	        '<div class="fl w30"><span>送站服务</span></div>'	
+									    +           '<div class="fl"><span>'+da.back_date+'</span><span class="ml5">'+da.back_time+'</span><span class="ml5">'+da.back_traffic+'</span></div>'		
+									    +		'</div>'	
+		//							    +		'<div class="oh b-o-d-div2" >'			
+		//							    +	        '<div class="fl w30"><span>送站住宿</span></div>'	
+		//							    +           '<div class="fl"><span>'+da.back_stay+'</span><span class="ml5">'+da.back_stay_star+'</span><span class="ml5">'+da.back_food+'</span></div>'		
+		//							    +		'</div>'
+									    +		'<div class="oh b-o-d-div2" >'	
+									    +			'<div class="fl w30"><span>附加金额</span></div>'	
+									    +			'<div class="fl"><span class="cred">'+da.other_cost+'元</span></div>'	
+									    +		 '</div>'
+									    +		'<div class="oh b-o-d-div2" >'	
+									    +			'<div class="fl w30"><span>附加金额备注</span></div>'	
+									    +			'<div class="fl w70"><span>'+cost_mark+'</span></div>'	
+									    +		 '</div>'	
+									    +		'<div class="oh b-o-d-div2" >'	
+									    +			'<div class="fl w30"><span>结算金额</span></div>'	
+									    +			'<div class="fl"><span class="cred">'+da.total_amount+'元</span></div>'	
+									    +		 '</div>'	
+									    +		'<div class="oh b-o-d-div2" >'	
+									    +			'<div class="fl w30"><span>代收金额</span></div>'	
+									    +			'<div class="fl"><span class="cred">'+da.collect_amount+'元</span></div>'	
+									    +		 '</div>'			
+									    +		'<div class="oh b-o-d-div2" >'	
+									    +			'<div class="fl w30"><span>订单备注</span></div>'	
+									    +			'<div class="fl w70"><span>'+order_mark+'</span></div>'	
+									    +		 '</div>'			
+									    +	  '</div>'
+									    +'</div>'	
+				    					+'<div class="b-o-d-div">'
+									    +	'<div class="b-o-d-div-d1"><span >游客信息</span></div>'	
+									    +	'<div class="b-o-d-div-d2">'+youkexinxi+'</div>'
+									    +'</div>';
+								
+								mui_content.innerHTML=temp;	
+								clickphone();
+							}
+						}
+						ca.closeWaiting();
+					},errFn:function(call){
+						ca.closeWaiting();
+						mui.toast(call);
+					}
+				})
+				function clickphone(){
+					var cell=ca.className('phone');
+					for(var i=0;i<cell.length;i++){
+						(function(index){
+							cell[i].addEventListener('tap',function(){
+								jdphone(cell[index].innerHTML);
+							})
+						})(i);
+					}
+				}
+				function jdphone(phone){
+					ca.callPhone(phone);
+				}
+			})
+		</script>
+	</body>
+
+</html>

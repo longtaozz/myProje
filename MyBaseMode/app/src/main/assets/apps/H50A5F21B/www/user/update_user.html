@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav" style="background: #FFFFFF;height: 69px;padding-top: 25px;">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: #333333;"></a>
+		    <h1 class="mui-title" style="font-size: 16px;">用户信息</h1>
+		    <span class="mui-pull-right" id="baocun" style="line-height: 44px;color: #333333 !important;display: none;">保存</span>
+		</header>
+		<div class="mui-content" style="margin-top: 35px;">
+		    <input type="text" class="mui-input-clear"  value="">
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/castapp.js" ></script>
+		<script type="text/javascript">
+			mui.init();
+			ca.init(true);
+			ca.blackStatusBar();
+			var tag=localStorage.getItem('update_user_tag');
+			var name=localStorage.getItem('update_user_name');
+			var url=localStorage.getItem('url');
+			var user_id=localStorage.getItem('userid');
+			var title=ca.className('mui-title');
+			var input=ca.tagName('input');
+			input[0].value=name;
+			input[0].addEventListener('input',function(){
+					ca.id('baocun').style.display='block';
+			});
+			var label=0;
+			label=tag;
+			if(tag==1){
+				title[0].innerHTML="修改用户名"
+			}
+			if(tag==2){
+				title[0].innerHTML="修改电话"
+			}
+			if(tag==3){
+				title[0].innerHTML="修改邮箱"
+			}
+			mui.plusReady(function(){
+				
+				ca.id('baocun').addEventListener('tap',function(){
+					ca.showWaiting();
+					ca.checkTheNetwork();
+					ca.ajaxs({url:'updateUser',data:{
+							user_id:user_id,label:label,name:input[0].value
+						},succFn:function(data){
+							if(data.msg!=1){
+								mui.toast('修改失败!');
+								ca.closeWaiting();
+								return;
+							}
+							ca.closeWaiting();
+							if(tag==1){
+								localStorage.setItem('realname',input[0].value);
+							}
+							var arr1 = ['user_information','user/user_index'];
+							ca.sendNotice(arr1,'update',{});
+							setTimeout(function(){
+								ca.closeCurrentInterface();
+							},500)
+						},errFn:function(call){
+							ca.closeWaiting();
+							mui.toast(call);
+						}
+					})
+					
+				})
+				
+			})
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,880 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/mui.picker.min.js" ></script>
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/mui.picker.min.css" />
+		<link rel="stylesheet" href="../css/style.css" />
+		<style>
+			.taocanxuanze{
+				background: #FF8201;
+				border: 1px solid #FF8201;
+				color: #FFFFFF;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav" style="background: #4F77AA;height: 69px;padding-top: 25px;">
+		    <a class=" mui-icon mui-icon-left-nav mui-pull-left mui-action-back" id="mui-action-back" style="color: #FFFFFF !important;"></a>
+		    <h1 class="mui-title" style="font-size: 18px !important;color: #FFFFFF !important;">业务下单</h1>
+		</header>
+		<div class="mui-content">
+		    <div class="business_order_div_1">
+		    	<div class="business_order_div_1_1">
+		    		<span>
+		    			团队选择
+		    		</span>
+		    	</div>
+		    	<div class="business_order_div_1_2">
+		    		<div class="business_order_div_1_2_l">
+		    			<span>
+		    				地区分类
+		    			</span>
+		    		</div>
+		    		<div class="business_order_div_1_2_c xiala">
+		    			<div style="border: 1px solid #999999;border-radius: 5px;font-size: 13px;color: #666666;height: 30px;padding-left:5px;">
+		    				<span id="diqu1">选择省份</span>
+		    				<span class="mui-icon mui-icon-arrowdown"></span>
+		    			</div>
+		    		</div>
+		    		<div class="business_order_div_1_2_r xiala">
+		    			<div style="border: 1px solid #999999;border-radius: 5px;height: 30px;padding-left:5px;font-size: 13px;color: #666666;">
+		    				<span id="city1">选择城市</span>
+		    				<span class="mui-icon mui-icon-arrowdown"></span>
+		    			</div>
+		    		</div>
+		    	</div>
+		    	<div class="business_order_div_1_3">
+		    		<div class="business_order_div_1_3_l">
+		    			<span>
+		    				旅行社
+		    			</span>
+		    		</div>
+		    		<div class="business_oder_div_1_3_r">
+		    			<div class="xiala" style="border: 1px solid #999999;border-radius: 5px;height: 30px;padding-left:5px;font-size: 13px;color: #666666;line-height: 25px;">
+		    				<span id="travelagency" style="width: 85%;float: left;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;text-align: center;">选择旅行社</span>
+		    				<span class="mui-icon mui-icon-arrowdown" style="float: right;"></span>
+		    			</div>
+		    		</div>
+		    	</div>
+		    	<div class="business_oder_div_1_3">
+		    		<div class="business_order_div_1_3_l" style="padding-top: 10px;">
+		    			<span>
+		    				部门
+		    			</span>
+		    		</div>
+		    		<div class="business_oder_div_1_3_r">
+		    			<div class="xiala" style="border: 1px solid #999999;border-radius: 5px;height: 30px;padding-left:5px;font-size: 13px;color: #666666;line-height: 25px;margin-top: 5px;text-align: center;">
+		    				<span id="department" style="width: 85%;float: left;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;">选择部门</span>
+		    				<span class="mui-icon mui-icon-arrowdown" style="float: right;"></span>
+		    			</div>
+		    		</div>
+		    	</div>
+		    </div>
+		    <div class="business_order_div_2">
+		    	<div class="business_order_div_2_1">
+		    		<div class="business_order_div_2_1_l">
+		    			<span>
+		    				线路选择
+		    			</span>
+		    		</div>
+		    		<div class="business_order_div_2_1_r">
+		    			<div id="xianluxiangqin" style="border: 1px solid #FF5757;height: 30px;line-height: 25px;border-radius:5px ;padding-left: 5px;padding-right: 5px;">
+		    				<span style="color: #FF5757;font-size: 15px;">线路详情</span>
+		    			</div>
+		    		</div>
+		    	</div>
+		    	<div class="business_order_div_2_2">
+		    		<div class="business_order_div_2_2_d ">
+						<form style="width: 85%;float: left;">
+							 <input type="search" id="xianlu" class="mui-input-clear" placeholder="选择线路" >
+						</form>
+						 <span class="mui-icon mui-icon-arrowdown xiala" >
+						 	
+						 </span>
+					</div>
+		    	</div>
+		    	<div class="business_order_div_2_3">
+		    		<div class="business_order_div_2_3_l " >
+		    			<span >
+		    				选择计调
+		    			</span>
+		    		</div>
+		    		<div class="business_order_div_2_3_r">
+		    			<div class="xiala" style="border: 1px solid #999999;border-radius: 5px;height: 30px;padding-left:5px;font-size: 13px;color: #666666;line-height: 25px;margin-top: 5px;text-align: center;">
+		    				<span style="width: 70%;float: left;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;" id="jidiao">选择计调</span>
+		    				<span class="mui-icon mui-icon-arrowdown" ></span>
+		    			</div>
+		    		</div>
+		    	</div>
+		    </div>
+		    <div class="business_order_div_3">
+		    	<div class="business_order_div_3_1">
+					<span>选择开团日期</span>
+				</div>
+				<div class="business_order_div_3_2">
+					<div class="business_order_div_3_2_1">
+						<div class="selectdate" id="">
+							<span>
+							无
+							</span>
+						</div>
+						<div class="selectdate" id="">
+							<span style="" >
+							无
+							</span>
+						</div>
+						<div class="selectdate" id="">
+							<span style="" >
+							无
+							</span>
+						</div>
+						<div class="selectdate" id="">
+							<span style="" >
+							无
+							</span>
+						</div>
+						
+					
+						<div class="selectdate" id="">
+							<span style="" >
+							无
+							</span>
+						</div>
+						<div class="selectdate" id="">
+							<span style="" >
+							无
+							</span>
+						</div>
+						<div class="selectdate" id="">
+							<span style="" >
+							无
+							</span>
+						</div>
+						<div class="selectdate" id="">
+							<span style="font-size: 12px;" >
+							更多日期
+							</span>
+						</div>
+					</div>
+				</div>
+		    	
+		    </div>
+		    <div class="business_order_div_4">
+				<div class="business_order_div_4_1">
+					<span>选择出行人数</span>
+				</div>
+				<div class="business_order_div_4_2">
+					<div class="business_order_div_4_2">
+						<div class="business_order_div_4_2_1">
+							<span style="font-size: 15px;color: #666666;">
+							人数
+							</span>
+						</div>
+						<!--<div class="business_oder_div_3_2_2" >
+							<span class="mui-icon mui-icon-minus" class="" id="jian"></span>
+							<input class="xianluxiadanrenshu" id="renshu" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" value="1"/>
+							<span class="mui-icon mui-icon-plus" id="jia"></span>
+						</div>-->
+						<div class="mui-numbox" data-numbox-step='1' data-numbox-min='1' data-numbox-max='1000' style="margin-left: 10px;">
+						  <button class="mui-btn mui-numbox-btn-minus" type="button">-</button>
+						  <input class="mui-numbox-input" type="number"  id="renshu"/>
+						  <button class="mui-btn mui-numbox-btn-plus" type="button">+</button>
+						</div>
+						
+					</div>
+				</div>
+		    </div>
+		    <div class="business_order_div_5">
+		    	<div class="business_order_div_4_1">
+					<span>套餐选择</span>
+				</div>
+				<div class="business_order_div_5_2" id="business_order_div_5_2">
+					<div class="business_order_div_5_2-div taocanxuanze">
+						<span>标准型</span>
+					</div>
+					<div class="business_order_div_5_2-div ">
+						<span>舒适型</span>
+					</div>
+					<div class="business_order_div_5_2-div">
+						<span>豪华型</span>
+					</div>
+				</div>
+				<div id="business_order_div_5_2_3">
+					<div class="business_order_div_5_3">
+					<span style="color: #FF8201;">标准型：</span>
+					<span style="color: #C3C3C3;"></span>
+					</div>
+					<div class="business_order_div_5_3" style="display: none;">
+						<span style="color: #FF8201;">舒适型：</span>
+						<span style="color: #C3C3C3;"></span>
+					</div>
+					<div class="business_order_div_5_3" style="display: none;">
+						<span style="color: #FF8201;">豪华型：</span>
+						<span style="color: #C3C3C3;"></span>
+					</div>
+				</div>
+				
+		    </div>
+		    <div class="business_order_div_6">
+		    	<div class="business_order_div_4_1">
+					<span>接站服务</span>
+				</div>
+				<div class="business_order_div_6_2">
+					<div class="business_order_div_6_2_l">
+						<div style="float: left;font-size: 15px;padding-top: 2px;" >
+							<span>接站日期</span>
+						</div>
+						<div id="jiezhanriqi" style="margin-left: 5px;float: left;border: 1px solid #999999;width: 90px;height:25px ;text-align: center;border-radius:5px ;font-size: 13px;">
+							<span id="jiezhanriqi1">选择接站日期</span>
+						</div>
+					</div>
+					<div class="business_order_div_6_2_r">
+						<div style="float: left;padding-top: 2px;">
+							<span>时间</span>
+						</div>
+						<div style="margin-left:5px;float: left;border: 1px solid #999999;width: 70px;height:25px ;text-align: center;border-radius:5px ;font-size: 13px;">
+							<input id="jiezhanshijian1" style="width:60px;border:0px;font-size:13px;height:22px;-webkit-user-select:auto;"/>
+						</div>
+						
+					</div>
+				</div>
+				<div class="business_order_div_6_3">
+					<div class="business_order_div_6_3_1">
+						<span>接车次航班</span>
+						<input type="text" placeholder="输入接车次航班及地址" style="width: 60%;height: 30px;margin-left: 5px;border-radius:5px ;font-size: 15px;"/>
+					</div>
+				</div>
+				<div class="business_order_div_6_4">
+					<div class="fl business_order_div_6_4_1">
+						<span>住宿</span>
+					</div>
+					<div class="fl business_order_div_6_4_2">
+						<span class="business_order_div_6_4_2_zi">无</span>
+						<span class="mui-icon mui-icon-arrowdown"></span>
+					</div>
+					<div class="fl business_order_div_6_4_2" >
+						<span  class="business_order_div_6_4_2_zi">星级</span>
+						<span class="mui-icon mui-icon-arrowdown"></span>
+					</div>
+					<div class="fl business_order_div_6_4_1">
+						<span>用餐</span>
+					</div>
+					<div class="fl business_order_div_6_4_2" >
+						<span  class="business_order_div_6_4_2_zi">无</span>
+						<span class="mui-icon mui-icon-arrowdown"></span>
+					</div>
+				</div>
+		    </div>
+			<div class="business_order_div_6" style="height: 200px;overflow: hidden;">
+		    	<div class="business_order_div_4_1">
+					<span>送站服务</span>
+				</div>
+				<div class="business_order_div_6_2">
+					<div class="business_order_div_6_2_l">
+						<div style="float: left;font-size: 15px;padding-top: 2px;" >
+							<span>送站日期</span>
+						</div>
+						<div id="songzhanriqi" style="margin-left: 5px;float: left;border: 1px solid #999999;width: 90px;height:25px ;text-align: center;border-radius:5px ;font-size: 13px;">
+							<span id="songzhanriqi1">选择送站日期</span>
+						</div>
+					</div>
+					<div class="business_order_div_6_2_r">
+						<div style="float: left;padding-top: 2px;">
+							<span>时间</span>
+						</div>
+						<div style="margin-left: 5px;float: left;border: 1px solid #999999;width: 70px;height:25px ;text-align: center;border-radius:5px ;font-size: 13px;">
+							<input style="width: 60px;border: 0px;font-size: 13px;-webkit-user-select:auto;"/>
+						</div>
+						
+					</div>
+				</div>
+				<div class="business_order_div_6_3">
+					<div class="business_order_div_6_3_1">
+						<span>送车次航班</span>
+						<input type="text" placeholder="输入送车次航班及地址" style="width: 60%;height: 30px;margin-left: 5px;border-radius:5px ;font-size: 15px;"/>
+					</div>
+				</div>
+				<!--<div class="business_order_div_6_4">
+					<div class="fl business_order_div_6_4_1">
+						<span>住宿</span>
+					</div>
+					<div class="fl business_order_div_6_4_2">
+						<span>无</span>
+						<span class="mui-icon mui-icon-arrowdown"></span>
+					</div>
+					<div class="fl business_order_div_6_4_2" >
+						<span>星级</span>
+						<span class="mui-icon mui-icon-arrowdown"></span>
+					</div>
+					<div class="fl business_order_div_6_4_1">
+						<span>用餐</span>
+					</div>
+					<div class="fl business_order_div_6_4_2" >
+						<span>无</span>
+						<span class="mui-icon mui-icon-arrowdown"></span>
+					</div>
+					
+				</div>-->
+				<div style="margin-top: 40px;">
+						<input type="button" id="xiayibu" value="下一步" style="height: 35px;width: 96%;margin-left: 2%;background: #FF8300;border-radius:5px ;color: #FFFFFF;border: 0px;"/>
+				</div>
+		    </div>
+		</div>
+		<script type="text/javascript" src="../js/castapp.js" ></script>
+		<script type="text/javascript">
+			mui.init();
+			ca.init();
+			mui.plusReady(function(){
+	       			plus.navigator.setStatusBarStyle('light');
+	       			oldback();
+					function oldback(){
+//						var old_back = mui.back;
+						mui.back = function() {
+							localStorage.removeItem('kaituanriqi');
+							localStorage.removeItem('kaituanriqiid');
+							localStorage.removeItem('xianluid');
+							localStorage.removeItem('xianlumingcheng');
+							localStorage.removeItem('manmoney');
+							localStorage.removeItem('childmoney');
+							localStorage.removeItem('manmoney1');
+							localStorage.removeItem('childmoney1');
+							localStorage.removeItem('manmoney2');
+							localStorage.removeItem('childmoney2');
+							localStorage.removeItem('manmoney3');
+							localStorage.removeItem('childmoney3');
+							localStorage.removeItem('renshu');
+							localStorage.removeItem('jiezhanshijian');
+							localStorage.removeItem('jiezhanxinxi');
+							localStorage.removeItem('songzhanxinxi');
+							localStorage.removeItem('songzhanshijian');
+							localStorage.removeItem('songzhanriqi');
+							localStorage.removeItem('jiezhanriqi');
+							localStorage.removeItem('jidiaoid');
+							var ws=plus.webview.currentWebview();
+							plus.webview.close(ws);
+//							old_back();
+						}
+					}
+	       			
+	      	})
+			var url=localStorage.getItem('url');
+			var cell=document.getElementsByClassName('xiala');
+			
+			var business_order_div_5_2=ca.id('business_order_div_5_2');
+			var business_order_div_5=ca.id('business_order_div_5_2_3');
+			var picker1 = new mui.PopPicker();
+			var picker2=new mui.PopPicker();
+			var picker3=new mui.PopPicker();
+			var picker4=new mui.PopPicker();
+			var picker5=new mui.PopPicker();
+			var picker6=new mui.PopPicker();
+			var picker7=new mui.PopPicker();
+			var picker8=new mui.PopPicker();
+			var picker9=new mui.PopPicker();
+			//获取省
+			mui.get(url+'findLineOrderProvince',{id:localStorage.getItem('structure_id')},function(data){
+				var arr=new Array();
+				for(var i=0;i<data.length;i++){
+					var ob=new Object();
+					ob.value='zz';
+					ob.text=data[i];
+					arr.push(ob)
+				}
+				picker1.setData(arr);
+				shengfen();
+				},'json'
+			);
+			function shengfen(){
+					cell[0].addEventListener('tap',function(){
+						picker1.show(function (selectItems) {
+							if(selectItems[0].text=="" || selectItems[0].text==null){
+								mui.toast('没有签约的旅行社');
+								return;
+							}
+							document.getElementById('diqu1').innerHTML=selectItems[0].text;
+							//获取城市
+							mui.get(url+'findLineOrderCity',{id:localStorage.getItem('structure_id'),name:selectItems[0].text},function(data1){
+								var arr=new Array();
+								for(var i=0;i<data1.length;i++){
+									var ob=new Object();
+									ob.value='zz';
+									ob.text=data1[i];
+									arr.push(ob)
+								}
+								picker2.setData(arr);
+								getCity();	
+								
+							},'json')
+							
+//							localStorage.setItem('xianlumingcheng',selectItems[0].text);
+					})
+				})
+			}
+			//显示城市
+			function getCity(){
+				cell[1].addEventListener('tap',function(){
+					picker2.show(function (selectItems) {
+							if(selectItems[0].text=="" || selectItems[0].text==null){
+								mui.toast('没有签约的旅行社');
+								return;
+							}
+						
+							document.getElementById('city1').innerHTML=selectItems[0].text;
+							//获取旅行社
+							mui.get(url+'findAllSignByCity',{id:localStorage.getItem('e_id'),city:selectItems[0].text},function(data){
+								var arr=new Array();
+								for(var i=0;i<data.length;i++){
+									var ob=new Object();
+									ob.value=data[i].id;
+									ob.text=data[i].name;
+									arr.push(ob)
+								}
+								picker3.setData(arr);
+								getTravelAgency();
+							})
+							
+					})
+				})
+			}
+			//显示旅行社
+			function getTravelAgency(){
+				cell[2].addEventListener('tap',function(){
+					picker3.show(function(selectItems){
+						if(selectItems[0].text=="" || selectItems[0].text==null){
+								mui.toast('没有签约的旅行社');
+								return;
+							}
+						document.getElementById('travelagency').innerHTML=selectItems[0].text;
+						//获取部门
+						mui.get(url+'findAllDepartmentByTravelAgency',{eid:selectItems[0].value,p_id:localStorage.getItem('structure_id')},function(data){
+								var arr=new Array();
+								for(var i=0;i<data.length;i++){
+									var ob=new Object();
+									ob.value=data[i].id;
+									ob.text=data[i].name;
+									arr.push(ob)
+								}
+								picker4.setData(arr);
+								getDepartment();
+							})
+						
+					})
+				})
+			}
+			//显示部门
+			function getDepartment(){
+				cell[3].addEventListener('tap',function(){
+					picker4.show(function(selectItems){
+						if(selectItems[0].text=="" || selectItems[0].text==null){
+								mui.toast('该签约旅行社没有部门');
+								return;
+						}
+						document.getElementById('department').innerHTML=selectItems[0].text;
+						//获取线路
+						mui.get(url+'findAllLineByPartmentid',{partmentid:selectItems[0].value},function(data){
+								var arr=new Array();
+								for(var i=0;i<data.length;i++){
+									var ob=new Object();
+									ob.value=data[i].id;
+									ob.text=data[i].name;
+									arr.push(ob)
+								}
+								picker5.setData(arr);
+								getLine();
+						})
+						//获取员工
+						mui.get(url+'getNameAndIdByStructure_id',{structure_id:selectItems[0].value},function(data){
+								var arr=new Array();
+								for(var i=0;i<data.length;i++){
+									var ob=new Object();
+									ob.value=data[i].id;
+									ob.text=data[i].realname;
+									arr.push(ob)
+								}
+								picker6.setData(arr);
+								showJidiao();
+						})
+					})
+				})
+			}
+			//显示线路
+			var selectdate=ca.className('selectdate');
+			function getLine(){
+				cell[4].addEventListener('tap',function(){
+					picker5.show(function(selectItems){
+						if(selectItems[0].text=="" || selectItems[0].text==null){
+								mui.toast('该签约旅行社没有发布线路');
+								return;
+						}
+						
+						document.getElementById('xianlu').value=selectItems[0].text;
+						localStorage.setItem('xianluid',selectItems[0].value);
+						localStorage.setItem('xianlumingcheng',selectItems[0].text);
+						Jumpxianluxiangqin();
+						//获取开团时间
+						mui.get(url+'findAllLineStartDate',{lineid:selectItems[0].value},function(data){
+							
+							for(var i=0;i<selectdate.length;i++){
+								if(data.length>8){
+									if(i==7){
+										selectdate[i].innerHTML='更多日期';
+									}else{
+										selectdate[i].innerHTML=data[i].start_date;
+										selectdate[i].setAttribute('id',data[i].id);
+										
+									}
+									(function(index){
+										selectdate[i].addEventListener('tap',function(){
+											for(var a=0;a<selectdate.length;a++){
+												if(index==7 && index==a){
+													localStorage.setItem('genduoriqi',JSON.stringify(data));
+													showGengduoDate();
+												}else{
+													if(index==a){
+														localStorage.setItem('kaituanriqiid',selectdate[a].getAttribute('id'));
+														localStorage.setItem('kaituanriqi',selectdate[a].innerHTML);
+														selectdate[a].style.color="#fff";
+							                        	selectdate[a].style.backgroundColor="#4F77AA";
+							                        	selectdate[7].innerHTML='更多日期';
+//							                        	alert(selectdate[a].getAttribute('id'));
+													}else{
+														selectdate[a].style.color="";
+							                        	selectdate[a].style.backgroundColor="";
+													}
+												}
+											}
+										})
+									})(i);
+								}else{
+									if(data.length==8){
+										selectdate[i].innerHTML=data[i].start_date;
+										selectdate[i].setAttribute('id',data[i].id);
+									}else{
+										if(i<data.length){
+											selectdate[i].innerHTML=data[i].start_date;
+											selectdate[i].setAttribute('id',data[i].id);
+										}else{
+											selectdate[i].innerHTML='无';
+										}
+									}
+									(function(index){
+										selectdate[i].addEventListener('tap',function(){
+											for(var a=0;a<data.length;a++){
+												if(index==a){
+//													alert(selectdate[a].getAttribute('id'));
+                                                    localStorage.setItem('kaituanriqi',selectdate[a].innerHTML);
+                                                    localStorage.setItem('kaituanriqiid',selectdate[a].getAttribute('id'));
+													selectdate[a].style.color="#fff";
+						                        	selectdate[a].style.backgroundColor="#4F77AA";
+												}else{
+													selectdate[a].style.color="";
+						                        	selectdate[a].style.backgroundColor="";
+												}
+											}
+										})
+									})(i);
+									
+								}
+								
+								
+								
+							}
+							
+							
+							
+							
+							
+						})
+						
+						business_order_div_5_2.innerHTML="";
+						business_order_div_5.innerHTML="";
+						//获取套餐
+						mui.get(url+'getLinesTandardById',{line_id:selectItems[0].value},function(data){
+							for(var a in data){
+								var temp;
+								var temp1;
+								localStorage.setItem('manmoney'+a,data[a].man_price);
+								localStorage.setItem('childmoney'+a,data[a].child_price);
+								if(a==0){
+									temp='<div class="business_order_div_5_2-div taocanxuanze" id="'+data[a].id+'">'
+										+'<span>'+data[a].name+'</span>'
+									+'</div>';
+									
+									temp1='<div class="business_order_div_5_3">'
+											+'<span style="color: #FF8201;">'+data[a].name+':</span>'
+											+'<span style="color: #C3C3C3;">成人:￥'+data[a].man_price+'/人  小孩:￥'+data[a].child_price+'/人'+data[a].mark+'</span>'
+										+'</div>';
+								}else{
+									temp='<div class="business_order_div_5_2-div" id="'+data[a].id+'">'
+										+'<span>'+data[a].name+'</span>'
+									+'</div>';
+									temp1='<div class="business_order_div_5_3" style="display: none;">'
+											+'<span style="color: #FF8201;">'+data[a].name+':</span>'
+											+'<span style="color: #C3C3C3;" >成人:￥'+data[a].man_price+'/人  小孩:￥'+data[a].child_price+'/人'+data[a].mark+'</span>'
+										+'</div>';
+								}	
+								business_order_div_5_2.innerHTML+=temp;
+								business_order_div_5.innerHTML+=temp1;
+							}
+							taocanxuanzes();
+						})
+							
+					})
+				})
+			}
+		//跳转线路详情
+		function Jumpxianluxiangqin(){
+			ca.id('xianluxiangqin').addEventListener('tap',function(){
+				ca.newInterface({url:'line_detail.html',id:'line_detail'});
+			})
+			
+		}
+		//显示计调
+		function showJidiao(){
+			cell[5].addEventListener('tap',function(){
+				picker6.show(function(selectItems){
+					if(selectItems[0].text=="" || selectItems[0].text==null){
+								mui.toast('该签约旅行社没有计调');
+								return;
+					}
+						
+					localStorage.setItem('jidiaoid',selectItems[0].value);
+					document.getElementById('jidiao').innerHTML=selectItems[0].text;
+				})
+			})
+		}
+			
+		//跟多时间选择
+		function showGengduoDate(){
+			mui.plusReady(function(){
+				    //确认订单
+				    //关闭splash页面
+				    plus.navigator.closeSplashscreen();
+				    var payfor;  //支付页面
+				    var self=null;//当前页面
+				    //支付页面           点击提交订单则创建支付webview
+				        //获取当前webview
+				        self=plus.webview.currentWebview();
+				
+				        if(payfor){//如果已经存在该窗口，则返回，避免快速点击创建多个窗口
+				            return;
+				        }
+				
+				        //不存在则创建支付窗口
+				        //支付页面距离顶端距离            自定义，需要多高则设置多高
+				        var top=plus.display.resolutionHeight-435;
+				        var href='gengduokaituanriqi.html'
+				
+				        //创建的webview显示payfor.html的内容
+				        payfor=plus.webview.create(href,'gengduokaituanriqi.html',{
+				            width:'90%',
+				            height:'450px',
+				            top:100,
+				            left:'5%',
+				            scrollIndicator:'none',
+				            scalable:false,
+				            popGesture:'none'
+				        },{//传送到创建的webview页面的数据
+				            payforInfo:{
+				                
+				            }
+				        });
+						
+				        //显示支付窗口   并且显示遮罩层
+				        payfor.addEventListener('loaded',function(){
+				            payfor.show('slide-in-bottom',300);
+				        },false);
+				        self.setStyle({
+				            mask:'rgba(0,0,0,0.5)'
+				        });
+				
+				        //遮罩层点击事件
+				        self.addEventListener('maskClick',function(){
+				            //关闭遮罩层
+				            self.setStyle({
+				                mask:'none'
+				            });
+				            //避免出现特殊情况，确保支付页面子在初始化时关闭
+				            if(!payfor){
+				                payfor=plus.webview.getWebviewById('gengduokaituanriqi.html');
+				            }
+				            //关闭支付页面   并设为空，如果不为空就不会创建，直接return在一开始时候有判断
+				            if(payfor){
+				                payfor.close();
+				                payfor=null;
+				            }
+				        },false);
+				
+				});
+		}
+		
+		//通知改变日期
+		ca.receiveNotice('update',function(){
+			selectdate[7].innerHTML=localStorage.getItem('kaituanriqi');
+			selectdate[7].setAttribute('id',localStorage.getItem('kaituanriqiid'));
+			selectdate[7].style.color="#fff";
+			selectdate[7].style.backgroundColor="#4F77AA";
+		});
+			
+			
+		//套餐选择
+		function taocanxuanzes(){
+		var taocanxuanze=document.getElementsByClassName('business_order_div_5_2-div');
+		var taocanxiangxi=document.getElementsByClassName('business_order_div_5_3');
+		localStorage.setItem('manmoney',localStorage.getItem('manmoney0'));
+		localStorage.setItem('childmoney',localStorage.getItem('childmoney0'));
+		localStorage.setItem('taocanming',taocanxuanze[0].firstChild.innerHTML);
+		for(var i=0;i<taocanxuanze.length;i++){
+			(function(index){
+				taocanxuanze[i].addEventListener('tap',function(){
+					for(var a=0;a<cell.length;a++){
+						
+						if(index==a){
+							taocanxuanze[a].classList.add('taocanxuanze');
+							taocanxiangxi[a].style.display='block';
+							localStorage.setItem('taocanming',taocanxuanze[a].firstChild.innerHTML);
+							localStorage.setItem('manmoney',localStorage.getItem('manmoney'+a));
+							localStorage.setItem('childmoney',localStorage.getItem('childmoney'+a));
+//							alert(localStorage.getItem('manmoney'));
+						}else{
+							localStorage.setItem('manmoney'+a,0);
+							localStorage.setItem('childmoney'+a,0);
+							
+							taocanxuanze[a].classList.remove('taocanxuanze')
+							taocanxiangxi[a].style.display='none';
+						}
+					}
+				})
+			})(i);
+		}
+		}
+		
+		var input=ca.tagName('input');
+		//接站服务
+		ca.id('jiezhanriqi').addEventListener('tap',function(){
+			// 使用原生js获取时间对象
+			var date = new Date();
+			var year = date.getFullYear();//年
+			var month = date.getMonth() + 1;//月
+			var day = date.getDate();//日
+			ca.dateSelect({
+				defaultTime:year + '-' + month + '-' + day,
+				minTime:year + '-' + month + '-' + day,
+				maxTime:year + '-'+ (month + 1) + '-' + day,
+				callback:function(data){
+					if(data){
+						localStorage.setItem('jiezhanriqi',data);
+						ca.id('jiezhanriqi1').innerHTML = data;
+						
+					}
+					
+				}
+			})
+			jiesongzhan();
+		})
+		function jiesongzhan(){
+			var cee=ca.className('business_order_div_6_4_2');
+			var zi=ca.className('business_order_div_6_4_2_zi');
+			picker7.setData([{value:0,text:'无'},{value:1,text:'有'}]);
+			localStorage.setItem('jiezhanzhusuyou',0);	
+			cee[0].addEventListener('tap',function(){
+				localStorage.setItem('jiezhanzhusuxingji',"无");	 
+					 picker7.show(function (selectItems) {
+					 	zi[0].innerHTML=selectItems[0].text;
+					 	localStorage.setItem('jiezhanzhusuyou',selectItems[0].value);
+					 	if(selectItems[0].value==1){
+//					 		picker8.setData([{value:1,text:'五星级'},{value:2,text:'四星级'},{value:3,text:'三星级'},{value:4,text:'客栈'}]);
+					 		mui.get(url+'findAllHotelStar',{},function(data){
+					 			var arr=new Array();
+					 			for(var da in data ){
+					 				var ob=new Object();
+									ob.value=data[da].id;
+									ob.text=data[da].name;
+									arr.push(ob)
+					 			}
+					 			picker8.setData(arr);
+					 		})
+					 		cee[1].addEventListener('tap',function(){
+								picker8.show(function (selectItems) {
+						 		 	zi[1].innerHTML=selectItems[0].text;
+						 		 	localStorage.setItem('jiezhanzhusuxingji',selectItems[0].value);	 
+						 		 })
+							})
+					 	}
+					    	
+				})
+				 
+			})
+			
+			picker9.setData([{value:0,text:'无'},{value:1,text:'有'}]);
+			localStorage.setItem('jiezhanzhusuyongcan',0);
+			cee[2].addEventListener('tap',function(){
+				picker9.show(function (selectItems) {
+		 		 	zi[2].innerHTML=selectItems[0].text;
+		 		 	localStorage.setItem('jiezhanzhusuyongcan',selectItems[0].value);	 
+		 		 })
+			})
+		}
+		
+		//送站服务
+		ca.id('songzhanriqi').addEventListener('tap',function(){
+			// 使用原生js获取时间对象
+			var date = new Date();
+			var year = date.getFullYear();//年
+			var month = date.getMonth() + 1;//月
+			var day = date.getDate();//日
+			ca.dateSelect({
+				defaultTime:year + '-' + month + '-' + day,
+				minTime:year + '-' + month + '-' + day,
+				maxTime:year + '-'+ (month + 1) + '-' + day,
+				callback:function(data){
+					if(data){
+						localStorage.setItem('songzhanriqi',data);
+						ca.id('songzhanriqi1').innerHTML = data;
+						
+					}
+					
+				}
+			})
+		})
+			
+			
+		
+			
+			
+		//下一步
+		ca.id('xiayibu').addEventListener('tap',function(){
+			if(!localStorage.getItem('xianluid')){
+				mui.toast('请选择线路')
+				return;
+			}
+			if(!localStorage.getItem('kaituanriqiid')){
+				mui.toast('请选择开团日期')
+				return;
+			}
+			if(!localStorage.getItem('jidiaoid')){
+				mui.toast('请选择计调')
+				return;
+			}
+			
+			localStorage.setItem('renshu',ca.id('renshu').value);
+			localStorage.setItem('jiezhanshijian',input[2].value);
+			localStorage.setItem('jiezhanxinxi',input[3].value);
+			localStorage.setItem('songzhanshijian',input[4].value);
+			localStorage.setItem('songzhanxinxi',input[5].value);
+			ca.newInterface({url:'order_filling.html',id:'order_filling'});
+		})
+			
+			
+		</script>
+	</body>
+
+</html>

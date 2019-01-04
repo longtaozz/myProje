@@ -1,0 +1,345 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/style.css" />
+		<link rel="stylesheet" href="../css/mui.picker.min.css" />
+		<link rel="stylesheet" href="../css/iconfont.css" />
+		<link rel="stylesheet" href="../css/previewImage.css" />
+		<style>
+			.mui-bar-nav {
+			    top: 0;
+			    -webkit-box-shadow: 0 0px 0px #ccc;
+			    /* box-shadow: 0 1px 6px #ccc; */
+			}
+			.fukuanxuanze{
+				border: 1px solid #e5e5e5;
+				width: 21%;
+				font-size: 13px!important;
+				line-height:30px!important ;
+				border-radius:8px ;
+			}
+			.active{
+				background: #52BCEC;
+				color: #FFFFFF;
+				border: 0px;
+			}
+			.mui-slider{
+				height: 100%;
+			}
+			textarea{
+				padding: 4px;
+			}
+		</style>
+	</head>
+
+	<body style="background: #F2F2F2;">
+		<header class="mui-bar mui-bar-nav mheader">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mback"></a>
+		    <h1 class="mui-title htitle"></h1>
+		    <span id="jizhang" class="mui-pull-right fs16 " style="line-height: 44px;">保存</span>
+		</header>
+		<div class="mui-content">
+		    <div class="bgwhite h40 bbf2 oh">
+		    	<div class="fl w30 fs14 c121212 pl20 lh40">
+		    		<span>项目</span>
+		    	</div>
+		    	<div class="fl w50 lh40 ">
+		    		<input type="text" class="w95 tc fs12"  readonly="readonly" style="width:95%;border:1px solid #e5e5e5;border-radius:4px ;height: 28px;" placeholder="请选择项目" data_id=""/>
+		    	</div>
+		    	<div class="fl w10 lh40 " id="liebiao">
+		    		<span class="mui-icon mui-icon-arrowdown"></span>
+		    	</div>
+		    </div>
+		    <div class="bgwhite h40 bbf2 oh">
+		    	<div class="fl w30 fs14 c121212 pl20 lh40">
+		    		<span>日 期</span>
+		    	</div>
+		    	<div class="fl w70 lh40 ">
+		    		<input type="text" readonly="readonly" class="w70 tc fs12" style="width:70%;border:1px solid #e5e5e5;border-radius:4px ;height: 28px;" placeholder="请输入时间"/>
+		    	</div>
+		    </div>
+		     <div class="bgwhite h40 bbf2 oh">
+		    	<div class="fl w30 fs14 c121212 pl20 lh40">
+		    		<span>名称</span>
+		    	</div>
+		    	<div class="fl w70 lh40">
+		    		<input type="text" class="w70 tc fs12" style="width:70%;border:1px solid #e5e5e5;border-radius:4px ;height: 28px;" placeholder="请输入名称"/>
+		    	</div>
+		    </div>
+		     <div class="bgwhite h40 bbf2 oh">
+		    	<div class="fl w30 fs14 c121212 pl20 lh40">
+		    		<span>金额</span>
+		    	</div>
+		    	<div class="fl w70 lh40 ">
+		    		<input type="number" class="w70 tc fs12" style="width:70%;border:1px solid #e5e5e5;border-radius:4px ;height: 28px;" placeholder="请输入价格"/>
+		    	</div>
+		    </div>
+		    <div class="bgwhite h40  oh" style="display: none;">
+		    	<div class="fl w30 fs14 c121212 pl20 lh40">
+		    		<span>总金额</span>
+		    	</div>
+		    	<div class="fl w70 lh40">
+		    		<input type="text" class="w70 tc fs12" style="width:70%;border:1px solid #e5e5e5;border-radius:4px ;height: 28px;" placeholder="请输入总金额"/>
+		    	</div>
+		    </div>
+		    <div class="bgwhite h40 bbf2 oh mt10">
+		    	<div class="fl w30 fs14 c121212 pl20 lh40">
+		    		<span>付款方式</span>
+		    	</div>
+		    </div>
+		    <div class="bgwhite h40  bbf2 oh">
+		    	<div class="fl w30 fs14 c121212 pl20 lh40">
+		    		<span>导游付</span>
+		    	</div>
+		    	<div class="fl w70 lh40 ">
+		    		<input type="number" onblur="yanzhen();" value="0.00" class="w70 tc fs12" style="width:70%;border:1px solid #e5e5e5;border-radius:4px ;height: 28px;" />
+		    	</div>
+		    </div>
+		    <div class="bgwhite h40 bbf2  oh">
+		    	<div class="fl w30 fs14 c121212 pl20 lh40">
+		    		<span>未付(签单)</span>
+		    	</div>
+		    	<div class="fl w70 lh40">
+		    		<input type="number" onblur="yanzhen();" value="0" class="w70 tc fs12" style=" width:70%;border:1px solid #e5e5e5;border-radius:4px ;height: 28px;" />
+		    	</div>
+		    </div>
+		    <div class="bgwhite h100  bbf2 oh">
+		    	<div class="fl w30 fs14 c121212 pl20 lh50">
+		    		<span>备注</span>
+		    	</div>
+		    	<div class="fl w70">
+		    		<textarea rows="3" placeholder="额外增加或减少的费用在此说明。" id="textarea" style="width: 90%;height: 90px;font-size: 13px;margin-top: 5px;"></textarea>
+		    	</div>
+		    </div>
+		     <div class="bgwhite h150  bbf2 oh">
+		    	<div class=" w70 fs14 c121212 pl20 lh40">
+		    		<span>票据</span><span class="fs13"> (提供票据图片，大小5M以下)</span>
+		    	</div>
+		    	<div class="pl20">
+		    		<div class="fl disn" id="tu1" style="width: 55px;height: 55px;">
+		    			<img id="tu"  class="" style="width: 100%;height: 100%;" data-preview-src="" data-preview-group="1"/>
+		    		</div>
+		    		<div class="fl ml10">
+		    			<span class="mui-icon mui-icon-plusempty" id="tupian" style="padding: 5px;font-size: 45px;border: 1px solid #666666;"></span>
+		    		</div>
+		    	</div>
+		    </div>
+		    <!--<div id="jizhang" style="background: #52bcec;color: #FFFFFF;height: 40px;line-height: 40px;text-align: center;position: fixed;bottom: 0;width: 100%;">
+				<span style="font-weight:bold ;font-size:15px ;">保  存</span>
+			</div>-->
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/castapp.js" ></script>
+		<script type="text/javascript" src="../js/mui.picker.min.js" ></script>
+		<script type="text/javascript" src="../js/mui.zoom.js" ></script>
+		<script type="text/javascript" src="../js/mui.previewimage.js" ></script>
+		<script type="text/javascript">
+			var url=localStorage.getItem('url');
+			var teamsk_id=localStorage.getItem('teamsk_id');
+			var day=localStorage.getItem('jizhangday');
+			var user_id=localStorage.getItem('userid');
+			var accounting_guide_id=localStorage.getItem('accounting_guide_id');
+			mui.previewImage();
+			var upload_imgurl=localStorage.getItem('upload_imgurl');
+			var imgurl="";
+			var is_check=0;
+			var wushuju=0;
+			mui.plusReady(function(){
+				mui.init();
+				ca.init(true);
+				ca.blackStatusBar();
+				ca.checkTheNetwork();
+				var input=ca.tagName('input');
+				ca.className('htitle')[0].innerHTML='修改加点购物其他支出'+'('+day+')'
+				input[1].value=day;
+				var picker1 = new mui.PopPicker();
+				ca.ajaxs({url:'findAccountingGuideByid',data:{
+						id:accounting_guide_id
+					},
+					succFn:function(data){
+						if(data.procurement_id>=1){
+							input[0].readOnly=true;
+							ca.id('liebiao').style.display='none';
+							input[2].readOnly=true;
+							if(data.quantity>0){
+								input[3].value=data.price;
+							}else{
+								input[3].value=data.procurement_price;
+							}
+						}else{
+							input[3].value=data.price;
+						}
+						is_check=data.is_check;
+						input[2].value=data.name;
+						input[2].setAttribute('guide_relation_id',data.client_id);
+						input[2].setAttribute('guide_union_id',data.union_id);
+						input[0].value=data.alias;
+						input[5].value=data.guide_pay;
+						input[6].value=data.sign_bill;
+						ca.id('textarea').value=data.guide_mark;
+						if(!ca.emptyFun(data.img_url)){
+							imgurl=data.img_url;
+							ca.id('tu').src=data.img_url;
+							ca.id('tu1').style.display='block';
+						}
+						ca.closeWaitings();
+					},
+					errFn:function(call){
+						ca.closeWaitings();
+						mui.toast(call);
+					}
+				})
+				show();
+				function show(){
+					ca.ajaxs({url:'findAccountingNamebyType',data:{
+							type:'增加其他支出'
+						},succFn:function(data){
+							if(ca.emptyFun(data)){
+								wushuju=1;
+							}else{
+								if(data.msg==1){
+									var da=data.data;
+									var arr=new Array();
+									for(var i=0;i<da.length;i++){
+										var ob=new Object();
+										ob.value=da[i].id;
+										ob.text=da[i].name;
+										arr.push(ob)
+									}
+									picker1.setData(arr);
+								}
+							}
+							ca.closeWaiting();
+						},errFn:function(call){
+							ca.closeWaiting();
+							mui.toast(call);
+						}
+					})
+					ca.id('liebiao').addEventListener('tap',function(){
+						if(wushuju==1){
+							mui.toast('没有为其他支出添加项目');
+						}else{
+							picker1.show(function (selectItems) {
+								input[0].value=selectItems[0].text;
+								input[2].value=selectItems[0].text;
+							})
+						}
+						
+					})
+				}
+				
+				ca.id('jizhang').addEventListener('tap',function(){
+					if(input[0].value==""){
+						mui.toast('请输入项目');
+						input[0].focus();
+						return;
+					}
+					if(input[1].value==""){
+						mui.toast('请输入时间');
+						input[1].focus();
+						return;
+					}
+					if(input[2].value==""){
+						mui.toast('请输入名称');
+						input[2].focus();
+						return;
+					}
+					if(input[3].value==""){
+						mui.toast('请输入金额');
+						input[3].focus();
+						return;
+					}
+					
+					if(input[5].value==""){
+						mui.toast('请输入导游付金额');
+						input[5].focus();
+						return;
+					}
+					if(input[6].value==""){
+						mui.toast('请输入签单金额');
+						input[6].focus();
+						return;
+					}
+					var fu_zong=parseFloat(input[5].value)+parseFloat(input[6].value);
+					var zongs=parseFloat(input[3].value);
+					if(zongs<=0){
+						mui.toast('请填写正确的单价,数量');
+					}else if(fu_zong!=zongs){
+						mui.toast('请填写付款,签单金额');
+					}else{
+						ca.ajaxs({url:'updateAccountingGuide',data:{
+								id:accounting_guide_id,
+								user_id:user_id,
+								type:'add_other_expend',
+								teamsk_id:teamsk_id,
+								client_id:0,
+								union_id:0,
+								use_date:day,end_date:'',
+								is_check:is_check,
+								name:input[2].value,
+								alias:input[0].value,alias_two:'',alias_three:'',alias_four:'',
+								price:input[3].value,price_two:0,price_three:0,price_four:0,
+								quantity:1,quantity_two:0,quantity_three:0,quantity_four:0,
+								quantity2:0,quantity2_two:0,quantity2_three:0,quantity2_four:0,
+								unit:'无',
+								guide_pay:input[5].value,
+								img_url:imgurl,
+								mark:ca.id('textarea').value,
+								sign_bill:input[6].value,
+							},
+							succFn:function(data){
+								if(data.msg==1){
+									mui.toast('修改成功');
+									var arr1 = ['customize_other_expenditure'];
+									ca.sendNotice(arr1,'update',{});
+									setTimeout(function(){
+										ca.closeCurrentInterface();	
+									},300);
+								}
+								else{
+									mui.toast('修改失败');
+								}
+								ca.closeWaiting();
+							},
+							errFn:function(call){
+								ca.closeWaiting();
+								mui.toast(call);
+							}
+						})
+					}
+				})
+				ca.id('tupian').addEventListener('tap',function(){
+					var arr = ['照相机','相册'];
+					ca.actionSheet(arr,{succFn:function(data){
+						ca.id('tu1').style.display='block';
+						var t=ca.id('tu');
+						t.style.display='block';
+						t.src=data;
+						imgurl=data;
+					},
+					//是否开启上传
+					isUpload:true,
+					uploadUrl:upload_imgurl,
+					})
+				})
+			})
+			function yanzhen(){
+				var inp=ca.tagName('input');
+				if(ca.emptyFun(inp[5].value)){
+					inp[5].value=0;
+				}
+				if(ca.emptyFun(inp[6].value)){
+					inp[6].value=0;
+				}
+				inp[6].value=inp[3].value-inp[5].value;
+			}
+			
+		</script>
+	</body>
+
+</html>

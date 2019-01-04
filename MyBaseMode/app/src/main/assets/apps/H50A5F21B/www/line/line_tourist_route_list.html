@@ -1,0 +1,946 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/style.css" rel="stylesheet" />
+		<link href="../css/iconfont.css" rel="stylesheet"/>
+		<style>
+			ul{
+				background: #FFFFFF;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="line-top " id="line-top">
+			<div class="fl ml15 lh30">
+				<span class="mui-icon mui-icon-arrowleft mui-action-back c000000 fs25" style="font-weight: bold;"></span>
+			</div>
+			<div class="fl ml15 line-top-div2">
+				<span class="mui-icon mui-icon-search c49C6CC fs20 "></span>
+				<span style="color: #999999;" class="fs14">搜索旅游线路/目的地</span>
+			</div>
+		</div>
+		<div class="mui-scroll-wrapper" id="refreshContainer">
+			<div class="mui-scroll">
+				<div class="line-bg">
+					<div class="line-bg-d1">
+						<div class="fl w50">
+							<div class="mt15 ml15 h30" id="mudidi">
+								<div class="fl">
+									<span class="fs22" style="font-weight:bold;" id="mudidiname"></span>
+								</div>
+								<div class="fl ml5" style="margin-top: -1px;">
+									<span class="mui-icon mui-icon-arrowdown cffffff fs16 lh15" style="background: #4C4C4C;border-radius:100px;"></span>
+								</div>
+							</div>
+							<div class="">
+								<!-- <iframe id="fancybox-frame" name="fancybox-frame1540353126080" frameborder="0" scrolling="no" hspace="0"  src="http://i.tianqi.com/index.php?c=code&a=getcode&id=34&h=25&w=200"></iframe> -->
+							</div>
+						</div>
+						<div class="fl w50">
+							<div class="w70" style="margin-left: 15%;height: 70px;margin-top: 10px;">
+								<img src="../img/banner1.jpg" style="width: 100%;height: 100%;border-radius:5px ;"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="h40 lh35 bgwhite oh bbfa">
+					<div class="fl w35 cityshaixuan-active" id="w332">
+						<div class="fl ml15 ">
+							<span class="fs15">目的城市</span>
+						</div>
+						<div class="fl" style="margin-top:0px;">
+							<span class="iconfont icon-arrLeft-fill fs16 ml5"></span>
+						</div>
+					</div>
+					<div class="fl w35 cityshaixuan" id="w331">
+						<div class="fl ml15">
+							<span class="fs15">出发城市</span>
+						</div>
+						<div class="fl">
+							<span class="iconfont icon-arrLeft-fill fs16 ml5"></span>
+						</div>
+					</div>
+				</div>
+				<div class="brand-bar-wrapper bgwhite">
+					<div id="tab" class="bgwhite brand-store-bar oh bbfa">
+						<div class="fl lh38 c18A3E5 w33" id="w333">
+							<div class="fl ml15">
+								<span class="fs13">推荐排序</span>
+							</div>
+							<div class="fl" style="margin-top:1px;">
+								<span class="iconfont icon-arrLeft-fill fs16 ml5"></span>
+							</div>
+						</div>
+						<div class="fl lh38 w33 c666666" id="w334">
+							<div class="fl ml15">
+								<span class="fs13">天数/日期</span>
+							</div>
+							<div class="fl" style="margin-top:1px;">
+								<span class="iconfont icon-arrLeft-fill fs16 ml5"></span>
+							</div>
+						</div>
+						<div class="fl lh38 w33 c666666" id="w335">
+							<div class="fl ml15">
+								<span class="fs13">筛选</span>
+							</div>
+							<div class="fl" style="margin-top: -1px;">
+								<span class="iconfont icon-shaixuan1 fs10 ml5 "></span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div style="" >
+					<ul id="div_list">
+						<!-- <li class="h120 oh bbf0">
+							<div class="line-list-divl">
+								<div class="line-list-divl-d1"><div style="margin-top: -2px;">跟团游</div></div>
+								<img src="../img/timg%20(2).jpg"/>
+								<div class="line-list-divl-d2">
+									<span>张家界出发</span>
+								</div>
+							</div>
+							<div class="line-list-divr">
+								<div class="yc2 fs14 c333333 mt3">
+									大啥决定离开静安寺离开酒店卢卡斯吉林大街卡视角来得及奥斯卡建档立卡讲述了肯德基大啥决定离开静安寺离开酒店卢卡斯吉林大街卡视角来得及奥斯卡建档立卡讲述了肯德基
+								</div>
+								<div class="mt6 oh">
+									<div class="fl line-list-divr-d2">
+										<div class="fl bgF8931E line-list-divr-d2-d1">
+											<span class="iconfont icon-31 fs15 cffffff"></span>
+										</div>
+										<div class="fl fs10 cFFB400 line-list-divr-d2-d2">
+											<span>4钻</span>
+										</div>
+									</div>
+									<div class="fl ml5 line-list-divr-d2">
+										<div style="line-height: 10px;padding: 0px 2px;">
+											<span class="fs11 c666666">成团保障</span>
+										</div>
+									</div>
+									<div class="fl ml5 line-list-divr-d2">
+										<div style="line-height: 10px;padding: 0px 2px;">
+											<span class="fs11 c666666">夕阳休闲游</span>
+										</div>
+									</div>
+								</div>
+								<div class="mt3">
+									<div class="fs11 c666666 oh">
+										<span class="iconfont icon-iconfontlvxingshe fs13 fl"></span>
+										<span class="fl ml3">湘西国旅</span>
+										<div class="fl ml5" >
+											<span class="ml5">10/26</span>
+										</div>
+										<div class="fl" style="margin-top: -1px;">
+											<span>、</span>
+										</div>
+										<div class="fl" style="margin-left: -6px;" >
+											<span class="ml5">10/26</span>
+										</div>
+										<div class="fl" style="margin-top: -1px;">
+											<span>、</span>
+										</div>
+										<div class="fl" style="margin-left: -6px;" >
+											<span class="ml5">10/26等</span>
+										</div>
+									</div>
+								</div>
+								<div class="h30 lh25">
+									<div class="fs12 c3F99DE fl">
+										<span>5.0分</span>
+									</div>
+									<div class="fl fs12 c666666 ml7">
+										<span>155人出游</span>
+									</div>
+									<div class="fr mr10 cF76211" style="margin-top: -3px;">
+										<div class="fl" style="margin-left:5px;">
+											<span class="fs11" >￥</span>
+										</div>
+										<span class="fs18">1922</span>
+										<span class="fs11 c666666" style="margin-left: -2px;">起</span>
+									</div>
+								</div>
+							</div>
+						</li> -->
+					</ul>
+					<div id="wushuju" class="disn">
+						<img src="../img/wushuju.png" style="height: 100%;width: 100%;background:#EFEFF4 ;"/>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="middlePopover0" class="mui-popover" style=" position:fixed;height: 150px;width: 100%;border-radius:0px ;border-top: 1px solid #DADADD;z-index: 1000;">
+			<div class="mui-scroll-wrapper3" id="mui-scroll-wrapper1">
+				<div class="mui-scroll3" >
+					<ul class="mui-table-view mui-table-view-radio fs12">
+						<li class="mui-table-view-cell mui-selected" data_id=0 >
+							<a class="mui-navigate-right">
+								推荐排序
+							</a>
+						</li>
+						<li class="mui-table-view-cell" data_id=1>
+							<a class="mui-navigate-right" >
+								近期销量最高
+							</a>
+						</li>
+						<li class="mui-table-view-cell" data_id=2>
+							<a class="mui-navigate-right" >
+								产品评分最高
+							</a>
+						</li>
+						<li class="mui-table-view-cell"  data_id=3>
+							<a class="mui-navigate-right" >
+								价格从高到低
+							</a>
+						</li>
+						<li class="mui-table-view-cell" data_id=4>
+							<a class="mui-navigate-right" >
+								价格从低到高
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div id="middlePopover1" class="mui-popover" style=" position:fixed;height:auto;width: 100%;border-radius:0px ;border-top: 1px solid #DADADD;z-index: 1000;">
+			<div class="mui-scroll-wrapper3" >
+				<div class="mui-scroll3" >
+					<div class="fs13 c666666">
+						<div class="mt5">
+							<span class="ml15">行程天数</span>
+							<span class="fr c18A3E5 mr15" id="xingchengtianshuname"></span>
+						</div>
+						<div class="oh">
+							<div class="fl xingchengtianshu w30 h30 lh30 popover2-div2-d" data_name="2">
+								<span>2日</span>
+							</div>
+							<div class="fl xingchengtianshu w30 h30 lh30 popover2-div2-d" data_name="3">
+								<span>3日</span>
+							</div>
+							<div class="fl xingchengtianshu w30 h30 lh30 popover2-div2-d" data_name="4">
+								<span>4日</span>
+							</div>
+							<div class="fl xingchengtianshu w30 h30 lh30 popover2-div2-d" data_name="5">
+								<span>5日</span>
+							</div>
+							<div class="fl xingchengtianshu w30 h30 lh30 popover2-div2-d" data_name="6">
+								<span>6日</span>
+							</div>
+							<div class="fl xingchengtianshu w30 h30 lh30 popover2-div2-d" data_name="7">
+								<span>7日</span>
+							</div>
+						</div>
+					</div>
+					<div class="fs13 c666666 mt8 disn">
+						<div class="mt5">
+							<span class="ml15">出发日期</span>
+							<span class="fr c18A3E5 mr15" id="chufariqi"></span>
+						</div>
+						<div class="oh" id="chufariqilist">
+							
+						</div>
+					</div>
+					<div class="oh mb7 mt10 " >
+						<div class="fl w46 popover2-div2-d h35 lh35 c666666" id="qingkong1">
+							<span>清空</span>
+						</div>
+						<div class="fl w46 popover2-div2-d h35 lh35 cffffff" id="chakan1" style="background:#FF6D0D ;">
+							<span>查看</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="middlePopover2" class="mui-popover" style="position:fixed;left: 15%;height: 100%;width: 85%;border-radius:4px ;z-index: 10001;border-top: 1px solid #DADADD;">
+			<div class="mui-scroll-wrapper3">
+				<div class="mui-scroll3 mt40">
+					<div class="fs13 c666666">
+						<div class="mt20">
+							<span class="ml15">产品类型</span>
+							<span class="fr c18A3E5 mr15" id="catename"></span>
+						</div>
+						<div class="oh" id="cate">
+							<div class="fl w30 h30 catelist lh30 popover2-div2-d">
+								<span>私家团</span>
+							</div>
+							<div class="fl w30 h30 lh30 popover2-div2-d-active">
+								<span>跟团游</span>
+							</div>
+							<div class="fl w30 h30 lh30 popover2-div2-d">
+								<span>半自助游</span>
+							</div>
+						</div>
+					</div>
+					<div class="fs13 c666666 mt8">
+						<div class="mt5">
+							<span class="ml15">产品等级</span>
+							<span class="fr c18A3E5 mr15" id="levelname"></span>
+						</div>
+						<div class="oh" id="level">
+							<div class="fl w30 h30 lh30 popover2-div2-d">
+								<span>5钻</span>
+							</div>
+							<div class="fl w30 h30 lh30 popover2-div2-d-active">
+								<span>4钻</span>
+							</div>
+							<div class="fl w30 h30 lh30 popover2-div2-d">
+								<span>3钻</span>
+							</div>
+							<div class="fl w30 h30 lh30 popover2-div2-d">
+								<span>2钻</span>
+							</div>
+						</div>
+					</div>
+					<div class="fs13 c666666 mt8">
+						<div class="mt5">
+							<span class="ml15">服务保障</span>
+							<span class="fr c18A3E5 mr15" id="servicename"></span>
+						</div>
+						<div class="oh" id="service">
+							<div class="fl w30 h30 lh30 popover2-div2-d">
+								<span>成团保障</span>
+							</div>
+							<div class="fl w30 h30 lh30 popover2-div2-d-active">
+								<span>无购物</span>
+							</div>
+							<div class="fl w30 h30 lh30 popover2-div2-d">
+								<span>精致小团</span>
+							</div>
+							<div class="fl w30 h30 lh30 popover2-div2-d">
+								<span>无自费</span>
+							</div>
+							<div class="fl w30 h30 lh30 popover2-div2-d">
+								<span>无神经病</span>
+							</div>
+						</div>
+					</div>
+					<div class="fs13 c666666 mt8">
+						<div class="mt5">
+							<span class="ml15">适用人群</span>
+							<span class="fr c18A3E5 mr15" id="peoplename"></span>
+						</div>
+						<div class="oh" id="people">
+							<div class="fl w30 h30 lh30 popover2-div2-d">
+								<span>夕阳休闲游</span>
+							</div>
+							<div class="fl w30 h30 lh30 popover2-div2-d-active">
+								<span>爸妈放心游</span>
+							</div>
+							<div class="fl w30 h30 lh30 popover2-div2-d">
+								<span>精致小团</span>
+							</div>
+						</div>
+					</div>
+					<div class="fs13 c666666 mt8">
+						<div class="mt5">
+							<span class="ml15">人均起价</span>
+							<span class="fr c18A3E5 mr15" id="avg_pricename"></span>
+						</div>
+						<div class="oh">
+							<div class="fl w30 avg_pricelist h30 lh30 popover2-div2-d" data_pr1="0" data_pr2="1000">
+								<span>0~1000</span>
+							</div>
+							<div class="fl w30 avg_pricelist h30 lh30 popover2-div2-d" data_pr1="1000" data_pr2="2000">
+								<span>1000~2000</span>
+							</div>
+							<div class="fl w30 avg_pricelist h30 lh30 popover2-div2-d" data_pr1="2000" data_pr2="3000">
+								<span>2000~3000</span>
+							</div>
+							<div class="fl w30 avg_pricelist h30 lh30 popover2-div2-d" data_pr1="3000" data_pr2="0">
+								<span>3000以上</span>
+							</div>
+						</div>
+					</div>
+					<div class="oh mb7 mt10 " >
+						<div class="fl w46 popover2-div2-d h35 lh35 c666666" id="qingkong2">
+							<span>清空</span>
+						</div>
+						<div class="fl w46 popover2-div2-d h35 lh35 cffffff" id="chakan2" style="background:#FF6D0D ;">
+							<span>查看</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script id="line_list" type="text/template">
+			{{each list}}
+				{{if $index==0}}
+				<li class="h120 oh bbf0" data_id="{{$value.id}}">
+				{{else}}
+				<li class="h120 oh bbf0 mt5" data_id="{{$value.id}}">
+				{{/if}}
+					<div class="line-list-divl">
+						<div class="line-list-divl-d1"><div style="margin-top: -2px;">{{$value.linecate.name}}</div></div>
+						<img src="{{$value.pic}}"/>
+						<div class="line-list-divl-d2">
+							<span>{{$value.city}}出发</span>
+						</div>
+					</div>
+					<div class="line-list-divr">
+						<div class="yc2 fs14 c333333 mt3">
+							{{$value.name}}
+						</div>
+						<div class="mt6 oh">
+							<div class="fl line-list-divr-d2">
+								<div class="fl bgF8931E line-list-divr-d2-d1">
+									<span class="iconfont icon-31 fs15 cffffff"></span>
+								</div>
+								<div class="fl fs10 cFFB400 line-list-divr-d2-d2">
+									<span>{{$value.linelevel.name}}</span>
+								</div>
+							</div>
+							<div class="fl ml5 line-list-divr-d2">
+								<div style="line-height: 10px;padding: 0px 2px;">
+									<span class="fs11 c666666">{{$value.lineservice.name}}</span>
+								</div>
+							</div>
+							<div class="fl ml5 line-list-divr-d2">
+								<div style="line-height: 10px;padding: 0px 2px;">
+									<span class="fs11 c666666">{{$value.linepeople.name}}</span>
+								</div>
+							</div>
+						</div>
+						<div class="mt3">
+							<div class="fs11 c666666 oh">
+								<span class="iconfont icon-iconfontlvxingshe fs13 fl"></span>
+								<span class="fl ml3">{{$value.structure.enterprise.alias}}</span>
+								{{each $value.lineclass  va inde}}
+								{{if inde+1==$value.lineclass.length}}
+									<div class="fl" style="margin-left: -6px;" >
+										<span class="ml5">{{va.start_date.slice(5,12)}}等</span>
+									</div>
+								{{else if inde==0}}
+									<div class="fl ml5" >
+										<span class="ml5">{{va.start_date.slice(5,12)}}</span>
+									</div>
+									<div class="fl" style="margin-top: -1px;">
+										<span>、</span>
+									</div>
+								{{else}}
+									<div class="fl" >
+										<span class="">{{va.start_date.slice(5,12)}}</span>
+									</div>
+									<div class="fl" style="margin-top: -1px;">
+										<span>、</span>
+									</div>
+								{{/if}}
+								{{/each}}
+							</div>
+						</div>
+						<div class="h30 lh25">
+							<div class="fs12 c3F99DE fl">
+								<span>{{$value.grade}}分</span>
+							</div>
+							<div class="fl fs12 c666666 ml7">
+								{{if $value.people_num.people_num>0}}
+								<span>{{$value.people_num.people_num}}人出游</span>
+								{{else}}
+								<span>0人出游</span>
+								{{/if}}
+								
+							</div>
+							<div class="fr mr10 cF76211" style="margin-top: -3px;">
+								<div class="fl" style="margin-left:5px;">
+									<span class="fs11" >￥</span>
+								</div>
+								<span class="fs18">{{$value.price}}</span>
+								<span class="fs11 c666666" style="margin-left: -2px;">起</span>
+							</div>
+						</div>
+					</div>
+				</li>
+			{{/each}}
+		</script>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/castapp.js"></script>
+		<script src="../js/template-web.js"></script>
+		<script type="text/javascript">
+			mui.plusReady(function(){
+				mui.init({
+					pullRefresh : {
+							container:"#refreshContainer",//下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
+							up: {
+								height:50,//可选.默认50.触发上拉加载拖动距离
+								auto:false,//可选,默认false.自动上拉加载一次
+								contentrefresh : "正在加载...",//可选，正在加载状态时，上拉加载控件上显示的标题内容
+								contentnomore:'没有更多数据了',//可选，请求完毕若没有更多数据时显示的提醒内容；
+								callback: upFn // 上拉执行函数
+								}
+					},
+					swipeBack:true
+				});
+				ca.init();
+				ca.blackStatusBar();
+				var LineScreenCondition='';
+				var self=plus.webview.currentWebview();
+				localStorage.setItem('line_position_ischina',1);
+				var type=self.type,cate_id=0,level_id=0,service_id=0,people_id=0,
+				province=localStorage.getItem('line_position_province'),page=1,pages=0,chakan=0,ischina=1;
+				city=localStorage.getItem('line_position_city'),
+				to_province=localStorage.getItem('line_position_province'),
+				to_city=localStorage.getItem('line_position_city'),
+				sort=0,travel_days='',departure_time='',data_yues='',price1=0,price2=0;
+				ca.id('mudidiname').innerText=localStorage.getItem('line_position_city')?localStorage.getItem('line_position_city'):'选择城市';
+				localStorage.setItem('go_city',city);
+				localStorage.setItem('out_city',to_city);
+				
+				ca.receiveNotice('update',function(){
+					ca.id('mudidiname').innerText=localStorage.getItem('go_city');
+					province=localStorage.getItem('out_province');
+					city=localStorage.getItem('out_city');
+					to_province=localStorage.getItem('go_province');
+					to_city=localStorage.getItem('go_city');
+					chongxinfind();
+				});
+				function upFn(){
+					if(pages==0){
+						mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
+					}else{
+						page=page+1;
+						plus.nativeUI.showWaiting();
+						findLine();
+						this.endPullupToRefresh(false);
+					}
+				}
+				findLine();
+				function findLine(){
+					ca.ajaxs({url:'findAllLine',data:{
+							type:type,cate_id:cate_id,
+							level_id:level_id,service_id:service_id,people_id:people_id,province:province,city:city,
+							to_province:to_province,to_city:to_city,
+							sort:sort,travel_days:travel_days,
+							departure_time:departure_time,price1:price1,price2:price2,page:page
+						},succFn:function(data){
+							if(!ca.emptyFun(data.data)){
+								ca.id('div_list').classList.add('disb');
+								ca.id('wushuju').classList.add('disn');
+								ca.id('div_list').classList.remove('disn');
+								if(data.length>page*10){
+									pages=1;
+								}else{
+									pages=0;
+								}
+								fuzhi(data.data);
+							}else if(page==1){
+								ca.id('wushuju').classList.add('disb');
+								ca.id('div_list').classList.add('disn');
+								ca.id('wushuju').classList.remove('disn');
+							}
+							setTimeout(function(){
+								ca.closeWaiting();
+							},200)
+						},errFn:function(err){
+							ca.closeWaiting();
+							mui.toast(err);
+						}
+					})
+				}
+				function fuzhi(data){
+					try{
+						ca.id('div_list').innerHTML+=template('line_list', {
+							"list":data
+						});
+					}catch(err){
+						console.log(err);
+					}
+				}
+				
+				var dockHeader = function(){
+					var wrapper= mui('#refreshContainer')[0],
+						barWrapper = mui('.brand-bar-wrapper')[0],
+						brandBar= mui('#tab')[0],
+						scroll= mui('#refreshContainer').scroll();
+					//顶部悬停
+					var dock = function(){
+						if (!brandBar.classList.contains('dock-header-bar')) {
+							wrapper.appendChild(brandBar);
+							brandBar.classList.add('dock-header-bar');
+							ca.id('line-top').classList.add('line-top-bg')
+						}
+					}
+					//复原
+					var reset = function(){
+						if (brandBar.classList.contains('dock-header-bar')) {
+							barWrapper.appendChild(brandBar);
+							brandBar.classList.remove('dock-header-bar');
+							ca.id('line-top').classList.remove('line-top-bg')
+						}
+					}
+					 //安卓停靠方式
+					var androidDock = function(){
+						document.addEventListener('scroll', function(e) {
+							window.pageYOffset > barWrapper.offsetTop ? dock() : reset();
+						});
+					}
+					//IOS停靠方式
+					var iosDock = function(){
+						wrapper.addEventListener('scroll', function(e) {
+							scroll.y < -(barWrapper.offsetTop-50) ? dock() : reset();
+						}, false);
+					}
+					//准备执行条件
+					var init = function(){
+						if (mui.os.ios) {
+							iosDock();
+						}else{
+							//安卓系统禁止系统滚动条
+							document.body.addEventListener('touchmove', function (event) {
+								event.stopPropagation();
+							}, false);
+							androidDock();
+						}
+					}
+					init();
+				}
+				dockHeader();
+				ca.id('w331').addEventListener('tap',function(){
+					mui.openWindow({
+						url:'line_positions.html',
+						id:'line_positions',
+						extras:{
+							city_type:1,
+							line_type:type
+						}
+					})
+					this.parentNode.children[0].classList.remove('cityshaixuan-active');
+					this.parentNode.children[0].classList.add('cityshaixuan');
+					this.classList.remove('cityshaixuan');
+					this.classList.add('cityshaixuan-active');
+					
+				})
+				ca.id('w332').addEventListener('tap',function(){
+					this.parentNode.children[1].classList.remove('cityshaixuan-active');
+					this.parentNode.children[1].classList.add('cityshaixuan');
+					this.classList.remove('cityshaixuan');
+					this.classList.add('cityshaixuan-active');
+					mui.openWindow({
+						url:'line_positions.html',
+						id:'line_positions',
+						extras:{
+							city_type:2,
+							line_type:type
+						}
+					})
+				})
+				ca.id('mudidi').addEventListener('tap',function(){
+					mui.openWindow({
+						url:'line_positions.html',
+						id:'line_positions',
+						extras:{
+							city_type:2,
+							line_type:type
+						}
+					})
+				})
+				ca.id('w333').addEventListener('tap',function(){
+					var top=this.getBoundingClientRect().top; 
+					ca.id('middlePopover0').style.top=(top+35)+'px';
+					mui('#middlePopover0').popover('show');
+					ca.className('mui-backdrop')[0].style.top=(top+35)+'px';
+					itemOnclick(0);
+				})
+				document.querySelector('.mui-table-view.mui-table-view-radio').addEventListener('selected',function(e){
+					// alert(e.detail.el.innerHTML);
+					sort=e.detail.el.getAttribute('data_id');
+					mui('#middlePopover0').popover('hide');
+					chongxinfind();
+				});
+				showDate();
+				ca.id('w334').addEventListener('tap',function(){
+					var top=this.getBoundingClientRect().top; 
+					ca.id('middlePopover1').style.top=(top+35)+'px';
+					ca.id('xingchengtianshuname').innerText=travel_days!=''?travel_days+'日':'';
+					mui('#middlePopover1').popover('show');
+					ca.className('mui-backdrop')[0].style.top=(top+35)+'px';
+					itemOnclick(1);
+					ca.id('chufariqi').innerText=data_yues!=''?data_yues+'月':'';
+					ca.id('chufariqi').setAttribute('data_date',departure_time!=''?departure_time:'');
+				})
+				mui('body').on('tap','#chakan1',function(){
+					departure_time=ca.id('chufariqi').getAttribute('data_date');
+					data_yues=ca.id('chufariqi').innerText.split('月')[0];
+					travel_days=ca.id('xingchengtianshuname').innerText.split('日')[0];
+					if(ca.emptyFun(departure_time) && ca.emptyFun(travel_days)){
+						mui.toast('请选择条件');
+					}else{
+						chongxinfind();
+						mui('#middlePopover1').popover('hide');
+					}
+				})
+				mui('body').on('tap','#qingkong1',function(){
+					departure_time='';
+					ca.id('chufariqi').setAttribute('data_date','');
+					travel_days='';
+					data_yues='';
+					chongxinfind();
+					mui('#middlePopover1').popover('hide');
+					showDate();
+					var cell=ca.className('xingchengtianshu');
+					for(var i=0;i<6;i++){
+						cell[i].classList.add('popover2-div2-d');
+						cell[i].classList.remove('popover2-div2-d-active');
+					}
+				})
+				var chongxinfind=function(){
+					ca.showWaiting();
+					page=1;
+					pages=1;
+					ca.id('div_list').innerHTML='';
+					mui('#refreshContainer').pullRefresh().refresh(true);
+					findLine();
+				}
+				ca.id('w335').addEventListener('tap',function(){
+					// var top=this.getBoundingClientRect().top;
+					if(LineScreenCondition && chakan==0){
+						showScreenConditions(LineScreenCondition);
+					}else if(chakan==1){
+						mui('#middlePopover2').popover('show');
+					}else{
+						findLineScreenConditions();
+					}
+					itemOnclick(2);
+				})
+				function itemOnclick(index){
+					var cell=ca.className('w33');
+					for(var i=0;i<cell.length;i++){
+						if(i==index){
+							cell[i].classList.add('c18A3E5');
+							cell[i].classList.remove('c666666');
+						}else{
+							cell[i].classList.add('c666666');
+							cell[i].classList.remove('c18A3E5');
+						}
+					}
+				}
+				/**
+				 * 获取出发时间
+				 */
+				function showDate(){
+					var arr=ObtainLineClass();
+					var chufariqilist=ca.id('chufariqilist');
+					chufariqilist.innerHTML='';
+					mui.each(arr,function(index,item){
+						var temp='<div class="fl chufariqi w30 h30 lh30 popover2-div2-d" data_date="'+item.date+'" data_yue="'+item.month+'">'
+							+		'<span>'+item.month+'月</span>'	
+							+	'</div>';
+						chufariqilist.innerHTML+=temp;
+					})
+					ca.id('chufariqi').innerText='';
+				}
+				//获取后几个月份
+				function ObtainLineClass(){
+					var date=new Date();
+					var arr=[];
+					var y=date.getFullYear();
+					var m=date.getMonth()+1;
+					var d=date.getDate();
+					for(var i=0;i<6;i++){
+						if(i==0){
+						}else{d='01';m=m+1;}
+						if(m>12){
+							y=y+1;
+							m=1;
+						}
+						var ob={
+							date:y+'-'+m+'-'+d,
+							month:m
+						}
+						arr.push(ob);
+					}
+					return arr;
+				}
+				
+				
+				mui('#middlePopover1').on('tap','.chufariqi',function(){
+					var date=this.getAttribute('data_date');
+					var data_yue=this.getAttribute('data_yue');
+					itemOnclick1('chufariqi',this);
+					ca.id('chufariqi').innerText=data_yue+'月';
+					ca.id('chufariqi').setAttribute('data_date',date);
+				})
+				mui('#middlePopover1').on('tap','.xingchengtianshu',function(){
+					var name=this.getAttribute('data_name');
+					itemOnclick1('xingchengtianshu',this);
+					ca.id('xingchengtianshuname').innerText=name+'日';
+				})
+				function itemOnclick1(cells,obj){
+					var cell=ca.className(cells);
+					for(var i=0;i<cell.length;i++){
+						if(cell[i]==obj){
+							cell[i].classList.add('popover2-div2-d-active');
+							cell[i].classList.remove('popover2-div2-d');
+						}else{
+							cell[i].classList.add('popover2-div2-d');
+							cell[i].classList.remove('popover2-div2-d-active');
+						}
+					}
+				}
+				/**
+				 * 查询筛选数据
+				 */
+				function findLineScreenConditions(){
+					plus.nativeUI.showWaiting('正在加载中...')
+					ca.ajaxs({url:'findLineScreenCondition',data:{
+						},succFn:function(data){
+							if(!ca.emptyFun(data)){
+								if(data.msg==1){
+									LineScreenCondition=data;
+									showScreenConditions(data);
+								}
+							}else{
+								mui.toast('数据错误,请稍后重试!')
+							}
+							ca.closeWaiting();
+						},errFn:function(){
+							ca.closeWaiting();
+							mui.toast('数据错误,请稍后重试!')
+						}
+					})
+				}
+				/**
+				 * 将查询的筛选数据展示
+				 */
+				function showScreenConditions(data){
+					var cate=data.cate;
+					var level=data.level;
+					var service=data.service;
+					var people=data.people;
+					ca.id('cate').innerHTML='';
+					ca.id('level').innerHTML='';
+					ca.id('service').innerHTML='';
+					ca.id('people').innerHTML='';
+					mui.each(cate,function(index,item){
+						var temp='<div class="fl w30 h30 catelist lh30 popover2-div2-d" data_id="'+item.id+'" data_name="'+item.name+'">'
+								+'<span>'+item.name+'</span></div>';
+						ca.id('cate').innerHTML+=temp;	
+					})
+					mui.each(level,function(index,item){
+						var temp='<div class="fl w30 levellist  h30 lh30 popover2-div2-d" data_id="'+item.id+'" data_name="'+item.name+'">'
+								+'<span>'+item.name+'</span></div>';
+						ca.id('level').innerHTML+=temp;	
+					})
+					mui.each(service,function(index,item){
+						var temp='<div class="fl w30 h30 servicelist lh30 popover2-div2-d" data_id="'+item.id+'" data_name="'+item.name+'">'
+								+'<span>'+item.name+'</span></div>';
+						ca.id('service').innerHTML+=temp;	
+					})
+					mui.each(people,function(index,item){
+						var temp='<div class="fl w30 h30 peoplelist lh30 popover2-div2-d" data_id="'+item.id+'" data_name="'+item.name+'">'
+								+'<span>'+item.name+'</span></div>';
+						ca.id('people').innerHTML+=temp;	
+					})
+					ca.id('middlePopover2').style.top=0+'px';
+					mui('#middlePopover2').popover('show');
+				}
+				mui('#middlePopover2').on('tap','.catelist',function(){
+					var id=this.getAttribute('data_id');
+					var name=this.getAttribute('data_name');
+					itemOnclick1('catelist',this);
+					ca.id('catename').setAttribute('data_id',id);
+					ca.id('catename').innerText=name;
+				})
+				mui('#middlePopover2').on('tap','.levellist',function(){
+					var id=this.getAttribute('data_id');
+					var name=this.getAttribute('data_name');
+					itemOnclick1('levellist',this);
+					ca.id('levelname').setAttribute('data_id',id);
+					ca.id('levelname').innerText=name;
+				})
+				mui('#middlePopover2').on('tap','.servicelist',function(){
+					var id=this.getAttribute('data_id');
+					var name=this.getAttribute('data_name');
+					itemOnclick1('servicelist',this);
+					ca.id('servicename').setAttribute('data_id',id);
+					ca.id('servicename').innerText=name;
+				})
+				mui('#middlePopover2').on('tap','.peoplelist',function(){
+					var id=this.getAttribute('data_id');
+					var name=this.getAttribute('data_name');
+					itemOnclick1('peoplelist',this);
+					ca.id('peoplename').setAttribute('data_id',id);
+					ca.id('peoplename').innerText=name;
+				})
+				mui('#middlePopover2').on('tap','.avg_pricelist',function(){
+					var pr1=this.getAttribute('data_pr1');
+					var pr2=this.getAttribute('data_pr2');
+					itemOnclick1('avg_pricelist',this);
+					if(pr1==3000){
+						ca.id('avg_pricename').innerText=pr1+'以上';
+					}else{
+						ca.id('avg_pricename').innerText=pr1+'~'+pr2;
+					}
+					ca.id('avg_pricename').setAttribute('pr1',pr1);
+					ca.id('avg_pricename').setAttribute('pr2',pr2);
+				})
+				/**
+				 * 查询筛选条件
+				 */
+				mui('body').on('tap','#chakan2',function(){
+					cate_id=ca.id('catename').getAttribute('data_id');
+					level_id=ca.id('levelname').getAttribute('data_id');
+					service_id=ca.id('servicename').getAttribute('data_id');
+					people_id=ca.id('peoplename').getAttribute('data_id');
+					price1=ca.id('avg_pricename').getAttribute('pr1');
+					price2=ca.id('avg_pricename').getAttribute('pr2');
+					if(ca.emptyFun(cate_id) && ca.emptyFun(level_id) && ca.emptyFun(service_id) &&ca.emptyFun(people_id) &&price1==0 &&price2==0){
+						mui.toast('请选择条件');
+					}else{
+						chakan=1;//设置为查看
+						chongxinfind();
+						mui('#middlePopover2').popover('hide');
+					}
+				})
+				/**
+				 * 清空筛选数据
+				 */
+				mui('body').on('tap','#qingkong2',function(){
+					ca.id('catename').setAttribute('data_id',0);
+					ca.id('levelname').setAttribute('data_id',0);
+					ca.id('servicename').setAttribute('data_id',0);
+					ca.id('peoplename').setAttribute('data_id',0);
+					ca.id('avg_pricename').setAttribute('pr1',0);
+					ca.id('avg_pricename').setAttribute('pr2',0);
+					ca.id('catename').innerText='';
+					ca.id('levelname').innerText='';
+					ca.id('servicename').innerText='';
+					ca.id('peoplename').innerText='';
+					ca.id('avg_pricename').innerText='';
+					cate_id=0,level_id=0,service_id=0,people_id=0,price1=0,price2=0;
+					LineScreenCondition='';//将筛选条件数据清除
+					chakan=0;//设置为未查看
+					chongxinfind();
+					var cell=ca.className('avg_pricelist');
+					for(var i=0;i<cell.length;i++){
+						cell[i].classList.add('popover2-div2-d');
+						cell[i].classList.remove('popover2-div2-d-active');
+					}
+					mui('#middlePopover2').popover('hide');
+					
+				})
+				mui.back = function() {
+					localStorage.setItem('line_position2_xianshiname',localStorage.getItem('line_position_city'))
+					localStorage.setItem('line_position1_xianshiname',localStorage.getItem('line_position_city'))
+					self.close();
+				}
+				
+				mui('#div_list').on('tap','.h120',function(){
+					ca.showWaiting();
+					var id=this.getAttribute('data_id');
+					var pl=plus.webview.create(
+						'line_listitem_detail.html',
+						'line_listitem_detail',{},{lineid:id})
+					setTimeout(function(){
+						pl.show('slide-in-right',400);
+					},300)
+					// ca.newInterface({url:'line_listitem_detail.html',id:''});
+				})
+			})
+		</script>
+	</body>
+
+</html>

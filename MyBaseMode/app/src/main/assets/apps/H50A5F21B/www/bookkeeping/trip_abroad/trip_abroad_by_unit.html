@@ -1,0 +1,285 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/style.css" rel="stylesheet"/>
+		<link href="../../css/iconfont.css" rel="stylesheet"/>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav mheader">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mback"></a>
+			<h1 class="mui-title htitle ">行程时间外记账</h1>
+		</header>
+		<div id="refreshContainer" class="mui-scroll-wrapper mui-content">
+			<div class="mui-scroll">		
+				<ul class="mui-table-view " id="div_list">
+					<li class="mt5 bgwhite h50 oh" style="border-bottom: 5px solid #F2F2F2;">
+						<div class="fl by-unit-li-l">
+							<div class="by-unit-li-l-1">
+								<span class="iconfont icon-zhufangbutie  cffffff"></span>
+							</div>
+						</div>
+						<div class="fl by-unit-li-c">
+							<span class="c121212 fs15 fl">
+								房费支出
+							</span>
+							<div class="fr cff8201 fs14">
+								<span></span>
+							</div>
+						</div>
+					</li>
+					<li class="mt5 bgwhite h50 oh"  style="border-bottom: 5px solid #F2F2F2;">
+						<div class="fl by-unit-li-l">
+							<div class="by-unit-li-l-1">
+								<span class="iconfont icon-restaurant  cffffff" style="font-size: 18px;"></span>
+							</div>
+						</div>
+						<div class="fl by-unit-li-c">
+							<span class="c121212 fs15 fl">
+								餐费支出
+							</span>
+							<div class="fr cff8201 fs14">
+								<span></span>
+							</div>
+						</div>
+					</li>
+					<li class="mt5 bgwhite h50 oh" style="border-bottom: 5px solid #F2F2F2;" >
+						<div class="fl by-unit-li-l">
+							<div class="by-unit-li-l-1">
+								<span class="iconfont icon-menpiao11  cffffff"></span>
+							</div>
+						</div>
+						<div class="fl by-unit-li-c">
+							<span class="c121212 fs15 fl">
+								门票支出
+							</span>
+							<div class="fr cff8201 fs14">
+								<span></span>
+							</div>
+						</div>
+					</li>
+					<li class="mt5 bgwhite h50 oh" style="border-bottom: 5px solid #F2F2F2;">
+						<div class="fl by-unit-li-l">
+							<div class="by-unit-li-l-1">
+								<span class="iconfont icon-chucha  cffffff"></span>
+							</div>
+						</div>
+						<div class="fl by-unit-li-c">
+							<span class="c121212 fs15 fl">
+								交通支出
+							</span>
+							<div class="fr cff8201 fs14">
+								<span></span>
+							</div>
+						</div>
+					</li>
+					<li class="mt5 bgwhite h50 oh disn" style="border-bottom: 5px solid #F2F2F2;">
+						<div class="fl by-unit-li-l">
+							<div class="by-unit-li-l-1">
+								<span class="iconfont icon-qichezhan  cffffff"></span>
+							</div>
+						</div>
+						<div class="fl by-unit-li-c">
+							<span class="c121212 fs15 fl">
+								接送站支出
+							</span>
+							<div class="fr cff8201 fs14">
+								<span></span>
+							</div>
+						</div>
+					</li>
+					<li class="mt5 bgwhite h50 oh" style="border-bottom: 5px solid #F2F2F2;">
+						<div class="fl by-unit-li-l">
+							<div class="by-unit-li-l-1">
+								<span class="iconfont icon-qita  cffffff"></span>
+							</div>
+						</div>
+						<div class="fl by-unit-li-c">
+							<span class="c121212 fs15 fl">
+								其他支出
+							</span>
+							<div class="fr cff8201 fs14">
+								<span></span>
+							</div>
+						</div>
+					</li>
+					<li class="mt5 bgwhite h50 oh" style="border-bottom: 5px solid #F2F2F2;">
+						<div class="fl by-unit-li-l">
+							<div class="by-unit-li-l-1">
+								<span class="iconfont icon-qita  cffffff"></span>
+							</div>
+						</div>
+						<div class="fl by-unit-li-c">
+							<span class="c121212 fs15 fl">
+								加点购物的其他支出
+							</span>
+							<div class="fr cff8201 fs14">
+								<span></span>
+							</div>
+						</div>
+					</li>
+					<li class="mt5 bgwhite h50 oh disn" style="border-bottom: 5px solid #F2F2F2;">
+						<div class="fl by-unit-li-l">
+							<div class="by-unit-li-l-1">
+								<span class="iconfont icon-daishou  cffffff"></span>
+							</div>
+						</div>
+						<div class="fl by-unit-li-c">
+							<span class="c121212 fs15 fl">
+								代收团款
+							</span>
+							<div class="fr cff8201 fs14">
+								<span></span>
+							</div>
+						</div>
+					</li>
+					<li class="mt5 bgwhite h50 oh disn" style="border-bottom: 5px solid #F2F2F2;">
+						<div class="fl by-unit-li-l">
+							<div class="by-unit-li-l-1">
+								<span class="iconfont icon-daoyou  cffffff"></span>
+							</div>
+						</div>
+						<div class="fl by-unit-li-c">
+							<span class="c121212 fs15 fl">
+								导游接团支出
+							</span>
+							<div class="fr cff8201 fs14">
+								<span></span>
+							</div>
+						</div>
+					</li>
+						
+						
+					<li class="mt5 bgwhite h50 oh" style="border-bottom: 5px solid #F2F2F2;">
+						<div class="fl by-unit-li-l">
+							<div class="by-unit-li-l-1">
+								<span class="iconfont icon-pita  cffffff"></span>
+							</div>
+						</div>
+						<div class="fl by-unit-li-c">
+							<span class="c121212 fs15 fl">
+								其他收入
+							</span>
+							<div class="fr cff8201 fs14">
+								<span></span>
+							</div>
+						</div>
+					</li>
+					<li class="mt5 bgwhite h50 oh disn" style="border-bottom: 5px solid #F2F2F2;">
+						<div class="fl by-unit-li-l">
+							<div class="by-unit-li-l-1">
+								<span class="iconfont icon-weituoshuguanli  cffffff"></span>
+							</div>
+						</div>
+						<div class="fl by-unit-li-c">
+							<span class="c121212 fs15 fl">
+								回执单收入
+							</span>
+							<div class="fr cff8201 fs14">
+								<span></span>
+							</div>
+						</div>
+					</li>
+					<li class="mt5 bgwhite h50 oh"  style="border-bottom: 5px solid #F2F2F2;">
+						<div class="fl by-unit-li-l">
+							<div class="by-unit-li-l-1">
+								<span class="iconfont icon-shouru  cffffff"></span>
+							</div>
+						</div>
+						<div class="fl by-unit-li-c">
+							<span class="c121212 fs15 fl">
+								导游创收
+							</span>
+							<div class="fr cff8201 fs14">
+								<span class="mui-icon mui-icon-arrowright" style="margin-right: -10px;"></span>
+							</div>
+						</div>
+					</li>
+					<li class="mt5 bgwhite h50 oh" >
+						<div class="fl by-unit-li-l">
+							<div class="by-unit-li-l-1">
+								<span class="iconfont icon-shouru  cffffff"></span>
+							</div>
+						</div>
+						<div class="fl by-unit-li-c">
+							<span class="c121212 fs15 fl">
+								加点购物的回执单收入
+							</span>
+							<div class="fr cff8201 fs14">
+								<span ></span>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/castapp.js"></script>
+		<script type="text/javascript">
+			mui.plusReady(function(){
+				mui.init({
+					pullRefresh : {
+						container:"#refreshContainer",
+						down : {
+							style:'circle',//必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
+							color:'#24ABFE', 
+							height:50,//可选,默认50.触发下拉刷新拖动距离,
+							auto: false,//可选,默认false.首次加载自动下拉刷新一次
+							contentdown : "下拉可以刷新",//可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
+							contentover : "释放立即刷新",//可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
+							contentrefresh : "正在刷新...",//可选，正在刷新状态时，下拉刷新控件上显示的标题内容
+							callback :downFn //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+						}
+					}
+				});
+				ca.init();
+				ca.blackStatusBar();
+				function downFn(){
+					mui('#refreshContainer').pullRefresh().endPulldown();
+				}
+				
+				var cell=ca.tagName('li');
+				cell[0].addEventListener('tap',function(){
+					ca.newInterface({url:'abroad_room.html',id:'abroad_room'});
+				})
+				cell[1].addEventListener('tap',function(){
+					ca.newInterface({url:'abroad_food.html',id:'abroad_food'});
+				})
+				cell[2].addEventListener('tap',function(){
+					ca.newInterface({url:'abroad_ticket.html',id:'abroad_ticket'});
+				})
+				cell[3].addEventListener('tap',function(){
+					ca.newInterface({url:'abroad_car.html',id:'abroad_car'});
+				})
+				cell[5].addEventListener('tap',function(){
+					ca.newInterface({url:'abroad_other_expenditure.html',id:'abroad_other_expenditure'});
+				})
+				cell[6].addEventListener('tap',function(){
+					ca.newInterface({url:'abroad_customize_other_expenditure.html',id:'abroad_customize_other_expenditure'});
+				})
+				cell[8].addEventListener('tap',function(){
+					ca.newInterface({url:'abroad_guide_collection.html',id:'abroad_guide_collection'});
+				})
+				cell[9].addEventListener('tap',function(){
+					ca.newInterface({url:'abroad_other_income.html',id:'abroad_other_income'});
+				})
+				cell[10].addEventListener('tap',function(){
+					ca.newInterface({url:'abroad_return_receipt.html',id:'abroad_return_receipt'});
+				})
+				cell[11].addEventListener('tap',function(){
+					ca.newInterface({url:'abroad_customize.html',id:'abroad_customize'});
+				})
+				cell[12].addEventListener('tap',function(){
+					ca.newInterface({url:'abroad_customize_return_receipt.html',id:'abroad_customize_return_receipt'});
+				})
+			})
+			
+		</script>
+	</body>
+
+</html>

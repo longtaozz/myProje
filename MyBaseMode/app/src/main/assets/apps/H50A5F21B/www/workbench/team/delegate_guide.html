@@ -1,0 +1,297 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/style.css" rel="stylesheet" />
+		<link href="../../css/iconfont.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../css/mui.picker.min.css" />
+		<style>
+			.quxiao{
+				background:#F27B1D;padding: 2px 10px;color: #FFFFFF;margin-left: 5px;
+				border-radius:3px ;
+			}
+			.tijiao{
+				background:#F27B1D;padding: 2px 10px;color: #FFFFFF;margin-left: 5px;
+				border-radius:3px;text-align: center;line-height: 40px;
+				width: 70%;margin-left: 15%;height: 40px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav user-index-top-bg mheader">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left cffffff"></a>
+			<h1 class="mui-title cffffff">委派导游</h1>
+		</header>
+		<div class="mui-content">
+			<div style="margin: 5px;background: #FFFFFF;border-radius:5px;padding: 5px;">
+				<div class="fs14 oh mt5">
+					<span>发班日期:</span>
+					<span id="fabanriqi"></span>
+					<span class="fr mr10" id="jieshuriqi"></span>
+					<span class="fr" >结束日期:</span>
+				</div>
+				<div class="fs15 mt10 c666666">
+					<span >选择导游开始带团日期:</span>
+				</div>
+				<div class="oh h40 lh40 mt5 borderr rq" style="border: 1px solid #25AEFE;margin-left: 15%;width: 70%;">
+					<div class="w80 fl">
+						<input type="text" class="tc" readonly="readonly" placeholder="选择日期" style="border: 0px;font-size: 14px;height:40px;padding: 2px;margin-bottom:0px;margin-top: -5px;"/>
+					</div>
+					<div class="c1296db fr mr10">
+						<span class="iconfont icon-arrLeft-fill fs16"></span>
+					</div>
+				</div>
+				<div class="fs15 mt10 c666666">
+					<span >选择当前可用导游:</span>
+				</div>
+				<div class="oh h40 lh40 mt5 borderr w70" style="border: 1px solid #25AEFE;margin-left: 15%;">
+					<div class="w80 fl">
+						<input type="text" class="tc" readonly="readonly" placeholder="选择导游" style="border: 0px;font-size: 14px;height:40px;padding: 2px;margin-bottom:0px;margin-top: -5px;"/>
+					</div>
+					<div class="c1296db fr mr10">
+						<span class="iconfont icon-arrLeft-fill fs16"></span>
+					</div>
+				</div>
+				<div class="mt10 tc pb5" id="list_item">
+					<!-- <div class="fs14 mt10 c333333">
+						<span>liuliang</span>
+						<span>/</span>
+						<span class="c666666">待确认</span>
+						<span class="quxiao" >取消</span>
+					</div>
+					<div class="fs14 mt10">
+						<span>liuliang</span>
+						<span>/</span>
+						<span class="cred">已确认</span>
+						<span class="quxiao" >取消</span>
+					</div> -->
+				</div>
+			</div>
+			<div class="mt12">
+				<div class="tijiao">提交</div>
+			</div>
+		</div>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/castapp.js"></script>
+		<script src="../../js/template-web.js"></script>
+		<script src="../../js/mui.picker.js"></script>
+		<script src="../../js/mui.poppicker.js"></script>
+		<script type="text/template" id="guide_orders">
+			{{each list}}
+				<div class="fs14 mt10">
+					<span>{{$value.guide.alias}}</span>
+					<span>/</span>
+					{{if $value.status==1}}
+						<span class="cred">已确认</span>
+						<!-- <span class="quxiao">取消</span> -->
+					{{else if $value.status==0}}
+						<span class="cred">待确认</span>
+						<!-- <span class="quxiao">取消</span> -->
+					{{else if $value.status==2}}
+						<span class="cred">导游取消</span>
+					{{else if $value.status==3}}
+						<span class="cred">同意取消</span>
+					{{else if $value.status==5}}
+						<span class="cred">计调取消</span>
+					{{else if $value.status==6}}
+						<span class="cred">换导游</span>
+					{{else if $value.status==8}}
+						<span class="cred">确认带团</span>
+					{{else if $value.status==9}}
+						<span class="cred">完成带团</span>
+					{{/if}}
+				</div>
+			{{/each}}
+		</script>
+		<script type="text/javascript">
+			mui.plusReady(function(){
+				mui.init();
+				ca.init();
+				var self=plus.webview.currentWebview();
+				var date_start=getdate();
+				var xuanzhong_date='',guide_id=0;
+				var picker1=new mui.PopPicker();
+				findGuide(date_start);
+				function findGuide(date_start){
+					ca.ajaxs({url:'findTeamSkAvailableGuide',data:{
+							user_id:localStorage.getItem('userid'),
+							team_id:self.team_id,date_start:date_start
+						},succFn:function(data){
+							if(data.code>0){
+								if(!ca.emptyFun(data.team_sk.guide)){
+									ca.tagName('input')[1].value=data.team_sk.guide.alias;
+									//选择带团时间
+									mui('body').on('tap','.rq',function(){
+										showdatapicker();
+									})
+								}
+								if(!ca.emptyFun(data.g_orders)){
+									showGuideOrders(data.g_orders);
+								}
+								if(!ca.emptyFun(data.msg)){
+									setPickper(data.msg);
+								}
+								if(date_start>=data.team_sk.start_date){
+									var date = new Date(date_start);
+									// date_start=ca.timestampToTime(date.getTime()+24*60*60*1000).slice(0,10);
+									ca.tagName('input')[0].value=date_start;
+								}else{
+									ca.tagName('input')[0].value=data.team_sk.start_date;
+									date_start=data.team_sk.start_date;
+								}
+								ca.id('fabanriqi').innerText=data.team_sk.start_date;
+								ca.id('jieshuriqi').innerText=data.team_sk.end_date;
+							}else{
+								mui.toast(data.mg);
+							}
+							ca.closeWaiting();
+						},errFn:function(err){
+							ca.closeWaiting();
+							mui.toast(err);
+						}
+					})
+				}
+				function showGuideOrders(data){
+					try{
+						ca.id('list_item').innerHTML=template('guide_orders', {
+							"list":data
+						});
+					}catch(err){
+						console.log(err);
+					}
+				}
+				/**
+				 * 设置导游数据
+				 */
+				function setPickper(data){
+					var arr=new Array();
+					for(var i=0;i<data.length;i++){
+						var ob=new Object();
+						ob.value={id:data[i].id,union_id:data[i].union_id};
+						ob.text=data[i].name;
+						arr.push(ob)
+					}
+					picker1.setData(arr);
+				}
+				/**
+				 * 导游选择
+				 */
+				mui('body').on('tap','.w70',function(){
+					picker1.show(function (selectItems) {
+						if(selectItems[0].text=="" || selectItems[0].text==null){
+							mui.toast('没有签约导游可供选择');
+							return;
+						}else{
+							guide_id=selectItems[0].value.id;
+							ca.tagName('input')[1].value=selectItems[0].text;
+						}
+						
+					})
+				})
+				
+				
+				function showdatapicker(){
+					var date = new Date();
+					var year = date.getFullYear();//年
+					var month = date.getMonth() + 1;//月
+					var day = date.getDate();//日
+					if(ca.tagName('input')[0].value){
+						var spli=ca.tagName('input')[0].value.split('-');
+						var spli1=ca.id('jieshuriqi').innerText.split('-');
+						ca.dateSelect({
+							defaultTime:spli[0] + '-' + spli[1] + '-' + spli[2],
+							minTime:spli[0] + '-' + spli[1] + '-' + spli[2],
+							maxTime:spli1[0] + '-' + spli1[1] + '-' + spli1[2],
+							callback:function(data){
+								if(data){
+									ca.tagName('input')[0].value=data;
+									date_start=data;
+// 									var date = new Date(data);
+// 									date_start=ca.timestampToTime(date.getTime()-24*60*60*1000);
+									findguides(data);
+								}
+							}
+						})
+					}else{
+						ca.dateSelect({
+							defaultTime:year + '-' + month + '-' + day,
+							minTime:year + '-' + month + '-' + (day),
+							maxTime:year + '-'+ (month + 2) + '-' + day,
+							callback:function(data){
+								if(data){
+									ca.tagName('input')[0].value=data;
+									date_start=data;
+									findguides(data);
+								}
+							}
+						})
+					}
+					
+				}
+				
+				function findguides(date_start){
+					ca.ajaxs({url:'findTeamSkAvailableGuide',data:{
+							user_id:localStorage.getItem('userid'),
+							team_id:self.team_id,date_start:date_start
+						},succFn:function(data){
+							if(data.code>0){
+								if(!ca.emptyFun(data.msg)){
+									setPickper(data.msg);
+								}else{
+									mui.toast('没有签约导游可供选择');
+								}
+							}else{
+								mui.toast(data.mg);
+							}
+							ca.closeWaiting();
+						},errFn:function(err){
+							ca.closeWaiting();
+							mui.toast(err);
+						}
+					})
+				}
+				function getdate(){
+					var date = new Date();
+					var year = date.getFullYear();//年
+					var month = date.getMonth() + 1;//月
+					var day = date.getDate();//日
+					if(month<10){
+						month='0'+month;
+					}
+					if(day<10){
+						day='0'+day;
+					}
+					return  year+'-'+month+'-'+ day;
+				}
+				/**
+				 * 提交委派导游
+				 */
+				mui('body').on('tap','.tijiao',function(){
+					if(guide_id==0){
+						mui.toast('请选择导游');
+						return;
+					}
+					ca.showWaiting();
+					ca.ajaxs({url:'AvailableGuide',data:{
+							team_id:self.team_id,guide_id:guide_id,
+							start_date:ca.tagName('input')[0].value,user_id:localStorage.getItem('userid')
+						},succFn:function(data){
+							alert(JSON.stringify(data))
+							ca.closeWaiting();
+						},errFn:function(err){
+							ca.closeWaiting();
+							mui.toast(err);
+						}
+					})
+				})
+			})
+			
+		</script>
+	</body>
+
+</html>

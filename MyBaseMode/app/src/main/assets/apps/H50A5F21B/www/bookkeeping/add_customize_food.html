@@ -1,0 +1,381 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/style.css" />
+		<link rel="stylesheet" href="../css/mui.picker.min.css" />
+		<link rel="stylesheet" href="../css/iconfont.css" />
+		<link rel="stylesheet" href="../css/previewImage.css" />
+		<style>
+			.mui-bar-nav {
+			    top: 0;
+			    -webkit-box-shadow: 0 0px 0px #ccc;
+			    /* box-shadow: 0 1px 6px #ccc; */
+			}
+			.fukuanxuanze{
+				border: 1px solid #e5e5e5;
+				width: 21%;
+				font-size: 13px!important;
+				line-height:30px!important ;
+				border-radius:8px ;
+			}
+			.active{
+				background: #52BCEC;
+				color: #FFFFFF;
+				border: 0px;
+			}
+			.mui-slider{
+				height: 100%;
+			}
+		</style>
+	</head>
+
+	<body style="background: #F2F2F2;">
+		<header class="mui-bar mui-bar-nav mheader">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mback"></a>
+		    <h1 class="mui-title htitle">餐费支出</h1>
+		    <span id="jizhang" class="mui-pull-right fs16 " style="line-height: 44px;">保存</span>
+		</header>
+		<div class="mui-content">
+		    <div class="bgwhite h40 bbf2 oh">
+		    	<div class="fl w30 fs14 c121212 pl20 lh40">
+		    		<span>餐厅名称</span>
+		    	</div>
+		    	<div class="fl w50 lh40 ">
+		    		<input type="text" readonly="readonly" class="w95 tc fs12" style="width:95%;border:1px solid #e5e5e5;border-radius:4px ;height: 28px;" placeholder="请选择餐厅名称" data_id=""/>
+		    	</div>
+		    	<div class="fl w10 lh40 " id="liebiao">
+		    		<span class="mui-icon mui-icon-arrowdown"></span>
+		    	</div>
+		    </div>
+		    <div class="bgwhite h40 bbf2 oh">
+		    	<div class="fl w30 fs14 c121212 pl20 lh40">
+		    		<span>使用日期</span>
+		    	</div>
+		    	<div class="fl w70 lh40 ">
+		    		<input type="text" readonly="readonly" class="w70 tc fs12" style="width:70%;border:1px solid #e5e5e5;border-radius:4px ;height: 28px;" placeholder="请输入入住时间"/>
+		    	</div>
+		    </div>
+		    <div id="fangxin">
+		    	
+		    </div>
+		    <div class="bgwhite h40 bbf2 oh disn" id="ewai">
+		    	<div class="fl w20 fs13 c121212 pl20 lh40">
+		    		<span>额外数量</span>
+		    	</div>
+		    	<div class="fl w75 lh40 ml3" id="ewais">
+		    		
+		    	</div>
+		    </div>
+		    <div class="bgwhite h40  oh ">
+		    	<div class="fl w30 fs14 c121212 pl20 lh40">
+		    		<span>总金额</span>
+		    	</div>
+		    	<div class="fl w70 lh40">
+		    		<input type="text" id="zonge" readonly="readonly" value="0" class="w70 tc fs12" style="width:70%;border:1px solid #e5e5e5;border-radius:4px ;height: 28px;" />
+		    	</div>
+		    </div>
+		    <div class="bgwhite h40 bbf2 oh mt10">
+		    	<div class="fl w30 fs14 c121212 pl20 lh40">
+		    		<span>收款方式</span>
+		    	</div>
+		    </div>
+		    <div class="bgwhite h40  bbf2 oh">
+		    	<div class="fl w30 fs14 c121212 pl20 lh40">
+		    		<span>导游收</span>
+		    	</div>
+		    	<div class="fl w70 lh40 ">
+		    		<input type="number"  onblur="yanzhen();" min="0" value="0" class="w70 tc fs12 fu" style="width:70%;border:1px solid #e5e5e5;border-radius:4px ;height: 28px;" />
+		    	</div>
+		    </div>
+		    <div class="bgwhite h40 bbf2  oh">
+		    	<div class="fl w30 fs14 c121212 pl20 lh40">
+		    		<span>未收</span>
+		    	</div>
+		    	<div class="fl w70 lh40">
+		    		<input type="number" onblur="yanzhen();"  value="0" class="w70 tc fs12 fu" style=" width:70%;border:1px solid #e5e5e5;border-radius:4px ;height: 28px;" />
+		    	</div>
+		    </div>
+		    <div class="bgwhite h100  bbf2 oh">
+		    	<div class="fl w30 fs14 c121212 pl20 lh50">
+		    		<span>备注</span>
+		    	</div>
+		    	<div class="fl w70">
+		    		<textarea rows="3" placeholder="额外增加或减少的费用在此说明。" id="textarea" style="width: 90%;height: 90px;font-size: 13px;margin-top: 5px;"></textarea>
+		    	</div>
+		    </div>
+		    <div class="bgwhite h150 bbf2 oh">
+		    	<div class=" w70 fs14 c121212 pl20 lh40">
+		    		<span>票据</span><span class="fs13"> (提供票据图片，大小5M以下)</span>
+		    	</div>
+		    	<div class="pl20">
+		    		<div class="fl" id="tu1" style="width: 55px;height: 55px;display: none;">
+		    			<img id="tu"  class="" style="width: 100%;height: 100%;" data-preview-src="" data-preview-group="1"/>
+		    		</div>
+		    		<div class="fl ml10">
+		    			<span class="mui-icon mui-icon-plusempty" id="tupian" style="padding: 5px;font-size: 45px;border: 1px solid #666666;"></span>
+		    		</div>
+		    	</div>
+		    </div>
+		    <!--<div id="jizhang" style="background: #52bcec;color: #FFFFFF;height: 40px;line-height: 40px;text-align: center;position: fixed;bottom: 0;width: 100%;">
+				<span style="font-weight:bold ;font-size:15px ;">保  存</span>
+			</div>-->
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/castapp.js" ></script>
+		<script type="text/javascript" src="../js/mui.picker.min.js" ></script>
+		<script type="text/javascript" src="../js/mui.zoom.js" ></script>
+		<script type="text/javascript" src="../js/mui.previewimage.js" ></script>
+		<script type="text/javascript">
+			mui.previewImage();
+			var url=localStorage.getItem('url');
+			var teamsk_id=localStorage.getItem('teamsk_id');
+			var day=localStorage.getItem('jizhangday');
+			var user_id=localStorage.getItem('userid');
+			var upload_imgurl=localStorage.getItem('upload_imgurl');
+			localStorage.removeItem('guide_relation_id');
+			var imgurl="";
+			var wucantin=0;
+			var pr1=0,pr2=0,pr3=0,pr4=0;
+			var alias='',alias_two='',alias_three='',alias_four='';
+			var client_id=0,union_id=0;
+			mui.plusReady(function(){
+				mui.init();
+				ca.init(true);
+				ca.blackStatusBar();
+				ca.checkTheNetwork();
+				ca.closeWaitings();
+				var input=ca.tagName('input');
+				ca.className('htitle')[0].innerHTML='添加自定餐费'+'('+day+')'
+				input[1].value=day;
+				var picker1 = new mui.PopPicker();
+				var picker2 = new mui.PopPicker();
+				ca.ajaxs({url:'findContractFoodBy',data:{
+						teamsk_id:teamsk_id
+					},
+					succFn:function(data){
+						if(ca.emptyFun(data)){
+							wucantin=1;
+						}else{
+							if(data.msg==1){
+								var da=data.data;
+								var arr=new Array();
+								for(var i=0;i<da.length;i++){
+									var ob=new Object();
+									ob.value={id:da[i].id,union_id:da[i].union_id,price1:da[i].food1,
+										price2:da[i].food2,price3:da[i].food3,price4:da[i].food4};
+									ob.text=da[i].name;
+									arr.push(ob)
+								}
+								picker1.setData(arr);
+							}
+						}
+						show();
+						ca.closeWaiting();
+					},
+					errFn:function(call){
+						ca.closeWaiting();
+						mui.toast(call);
+					}
+				})
+				function show(){
+					ca.id('liebiao').addEventListener('tap',function(){
+						if(wucantin==1){
+							mui.toast('无签约客户!');
+							return;
+						}
+						picker1.show(function (selectItems) {
+							input[0].value=selectItems[0].text;
+							var da=selectItems[0].value;
+							client_id=da.id;
+							union_id=da.union_id;
+							pr1=0,pr2=0,pr3=0,pr4=0;
+							alias='',alias_two='',alias_three='',alias_four='';
+							ca.id('fangxin').innerHTML='';
+							if(da.price1>=0){
+								var temp='<div class="bgwhite h40 bbf2 oh">'
+									    +	'<div class="fl lh40 fs14 c121212 w30 pl20">'
+									    +		'<span>早餐</span>'
+									    +	'</div>'
+									    +	'<div class="fl w60 lh40">'
+									    +		'<input type="number" onblur="jisuan();" id="dan1"  value="'+da.price1+'"  class="tc fs12" style="width:45%;border:1px solid #e5e5e5;border-radius:4px ;height: 28px;" placeholder="输入单价"/>'
+									    +		'<input type="number" onblur="jisuan();" id="dan2"  class="tc fs12" style="width:45%;border:1px solid #e5e5e5;border-radius:4px ;height: 28px;" placeholder="数量"/>'
+									    +	'</div>'
+									    +'</div>';
+								ca.id('fangxin').innerHTML+=temp;
+								alias='早餐';
+								pr1=1;
+							}
+							if(da.price2>=0){
+								var temp='<div class="bgwhite h40 bbf2 oh">'
+									    +	'<div class="fl lh40 fs14 c121212 w30 pl20">'
+									    +		'<span>中餐</span>'
+									    +	'</div>'
+									    +	'<div class="fl w60 lh40">'
+									    +		'<input type="number" onblur="jisuan();" id="shuang1"  value="'+da.price2+'"  class="tc fs12" style="width:45%;border:1px solid #e5e5e5;border-radius:4px ;height: 28px;" placeholder="输入单价"/>'
+									    +		'<input type="number" onblur="jisuan();" id="shuang2"  class="tc fs12" style="width:45%;border:1px solid #e5e5e5;border-radius:4px ;height: 28px;" placeholder="数量"/>'
+									    +	'</div>'
+									    +'</div>';
+								ca.id('fangxin').innerHTML+=temp;
+								alias_two='中餐';
+								pr2=1;
+							}
+							if(da.price3>=0){
+								var temp='<div class="bgwhite h40 bbf2 oh">'
+									    +	'<div class="fl lh40 fs14 c121212 w30 pl20">'
+									    +		'<span>晚餐</span>'
+									    +	'</div>'
+									    +	'<div class="fl w60 lh40">'
+									    +		'<input type="number" onblur="jisuan();" id="san1" value="'+da.price3+'"  class="tc fs12" style="width:45%;border:1px solid #e5e5e5;border-radius:4px ;height: 28px;" placeholder="输入单价"/>'
+									    +		'<input type="number" onblur="jisuan();" id="san2"  class="tc fs12" style="width:45%;border:1px solid #e5e5e5;border-radius:4px ;height: 28px;" placeholder="数量"/>'
+									    +	'</div>'
+									    +'</div>';
+								ca.id('fangxin').innerHTML+=temp;
+								pr3=1;
+								alias_three='晚餐';
+							}
+							if(da.price4>=0){
+								var temp='<div class="bgwhite h40 bbf2 oh">'
+									    +	'<div class="fl lh40 fs14 c121212 w30 pl20">'
+									    +		'<span>半餐</span>'
+									    +	'</div>'
+									    +	'<div class="fl w60 lh40">'
+									    +		'<input type="text" onblur="jisuan();" id="si1" value="'+da.price4+'"  class="tc fs12" style="width:45%;border:1px solid #e5e5e5;border-radius:4px ;height: 28px;" placeholder="输入单价"/>'
+									    +		'<input type="text" onblur="jisuan();" id="si2"  class="tc fs12" style="width:45%;border:1px solid #e5e5e5;border-radius:4px ;height: 28px;" placeholder="数量"/>'
+									    +	'</div>'
+									    +'</div>';
+								ca.id('fangxin').innerHTML+=temp;
+								alias_four='半餐'
+								pr4=1;
+							}
+						})
+					})
+				}
+				
+				
+				
+				ca.id('jizhang').addEventListener('tap',function(){
+					if(input[0].value==""){
+						mui.toast('请选择餐厅名称');
+						input[0].focus();
+						return;
+					}
+					var price=0,price_two=0,price_three=0,price_four=0;
+					var quantity=0,quantity_two=0,quantity_three=0,quantity_four=0;
+					if(pr1>0){
+						price=ca.id('dan1').value;
+						quantity=ca.id('dan2').value;
+					}
+					if(pr2>0){
+						price_two=ca.id('shuang1').value;
+						quantity_two=ca.id('shuang2').value;
+					}
+					if(pr3>0){
+						price_three=ca.id('san1').value;
+						quantity_three=ca.id('san2').value;
+					}
+					if(pr4>0){
+						price_four=ca.id('si1').value;
+						quantity_four=ca.id('si2').value;
+					}
+					
+					var inp=ca.className('fu');
+					var fu_zong=parseFloat(inp[0].value)+parseFloat(inp[1].value);
+					var zongs=parseFloat(ca.id('zonge').value);
+					if(zongs<=0){
+						mui.toast('请填写正确的单价,数量');
+					}else if(fu_zong!=zongs){
+						mui.toast('请填写收款,未收金额');
+					}else{
+						var btnArray = ['是','否'];
+						mui.confirm('确认保存？', '提示', btnArray, function(e) {
+							if(e.index == 0){
+								ca.ajaxs({url:'addAccountingGuide',data:{
+											user_id:user_id,
+											type:'add_food',
+											teamsk_id:teamsk_id,
+											client_id:client_id,union_id:union_id,use_date:day,end_date:'',
+											name:input[0].value,
+											alias:alias,alias_two:alias_two,alias_three:alias_three,alias_four:alias_four,
+											price:price,price_two:price_two,price_three:price_three,price_four:price_four,
+											quantity:quantity,quantity_two:quantity_two,quantity_three:quantity_three,quantity_four:quantity_four,
+											quantity2:0,quantity2_two:0,quantity2_three:0,quantity2_four:0,
+											unit:'位',img_url:imgurl,mark:ca.id('textarea').value,
+											guide_pay:inp[0].value,
+											sign_bill:inp[1].value,
+										},
+										succFn:function(data){
+											if(data.msg==1){
+												mui.toast('添加成功');
+												var arr1 = ['customize_food'];
+												ca.sendNotice(arr1,'update',{});
+												setTimeout(function(){
+													ca.closeCurrentInterface();
+												},300);
+											}
+											else{
+												mui.toast('添加失败');
+											}
+											ca.closeWaiting();
+										},
+										errFn:function(call){
+											ca.closeWaiting();
+											mui.toast(call);
+										}
+								})
+							}
+						})
+					}
+				})
+					
+				
+				ca.id('tupian').addEventListener('tap',function(){
+					var arr = ['照相机','相册'];
+					ca.actionSheet(arr,{succFn:function(data){
+						ca.id('tu1').style.display='block';
+						var t=ca.id('tu');
+						t.style.display='block';
+						t.src=data;
+						imgurl=data;
+					},
+					//是否开启上传
+					isUpload:true,
+					uploadUrl:upload_imgurl,
+					})
+				})
+				
+			})
+			function yanzhen(){
+				var inp=ca.className('fu');
+				if(ca.emptyFun(inp[0].value)){
+					inp[0].value=0;
+				}
+				if(ca.emptyFun(inp[1].value)){
+					inp[1].value=0;
+				}
+				inp[1].value=ca.id('zonge').value-inp[0].value;
+			}
+			function jisuan(){
+					var zong1=0,zong2=0,zong3=0,zong4=0;
+					if(pr1==1){
+						zong1=ca.id('dan2').value*ca.id('dan1').value;
+					}
+					if(pr2==1){
+						zong2=ca.id('shuang2').value*ca.id('shuang1').value;
+					}
+					if(pr3==1){
+						zong3=ca.id('san2').value*ca.id('san1').value;
+					}
+					if(pr4==1){
+						zong4=ca.id('si2').value*ca.id('si1').value;
+					}
+					ca.id('zonge').value=zong1+zong2+zong3+zong4;
+				}
+		</script>
+	</body>
+
+</html>

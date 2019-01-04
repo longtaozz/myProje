@@ -1,0 +1,953 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/style.css" rel="stylesheet" />
+		<link href="../css/iconfont.css" rel="stylesheet" />
+		<link href="../css/timelinestyle.css" rel="stylesheet"/>
+		<style>
+			.mui-slider-item img{
+				height: 200px;
+				z-index: 105;
+			}
+			.mui-slider-indicator{
+				bottom: 8px;
+				color: #FFFFFF;
+				right: 40px;
+				width: 0;
+				font-size: 13px;
+			}
+			.brand-store-bar.dock-header-bar{position: fixed;top: 69px;z-index: 99;width: 100%;}
+			.brand-bar-wrapper{height: 40px;}
+			
+			.line_listitem_detail_header{
+				height: 69px;padding-top: 25px;background: rgba(255,255,255,0);
+			}
+			.line-listitem-div1-d2{
+				position: absolute;top: 170px;z-index: 6;color: #FFFFFF;font-size: 11px;margin-left:10px;
+			}
+			.line-listitem-div2{
+				position: relative;margin: -10px 5px 0px 5px; border:1px solid #F2F2F2;
+				background: #FFFFFF;border-radius:8px ;z-index:8;
+				overflow: hidden;
+			}
+			.line-listitem-div2-d1{
+				margin: 10px;
+				color: #333333;
+				font-size: 15px;
+			}
+			.line-listitem-div2-d2{
+				margin-left: 10px;
+			}
+			.line-listitem-div2-d3{
+				margin-left: 10px;
+				margin-top: 5px;
+			}
+			.line-listitem-div2-d4{
+				margin-left: 10px;
+			}
+			.line-listitem-div3{
+				margin:5px 5px 0px 5px; border:1px solid #F2F2F2;
+				background: #FFFFFF;border-radius:8px ;
+			}
+			.line-listitem-div3-div{
+				border: 1px solid #9A9A9A;float:left;border-radius:6px; padding: 5px 8px;
+				margin-left: 10px;
+			}
+			.line-listitem-div4{
+				margin:5px 5px 0px 5px; border:1px solid #F2F2F2;
+				background: #FFFFFF;border-radius:8px;
+			}
+			.line-listitem-div4-d2-d1 img{
+				width: 25px;height: 25px;border-radius:100px ;
+			}
+			.line-listitem-div5{
+				margin-top: 10px;
+				height: 42px;
+			}
+			.line-listitem-div5-d{
+				color:#333333;
+			}
+			.line-listitem-div5-d-active{
+				color:#FE6F11;
+				border-bottom: 2px solid #FE6F11;
+			}
+			.line-listitem-div7{
+				border-top: 15px solid #EEEEEE; 
+			}
+			.line-listitem-div8{
+				border-top: 15px solid #EEEEEE; 
+			}
+			.line-listitem-div9{
+				border-top: 15px solid #EEEEEE; 
+			}
+			.popover-div2-div{
+				width:50px;height: 50px;border-radius:100px;
+				background: #FFFFFF;line-height: 40px;margin:0 auto;
+			}
+			.icon {
+				width: 1em; height: 1em;
+				vertical-align: -0.15em;
+				fill: currentColor;
+				overflow: hidden;
+			}
+			.popover-div3-div{
+				position: absolute;bottom: 0px;width: 100%;
+				height: 45px;line-height: 45px;text-align: center;
+			}
+			.line-detail-bg{
+				background: -webkit-linear-gradient(top,rgba(42,192,255,1),rgba(24,123,252,1)); /* Safari 5.1 - 6 */
+				background: -o-linear-gradient(bottom,rgba(42,192,255,1),rgba(24,123,252,1)); /* Opera 11.1 - 12*/
+				background: -moz-linear-gradient(bottom,rgba(42,192,255,1),rgba(24,123,252,1)); /* Firefox 3.6 - 15*/
+				background: linear-gradient(to bottom, rgba(42,192,255,1),rgba(24,123,252,1)); /* 标准的语法 */
+			}
+		</style>
+	</head>
+
+	<body>
+		<header id="header" class="mui-bar mui-bar-transparent line_listitem_detail_header" >
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left c000000"></a>
+			<h1 class="mui-title" style="display: none;"></h1>
+			<span class="iconfont icon-fenxiang lh40 fr mr10 c000000 fs20"></span>
+		</header>
+		<div class="line-listitem-div1">
+			<div class="mui-slider" id="slider" style="height:200px;z-index:5;">
+				<div class="mui-slider-group" id="banner">
+					
+				</div>
+				<div class="mui-slider-indicator">
+					<span class="mui-slider-indicator-sp1">1</span><span>/</span><span id="bannermun">1</span>
+				</div>
+			</div>
+			<div class="line-listitem-div1-d2">
+			</div>
+		</div>
+		<div  id="refreshContainer" class="bgwhite">
+			<!-- <div class="line-listitem-div2">
+				<div class="line-listitem-div2-d1 yc2">
+					<span>张家界+武陵源区+大峡谷+天门山+湘西+凤凰5日4晚跟团游(4钻)·【16人纯玩小团】赠接送站服务 玻璃桥VS玻璃栈道+袁家界（阿凡达取景地）+凤凰古城夜景【赠148元宝峰湖+赠芙蓉镇</span>
+				</div>
+				<div class="mt6 oh line-listitem-div2-d2">
+					<div class="fl line-list-divr-d2">
+						<div class="fl bgF8931E line-list-divr-d2-d1">
+							<span class="iconfont icon-31 fs15 cffffff"></span>
+						</div>
+						<div class="fl fs10 cFFB400 line-list-divr-d2-d2">
+							<span>4钻</span>
+						</div>
+					</div>
+					<div class="fl ml5 line-list-divr-d2">
+						<div style="line-height: 10px;padding: 0px 2px;">
+							<span class="fs11 c666666">成团保障</span>
+						</div>
+					</div>
+					<div class="fl ml5 line-list-divr-d2">
+						<div style="line-height: 10px;padding: 0px 2px;">
+							<span class="fs11 c666666">夕阳休闲游</span>
+						</div>
+					</div>
+				</div>
+				<div class="mt3 line-listitem-div2-d3">
+					<div class="fs11 c666666 oh">
+						<span class="iconfont icon-iconfontlvxingshe fs13 fl"></span>
+						<span class="fl ml3">湘西国旅</span>
+						<div class="fl ml5" >
+							<span class="ml5">10/26</span>
+						</div>
+						<div class="fl" style="margin-top: -1px;">
+							<span>、</span>
+						</div>
+						<div class="fl" style="margin-left: -6px;" >
+							<span class="ml5">10/26</span>
+						</div>
+						<div class="fl" style="margin-top: -1px;">
+							<span>、</span>
+						</div>
+						<div class="fl" style="margin-left: -6px;" >
+							<span class="ml5">10/26等</span>
+						</div>
+					</div>
+				</div>
+				<div class="h30 lh25 line-listitem-div2-d4 oh">
+					<div class="fs12 c3F99DE fl">
+						<span>5.0分</span>
+					</div>
+					<div class="fl fs12 c666666 ml7">
+						<span>155人出游</span>
+					</div>
+					<div class="fr mr10 cF76211" style="margin-top: -3px;">
+						<div class="fl" style="margin-left:5px;">
+							<span class="fs11" >￥</span>
+						</div>
+						<span class="fs18">1922</span>
+						<span class="fs11 c666666" style="margin-left: -2px;">/人起</span>
+					</div>
+				</div>
+			</div>
+			<div class="line-listitem-div3">
+				<div class="mt15 ml10 c333333 fs15">
+					<span>线路标准</span>
+				</div>
+				<div class="oh mt10 mb10">
+					<div class="line-listitem-div3-div">
+						<div class="fs13 tc c666666">
+							<span>经济型</span>
+						</div> 
+						<div class="fs13 tc c999999 mt3">
+							<span>成人价</span>
+						</div>
+						<div class="fs12 tc cF76211">
+							<span>￥1820</span>
+						</div>
+						<div class="fs13 tc c999999 mt3">
+							<span>儿童价</span>
+						</div>
+						<div class="fs12 tc cF76211">
+							<span>￥1820</span>
+						</div>
+					</div>
+					<div class="line-listitem-div3-div">
+						<div class="fs13 tc c666666">
+							<span>经济型</span>
+						</div>
+						<div class="fs13 tc c999999 mt3">
+							<span>成人价</span>
+						</div>
+						<div class="fs12 tc cF76211">
+							<span>￥1820</span>
+						</div>
+						<div class="fs13 tc c999999 mt3">
+							<span>儿童价</span>
+						</div>
+						<div class="fs12 tc cF76211">
+							<span>￥1820</span>
+						</div>
+					</div>
+					<div class="line-listitem-div3-div">
+						<div class="fs13 tc c666666">
+							<span>经济型</span>
+						</div>
+						<div class="fs13 tc c999999 mt3">
+							<span>成人价</span>
+						</div>
+						<div class="fs12 tc cF76211">
+							<span>￥1820</span>
+						</div>
+						<div class="fs13 tc c999999 mt3">
+							<span>儿童价</span>
+						</div>
+						<div class="fs12 tc cF76211">
+							<span>￥1820</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="line-listitem-div4">
+				<div class="oh">
+					<div class="mt15 ml10 c333333 fs15 fl">
+						<span>评价</span>
+					</div>
+					<div class="fr fs11 mt17 mr15 cF76211">
+						<span>查看全部(115) ></span>
+					</div>
+				</div>
+				<div class="ml10 mr10 mt10 mb10">
+					<div class="mui-slider-handle line-listitem-div4-d2">
+						<div class="oh line-listitem-div4-d2-d1">
+							<img src="../img/ttyou.png" class="fl" />
+							<span class="fs11 fl ml10 c666666">李四</span>
+						</div>
+						<div class="mt3 pb5 c666666">
+							<span class="fs13">dajshdkj是的了解来看撒娇地离开静安寺立刻就打深刻理解的是的了解来看撒娇地离开静安寺立刻就打深刻理解的是的了解来看撒娇地离开静安寺立刻就打深刻理解的</span>
+						</div>
+						<div class=" fs12 c999999">
+							<span>201-12-16</span>
+							<span>15:16</span>
+						</div>
+					</div>	
+				</div>
+			</div>
+			 -->
+			<!-- <div class="brand-bar-wrapper line-listitem-div5 bbfa">
+				<div id="tab" class="bgwhite brand-store-bar oh">
+					<div class="fl w25 tc fs15 lh38 line-listitem-div5-d-active" data_id="0">
+						<span>线路行程</span>
+					</div>
+					<div class="fl w25 tc fs15 lh38 line-listitem-div5-d" data_id="1">
+						<span>产品特色</span>
+					</div>
+					<div class="fl w25 tc fs15 lh38 line-listitem-div5-d" data_id="2">
+						<span>费用说明</span>
+					</div>
+					<div class="fl w25 tc fs15 lh38 line-listitem-div5-d" data_id="3">
+						<span>预定须知</span>
+					</div>
+				</div>
+			</div> -->
+			<!-- <div class="line-listitem-div6  oh">
+				<div class="mt15 ml10 c333333 fs15">
+					<span>行程信息</span>
+				</div>
+				<div class="mt15" style="z-index: 15;">
+					<div class="bgwhite oh" style="border-bottom: 15px solid #EEEEEE;">
+						<section id="cd-timeline" class="cd-container mt10">
+							<div class="cd-timeline-block">
+								<div class="cd-timeline-img cd-picture">
+								</div>
+								<div class="cd-timeline-content fs15 c333333 mt10">
+									<span>第一天:张家界市</span>
+								</div>
+							</div>
+							<div class="cd-timeline-block">
+								<div class="cd-timeline-img cd-picture">
+								</div>
+								<div class="cd-timeline-content fs14">
+									<span>餐饮:早餐自理</span>
+								</div>
+							</div>
+							<div class="cd-timeline-block">
+								<div class="cd-timeline-img cd-picture">
+								</div>
+								<div class="cd-timeline-content fs14">
+									<span>住宿:大成山水国际酒店</span>
+								</div>
+							</div>
+							<div class="cd-timeline-block">
+								<div class="cd-timeline-img cd-picture">
+								</div>
+								<div class="cd-timeline-content">
+									<p style="">
+										<span style="color: rgb(38, 38, 38); font-size: 18px;">刚从张家界回来，上个月24—29号，广东出发坐火车去，行程路线：森林公园，玻璃桥，天门山，凤凰，四天三晚，玩得非常尽兴！！尤其是感谢张家界的本地妹子</span><span style="font-size: 18px;"><span class="randname">翠翠</span></span><span style="color: rgb(38, 38, 38); font-size: 18px;">，为我们提前规划好了行程，我们到张家界的时候还去机场接了我们，帮我们定好了住的酒店和后面要玩的门票，实在是太贴心和周到了！让我们省时省事又省心，为她点个赞！！!想去张家界的朋友可以加</span><span style="font-size: 18px;"><span class="randname">翠翠</span>的<span style="color: rgb(38, 38, 38); text-indent: 32px;">微信号：</span></span><span style="color: rgb(38, 38, 38); font-size: 18px;"><span style="color: rgb(255, 0, 0);"><span class="randweixin">17397275528</span></span>，电话号码也是这个，她人非常好，希望能帮到你们！</span>
+									</p>
+									<p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; font-family: Arial, 微软雅黑; color: rgb(102, 102, 102); font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">
+										<img src="http://img.manbuquanqiu.com/uploads/zl1/11/20181101/1541059919130078.jpg"/>
+									</p>
+									<p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; font-family: Arial, 微软雅黑; color: rgb(102, 102, 102); font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">
+										<img src="http://img.manbuquanqiu.com/uploads/zl1/11/20181101/1541059919187468.jpg"/>
+									</p>
+									<p>
+										<br/>
+									</p>
+								</div>
+							</div>
+						</section>
+					</div>
+					<div class="bgwhite oh" >
+						<section id="cd-timeline" class="cd-container mt10">
+							<div class="cd-timeline-block">
+								<div class="cd-timeline-img cd-picture">
+								</div>
+								<div class="cd-timeline-content fs15 c333333 mt15">
+									<span>第一天:张家界市</span>
+								</div>
+							</div>
+							<div class="cd-timeline-block">
+								<div class="cd-timeline-img cd-picture">
+								</div>
+								<div class="cd-timeline-content fs14">
+									<span>餐饮:早餐自理</span>
+								</div>
+							</div>
+							<div class="cd-timeline-block">
+								<div class="cd-timeline-img cd-picture">
+								</div>
+								<div class="cd-timeline-content fs14">
+									<span>住宿:大成山水国际酒店</span>
+								</div>
+							</div>
+							<div class="cd-timeline-block">
+								<div class="cd-timeline-img cd-picture">
+								</div>
+								<div class="cd-timeline-content">
+									<p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; font-family: Arial, 微软雅黑; color: rgb(102, 102, 102); font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255); line-height: 1.75em; text-indent: 2em;">
+										<span style="color: rgb(38, 38, 38); font-size: 18px;">刚从张家界回来，上个月24—29号，广东出发坐火车去，行程路线：森林公园，玻璃桥，天门山，凤凰，四天三晚，玩得非常尽兴！！尤其是感谢张家界的本地妹子</span><span style="font-size: 18px;"><span class="randname">翠翠</span></span><span style="color: rgb(38, 38, 38); font-size: 18px;">，为我们提前规划好了行程，我们到张家界的时候还去机场接了我们，帮我们定好了住的酒店和后面要玩的门票，实在是太贴心和周到了！让我们省时省事又省心，为她点个赞！！!想去张家界的朋友可以加</span><span style="font-size: 18px;"><span class="randname">翠翠</span>的<span style="color: rgb(38, 38, 38); text-indent: 32px;">微信号：</span></span><span style="color: rgb(38, 38, 38); font-size: 18px;"><span style="color: rgb(255, 0, 0);"><span class="randweixin">17397275528</span></span>，电话号码也是这个，她人非常好，希望能帮到你们！</span>
+									</p>
+									<p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; font-family: Arial, 微软雅黑; color: rgb(102, 102, 102); font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">
+										<img src="http://img.manbuquanqiu.com/uploads/zl1/11/20181101/1541059919130078.jpg"/>
+									</p>
+									<p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; font-family: Arial, 微软雅黑; color: rgb(102, 102, 102); font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">
+										<img src="http://img.manbuquanqiu.com/uploads/zl1/11/20181101/1541059919187468.jpg"/>
+									</p>
+									<p>
+										<br/>
+									</p>
+								</div>
+							</div>
+						</section>
+					</div>
+				</div>
+			</div> -->
+			<!-- <div class="line-listitem-div7 oh">
+				<div class="mt15 ml10 c333333 fs15">
+					<span>产品特色</span>
+				</div>
+				<div class="mt15" style="z-index: 15;height: 700px;">
+				</div>
+			</div>
+			<div class="line-listitem-div8 oh">
+				<div class="mt15 ml10 c333333 fs15">
+					<span>费用说明</span>
+				</div>
+				<div class="mt15" style="z-index: 15;height: 700px;">
+				</div>
+			</div>
+			<div class="line-listitem-div9 oh">
+				<div class="mt15 ml10 c333333 fs15">
+					<span>预定须知</span>
+				</div>
+				<div class="mt15" style="z-index: 15;height: 700px;">
+				</div>
+			</div> -->
+		</div>
+		<div class="tc bgwhite oh" style="position: fixed;bottom:0px;width:100%;height:55px;z-index: 100;border-top:1px solid #F0F0F0;box-shadow:0 -2px 10px -1px #999999;">
+			<div class="fl oh w100 c666666 mt5">
+				<div class="fl w25 bgcaidan">
+					<span class="iconfont icon-dianhua-copy fs23" style="text-align: center;
+	display:block;"></span>
+					<span class="fs12">电话咨询</span>
+				</div>
+				<div class="fl w25 bgcaidan">
+					<span class="iconfont icon-kefu fs18" style="text-align: center;
+	display:block;"></span>
+					<span class="fs12">在线咨询</span>
+				</div> 
+				<div class="fl w25 bgcaidan">
+					<span class="iconfont icon-shangjia fs18" style="text-align: center;
+	display:block;"></span>
+					<span class="fs12">商家信息</span>
+				</div>
+				<div class="fl w25 bgcaidan">
+					<span class="iconfont icon-wodeshoucang fs20" style="text-align: center;
+	display:block;"></span >
+					<span class="fs12">收藏</span>
+				</div>
+			</div>
+			<!-- <div class="fl oh w33">
+				<div  style="margin:5px 10px;background:#F8931E;height: 40px;line-height:40px;border-radius:5px ;">
+					<span class="cffffff fs16">我要预订</span>
+				</div>
+			</div> -->
+		</div>
+		<div id="middlePopover0" class="mui-popover" style="position:fixed;height: 190px;width: 100%;border-radius:0px ;z-index: 1000;border-top-left-radius:8px ;border-top-right-radius:8px ;">
+			<div class="tc mt10 c666666">
+				<span>分享至</span>
+			</div>
+			<div class="mt10 oh">
+				<div class="w20 tc fl">
+					<div class="tc popover-div2-div pt9" data_index=0>
+						<svg class="icon" style="font-size: 30px;" aria-hidden="true">
+						<use xlink:href="#icon-weixin"></use>
+						</svg>
+					</div>
+					<div class="tc mt5">
+						<span class="fs13 c333333">微信好友</span>
+					</div>
+				</div>
+				<div class="w20 tc fl">
+					<div class="tc popover-div2-div" data_index=1>
+						<svg class="icon" style="font-size: 55px;margin-left: -2px;margin-top: -2px;" aria-hidden="true">
+						<use xlink:href="#icon-pengyouquan"></use>
+						</svg>
+					</div>
+					<div class="tc mt5">
+						<span class="fs13 c333333">微信朋友圈</span>
+					</div>
+				</div>
+				<!-- <div class="w20 tc fl">
+					<div class="tc popover-div2-div">
+						<svg class="icon" style="font-size:30px;margin-left: -2px;margin-top:8px;" aria-hidden="true">
+						<use xlink:href="#icon-icon-"></use>
+						</svg>
+					</div>
+					<div class="tc mt5">
+						<span class="fs13 c333333">QQ</span>
+					</div>
+				</div>
+				<div class="w20 tc fl">
+					<div class="tc popover-div2-div">
+						<svg class="icon" style="font-size:30px;margin-left: -2px;margin-top:8px;" aria-hidden="true">
+						<use xlink:href="#icon-qqkongjian"></use>
+						</svg>
+					</div>
+					<div class="tc mt5">
+						<span class="fs13 c333333">QQ空间</span>
+					</div>
+				</div> -->
+			</div>
+			<div class="bgwhite popover-div3-div">
+				<span>取消</span>
+			</div>
+		</div>
+		<script src="../js/mui.js"></script>
+		<script src="../js/iconfont.js"></script>
+		<!-- <script src="../js/mui.min.js"></script> -->
+		<script src="../js/castapp.js"></script>
+		<script type="text/javascript">
+			mui.plusReady(function(){
+				mui.init({
+					swipeBack:true
+				});
+				ca.init();
+				ca.closeWaitings();
+				var self=plus.webview.currentWebview();
+				var picss='';
+				var namess='';
+				findAll(self.lineid);
+				var item_id=0,enterprise_id=0,partment_id=0,structure_id=0;
+				var shareUrl='';
+				// window.scrollTo(0,1000);
+				var setitem=function(index){
+					var cell=document.getElementsByClassName('lh38');
+					for(var a=0;a<cell.length;a++){
+							if(index==a){
+								cell[a].classList.add('line-listitem-div5-d-active');
+								cell[a].classList.remove('line-listitem-div5-d');
+							}else{
+								cell[a].classList.remove('line-listitem-div5-d-active');
+								cell[a].classList.add('line-listitem-div5-d');
+							}
+					}
+				}
+				mui('body').on('tap','.lh38',function(){
+					var id=this.getAttribute('data_id');
+					// setitem(id);
+					var scrolls=0;
+					if(id==0){
+						scrolls=ca.className('line-listitem-div6')[0].offsetTop-95;
+					}else if(id==1){
+						scrolls=ca.className('line-listitem-div7')[0].offsetTop-95;
+					}else if(id==2){
+						scrolls=ca.className('line-listitem-div8')[0].offsetTop-95;
+					}else{
+						scrolls=ca.className('line-listitem-div9')[0].offsetTop-95;
+					}
+					window.scrollTo(0,scrolls);
+				})
+				
+				function findAll(lineid){
+					ca.showWaiting();
+					ca.ajaxs({url:'findLineDetailAll',data:{
+							id:lineid
+						},succFn:function(data){
+							if(data){
+								showAll(data);
+							}
+							ca.closeWaiting();
+						},errFun:function(err){
+							ca.closeWaiting();
+							mui.toast(err);
+						}
+					})
+				}
+				function showAll(datas){
+					var data=datas.line;
+					item_id=data.id;
+					enterprise_id=data.structure.enterprise.id;
+					partment_id=data.structure.id;
+					structure_id=data.structure.id;
+					shareUrl=datas.shareUrl;
+					ca.createHistory({
+						id:data.id,name:data.name,type:'line',
+						data_comment_num:0,
+						data_grade:0,enterprise_id:enterprise_id,
+						date:new Date().getTime()
+					});
+					if(data.pics){
+						var pics=data.pics.split(',');
+						picss=pics[0];
+						ca.id('bannermun').innerText=pics.length;
+						pics.forEach(function(item,index){
+							var temp='<div class="mui-slider-item"><a href="#"><img src="'+item+'" /></a></div>';
+							ca.id('banner').innerHTML+=temp;
+						})
+						var slider = mui('#slider').slider({
+							interval: 0
+						});
+						document.querySelector('.mui-slider').addEventListener('slide', function(event) {
+							ca.className('mui-slider-indicator-sp1')[0].innerText=slider.getSlideNumber()+1;
+						});
+					}
+					
+					
+					ca.className('mui-title')[0].innerText=data.name;
+					namess=data.name;
+					ca.className('line-listitem-div1-d2')[0].innerText=data.city+'出发';
+					var temp1class='';
+					if(datas.lineclass){
+						datas.lineclass.forEach(function(item,index){
+							var temp1clas='';
+							if(index==0){
+								temp1clas='<div class="fl ml5"><span class="ml5">'+item.start_date.slice(5,12)+'</span></div>'
+								+			'<div class="fl" style="margin-top: -1px;"><span>、</span></div>';
+							}else if(index+1==datas.lineclass.length){
+								temp1clas='<div class="fl" style="margin-left: -6px;" ><span class="ml5">'+item.start_date.slice(5,12)+'等</span></div>'
+							}else{
+								temp1clas='<div class="fl" style="margin-left: -6px;" ><span class="ml5">'+item.start_date.slice(5,12)+'</span></div>'
+								+		'<div class="fl" style="margin-top: -1px;"><span>、</span></div>'
+							}
+							temp1class+=temp1clas;
+						})
+					}
+					
+					ca.className('bgcaidan')[0].setAttribute('data_phone',data.structure.contact_tel);
+					var temp1='<div class="line-listitem-div2">'
+							+	'<div class="line-listitem-div2-d1 yc2"><span>'+data.name+'</span></div>'
+							+	'<div class="mt6 oh line-listitem-div2-d2">'	
+							+		'<div class="fl line-list-divr-d2">'
+							+	        '<div class="fl bgF8931E line-list-divr-d2-d1">'
+							+				'<span class="iconfont icon-31 fs15 cffffff"></span>'
+							+			'</div>'			
+							+			'<div class="fl fs10 cFFB400 line-list-divr-d2-d2"><span>'+data.linelevel.name+'</span></div>'
+							+		'</div>'	
+							+ 		'<div class="fl ml5 line-list-divr-d2">'			
+							+			'<div style="line-height: 10px;padding: 0px 2px;">'	
+							+				'<span class="fs11 c666666">'+data.lineservice.name+'</span>'
+							+			'</div>'		
+							+		'</div>'		
+							+		'<div class="fl ml5 line-list-divr-d2">'			
+							+			'<div style="line-height: 10px;padding: 0px 2px;">'				
+							+				'<span class="fs11 c666666">'+data.linecate.name+'</span>'		
+							+			'</div>'		
+							+		'</div>'
+							+		'<div class="fl ml5 line-list-divr-d2">'			
+							+			'<div style="line-height: 10px;padding: 0px 2px;">'				
+							+				'<span class="fs11 c666666">'+data.linepeople.name+'</span>'		
+							+			'</div>'		
+							+		'</div>'
+							+	'</div>'			
+							+	'<div class="mt3 line-listitem-div2-d3">'		
+							+		'<div class="fs11 c666666 oh">'			
+							+			'<span class="iconfont icon-iconfontlvxingshe fs13 fl"></span>'		
+							+			'<span class="fl ml3">'+data.structure.enterprise.alias+'</span>'	
+							+				temp1class		
+							+		'</div>'			
+							+	'</div>'			
+							+	'<div class="h30 lh25 line-listitem-div2-d4 oh">'				
+							+		'<div class="fs12 c3F99DE fl"><span>'+datas.grade+'分</span></div>'			
+							+		'<div class="fl fs12 c666666 ml7"><span>'+(datas.people_num.people_num?datas.people_num.people_num:0)+'人出游</span></div>'			
+							+		'<div class="fr mr10 cF76211" style="margin-top: -3px;">'			
+							+			'<div class="fl" style="margin-left:5px;"><span class="fs11" >￥</span></div>'				
+							+			'<span class="fs18">'+data.price.split('.')[0]+'</span>'			
+							+			'<span class="fs11 c666666" style="margin-left:0px;">/人起</span>'			
+							+		'</div>'				
+							+	'</div>'			
+							+'</div>';			
+					ca.id('refreshContainer').innerHTML+=temp1;	
+					
+					
+					if(data.linestandard){
+						if(datas.type_id==2){
+							var temp1s='',temp2s='';
+							data.linestandard.forEach(function(item,index){
+								var temp2s1='<div class="line-listitem-div3-div">'
+										+		'<div class="fs13 tc c666666"><span>'+item.name+'</span></div> '
+										+		'<div class="fs13 tc c999999 mt3"><span>成人价</span></div>'		
+										+		'<div class="fs12 tc cF76211"><span>￥'+item.man_price2.split('.')[0]+'</span></div>'			
+										+		'<div class="fs13 tc c999999 mt3"><span>儿童价</span></div>'			
+										+		'<div class="fs12 tc cF76211"><span>￥'+item.child_price2.split('.')[0]+'</span></div>'				
+										+'</div>';
+								temp1s+=temp2s1;
+								var temp2s2='<div class="line-listitem-div3-div">'
+										+		'<div class="fs13 tc c666666"><span>'+item.name+'</span></div> '
+										+		'<div class="fs13 tc c999999 mt3"><span>成人价</span></div>'		
+										+		'<div class="fs12 tc cF76211"><span>￥'+item.man_price.split('.')[0]+'</span></div>'			
+										+		'<div class="fs13 tc c999999 mt3"><span>儿童价</span></div>'			
+										+		'<div class="fs12 tc cF76211"><span>￥'+item.child_price.split('.')[0]+'</span></div>'				
+										+'</div>';
+								temp2s+=temp2s2;
+							})
+							var temp2='<div class="line-listitem-div3">'
+									+	'<div class="mt15 ml10 c333333 fs15 fwb"><span>线路标准</span></div>'
+									+	'<div class="oh mt10 mb10">'
+									+		'<div class="ml10 c666666 fs14">门市价</div>'
+									+	temp1s	
+									+	'</div>'
+									+	'<div class="oh mt10 mb10">'
+									+		'<div class="ml10 c666666 fs14">同业价</div>'
+									+	temp2s	
+									+	'</div>';
+							ca.id('refreshContainer').innerHTML+=temp2;
+							
+						}else{
+							var temp2s='';
+							data.linestandard.forEach(function(item,index){
+								var temp2s1='<div class="line-listitem-div3-div">'
+										+		'<div class="fs13 tc c666666"><span>'+item.name+'</span></div> '
+										+		'<div class="fs13 tc c999999 mt3"><span>成人价</span></div>'		
+										+		'<div class="fs12 tc cF76211"><span>￥'+item.man_price.split('.')[0]+'</span></div>'			
+										+		'<div class="fs13 tc c999999 mt3"><span>儿童价</span></div>'			
+										+		'<div class="fs12 tc cF76211"><span>￥'+item.child_price.split('.')[0]+'</span></div>'				
+										+'</div>';
+								temp2s+=temp2s1;
+							})
+							var temp2='<div class="line-listitem-div3">'
+									+	'<div class="mt15 ml10 c333333 fs15 fwb"><span>线路标准</span></div>'
+									+	'<div class="oh mt10 mb10">'
+									+	temp2s	
+									+	'</div>';
+							ca.id('refreshContainer').innerHTML+=temp2;
+						}
+						
+					}			
+					
+					if(datas.comment){
+						var temp8='<div class="line-listitem-div4">'
+								+	'<div class="oh">'
+								+		'<div class="mt15 ml10 c333333 fs15 fl fwb"><span>评论</span></div>'
+								+		'<div class="fr fs11 mt17 mr15 cF76211 allcomment" ><span>查看全部('+datas.countComment+') ></span></div>'			
+								+	'</div>'	
+								+	'<div class="ml10 mr10 mt10 mb10">'		
+								+		'<div class="mui-slider-handle line-listitem-div4-d2">'			
+								+			'<div class="oh line-listitem-div4-d2-d1">'		
+								+				'<img src="'+datas.comment.employee.img_url+'" class="fl" />'	
+								+				'<span class="fs11 fl ml10 c666666">'+datas.comment.employee.realname+'</span>'	
+								+			'</div>'		
+								+			'<div class="mt3 pb5 c666666 ml5"><span class="fs13">'+datas.comment.content+'</span></div>'			
+								+			'<div class=" fs12 c999999"><span>'+datas.comment.create_time.slice(0,10)+'</span><span class="ml10">'+datas.comment.create_time.slice(11,16)+'</span></div>'				
+								+		'</div>'					
+								+	'</div>'			
+								+'</div>';		
+												
+						ca.id('refreshContainer').innerHTML+=temp8;	
+					}					
+					
+					
+					
+					
+					var temp3='<div class="brand-bar-wrapper line-listitem-div5 bbfa" >'
+							+	'<div id="tab" class="bgwhite brand-store-bar oh">'
+							+		'<div class="fl w25 tc fs15 lh38 line-listitem-div5-d-active" data_id="0">'
+							+			'<span>线路行程</span>'
+							+		'</div>'
+							+		'<div class="fl w25 tc fs15 lh38 line-listitem-div5-d" data_id="1">'
+							+			'<span>产品特色</span>'
+							+		'</div>'
+							+		'<div class="fl w25 tc fs15 lh38 line-listitem-div5-d" data_id="2">'
+							+			'<span>费用说明</span>'
+							+		'</div>'
+							+		'<div class="fl w25 tc fs15 lh38 line-listitem-div5-d" data_id="3">'
+							+			'<span>预定须知</span>'
+							+		'</div>'
+							+	'</div>'
+							+'</div>';
+					ca.id('refreshContainer').innerHTML+=temp3;	
+					if(data.lineitems){
+						var temp4s='';
+						data.lineitems.forEach(function(item,index){
+							var	temp4s1='<div class="bgwhite oh" style="border-bottom: 15px solid #EEEEEE;">'
+									+	    '<section id="cd-timeline" class="cd-container mt10">'		
+									+			'<div class="cd-timeline-block">'	
+									+				'<div class="cd-timeline-img cd-picture"></div>'
+									+				'<div class="cd-timeline-content fs15 c333333 mt10 fwb">'
+									+					'<span>第'+(index+1)+'天:'+item.name+'</span>'
+									+				'</div>'
+									+			'</div>'
+									+			'<div class="cd-timeline-block">'
+									+				'<div class="cd-timeline-img cd-picture"></div>'
+									+				'<div class="cd-timeline-content fs14">'	
+									+					'<span>餐饮:早餐'+(item.food[2]==1?'含':'无')+' 午餐'+(item.food[6]==1?'含':'无')+' 晚餐'+(item.food[10]==1?'含':'无')+'</span>'
+									+				'</div>'
+									+			'</div>'
+									+			'<div class="cd-timeline-block">'
+									+				'<div class="cd-timeline-img cd-picture"></div>'
+									+				'<div class="cd-timeline-content fs14">'	
+									+ 					'<span>住宿:'+(item.stay==1?item.stay_address:'无')+'</span>'
+									+				'</div>'
+									+			'</div>'
+									+			'<div class="cd-timeline-block">'
+									+				'<div class="cd-timeline-img cd-picture"></div>'
+									+				'<div class="cd-timeline-content">'
+									+					'<div class="fs14">游玩景点:'+item.scenic_spot+'</div><div>'+item.detail+'</div>'
+									+				'</div>'
+									+			'</div>'
+									+		'</section>'
+									+	'</div>';
+							temp4s+=temp4s1;
+						})	
+						var temp4='<div class="line-listitem-div6  oh">'
+							+		'<div class="mt15 ml10 c333333 fs15"><span>行程信息</span></div>'
+							+		'<div class="mt15" style="z-index: 15;">'
+							+		temp4s	
+							+		'</div>'
+							+      '</div>';	
+								
+						ca.id('refreshContainer').innerHTML+=temp4;	
+					}
+					
+					
+					
+					var temp5='<div class="line-listitem-div7 oh">'
+						+		'<div class="mt15 ml10 c333333 fs15"><span>产品特色</span></div>'
+						+		'<div class="mt15 ml10 mr10" style="z-index: 15;">'+data.selling_point+'</div>'
+						+	   '</div>';
+						
+					ca.id('refreshContainer').innerHTML+=temp5;	
+						
+					var temp6='<div class="line-listitem-div8 oh">'
+						+		'<div class="mt15 ml10 c333333 fs15"><span>费用说明</span></div>'
+						+		'<div class="mt15 ml10 mr10" style="z-index: 15;">'+data.cost_mark+'</div>'
+						+	   '</div>';
+						
+					ca.id('refreshContainer').innerHTML+=temp6;	
+						
+					var temp7='<div class="line-listitem-div9 oh" style="margin-bottom:55px">'
+						+		'<div class="mt15 ml10 c333333 fs15"><span>预定须知</span></div>'
+						+		'<div class="mt15 ml10 mr10" style="z-index: 15;">'+data.attention+'</div>'
+						+	   '</div>';
+						
+					ca.id('refreshContainer').innerHTML+=temp7;	
+				}
+				
+				
+				
+				ca.className('icon-fenxiang')[0].addEventListener('tap',function(){
+						ca.showWaiting();
+						ca.id('middlePopover0').style.bottom=0+'px';
+						if(shareUrl){
+							var urls=shareUrl+'?id='+self.lineid+'&u='+localStorage.getItem('userid'); 
+							ca.share({shareContent:'sdashj',shareTitle:namess,shareImg:picss,shareLink:urls});
+						}else{
+							mui.toast('分享地址为空');
+						}
+						mui('#middlePopover0').popover('show');
+				})
+				mui('body').on('tap','.allcomment',function(){
+					mui.openWindow({
+						url:'line_allcomment.html',
+						id:'line_allcomment',
+						extras:{
+							line_id:self.lineid
+						}
+					})
+				})
+				
+				
+				ca.className('popover-div3-div')[0].addEventListener('tap',function(){
+					mui('#middlePopover0').popover('hide');
+				})
+				
+				var caidan=ca.className('bgcaidan');
+				caidan[3].addEventListener('tap',function(){
+					ca.ajaxs({url:'addMyFavorite',data:{
+							user_id:localStorage.getItem('userid'),
+							type:'line',enterprise_id:enterprise_id,
+							item_id:item_id,partment_id:partment_id
+						},succFn:function(data){
+							if(!ca.emptyFun(data)){
+								mui.toast(data.msgtext);
+							}
+							ca.closeWaiting();
+						},errFn:function(err){
+							mui.toast(err);
+							ca.closeWaiting();
+						}
+					})
+				})
+				caidan[0].addEventListener('tap',function(){
+					ca.callPhone(caidan[0].getAttribute('data_phone'));
+				})
+				caidan[1].addEventListener('tap',function(){
+					plus.nativeUI.showWaiting();
+						ca.ajaxs({url:'findEnterpriseTravelAgency',data:{
+								s_id:structure_id
+							},succFn:function(data){
+								if(data.msg==1){
+									var accounts=data.data.e_code+'_'+data.data.username;
+									var userimg=data.data.img_url;
+									var name=data.data.realname;
+										localStorage.setItem('accounts',accounts);
+										var account=localStorage.getItem('e_code')+'_'+localStorage.getItem('username')
+										var storageName='chatList'+account+'and'+accounts;
+					// 						plus.storage.removeItem(storageName)
+					// 						localStorage.setItem(account+'userimg','../img/NoHeadportrait.png')
+										var chatlistdetail=JSON.parse(plus.storage.getItem(storageName));
+										if(ca.emptyFun(chatlistdetail)){//如果没有
+											var selfimg=localStorage.getItem(account+'userimg');//获取用户自己的头像地址
+											var heimg='';//读取消息来源人的头像
+											plus.io.resolveLocalFileSystemURL('_downloads/'+account+'/'+accounts+'.png',function(entry){  
+												entry.file(function(file){
+													heimg=file.fullPath;
+												});
+											},function(e){//读取文件失败 重新下载
+												if(!ca.emptyFun(userimg)){
+													ca.downloader({url:userimg,filePath:account+'/'+accounts+'.png',//下载用户头像
+														succFn:function(file){
+															// alert(JSON.stringify(file))
+															findFileSystemURL({url:file.filename,succFn:function(fil){//根据路径读取文件
+																heimg=fil;//创建列表
+															}})
+														},errFn:function(){//下载失败 使用默认头像
+															heimg='../imag/NoHeadportrait.png';
+														}
+													})
+												}else{
+													heimg='../imag/NoHeadportrait.png';
+												}
+											});
+											setTimeout(function(){//防止文件资源还未读取到
+												var chat=new Object;
+												chat.selfname=localStorage.getItem('realname');
+												chat.selfimg=selfimg;
+												chat.selfaccount=account;
+												chat.hename=name;
+												chat.heimg=heimg;
+												chat.heaccount=accounts;
+												chat.updatetime=new Date().getTime();
+												chat.content=[];
+												plus.storage.setItem(storageName,JSON.stringify(chat));
+											},200)
+										}
+										setTimeout(function(){
+											var pl=plus.webview.create('../jiaoliu/chat_message_list_detail.html','chat_message_list_detail',{},{accounts:accounts,userimg:userimg,name:name,chat_type:'line',chat_type_id:item_id});
+											setTimeout(function(){
+												pl.show('pop-in',400);
+												ca.closeWaiting();
+											},300)
+											
+// 											mui.openWindow({
+// 												url:'../jiaoliu/chat_message_list_detail.html',
+// 												id:'chat_message_list_detail',
+// 												extras:{
+// 													accounts:accounts,
+// 													userimg:userimg,
+// 													name:name
+// 												}
+// 											});
+										},200)
+								}else{
+									mui.toast(data.data);
+								}
+							},errFn:function(err){
+								mui.toast(err)
+								ca.closeWaiting();
+							}
+						})
+				})
+				/**
+				* 根据路径读取到文件   
+				*/
+				function findFileSystemURL(data){
+					plus.io.resolveLocalFileSystemURL(data.url,function(entry){  
+						entry.file(function(file){
+							data.succFn && data.succFn(file.fullPath);
+						});  
+					});
+				}
+				caidan[2].addEventListener('tap',function(){
+					// ca.showWaiting();
+					var pl=plus.webview.create('travel_agency_detail.html','travel_agency_detail',{},{structure_id:partment_id});
+					setTimeout(function(){
+						pl.show('slide-in-right',400);
+					},300)
+				})
+				
+			})
+			
+		</script>
+	</body>
+
+</html>

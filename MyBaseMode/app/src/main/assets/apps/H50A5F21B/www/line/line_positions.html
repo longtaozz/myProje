@@ -1,0 +1,371 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/style.css" rel="stylesheet" />
+		<link href="../css/iconfont.css" rel="stylesheet" />
+		<link href="../css/mui.indexedlist.css" rel="stylesheet" />
+		<style>
+			.mui-group-list-bar {
+				width: 23px;
+				background-color: rgba(255,255,255,0.2);
+				position: absolute;
+				height: 100%;
+				z-index: 10;
+				right: 0px;
+				top:0px;
+				-webkit-transition: .2s;
+			}
+			.mui-group-list-bar a {
+				display: block;
+				text-align: center;
+				font-size: 10px;
+				padding: 0px;
+				margin: 0px;
+				line-height: 15px !important;
+				color: #000;
+			}
+			.mui-row.mui-fullscreen>[class*="mui-col-"] {
+				height: 100%;
+			}
+			.mui-col-xs-3,.mui-control-content {
+				overflow-y: auto;
+				height: 100%;
+			}
+			.mui-segmented-control .mui-control-item {
+				line-height: 50px;
+				width: 100%;
+			}
+			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
+				background-color: #fff;
+				color: #FF8201;
+			}
+			.dangqian{
+				border: 1px solid #FF8201;border-radius:5px;
+				margin-top: 2px;width: auto;display:inline-block;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav mheader aaa">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left cffffff"></a>
+			<h1 class="mui-title cffffff"></h1>
+		</header>
+		<div class="mui-content">
+			<div class="oh h40 lh38 bgwhite">
+				<div class="w50 fl tc fs15 cff8201 bbFF8201">
+					<span>国内</span>
+				</div>
+				<div class="w50 fl tc fs15 c333333">
+					<span>国际</span>
+				</div>
+			</div>
+			<div id="guonei">
+				<div class="ml15 fs15">
+					<span class="c333333">当前</span>
+				</div>
+				<div class="bgwhite h40" style="padding: 5px 5px 5px 15px;">
+					<div class="dangqian" id="dangqianxuanze">
+						<span class="iconfont icon-qi fs16 cff8201 ml5"></span> <span class="fs14 mr10" id="out_city1">张家界</span>
+					</div>
+					<div class="dangqian"  id="dangqianxuanze">
+						<span class="iconfont icon-zhong fs16 cff8201 ml5"></span> <span class="fs14 mr10" id="go_city1">张家界</span>
+					</div>
+				</div>
+				<div class="ml15 fs15">
+					<span class="c333333">筛选</span>
+				</div>
+				<div class="mui-content mui-row mui-fullscreen" style="margin-top:195px;">
+					<div class="mui-col-xs-3">
+						<div id="segmentedControls" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-vertical fs15"></div>
+					</div>
+					<div id="segmentedControlContents" class="mui-col-xs-9 fs15 bgwhite" style="border-left: 1px solid #c8c7cc;"></div>
+				</div>
+			</div>
+			<div id="guoji" class="disn">
+				<div class="ml15 fs15">
+					<span class="c333333">当前</span>
+				</div>
+				<div class="bgwhite h40" style="padding: 5px 5px 5px 15px;">
+					<div class="dangqian" id="dangqianxuanze">
+						<span class="iconfont icon-qi fs16 cff8201 ml5"></span> <span class="fs14 mr10" id="out_city2">张家界</span>
+					</div>
+					<div class="dangqian"  id="dangqianxuanze">
+						<span class="iconfont icon-zhong fs16 cff8201 ml5"></span> <span class="fs14 mr10" id="go_city2">张家界</span>
+					</div>
+				</div>
+				<div class="ml15 fs15">
+					<span class="c333333">筛选</span>
+				</div>
+				<div id='list' class="mui-group-list" style="background: #efefef;">
+					<div class="mui-group-list-search mui-input-row  disn" style="margin: 10px;">
+						<input id="input_search"  type="search" class="mui-input-clear mui-group-list-search-input" placeholder="搜索">
+					</div>
+					<div class="mui-group-list-bar" style="padding-top:20px;line-height:15px;">
+						<a>A</a>
+						<a>B</a>
+						<a>C</a>
+						<a>D</a>
+						<a>E</a>
+						<a>F</a>
+						<a>G</a>
+						<a>H</a>
+						<a>I</a>
+						<a>J</a>
+						<a>K</a>
+						<a>L</a>
+						<a>M</a>
+						<a>N</a>
+						<a>O</a>
+						<a>P</a>
+						<a>Q</a>
+						<a>R</a>
+						<a>S</a>
+						<a>T</a>
+						<a>U</a>
+						<a>V</a>
+						<a>W</a>
+						<a>X</a>
+						<a>Y</a>
+						<a>Z</a>
+					</div>
+					<div class="mui-group-list-alert"></div>
+					<div class="mui-group-list-inner"  style="padding-bottom:50px;">
+						<div class="mui-group-list-empty-alert">没有数据</div>
+						<ul id="ul_city" class="mui-table-view">
+							<!-- <li data-group="A" class="mui-table-view-divider mui-group-list-group fs12 ">A</li>
+							<li class="mui-table-view-cell mui-group-list-item">安康市</li>
+							<li class="mui-table-view-cell mui-group-list-item">安庆市</li>
+							<li data-group="B" class="mui-table-view-divider mui-group-list-group fs12">B</li>
+							<li class="mui-table-view-cell mui-group-list-item">巴彦淖尔市</li>
+							<li class="mui-table-view-cell mui-group-list-item">巴中市</li>
+							<li class="mui-table-view-cell mui-group-list-item">巴州</li>
+							<li class="mui-table-view-cell mui-group-list-item">白城市</li>
+							<li data-group="C" class="mui-table-view-divider mui-group-list-group fs12">C</li>
+							<li class="mui-table-view-cell mui-group-list-item">cs</li>
+							<li class="mui-table-view-cell mui-group-list-item">长沙</li>
+							<li class="mui-table-view-cell mui-group-list-item">成都</li> -->
+							
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/city.min.js"></script>
+		<script src="../js/castapp.js"></script>
+		<script src="../js/template-web.js"></script>
+		<script src="../js/mui.indexedlist.js"></script>
+		<script type="text/template" id="liebiao">
+			{{each list}}
+				<li data-group="{{$value.first}}" class="mui-table-view-divider mui-group-list-group fs12 ">{{$value.first}}</li>
+				{{each $value.content}}
+					<li class="mui-table-view-cell mui-group-list-item fs14">
+							{{$value.name}}
+					</li>
+				{{/each}}
+			{{/each}}
+		</script>
+		<script type="text/javascript">
+			mui.plusReady(function(){
+				mui.init();
+				ca.init();
+				ca.whiteStatusBar();
+				var self=plus.webview.currentWebview();
+				var city_type=self.city_type;//选择类型(目的地2，出发地1)
+				var line_type=self.line_type;//线路类型(省内3,国内1,国际2)
+				var out_city='',out_province='',go_city='',go_province='';//出发城市,目的地城市
+				ca.id('go_city1').innerText=localStorage.getItem('go_city');
+				ca.id('go_city2').innerText=localStorage.getItem('go_city');
+				ca.id('out_city1').innerText=localStorage.getItem('out_city');
+				ca.id('out_city2').innerText=localStorage.getItem('out_city');
+				if(city_type==1){
+					ca.className('mui-title')[0].innerText='选择出发地城市';
+				}else{
+					ca.className('mui-title')[0].innerText='选择目的地城市';
+				}
+				
+				if(city_type==2 && line_type==2){
+					ca.className('w50')[0].classList.add('disn');
+					ca.className('w50')[1].classList.add('cff8201');
+					ca.className('w50')[1].classList.add('bbFF8201');
+					ca.id('guoji').classList.add('disb');
+					ca.id('guoji').classList.remove('disn');
+					ca.id('guonei').classList.add('disn');
+					ca.id('guonei').classList.remove('disb');
+				}else{
+					ca.className('w50')[1].classList.add('disn');
+					ca.className('w50')[0].classList.add('cff8201');
+					ca.className('w50')[0].classList.add('bbFF8201');
+					ca.id('guoji').classList.add('disn');
+					ca.id('guoji').classList.remove('disb');
+					ca.id('guonei').classList.add('disb');
+					ca.id('guonei').classList.remove('disn');
+				}
+				
+				findcity();
+				function findcity(){
+					ca.ajaxs({url:'findLineCate',data:{
+						},succFn:function(data){
+							if(data){
+								show1(data.gn);
+								findlistgj(data.gj);
+							}
+							ca.closeWaiting();
+						},errFn:function(err){
+							mui.toast(err);
+							ca.closeWaiting();
+						}
+					})
+				}
+				/**
+				 * 按首字符排序
+				 */
+				function findlistgj(data){
+					var arr=[];
+					if(data){
+						mui.each(data,function(index,item){
+							var uni=item.name.charCodeAt(0);//取得首字符
+							var shouzi='';
+							if(uni > 40869 || uni < 19968){
+								shouzi=item.name.slice(0,1);
+							}else{
+								//检查是否是多音字,是按多音字处理,不是就直接在strChineseFirstPY字符串中找对应的首字母  
+								shouzi=(ca.oMultiDiffs(uni) ? ca.oMultiDiffs(uni) : ca.getFirstLetter(item.name));
+							}
+							if(index==0){
+								arr.push({first:shouzi,content:[item]});
+							}else{
+								for(var a in arr){
+									if(arr[a].first==shouzi){
+										arr[a].content.push(item);
+										arr.splice(a,1,arr[a]);
+										break;
+									}else if(a==arr.length-1){
+										arr.push({first:shouzi,content:[item]});
+									}
+								}
+							}
+						})
+						//排序
+						var a=arr.sort(function(a,b){
+							return a.first.localeCompare(b.first);
+						})
+						
+						ca.id('ul_city').innerHTML+=template('liebiao',{
+							'list':a
+						})
+					}	
+				}
+				//国内城市选择
+				mui('#segmentedControlContents').on('tap','.mui-table-view-cell',function(){
+					var province=this.getAttribute('data_province');
+					var city=this.innerText;
+					setCitys(province,city);
+				})
+				//国际城市选择
+				mui('#ul_city').on('tap','.mui-table-view-cell',function(){
+					var province='国外';
+					var city=this.innerText;
+					setCitys(province,city);
+				})
+				
+				function setCitys(province,city){
+					var arr=['北京','天津','上海','重庆','香港','澳门'];
+					for(var i=0;i<arr.length;i++){
+						if(province==arr[i]){
+							if(city_type==2){
+								localStorage.setItem('go_province',province);
+								localStorage.setItem('go_city',province);
+							}else{
+								localStorage.setItem('out_province',province);
+								localStorage.setItem('out_city',province);
+							}
+						}else if(i==(arr.length-1)){
+							if(city_type==2){
+								localStorage.setItem('go_province',province);
+								localStorage.setItem('go_city',city);
+							}else{
+								localStorage.setItem('out_province',province);
+								localStorage.setItem('out_city',city);
+							}
+						}
+					}
+					var arr1 = ['line_tourist_route_list'];
+					ca.sendNotice(arr1,'update',{});
+					self.close();
+				}
+			})
+			
+			
+			ca.className('w50')[0].addEventListener('tap',function(){
+				this.classList.remove('c333333')
+				this.classList.add('cff8201');
+				this.classList.add('bbFF8201');
+				this.nextElementSibling.classList.add('c333333');
+				this.nextElementSibling.classList.remove('cff8201');
+				this.nextElementSibling.classList.remove('bbFF8201');
+				ca.id('guonei').classList.add('disb');
+				ca.id('guonei').classList.remove('disn');
+				ca.id('guoji').classList.add('disn');
+				ca.id('guoji').classList.remove('disb');
+			})
+			ca.className('w50')[1].addEventListener('tap',function(){
+				this.classList.remove('c333333')
+				this.classList.add('cff8201');
+				this.classList.add('bbFF8201');
+				this.previousElementSibling.classList.add('c333333');
+				this.previousElementSibling.classList.remove('cff8201');
+				this.previousElementSibling.classList.remove('bbFF8201');
+				ca.id('guoji').classList.add('disb');
+				ca.id('guoji').classList.remove('disn');
+				ca.id('guonei').classList.add('disn');
+				ca.id('guonei').classList.remove('disb');
+			})
+			
+			function show1(data) {
+				var controls = document.getElementById("segmentedControls");
+				var contents = document.getElementById("segmentedControlContents");
+				var html = [];
+				var html1 = [];
+				for (var i = 0; i < data.length; i++) {
+					html.push('<a class="mui-control-item" href="#content' + i + '">' + data[i].p + '</a>');
+					html1.push('<div id="content' + i + '" class="mui-control-content"><ul class="mui-table-view">');
+					if (!ca.emptyFun(data[i].c)) {
+						var da = data[i].c;
+						for (var a = 0; a < da.length; a++) {
+							html1.push('<li class="mui-table-view-cell" data_province="' + data[i].p + '">' + da[a].name + '</li>');
+						}
+					} else {
+						html1.push('<li class="mui-table-view-cell">无城市选择</li>');
+					}
+					html1.push('</ul></div>');
+				}
+				controls.innerHTML = html.join('');
+				contents.innerHTML = html1.join('');
+				//默认选中第一个
+				controls.querySelector('.mui-control-item').classList.add('mui-active');
+				contents.querySelector('.mui-control-content').classList.add('mui-active');
+			}
+			
+			
+			mui.ready(function() {
+				var header = document.querySelector('header.mui-bar');
+				var list = document.getElementById('list');
+				//calc hieght
+				var height=document.documentElement.clientHeight || document.body.clientHeight;
+				list.style.height = (height - (header.offsetHeight+110)) + 'px';
+				ca.className('mui-group-list-inner')[0].style.height=(height - (header.offsetHeight+110)) + 'px';
+				//create
+				window.groupList = new mui.GroupList(list);
+			});
+		
+		</script>
+	</body>
+
+</html>

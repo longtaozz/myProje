@@ -1,0 +1,151 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../css/style.css" />
+		<style>
+			.mui-icon-star {
+			    color: #B5B5B5;
+			    font-size: 22px;
+			}
+			.mui-icon-star-filled{
+				color: #FFB400;
+				font-size: 22px;
+			}
+			#textarea::-webkit-input-placeholder{
+			    color:#b6b6b6;
+			}
+		</style>
+	</head>
+
+	<body  style="background: #FFFFFF;">
+		<header class="mui-bar mui-bar-nav mheader">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mback"></a>
+		    <h1 class="mui-title htitle">发表评价</h1>
+		    <span  class="fr lh44 mr10 fs15 cFFB400" id="add" >发布</span>
+		</header>
+		<div class="mui-content"  style="background: #FFFFFF;">
+		    <div class="bbf0 oh">
+		    	<span class="fl mt13 ml20 fs14" style="">评分</span>
+		  		<div class="mui-content-padded fl">
+					<div class="icons mui-inline" style="">
+						<i data-index="1" class="mui-icon mui-icon-star-filled "></i>
+						<i data-index="2" class="mui-icon mui-icon-star-filled"></i>
+						<i data-index="3" class="mui-icon mui-icon-star-filled"></i>
+						<i data-index="4" class="mui-icon mui-icon-star-filled"></i>
+						<i data-index="5" class="mui-icon mui-icon-star-filled"></i>
+					</div>
+				</div>
+				<div class="fl mt13 ml10">
+					<span id="zhuangtai" class="fs14" style="color: #B5B5B5;"></span>
+				</div>
+		    </div>
+		    <div class="h200 bbf0">
+		    	<textarea id="textarea" placeholder="物品满足你的期望吗？说说它的优点和美中不足的地方吧" rows="3" style="border: 0px; height: 180px;font-size: 14px; " ></textarea>
+		    </div>
+		</div>
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/castapp.js" ></script>
+		<script type="text/javascript">
+		  mui.plusReady(function(){
+				mui.init();
+				ca.init();
+				ca.blackStatusBar();
+				var zhuantai="非常好"
+				var zhuanta=ca.id('zhuangtai');
+				var level=1;
+				var grade=5;
+				var self=plus.webview.currentWebview();
+				zhuanta.innerHTML=zhuantai;
+				//应用评分
+				mui('.icons').on('tap','i',function(){
+						var index = parseInt(this.getAttribute("data-index"));
+						var parent = this.parentNode;
+						var children = parent.children;
+						
+						if(this.classList.contains("mui-icon-star")){
+							var a=0;
+							for(var i=0;i<index;i++){
+								a=i;
+								children[i].classList.remove('mui-icon-star');
+								children[i].classList.add('mui-icon-star-filled');
+							}
+							zhuantai=zhuangt(a);
+							zhuanta.innerHTML=zhuantai;
+						}else{
+							var a=0;
+							for (var i = index; i < 5; i++) {
+								a=index-1;
+								children[i].classList.add('mui-icon-star')
+								children[i].classList.remove('mui-icon-star-filled')
+							}
+							zhuantai=zhuangt(a);
+							zhuanta.innerHTML=zhuantai;
+						}
+						starIndex = index;
+						
+				});
+				function zhuangt(i){
+						if(i==0){
+							level=3;
+							grade=1;
+							return '非常差';
+						}else if(i==1){
+							level=3;
+							grade=2;
+							return '差';
+						}else if(i==2){
+							level=2;
+							grade=3;
+							return '一般';
+						}else if(i==3){
+							level=1;
+							grade=4;
+							return '好';
+						}else{
+							level=1;
+							grade=5;
+							return '非常好';
+						}
+				}
+		  	ca.id('add').addEventListener('tap',function(){
+		  		var te=ca.id('textarea').value;
+		  		if(te==""){
+		  			mui.toast('多少给点评论吧！');
+		  			return;
+		  		}
+		  		ca.ajaxs({url:'addComment',data:{
+			  			product_type:self.comment_type,
+			  			product_id:self.comment_product_id,
+			  			order_id:self.comment_order_id,
+			  			user_id:localStorage.getItem('userid'),
+			  			level:level,
+			  			grade:grade,
+			  			content:te,
+			  			status:1,
+			  			type:1
+		  			},succFn:function(data){
+							alert(JSON.stringify(data))
+		  				if(data.msg==1){
+		  					mui.toast('评论成功!');
+		  				}else{
+								mui.toast('评论失败!');
+							}
+		  				ca.closeWaiting();
+		  			},errFn:function(call){
+		  				ca.closeWaiting();
+		  				mui.toast(call);
+		  			}
+		  		})
+		  		
+		  	})
+		  	
+		  })
+		</script>
+	</body>
+
+</html>

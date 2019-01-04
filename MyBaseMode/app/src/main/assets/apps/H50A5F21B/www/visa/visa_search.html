@@ -1,0 +1,122 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/style.css" rel="stylesheet" />
+		<style>
+			.mui-bar-nav {
+				top: 0;
+				-webkit-box-shadow: 0 0px 0px #ccc;
+				box-shadow: 0 0px 0px #ccc;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav bgwhite" style="height: 69px;padding-top: 25px;">
+				<div class="fl w10">
+					<span class="mui-icon mui-icon-arrowleft mui-action-back">
+						
+					</span>
+				</div>
+				<div class="fl w80 mt3">
+					<form>
+						<div class="mui-input-row mui-search">
+						<input type="search" id="strName" placeholder="搜索">
+					</div>
+				</form>
+				</div>
+		</header>
+		<div class="mui-content">
+			<ul class="mui-table-view" id="list" style="margin-top:1px;">
+				 <!-- <li class="mui-table-view-cell">Item 1</li>
+		         <li class="mui-table-view-cell">Item 2</li>
+		         <li class="mui-table-view-cell">Item 3</li> -->
+			</ul>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/castapp.js"></script>
+		<script type="text/javascript">
+			mui.plusReady(function(){
+				mui.init();
+				ca.init();
+				ca.blackStatusBar();
+				var nativeWebview, imm, InputMethodManager;
+				var initNativeObjects = function() {
+					if (mui.os.android) {
+						var main = plus.android.runtimeMainActivity();
+						var Context = plus.android.importClass("android.content.Context");
+						InputMethodManager = plus.android.importClass("android.view.inputmethod.InputMethodManager");
+						imm = main.getSystemService(Context.INPUT_METHOD_SERVICE);
+					} else {
+						nativeWebview = plus.webview.currentWebview().nativeInstanceObject();
+					}
+				};
+				var showSoftInput = function() {
+					if (mui.os.android) {
+						imm.toggleSoftInput(0, InputMethodManager.SHOW_FORCED);
+					} else {
+						nativeWebview.plusCallMethod({
+							"setKeyboardDisplayRequiresUserAction": false
+						});
+					}
+					setTimeout(function() {
+						var inputElem = document.querySelector('input');
+						inputElem.focus();
+						inputElem.parentNode.classList.add('mui-active'); //第一个是search，加上激活样式
+					},300);
+				};
+				initNativeObjects();
+				showSoftInput();
+				
+				ca.tagName('input')[0].addEventListener('input',function(){
+					if(this.value.length>0){
+						find(this.value);
+					}else{
+						ca.id('list').innerHTML='';
+					}
+					
+				});
+				
+				function find(value){
+					ca.ajaxs({url:'searchVisaZong',data:{
+							value:value
+						},succFn:function(data){
+							if(data){
+								ca.id('list').innerHTML='';
+								for(var a in data){
+									var temp='<li class="mui-table-view-cell" data_country="'+data[a].name+'" data_img="'+data[a].pic+'">'+data[a].name+'</li>';
+									ca.id('list').innerHTML+=temp;
+								}
+								
+							}
+							
+						},errFn:function(err){
+							mui.toast(err);
+						}
+					})
+				}
+				document.getElementById("strName").addEventListener("keydown",function(e){ 
+							if(13 == e.keyCode){ //点击了“搜索”  
+								find(ca.tagName('input')[0].value);
+							} 
+					},false); 
+				mui('#list').on('tap','.mui-table-view-cell',function(){
+					document.activeElement.blur(); 
+					var data_country=this.getAttribute('data_country');
+					var data_img=this.getAttribute('data_img');
+					var self=plus.webview.create('visa_list_item.html','visa_list_item',{},{country:data_country,country_img:data_img});
+					setTimeout(function(){
+						self.show('pop-in',400);
+					},300)
+				})
+			})
+			
+		</script>
+	</body>
+
+</html>

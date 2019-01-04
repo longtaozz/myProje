@@ -1,0 +1,341 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../css/style.css" />
+		<style>
+			.su_o_d1 div{
+				width: 45%;
+				margin-top: 10px;
+			}
+			.su_o_d1_1{
+				color: #FFFFFF;
+				text-align: center;
+				border-radius:2px ;
+				margin-left: 10px;
+				background: #fb5956;
+				height: 30px;
+				line-height: 30px;
+				font-size: 15px;
+			}
+			.su_o_d1_2{
+				color: #FFFFFF;
+				text-align: center;
+				border-radius:2px ;
+				margin-right: 10px;
+				background: #52BCEC;
+				height: 30px;
+				line-height: 30px;
+				font-size: 15px;
+			}
+			.su_o_d2_1{
+				color: #FFFFFF;
+				text-align: center;
+				border-radius:2px ;
+				margin-right: 10px;
+				margin-left: 10px;
+				margin-top: 10px;
+				background: #4F77AA;
+				height: 30px;
+				line-height: 30px;
+				font-size: 15px;
+			}
+		</style>
+	</head>
+		
+	<body>
+		<header class="mui-bar mui-bar-nav mheader">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mback"></a>
+		    <h1 class="mui-title htitle">订  单</h1>
+		</header>
+		<div class="mui-content">
+			<div class="b-o-d-div">
+				<div class="b-o-d-div-d1"><span >订单信息</span></div>
+					<div class="b-o-d-div-d2">
+						<div class="oh b-o-d-div2" >	
+							<div class="fl w30"><span>往来单位</span></div>
+							<div class="fl"><span class="xx"></span></div>
+						</div>
+						<div class="oh b-o-d-div2" >	
+							<div class="fl" style="margin-left: 30%;"><span class="xx"></span></div>	
+						</div>
+						<div class="oh b-o-d-div2" >	
+							<div class="fl" style="margin-left: 30%;"><span class="xx"></span></div>	
+						</div>
+						<div class="oh b-o-d-div2" >	
+							<div class="fl" style="margin-left: 30%;"><span class="xx"></span></div>	
+						</div>
+						<div class="oh b-o-d-div2" >	
+							<div class="fl" style="margin-left: 30%;"><span class="xx"></span></div>	
+						</div>
+						<div class="oh b-o-d-div2" >	
+							<div class="fl w30"><span>使用时间</span></div>
+							<div class="fl"><span class="xx"></span></div>	
+						</div>	
+						<div class="oh b-o-d-div2" >		
+							<div class="fl w30"><span>采购人</span></div>	
+							<div class="fl"><span class="xx"></span></div>	
+						</div>
+						<div class="oh b-o-d-div2" >		
+							<div class="fl w30"><span>联系电话</span></div>
+							<div class="fl" ><span class="xx" id="phone1"></span></div>
+						</div>	
+						<div class="oh b-o-d-div2" >		
+							<div class="fl w30"><span>导游</span></div>	
+							<div class="fl"><span class="xx"></span></div>	
+						</div>
+						<div class="oh b-o-d-div2" >		
+							<div class="fl w30"><span>联系电话</span></div>
+							<div class="fl" ><span class="xx" id="phone2"></span></div>
+						</div>
+						<div class="oh b-o-d-div2" >			
+							<div class="fl w30"><span>导游付</span></div>	
+							<div class="fl"><span class="cred xx"></span></div>		
+						</div>
+						
+						<div class="oh b-o-d-div2" >	
+							<div class="fl w30"><span>签单</span></div>	
+							<div class="fl"><span class="cred xx" ></span></div>
+						</div>
+						<div class="oh b-o-d-div2" >	
+							<div class="fl w30"><span>订单总额</span></div>	
+							<div class="fl"><span class="cred xx"></span></div>	
+						</div>
+					</div>
+			</div>
+			<div>
+				<div class="su_o_d1 oh" id="su_o_d1" style="">
+					<div class="su_o_d1_1 fl" id="queren">
+						<span>订单确认</span>
+					</div>
+					<div class="su_o_d1_2 fr" id="jujue">
+						<span>订单拒绝</span>
+					</div>
+				</div>
+				<div id="su_o_d2"> 
+					<div class="su_o_d2_1" id="su_o_d2_1">
+						<span>订单已确认</span>
+					</div>
+					<div class="fr mt10 fs14 mr10 c666666" id="qiangzhijujue">
+						<span style="border-bottom: 1px solid #666666;">申请取消</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/castapp.js" ></script>
+		<script type="text/javascript">
+			mui.plusReady(function(){
+				mui.init();
+				ca.init();
+				ca.blackStatusBar();
+				var self=plus.webview.currentWebview();
+				var supplier_order_id=self.supplier_order_id;
+				var user_id=localStorage.getItem('userid');
+				var cell=ca.className('xx');
+				ca.ajaxs({url:'findSupplierOrderDetail',data:{
+						id:supplier_order_id
+					},succFn:function(data){
+						var guide=data.guide;
+						var data=data.data;
+						cell[0].innerHTML=data.structure.enterprise.alias+' '+data.structure.name;
+						if(data.procurement_quantity>0){
+							cell[1].innerHTML=data.alias+' x'+data.procurement_quantity+' '+data.procurement_price+' &nbsp' + (data.procurement_quantity*data.procurement_price)+'元'           ;
+						}
+						if(data.procurement_quantity_two>0){
+							cell[2].innerHTML=data.alias_two+' x'+data.procurement_quantity_two+' '+data.procurement_price_two+' &nbsp' + (data.procurement_quantity_two*data.procurement_price_two)+'元'           ;
+						}
+						if(data.procurement_quantity_three>0){
+							cell[3].innerHTML=data.alias_three+' x'+data.procurement_quantity_three+' '+data.procurement_price_three+' &nbsp' + (data.procurement_quantity_three*data.procurement_price_three)+'元'           ;
+						}
+						if(data.procurement_quantity_four>0){
+							cell[4].innerHTML=data.alias_four+' x'+data.procurement_quantity_four+' '+data.procurement_price_four+' &nbsp' + (data.procurement_quantity_four*data.procurement_price_four)+'元'           ;
+						}
+						cell[5].innerHTML=data.use_date;
+						if(ca.emptyFun(data.employee1)){
+							cell[6].innerHTML='无';
+							cell[7].innerHTML='无';
+						}else{
+							cell[6].innerHTML=data.employee1.realname;
+							cell[7].innerHTML=data.employee1.phone;
+						}
+						if(ca.emptyFun(guide)){
+							cell[8].innerHTML='无';
+							cell[9].innerHTML='无';
+						}else{
+							cell[8].innerHTML=guide.employee.realname;
+							
+							cell[9].innerHTML=guide.employee.phone;
+						}
+						cell[10].innerHTML=data.guide_pay;
+						cell[11].innerHTML=data.sign_bill;
+						cell[12].innerHTML=(data.procurement_price*data.procurement_quantity+data.procurement_price_two*data.procurement_quantity_two+data.procurement_price_three*data.procurement_quantity_three+data.procurement_price_four*data.procurement_quantity_four)+'元';
+						if(data.type=='pickup'){
+							if(data.pickup_flag==0){
+								var temp='<div class="oh b-o-d-div2" >'	
+										+	'<div class="fl w30"><span>接站日期时间</span></div>	'
+										+	'<div class="fl"><span class="xx">'+data.lineorder.go_date+' '+data.lineorder.go_time+'</span></div>'
+										+'</div>'
+										+'<div class="oh b-o-d-div2" >'
+										+	'<div class="fl w30"><span>接站车次航班</span></div>	'
+										+	'<div class="fl"><span class="xx">'+data.lineorder.go_traffic+'</span></div>'
+										+'</div>'
+										+'<div class="oh b-o-d-div2" >'
+										+	'<div class="fl w30"><span>联系人</span></div>	'
+										+	'<div class="fl"><span class="xx">'+data.lineorder.contact_name+'</span></div>'
+										+'</div>'
+										+'<div class="oh b-o-d-div2" >'
+										+	'<div class="fl w30"><span>联系人电话</span></div>	'
+										+	'<div class="fl"><span class="xx" id="phone3">'+data.lineorder.contact_tel+'</span></div>'
+										+'</div>'
+										+'<div class="oh b-o-d-div2" >'
+										+	'<div class="fl w30"><span>人数</span></div>	'
+										+	'<div class="fl"><span class="xx">成人:'+data.lineorder.man_num+' 小孩:'+data.lineorder.child_num+' 全陪:'+data.lineorder.guide_num+'</span></div>'
+										+'</div>';
+									ca.className('b-o-d-div-d2')[0].innerHTML+=temp;
+							}else{
+								var temp='<div class="oh b-o-d-div2" >'	
+										+	'<div class="fl w30"><span>送站日期时间</span></div>	'
+										+	'<div class="fl"><span class="xx">'+data.lineorder.back_date+' '+data.lineorder.back_time+'</span></div>'
+										+'</div>'
+										+'<div class="oh b-o-d-div2" >'
+										+	'<div class="fl w30"><span>送站车次航班</span></div>	'
+										+	'<div class="fl"><span class=" xx">'+data.lineorder.back_traffic+'</span></div>'
+										+'</div>'
+										+'<div class="oh b-o-d-div2" >'
+										+	'<div class="fl w30"><span>联系人</span></div>	'
+										+	'<div class="fl"><span class="xx">'+data.lineorder.contact_name+'</span></div>'
+										+'</div>'
+										+'<div class="oh b-o-d-div2" >'
+										+	'<div class="fl w30"><span>联系人电话</span></div>	'
+										+	'<div class="fl"><span class="xx" id="phone3">'+data.lineorder.contact_tel+'</span></div>'
+										+'</div>'
+										+'<div class="oh b-o-d-div2" >'
+										+	'<div class="fl w30"><span>人数</span></div>	'
+										+	'<div class="fl"><span class="xx">成人:'+data.lineorder.man_num+' 小孩:'+data.lineorder.child_num+' 全陪:'+data.lineorder.guide_num+'</span></div>'
+										+'</div>';
+									ca.className('b-o-d-div-d2')[0].innerHTML+=temp;
+							}
+							var temp='<div class="oh b-o-d-div2" >'	
+									+	'<div class="fl w30"><span>订单总额</span></div>	'
+									+	'<div class="fl"><span class="cred xx"></span></div>'
+									+'</div>'
+						}
+						
+						
+						
+						var myDate = new Date();
+						var ye=myDate.getFullYear();
+						var mo=myDate.getMonth()+1; //获取当前月份(0-11,0代表1月)
+						var day=myDate.getDate();
+						var mmda=ye+'-'+mo+'-'+day;
+						var date = new Date(mmda.replace(/-/g, '/'));
+						var date1 = new Date(data.use_date.replace(/-/g, '/'));
+						if(date>date1){
+							ca.id('su_o_d1').style.display='none';
+							ca.id('qiangzhijujue').style.display='none';
+							
+							if(data.status==1){
+								ca.id('su_o_d2_1').innerHTML='订单已确认';
+							}else{
+								ca.id('su_o_d2_1').innerHTML='订单已过期';
+							}
+							ca.closeWaiting();
+							return;
+						}
+						
+						if(data.status==0){
+							ca.id('su_o_d1').style.display='block';
+							ca.id('su_o_d2').style.display='none';
+							btjujue();
+							btqueren();
+						}else if(data.status==1){
+							ca.id('su_o_d1').style.display='none';
+							ca.id('su_o_d2').style.display='block';
+							ca.id('su_o_d2_1').innerHTML='订单已确认'
+							btjujue();
+						}else if(data.status==2){
+							ca.id('su_o_d1').style.display='none';
+							ca.id('su_o_d2').style.display='block';
+							ca.id('qiangzhijujue').style.display='none';
+							ca.id('su_o_d2_1').innerHTML='订单申请取消'
+						}else if(data.status==3){
+							ca.id('su_o_d1').style.display='none';
+							ca.id('su_o_d2').style.display='block';
+							ca.id('qiangzhijujue').style.display='none';
+							ca.id('su_o_d2_1').innerHTML='订单已取消'
+						}
+						
+						ca.closeWaiting();
+					},errFn:function(call){
+						ca.closeWaiting();
+						mui.toast(call);
+					}
+				})
+				mui('body').on('tap','#phone1',function(){
+					ca.callPhone(this.innerText);
+				})
+				mui('body').on('tap','#phone2',function(){
+					ca.callPhone(this.innerText);
+				})
+				mui('body').on('tap','#phone3',function(){
+					ca.callPhone(this.innerText);
+				})
+				function btqueren(){
+					ca.id('queren').addEventListener('tap',function(){
+						var btnArray = ['是','否'];
+						mui.confirm('确认接收该订单?', '提示', btnArray, function(e) {
+		                    if (e.index == 0) {
+		                    	postOrder(1);
+		                    } else {
+		                    }
+		                })
+					})
+				}
+				function btjujue(){
+					ca.id('jujue').addEventListener('tap',function(){
+						var btnArray = ['是','否'];
+						mui.confirm('确认拒绝该订单?', '提示', btnArray, function(e) {
+		                    if (e.index == 0) {
+		                    	postOrder(3);
+		                    } else {
+		                    }
+		                })
+					})
+					ca.id('qiangzhijujue').addEventListener('tap',function(){
+						var btnArray = ['是','否'];
+						mui.confirm('确认取消订单?', '提示', btnArray, function(e) {
+		                    if (e.index == 0) {
+		                    	postOrder(2);
+		                    } else {
+		                    }
+		                })
+					})
+				}
+				function postOrder(sta){
+					ca.ajaxs({url:'updateSupplierOrder',data:{
+							id:supplier_order_id,status:sta
+						},succFn:function(data){
+							if(data.code>0){
+								mui.toast('操作成功!');
+								location.reload();
+							}else{
+								mui.toast(data.msg);
+							}
+							ca.closeWaiting();
+						},errFn:function(call){
+							ca.closeWaiting();
+							mui.toast(call);
+						}
+					})
+				}
+			})
+		</script>
+	</body>
+
+</html>

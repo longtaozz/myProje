@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/castapp.js" ></script>
+		<script type="text/javascript" src="../js/mui.picker.min.js" ></script>
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/style.css" />
+		<link rel="stylesheet" href="../css/iconfont.css" />
+		<link rel="stylesheet" href="../css/mui.picker.min.css" />
+		<style>
+			.mui-bar-nav~ .mui-content .mui-pull-top-pocket{
+				top:90px !important;
+			}
+			.mui-backdrop {
+			    position: fixed;
+			    top: 172px !important;
+			    right: 0;
+			    bottom: 0;
+			    left: 0;
+			    z-index: 998;
+			    background-color: rgba(0,0,0,0.2);
+			}
+			.mui-popover{
+				-webkit-box-shadow: 0 0 0px rgba(0,0,0,.1);
+    		 box-shadow: 0 0 0px rgba(0,0,0,.1)
+			}
+			.mui-row.mui-fullscreen>[class*="mui-col-"] {
+				height: 100%;
+			}
+			.mui-col-xs-3,
+			.mui-control-content {
+				overflow-y: auto;
+				height: 100%;
+			}
+			.mui-segmented-control .mui-control-item {
+				line-height: 50px;
+				width: 100%;
+			}
+			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
+				background-color: #fff;
+				color: #4F77AA;
+			}
+			.mui-scroll-wrapper1
+			{
+			    position: absolute;
+			    z-index: 2;
+			    top: 0;
+			    bottom: 0;
+			    left: 0;
+			
+			    overflow: hidden;
+			
+			    width: 100%;
+			}
+			
+			.mui-scroll1
+			{
+			    position: absolute;
+			    z-index: 1;
+			
+			    width: 100%;
+			
+			    -webkit-transform: translateZ(0);
+			            transform: translateZ(0);
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav bgwhite" style="z-index: 9998;height: 69px;padding-top: 25px;">
+		    <div class="fl w10">
+		    	<span class="mui-icon mui-icon-arrowleft mui-action-back">
+		    		
+		    	</span>
+		    </div>
+		    <div class="fl w80 mt8">
+		    	<div class="top-neirong w90" >
+					<div class="top-dinwei">
+						<span class="top-dinwei-name">张家界</span>
+						<span class="iconfont icon-shuxian2"></span>
+					</div>
+					<div class="top-input">
+						<input type="text" placeholder="张家界火车站" id="top-search-input"/>
+						
+					</div>
+				</div>
+		    </div>
+		</header>
+		
+		<script type="text/javascript">
+			mui.init({
+				 subpages:[{
+			      url:'restaurant_list_item.html',//下拉刷新内容页面地址
+			      id:'restaurant_list_item',//内容页面标志
+			      styles:{
+			       top:'69px',
+			       bottom:'1px',
+			      }
+			    }]
+	       });
+	       ca.init(true);
+			ca.blackStatusBar();
+	       
+		</script>
+	</body>
+
+</html>

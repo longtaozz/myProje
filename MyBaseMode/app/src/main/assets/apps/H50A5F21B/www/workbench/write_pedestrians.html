@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/style.css" rel="stylesheet" />
+		<style>
+			textarea{
+				padding: 2px;
+				height: 300px;
+				width: 94%;
+				margin-left: 3%;
+				font-size: 14px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav user-index-top-bg mheader" >
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: #FFFFFF !important;"></a>
+			<h1 class="mui-title" style="font-size: 18px !important;color: #FFFFFF !important;">新增出行人</h1>
+			<span class="mui-pull-right" id="add" style="line-height: 44px;color: #FFFFFF !important;font-weight: bold;">保存</span>
+		</header>
+		<div class="mui-content">
+			<div class="bd4f77aa borderr" style="margin:5px; padding: 5px 10px;">
+				<div class="cred fs16">格式要求:</div>
+				<div class="fs14">
+					<span>1. 每个游客信息之间必须换行;</span><br>
+					<span>2. 每个游客的姓名和身份证必不可少;</span><br>
+					<span>3. 姓名必须是中文，中间可有空格;</span><br>
+					<span>4. 身份证和电话号码连写时，必须有非数字间隔符;</span><br>
+					<span>5. 姓名和备注连写时，必须有非空非汉字字符隔开;</span><br>
+				</div>
+			</div>
+			<div>
+				<textarea placeholder="姓名 身份证 电话 备注"></textarea>
+			</div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/castapp.js"></script>
+		<script type="text/javascript" src="../js/my.js"></script>
+		<script type="text/javascript">
+			mui.plusReady(function(){
+				mui.init();
+				ca.init();
+				show();
+				ca.id('add').addEventListener('tap',function(){
+					var values=ca.tagName('textarea')[0].value;
+					if(values){
+						var value_arr=my.strToObject(values);
+						if(value_arr){
+							var tourists = localStorage.getItem('youkexinxi');
+							var arrs = JSON.parse(tourists);
+							var arr = new Array();
+							if(ca.emptyFun(arrs)) {
+							} else {
+								if(arrs.length > 0) {
+									arr = arrs;
+								}
+							}
+							for(var a in value_arr){
+								arr.push(value_arr[a]);
+							}
+							localStorage.setItem('youkexinxi', JSON.stringify(arr));
+							mui.toast('保存成功');
+							var arr1 = ['add_pedestrian'];
+							ca.sendNotice(arr1, 'update', {});
+							setTimeout(function() {
+								ca.closeCurrentInterface();
+							}, 1000);
+						}
+						
+					}else{
+						mui.toast('请输入游客信息');
+					}
+				})
+				
+				function show(){
+					var tourists = localStorage.getItem('youkexinxi');
+					var arrs = JSON.parse(tourists);
+					if(ca.emptyFun(arrs)) {
+					}else{
+						for(var a in arrs){
+							var temp=arrs[a].name+' '+arrs[a].card+' '+arrs[a].phone+' '+arrs[a].mark+'\n';
+							ca.tagName('textarea')[0].value+=temp;
+						}
+					}
+				}
+			})
+			
+		</script>
+	</body>
+
+</html>

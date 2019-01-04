@@ -1,0 +1,228 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/style.css" />
+		<link rel="stylesheet" href="../css/iconfont.css" />
+		<style>
+			
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav mheader">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mback"></a>
+		    <h1 class="mui-title mtitle" id="title" style="display:none;">详细资料</h1>
+		    <div class="mui-title" id="jiazai" style="display:block;">
+		    	<div class="chat-trip">
+					<div class="mui-pull-loading mui-icon mui-spinner mui-visibility"></div>
+					<span class="fs14 c666666">加载中...</span>
+				</div>
+		    </div>
+		</header>
+		<div class="mui-content">
+		    <div class="bgwhite mt15 oh" style="height: 80px;">
+		    	<div class="fl" style="padding: 10px 15px;">
+		    		<img id="avatar" src="" style="height: 60px;width:60px ;border-radius:3px ;"/>
+		    	</div>
+		    	<div class="fl mt15">
+		    		<div><span id="nick"></span><span id="gender" class="ml5 fs14 iconfont"></span></div>
+		    		<div class="fs13 c666666 mt5" id="account"></div>
+		    	</div>
+		    </div>
+		    <div class="mt15">
+		    	<ul class="mui-table-view">
+				    <li class="mui-table-view-cell">
+				    	<span class="fs15">电话</span><span id="tel" class="ml20 fs14"></span>
+				    </li>
+				    <li class="mui-table-view-cell">
+				    	<span class="fs15">邮箱</span><span id="email" class="ml20 fs14"></span>
+				    </li>
+				    <li class="mui-table-view-cell">
+				    	<span class="fs15">生日</span><span id="birth" class="ml20 fs14"></span>
+				    </li>
+				</ul>
+		    </div>
+		    <div class="mt15">
+		    	<div class="tc lh40" style="width: 80%;margin-left: 10%;background: #07BC05;border-radius:3px ;height: 40px;">
+		    		<span class="cffffff fs16">发送消息</span>
+		    	</div>
+		    </div>
+		    <div class="mt15 disn" id="jiahaoyou">
+		    	<div class="tc lh40" style="width: 80%;margin-left: 10%;background: #07BC05;border-radius:3px ;height: 40px;">
+		    		<span class="cffffff fs16">添加为好友</span>
+		    	</div>
+		    </div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/castapp.js" ></script>
+		<script type="text/javascript" src="../js/NIM_Web_NIM_v5.5.0.js" ></script>
+		<script type="text/javascript">
+			mui.init({swipeBack: true //启用右滑关闭功能
+			});
+			ca.init();
+			ca.blackStatusBar();
+// 			oldback();//监听返回键
+// 			function oldback(){
+// 				mui.back = function() {
+// 					localStorage.removeItem('accounts');//移除当前正在聊天的对象
+// 					var ws=plus.webview.currentWebview();
+// 					plus.webview.close(ws);
+// 				}
+// 			}
+			mui.plusReady(function(){
+				var self = plus.webview.currentWebview();
+				var nim = NIM.getInstance({
+					  appKey:'fc06054e7594d0cd2e17b1238c9fc296',
+					  account:localStorage.getItem('e_code')+'_'+localStorage.getItem('username'),
+					  token:localStorage.getItem('im_token'),
+					  onconnect:onConnect,
+					  onwillreconnect:onWillReconnect,
+					  ondisconnect:onDisconnect,
+					  onerror:onError
+				});
+				function onConnect(optional) {
+				  console.log('连接成功');
+				  find();
+				}
+				function onWillReconnect(obj) {
+				  // 此时说明 SDK 已经断开连接, 请开发者在界面上提示用户连接已断开, 而且正在重新建立连接
+				  console.log('即将重连');
+				}
+				function onDisconnect(error) {
+				  // 此时说明 SDK 处于断开状态, 开发者此时应该根据错误码提示相应的错误信息, 并且跳转到登录页面
+				  console.log('丢失连接');
+				}
+				function onError(error) {
+				  console.log(error);
+				}
+				function find(){
+					nim.getFriends({
+				    	done: getFriendsDone
+					});
+					function getFriendsDone(error, friends) {
+					    console.log('获取好友列表' + (!error?'成功':'失败'), error, friends);
+					    if (!error) {
+					        for(var a in friends){
+						    	if(self.users.account==friends[a].account){
+						    		break;
+						    	}else if(a==friends.length-1){
+						    		ca.id('jiahaoyou').style.display='block';
+						    	}
+						    }
+					        
+					    }
+					}
+					ca.id('jiazai').style.display='none';
+					ca.id('title').style.display='block';
+				}
+				ca.id('avatar').src=self.users.avatar;
+				ca.id('nick').innerText=self.users.nick;
+				if(self.users.gender=='unknown'){
+				}else if(self.users.gender=='male'){
+					ca.id('gender').classList.add('icon-nan');
+					ca.id('gender').classList.add('c1296db');
+				}else if(self.users.gender=='female'){
+					ca.id('gender').classList.add('icon-nv');
+					ca.id('gender').classList.add('cF37E7D');
+				}
+				ca.id('account').innerText='账号: '+self.users.account;
+				ca.id('tel').innerText=self.users.tel;
+				ca.id('email').innerText=self.users.email;
+				ca.id('birth').innerText=self.users.birth;
+				
+				
+				var bt=ca.className('tc');
+				bt[0].addEventListener('tap',function(){
+					var name=ca.id('nick').innerText;
+					var userimg=ca.id('avatar').src;
+					accounts=self.users.account;
+					localStorage.setItem('accounts',accounts);
+					var account=localStorage.getItem('e_code')+'_'+localStorage.getItem('username')
+					var storageName='chatList'+account+'and'+accounts;
+// 						plus.storage.removeItem(storageName)
+// 						localStorage.setItem(account+'userimg','../img/NoHeadportrait.png')
+					var chatlistdetail=JSON.parse(plus.storage.getItem(storageName));
+					if(ca.emptyFun(chatlistdetail)){//如果没有
+						var selfimg=localStorage.getItem(account+'userimg');//获取用户自己的头像地址
+						var heimg='';//读取消息来源人的头像
+						plus.io.resolveLocalFileSystemURL('_downloads/'+account+'/'+accounts+'.png',function(entry){  
+							entry.file(function(file){
+								heimg=file.fullPath;
+							});
+						},function(e){//读取文件失败 重新下载
+							if(!ca.emptyFun(userimg)){
+								ca.downloader({url:userimg,filePath:account+'/'+accounts+'.png',//下载用户头像
+									succFn:function(file){
+										// alert(JSON.stringify(file))
+										findFileSystemURL({url:file.filename,succFn:function(fil){//根据路径读取文件
+											heimg=fil;//创建列表
+										}})
+									},errFn:function(){//下载失败 使用默认头像
+										heimg='../imag/NoHeadportrait.png';
+									}
+								})
+							}else{
+								heimg='../imag/NoHeadportrait.png';
+							}
+						});
+						setTimeout(function(){//防止文件资源还未读取到
+							var chat=new Object;
+							chat.selfname=localStorage.getItem('realname');
+							chat.selfimg=selfimg;
+							chat.selfaccount=account;
+							chat.hename=name;
+							chat.heimg=heimg;
+							chat.heaccount=accounts;
+							chat.updatetime=new Date().getTime();
+							chat.content=[];
+							plus.storage.setItem(storageName,JSON.stringify(chat));
+						},200)
+					}
+					setTimeout(function(){
+						mui.openWindow({
+							url:'chat_message_list_detail.html',
+							id:'chat_message_list_detail',
+							extras:{
+								accounts:accounts,
+								userimg:userimg,
+								name:name
+							}
+						});
+					},300)
+					
+//					ProcessingmUnreadcount();
+					
+				})
+				bt[1].addEventListener('tap',function(){
+					var name=ca.id('nick').innerText;
+					accounts=self.users.account;
+					mui.openWindow({
+					    url:'add_friend.html',
+					    id:'add_friend',
+					    extras:{
+					        name:name,
+					        accounts:accounts,
+					    }
+					});
+					
+				})
+				/**
+				* 根据路径读取到文件   
+				*/
+				function findFileSystemURL(data){
+					plus.io.resolveLocalFileSystemURL(data.url,function(entry){  
+						entry.file(function(file){
+							data.succFn && data.succFn(file.fullPath);
+						});  
+					});
+				}
+			})
+		</script>
+	</body>
+
+</html>

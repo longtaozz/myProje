@@ -1,0 +1,625 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../css/style.css" />
+		<link rel="stylesheet" href="../../css/mui.picker.min.css" />
+		<link href="../../css/mui.poppicker.css" rel="stylesheet" />
+		<style>
+			.business_list_divr input{
+				border: 0px;
+				background:#EFEFF4;
+				height: 40px;
+				font-size: 14px;
+				
+			}
+			.business_list_divr input::-webkit-input-placeholder {
+			        /* placeholder颜色  */
+			        color: #999999;
+			         /* placeholder字体大小  */
+			        font-size: 14px;
+			         /* placeholder位置  */
+			        /*text-align: right*/
+			}
+			
+		</style>
+	</head>
+
+	<body>
+		<div class="" id="app">
+		    <div class="mt10 h40 oh">
+		    	<div class="w30 fl fs15 lh40 c333333">
+		    		<span class="ml15">客户地区</span>
+		    	</div>
+		    	<div class="w65 fl business_list_divr">
+		    		<input type="text" readonly="readonly"  placeholder="选择客户省份城市" />
+		    	</div>
+		    </div>
+		    <div class="h40 oh">
+		    	<div class="w30 fl fs15 lh40 c333333">
+		    		<span class="ml15">选择客户</span>
+		    	</div>
+		    	<div class="w65 fl business_list_divr">
+		    		<input type="text" readonly="readonly"  placeholder="选择客户" />
+		    	</div>
+		    </div>
+		    <div class="h40 oh">
+		    	<div class="w30 fl fs15 lh40 c333333">
+		    		<span class="ml15">选业务员</span>
+		    	</div>
+		    	<div class="w65 fl business_list_divr">
+		    		<input type="text" readonly="readonly" placeholder="选择业务员" />
+		    	</div>
+		    </div>
+		    <div class="h40 oh">
+		    	<div class="w30 fl fs15 lh40 c333333">
+		    		<span class="ml15">选择线路</span>
+		    	</div>
+		    	<div class="w50 fl business_list_divr">
+		    		<input type="text" readonly="readonly"  placeholder="选择线路" />
+		    	</div>
+		    	<div class="fl w20 lh40 fs14 cff8201 disn" id="xianluxiangxi" >
+					<span>线路详情</span>
+				</div>
+		    </div>
+		    <div class="h40 oh">
+		    	<div class="w30 fl fs15 lh40 c333333">
+		    		<span class="ml15">选择计调</span>
+		    	</div>
+		    	<div class="w65 fl business_list_divr">
+		    		<input type="text"  readonly="readonly" placeholder="选择计调" />
+		    	</div>
+		    </div>
+		    <div class="h40 oh">
+		    	<div class="w30 fl fs15 lh40 c333333">
+		    		<span class="ml15">开团日期</span>
+		    	</div>
+		    	<div class="w65 fl business_list_divr">
+		    		<input type="text" readonly="readonly"  placeholder="选择开团日期" />
+		    	</div>
+		    </div>
+		    <div class="h40 oh">
+		    	<div class="w30 fl fs15 lh40 c333333">
+		    		<span class="ml15">选择套餐</span>
+		    	</div>
+		    	<div class="w65 fl business_list_divr">
+		    		<input type="text" readonly="readonly"  placeholder="选择线路套餐" />
+		    	</div>
+		    </div>
+		    <div class="fs12 business_list_divr disn" id="taocan" style="height: auto;">
+					<span class="cff8201 ml15" id="taocan1">普通新</span><span class="cff8201">:</span><span class="c999999 ml3" id="taocan2">s撒娇的航空哈萨克就好的哈数据库来撒会对接客户萨科技活动</span>
+			</div>
+		    <div class="h40 oh">
+				<div class="fl w30 lh40 fs15 c333333">
+					<span class="ml15">出行人数</span>
+				</div>
+				<div class="fl w50 business_list_divr mt3">
+					<div class="mui-numbox" data-numbox-step="1" data-numbox-min="1" data-numbox-max="1000" style="border: 1px solid #D0D0D0;">
+					  <button class="mui-btn mui-numbox-btn-minus" type="button" disabled="">-</button>
+					  <input class="mui-numbox-input" type="number" id="renshu">
+					  <button class="mui-btn mui-numbox-btn-plus" type="button">+</button>
+					</div>
+				</div>
+			</div>
+			<div class="h40 oh mt5">
+		    	<div class="w30 fl fs15 lh40 c333333">
+		    		<span class="ml15">接站时间</span>
+		    	</div>
+		    	<div class="w65 fl business_list_divr">
+		    		<input type="text" readonly="readonly" placeholder="选择接站时间" />
+		    	</div>
+		    </div>
+		    <div class="h40 oh">
+		    	<div class="w30 fl fs15 lh40 c333333">
+		    		<span class="ml15">车次航班</span>
+		    	</div>
+		    	<div class="w65 fl business_list_divr">
+		    		<input type="text"  placeholder="填写接站位置及车次航班" />
+		    	</div>
+		    </div>
+		    <div class="h40 oh">
+		    	<div class="w30 fl fs15 lh40 c333333">
+		    		<span class="ml15">接车宿餐</span>
+		    	</div>
+		    	<div class="w65 fl business_list_divr">
+		    		<input type="text" readonly="readonly" placeholder="选择接站住宿餐饮" />
+		    	</div>
+		    </div>
+		    <div class="h40 oh mt5">
+		    	<div class="w30 fl fs15 lh40 c333333">
+		    		<span class="ml15">送站时间</span>
+		    	</div>
+		    	<div class="w65 fl business_list_divr">
+		    		<input type="text" readonly="readonly"  placeholder="选择送站时间" />
+		    	</div>
+		    </div>
+		    <div class="h40 oh">
+		    	<div class="w30 fl fs15 lh40 c333333">
+		    		<span class="ml15">车次航班</span>
+		    	</div>
+		    	<div class="w65 fl business_list_divr">
+		    		<input type="text"  placeholder="填写送站位置及车次航班" />
+		    	</div>
+		    </div>
+		    <div class="h40 oh">
+		    	<div class="w30 fl fs15 lh40 c333333">
+		    		<span class="ml15">送车宿餐</span>
+		    	</div>
+		    	<div class="w65 fl business_list_divr">
+		    		<input type="text" readonly="readonly"  placeholder="选择送站住宿餐饮" />
+		    	</div>
+		    </div>
+		</div>
+		<div id="xiayibu1" class="mt20 mb40 w80 tc h40 lh40" style="background: #FF8300;border-radius:5px ;color: #FFFFFF;border: 0px;margin-left: 10%;">
+			<span>下一步</span>
+		</div>
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/castapp.js" ></script>
+		<script src="../../js/mui.picker.js"></script>
+		<script src="../../js/mui.poppicker.js"></script>
+		<script type="text/javascript">
+			mui.init({
+				swipeBack:true
+			});
+			ca.init();
+			var e_id=localStorage.getItem('e_id');
+			var p_id=localStorage.getItem('structure_id');
+			var cell=ca.tagName('input');
+			var picker2=new mui.PopPicker();
+			var picker3=new mui.PopPicker();
+			var picker4=new mui.PopPicker();
+			var picker5=new mui.PopPicker();
+			var picker6=new mui.PopPicker();
+			var picker7=new mui.PopPicker();
+			var picker8=new mui.PopPicker();
+			var picker9=new mui.PopPicker();
+			var picker10=new mui.PopPicker();
+			var picker11=new mui.PopPicker();
+			var xianluming='',yewuyuanid=0,kehuid=0,jidiaoid='',fabanriqi='',fabanriqiid='',taocanmin='',manmoney='',childmoney='',use_client_id='',jiezhanriqi='',
+			people='',jiezhanshijian='',jiezhanxinxi='',jiezhanzhusuyou='',jiezhanzhusuxingji='',jiezhanzhusuyongcan='',
+			songzhanriqi='',songzhanshijian='',songzhanxinxi='',songzhanzhusuyou='',songzhanzhusuxingji='',songzhanzhusuyongcan='';
+			
+			mui.plusReady(function(){
+				findLineOrderProvinceAndCity();
+				//获取签约旅行社省份与城市
+				function findLineOrderProvinceAndCity(){
+					ca.ajaxs({url:'findLineOrderProvinceAndCity',data:{
+							id:p_id
+						},succFn:function(data){
+							cell0(data);
+							ca.closeWaiting();
+						},errFn:function(call){
+							ca.closeWaiting();
+							mui.toast(call);
+						}
+						
+					})
+				}
+				function cell0(arr){
+					cell[0].addEventListener('tap',function(){
+						ca.combinationSelect(2,arr,function(da){
+							cell[0].value=da[0].te;
+							var index = cell[0].value.indexOf('/');
+							var city  = cell[0].value.substring(index + 1, cell[0].value.length);
+							//获取签约旅行社部门
+							ca.ajaxs({url:'findLineOrderTravelAndPartment_two',data:{
+									city:city,p_id:p_id
+								},succFn:function(data){
+									var arr=new Array();
+									for(var i=0;i<data.length;i++){
+										var ob=new Object();
+										ob.value={id:data[i].id,union_id:data[i].union_id};
+										ob.text=data[i].name;
+										arr.push(ob)
+									}
+									picker2.setData(arr);
+									cell1();
+									ca.closeWaiting();
+								},errFn:function(call){
+									ca.closeWaiting();
+									mui.toast(call);
+								}
+							})
+							ca.id('xianluxiangxi').style.display='none';
+							cell[1].value="";
+							cell[2].value="";
+							cell[3].value="";
+							cell[4].value="";
+							cell[5].value="";
+							cell[6].value="";
+						})
+						
+					})
+				}
+				function cell1(){
+					cell[1].addEventListener('tap',function(){
+						picker2.show(function (selectItems) {
+							cell[1].value=selectItems[0].text;
+							if(selectItems[0].value.union_id==0){
+								picker3.setData('');
+								window.removeEventListener(cell[2],null);
+								use_client_id=selectItems[0].value.id;
+								cell[2].value='内部客户';
+							}else{
+								kehuid=selectItems[0].value.union_id;
+								use_client_id=selectItems[0].value.id;
+								//获取业务员信息、
+								ca.ajaxs({url:'getNameAndIdByStructure_id',data:{
+										structure_id:selectItems[0].value.union_id
+									},succFn:function(data){
+										var arr=new Array();
+										for(var i=0;i<data.length;i++){
+											var ob=new Object();
+											ob.value=data[i].id;
+											ob.text=data[i].realname;
+											arr.push(ob)
+										}
+										picker3.setData(arr);
+										cell2();
+										ca.closeWaiting();
+									},errFn:function(call){
+										ca.closeWaiting();
+										mui.toast(call);
+									}
+								})
+								cell[2].value="";
+							}
+							cell[3].value="";
+							cell[4].value="";
+							cell[5].value="";
+							cell[6].value="";
+							ca.ajaxs({url:'findMyselfLine',data:{//获取线路信息
+									partment_id:p_id
+								},succFn:function(data){
+									var arr=new Array();
+									for(var i=0;i<data.length;i++){
+										var ob=new Object();
+										ob.value=data[i].id;
+										ob.text=data[i].name;
+										arr.push(ob)
+									}
+									picker4.setData(arr);
+									cell3();
+									
+								},errFn:function(call){
+									ca.closeWaiting();
+									mui.toast(call);
+								}
+							})
+							ca.id('xianluxiangxi').style.display='none';	
+						})
+					})
+				}
+				//选择业务员信息
+				function cell2(){
+					cell[2].addEventListener('tap',function(){
+						picker3.show(function (selectItems) {
+							cell[2].value=selectItems[0].text;
+							yewuyuanid=selectItems[0].value;
+						})
+					})
+				}
+				//选择线路
+				function cell3(){
+					cell[3].addEventListener('tap',function(){
+						picker4.show(function (selectItems) {
+							cell[3].value=selectItems[0].text;
+							if(selectItems[0].text){
+								ca.id('xianluxiangxi').style.display='block';
+								xianluming=selectItems[0].text;
+//								localStorage.setItem('xianlumingcheng',selectItems[0].text);
+								Jumpxianluxiangqin(selectItems[0].value);
+								ca.ajaxs({url:'getNameAndIdByStructure_id',data:{//获取计调
+										structure_id:p_id
+									},succFn:function(data){
+										var arr=new Array();
+										for(var i=0;i<data.length;i++){
+											var ob=new Object();
+											ob.value=data[i].id;
+											ob.text=data[i].realname;
+											arr.push(ob)
+										}
+										picker5.setData(arr);
+										cell4();
+										ca.closeWaiting();
+									},errFn:function(call){
+										ca.closeWaiting();
+										mui.toast(call);
+									}
+								})
+								//获取开团日期
+								ca.ajaxs({url:'findAllLineStartDate',data:{
+										lineid:selectItems[0].value,structure_id:p_id
+									},succFn:function(data){
+										var arr=new Array();
+										for(var i=0;i<data.length;i++){
+											var ob=new Object();
+											ob.value=data[i].id;
+											ob.text=data[i].start_date;
+											arr.push(ob)
+										}
+										picker6.setData(arr);
+										cell5();//选择开团日期
+										ca.closeWaiting();
+									},errFn:function(call){
+										ca.closeWaiting();
+										mui.toast(call);
+									}
+								})
+								//套餐选择
+								ca.ajaxs({url:'getLinesTandardById',data:{
+										line_id:selectItems[0].value
+									},succFn:function(data){
+										var arr=new Array();
+										for(var i=0;i<data.length;i++){
+											var ob=new Object();
+											ob.value=data[i];
+											ob.text=data[i].name;
+											arr.push(ob)
+										}
+										picker7.setData(arr);
+										cell6();//选择套餐
+										ca.closeWaiting();
+									},errFn:function(call){
+										ca.closeWaiting();
+										mui.toast(call);
+									}
+								})
+								cell[4].value="";
+							cell[5].value="";
+							cell[6].value="";
+								
+								
+							}else{
+								mui.toast('没有选择线路！')
+							}
+							
+						})
+					})
+				}
+				//跳转线路详情
+				function Jumpxianluxiangqin(xianluid){
+					ca.id('xianluxiangxi').addEventListener('tap',function(){
+						ca.showWaiting();
+						var self=plus.webview.create('../line_detail.html','line_detail',{},{line_id:xianluid});
+						self.show('slide-in-right',350);
+					})
+					
+				}
+				
+				//选择计调
+				function cell4(){
+					cell[4].addEventListener('tap',function(){
+						picker5.show(function(selectItems){
+							if(selectItems[0].text){
+								cell[4].value=selectItems[0].text;
+								jidiaoid=selectItems[0].value;
+							}else{
+								mui.toast('没有计调！');
+							}
+						})
+					})
+				}
+				//选择开班日期
+				function cell5(){
+					cell[5].addEventListener('tap',function(){
+						picker6.show(function(selectItems){
+							if(selectItems[0].text){
+								cell[5].value=selectItems[0].text;
+								fabanriqi=selectItems[0].text;
+								fabanriqiid=selectItems[0].value;
+							}else{
+								mui.toast('该线路没有开班日期!');
+							}
+						})
+					})
+				}
+				//选择线路套餐
+				function cell6(){
+					cell[6].addEventListener('tap',function(){
+						picker7.show(function(selectItems){
+							if(selectItems[0].text){
+								cell[6].value=selectItems[0].text;
+								ca.id('taocan').style.display='block';
+								ca.id('taocan1').innerHTML=selectItems[0].text;
+								ca.id('taocan2').innerHTML='成人价格:￥'+selectItems[0].value.man_price+'/人    小孩价格:￥'+selectItems[0].value.child_price+'/人     备注:'+selectItems[0].value.mark;
+								taocanmin=selectItems[0].text;
+								childmoney=selectItems[0].value.child_price;
+								manmoney=selectItems[0].value.man_price;
+							}else{
+								mui.toast('该线路没有添加套餐!');
+							}
+							cell8();
+							cell11()
+						})
+					})
+				}
+				
+				//选择接站时间
+				function cell8(){
+					cell[8].addEventListener('tap',function(){
+						showdatapicker(cell[8]);
+						ca.ajaxs({url:'findAllHotelStar',data:{
+							
+							},succFn:function(data){
+								var arr=new Array();
+					 			for(var da in data ){
+					 				var ob=new Object();
+									ob.value=data[da].id;
+									ob.text=data[da].name;
+									arr.push(ob)
+					 			}
+					 			picker8.setData(arr);
+					 			ca.closeWaiting();
+							},errFn:function(call){
+								ca.closeWaiting();
+								mui.toast(call);
+							}
+						})
+						picker9.setData([{value:0,text:'无'},{value:1,text:'有'}]);
+						cell10();
+					})
+				}
+				
+				//选择接站宿餐
+				function cell10(){
+					cell[10].addEventListener('tap',function(){
+						var zhu='无';
+						var can='无';
+						jiezhanzhusuyou=0;
+						jiezhanzhusuyongcan=0;
+//						localStorage.setItem('jiezhanzhusuyou',0);
+						picker8.show(function (selectItems) {
+							jiezhanzhusuyou=1;
+							jiezhanzhusuxingji=selectItems[0].value;
+//							localStorage.setItem('jiezhanzhusuyou',1);
+//							localStorage.setItem('jiezhanzhusuxingji',selectItems[0].text);
+							zhu=selectItems[0].text;
+							cell[10].value=zhu+'/'+can;
+							picker9.show(function (selectItems) {
+								jiezhanzhusuyongcan=1;
+								can=selectItems[0].text;
+								cell[10].value=zhu+'/'+can;
+							})
+						})
+					})
+					
+					
+				}
+				//选择送站时间
+				function cell11(){
+					cell[11].addEventListener('tap',function(){
+						showdatapicker(cell[11]);
+						ca.ajaxs({url:'findAllHotelStar',data:{
+							
+							},succFn:function(data){
+								var arr=new Array();
+					 			for(var da in data ){
+					 				var ob=new Object();
+									ob.value=data[da].id;
+									ob.text=data[da].name;
+									arr.push(ob)
+					 			}
+					 			picker11.setData(arr);
+					 			ca.closeWaiting();
+							},errFn:function(call){
+								ca.closeWaiting();
+								mui.toast(call);
+							}
+						})
+						picker9.setData([{value:0,text:'无'},{value:1,text:'有'}]);
+						cell13();
+					})
+				}
+				//选择送站宿餐
+				function cell13(){
+					cell[13].addEventListener('tap',function(){
+						var zhu='无';
+						var can='无';
+						songzhanzhusuyou=0;
+						songzhanzhusuyongcan=0;
+//						localStorage.setItem('jiezhanzhusuyou',0);
+						picker11.show(function (selectItems) {
+							songzhanzhusuyou=1;
+							songzhanzhusuxingji=selectItems[0].value;
+//							localStorage.setItem('jiezhanzhusuyou',1);
+//							localStorage.setItem('jiezhanzhusuxingji',selectItems[0].text);
+							zhu=selectItems[0].text;
+							cell[13].value=zhu+'/'+can;
+							picker9.show(function (selectItems) {
+								songzhanzhusuyongcan=1;
+								can=selectItems[0].text;
+								cell[13].value=zhu+'/'+can;
+							})
+						})
+					})
+					
+					
+				}
+			//获取时间	
+			function showdatapicker(ob){
+					var date = new Date();
+					var year = date.getFullYear();//年
+					var month = date.getMonth() + 1;//月
+					var day = date.getDate();//日
+					var h = date.getHours();// 小时
+					var m = date.getMinutes(); // 分钟
+					ca.dateSelect({
+						defaultTime:year + '-' + month + '-' + day,
+						minTime:year + '-' + month + '-' + day,
+						maxTime:year + '-'+ (month + 1) + '-' + day,
+						callback:function(data){
+							if(data){
+								ca.timeSelect({
+									defaultTime:h + '-' + m ,
+									callback:function(datas){
+										if(datas){
+											ob.value=data+' '+datas;
+											if(ob==cell[8]){
+												jiezhanshijian=datas;
+												jiezhanriqi=data;
+											}
+											if(ob==cell[11]){
+												songzhanshijian=datas;
+												songzhanriqi=data;
+											}
+										}else{
+											mui.toast('请选择时间')
+										}
+										
+									}
+								})
+							}
+							
+						}
+					})
+				}	
+			
+			//下一步
+			ca.id('xiayibu1').addEventListener('tap',function(){
+				if(ca.emptyFun(use_client_id)){
+					mui.toast('请选择客户!')
+				}else if(ca.emptyFun(jidiaoid)){
+					mui.toast('请选择计调!')
+				}else if(ca.emptyFun(fabanriqiid)){
+					mui.toast('请选择开班日期!');
+				}else if(ca.emptyFun(taocanmin)){
+					mui.toast('请选择套餐！')
+				}else{
+					localStorage.setItem('renshu',ca.id('renshu').value);
+					mui.openWindow({
+						url:'business_order_filling.html',
+					    id:'business_order_filling',
+					    extras:{
+					        xianluming:xianluming,
+					        yewuyuanid:yewuyuanid,
+					        kehuid:kehuid,
+					        jidiaoid:jidiaoid,
+					        fabanriqi:fabanriqi,
+					        fabanriqiid:fabanriqiid,
+					        taocanmin:taocanmin,
+					        childmoney:childmoney,
+					        manmoney:manmoney,use_client_id:use_client_id,
+					        people:ca.id('renshu').value,
+					        jiezhanriqi:jiezhanriqi,
+				jiezhanshijian:jiezhanshijian,jiezhanxinxi:cell[9].value,jiezhanzhusuyou:jiezhanzhusuyou,jiezhanzhusuxingji:jiezhanzhusuxingji,jiezhanzhusuyongcan:jiezhanzhusuyongcan,
+				songzhanriqi:songzhanriqi,songzhanshijian:songzhanshijian,songzhanxinxi:cell[12].value,songzhanzhusuyou:songzhanzhusuyou,songzhanzhusuxingji:songzhanzhusuxingji,songzhanzhusuyongcan:songzhanzhusuyongcan
+					        
+					    }
+					})
+				}
+			})
+//			plus.webview.currentWebview().setStyle({
+//			    softinputMode: "adjustResize"  // 弹出软键盘时自动改变webview的高度
+//			});
+//			
+				
+			})
+		</script>
+	</body>
+
+</html>

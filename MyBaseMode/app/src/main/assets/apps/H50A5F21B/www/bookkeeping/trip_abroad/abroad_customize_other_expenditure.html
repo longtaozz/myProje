@@ -1,0 +1,221 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../css/style.css" />
+		<link rel="stylesheet" href="../../css/iconfont.css" />
+		<style>
+			.mui-bar-nav {
+			    top: 0;
+			    -webkit-box-shadow: 0 0px 0px #ccc;
+			    /* box-shadow: 0 1px 6px #ccc; */
+			}
+			.bt1{
+				height: 30px;
+				color: #FFFFFF;
+				background: #4F77AA;
+				font-size: 13px;
+				border-radius:5px ;
+				border: 0px;
+				padding: 5px 5px;
+			}
+			.bt2{
+				color: #FF0000;
+				font-size: 13px;
+			}
+			img{
+				width: 75px;
+				height: 80px;
+				margin: 10px 0px 10px 15px;
+				border-radius:3px ;
+			}
+		</style>
+	</head>
+	
+	<body style="background:#F0F0F0;">
+		<header class="mui-bar mui-bar-nav mheader">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mback"></a>
+		    <h1 class="mui-title htitle">加点购物其他支出</h1>
+		    <span id="add" class="mui-pull-right fs15" style="line-height: 44px;">增加</span>
+		</header>
+		<div class="mui-content mb10" id="content">
+		</div>
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/castapp.js" ></script>
+		<script type="text/javascript">
+			var url=localStorage.getItem('url');
+			var teamsk_id=localStorage.getItem('teamsk_id');
+			var user_id=localStorage.getItem('userid');
+			mui.plusReady(function(){
+				mui.init();
+				ca.init(true);
+				ca.blackStatusBar();
+				if(localStorage.getItem('teamsk_is_check')==3){
+					ca.id('add').style.display='none';
+				}
+				
+				var list=ca.id('content');
+				ca.receiveNotice('update',function(){
+					list.innerHTML="";
+					showItem();
+				
+				});
+				showItem();
+				function showItem(){
+					plus.nativeUI.showWaiting();
+					ca.ajaxs({url:'findAccountingGuideByType_abroad',data:{
+							type:'add_other_expend',teamsk_id:teamsk_id,user_id:user_id
+						},
+						succFn:function(data){
+							if(!ca.emptyFun(data)){
+								if(data.msg==1){
+									var da=data.data;
+									for(var a in da){
+										var zhuangtai='',qu='',pr='',imgurl='';
+										if(da[a].procurement_id>0){//判断是否采购
+											if(da[a].quantity>0){//判断导游是否修改计调采购数据
+												qu=da[a].quantity;
+												pr=da[a].price;
+											}else{
+												qu=da[a].procurement_quantity;
+												pr=da[a].procurement_price;
+											}
+										}else{
+											pr=da[a].price;
+											if(da[a].quantity>0){
+												qu=da[a].quantity;
+											}else{
+												qu=da[a].quantity2;
+											}
+										}
+										if(!ca.emptyFun(da[a].img_url)){//判断图片是否为空
+											imgurl=da[a].img_url;
+										}else{
+											imgurl='../../img/noimg.jpg';
+										}
+										
+										var xiugai='',shanchu='',shanchuzi='',shanchuzi='';
+										if(da[a].is_confirm==1){//导游提交报账
+											if(da[a].is_check==1){//审核通过
+												zhuangtai='审核通过';
+												xiugai='bdF0F0F0';
+												shanchu='bdF0F0F0';
+												xiugaizi='ca6a6a6';
+												shanchuzi='ca6a6a6';
+											}else if(da[a].is_check==2){//审核未通过
+												zhuangtai='未通过';
+												xiugai='bd52bcec';
+												shanchu='bdff8201';
+												xiugaizi='c52bcec';
+												shanchuzi='cff8201';
+											}else{
+												zhuangtai='待审核';
+												xiugai='bd52bcec';
+												shanchu='bdff8201';
+												xiugaizi='c52bcec';
+												shanchuzi='cff8201';
+											}
+										}else{
+											zhuangtai='待确认';
+											xiugai='bd52bcec';
+											shanchu='bdff8201';
+											xiugaizi='c52bcec';
+											shanchuzi='cff8201';
+										}
+										
+										if(da[a].procurement_id>0){//如果计调采购的不允许删除
+											shanchu='bdF0F0F0';
+											shanchuzi='ca6a6a6';
+										}
+										var gui_pay="",company_pay="",sign_bill="";
+										if(da[a].guide_pay!=0){
+											gui_pay="导游付:"+da[a].guide_pay;
+										}
+										if(da[a].sign_bill!=0){
+											sign_bill="签单:"+da[a].sign_bill;
+										}
+										var temp='<div>'
+											    +	'<div class="bgwhite oh mt5 h30 lh30">'
+											    +		'<div class="fl fs14 ml20 c333333"><span>第'+(parseInt(a)+1)+'笔</span></div>'
+											    +		'<div class="fr cred fs14 mr20"><span>￥</span><span>'+qu*pr+'</span></div>'	
+											    +	'</div>'
+											    +	'<div class="oh bgf2f2f2"  style="background: #FBF9F9;">'
+											    +		'<div class=" w25 fl h100"><img src="'+imgurl+'" style=""/></div>'
+											    +		'<div class="w70 fl">'
+											    +			'<div class="ml20 fs15 mt10"><span class="ts-li-title">'+da[a].name+'</span></div>'	
+											    +			'<div class="ml20 fs14 ca6a6a6"><span>'+da[a].alias+'</span><span>/</span><span>'+pr+'</span></div>'
+												+    		'<div class="ml20 fs14 ca6a6a6"><span class="fs13">x</span><span class="ml3">'+qu+'</span></div>'
+												+    		'<div class="ml20 fs14 ca6a6a6">'+gui_pay+' '+ sign_bill+'</div>'
+												+    		'<div class="ml20 fs14 ca6a6a6"><span class="fs13">'+da[a].use_date+'</span></div>'
+												+		'</div>'
+											    +	'</div>'
+											    +	'<div class="bgwhite oh h40">'
+											    +		'<div class="fl ml20 mt10 fs15 cred"><span>'+zhuangtai+'</span></div>'
+											    +		'<div class="fr '+xiugai+' mt6 mr15" style="border-radius:20px;padding: 2px 20px;" data_id="'+da[a].id+'"><span class="fs14 '+xiugaizi+'">修改</span></div>'
+											    +		'<div class="fr '+shanchu+' mt6 mr10" style="border-radius:20px;padding: 2px 20px;" data_id="'+da[a].id+'"><span class="fs14 '+shanchuzi+'">删除</span></div>'	
+											    +	'</div>'	
+											    +'</div>';
+										list.innerHTML+=temp;
+										
+									}
+									
+								}
+								ca.closeWaiting();
+							}else{
+								ca.closeWaiting();
+								mui.toast('没有数据!');
+							}
+						},
+						errFn:function(call){
+							ca.closeWaiting();
+							mui.toast(call);
+						}
+					});
+				}
+				mui('#content').on('tap','.bdff8201',function(){
+					var accounting_guide_id=this.getAttribute('data_id')
+					var btnArray = ['是','否'];
+					mui.confirm('删除后不能恢复，确认删除？', '删除报账', btnArray, function(e) {
+	                    if (e.index == 0) {
+	                    	ca.ajaxs({url:'deleteAccountingGuide',data:{
+	                    			id:accounting_guide_id,user_id:user_id
+		                    	},succFn:function(data){
+		                    		if(data.msg==1){
+		                    			mui.toast('删除成功!');
+		                    			list.innerHTML="";
+		                    			showItem();
+	                    			}else{
+	                    				mui.toast('删除失败!');
+	                    			}
+	                    			
+		                    	},errFn:function(call){
+		                    		ca.closeWaiting();
+		                    		mui.toast(call);
+		                    	}
+	                    	})
+	                    }
+					})
+				})
+				
+				
+				mui('#content').on('tap','.bd52bcec',function(){
+					var accounting_guide_id=this.getAttribute('data_id');
+					localStorage.setItem('accounting_guide_id',accounting_guide_id);
+					ca.newInterface({url:'update_abroad_customize_other_expenditure.html',id:'update_abroad_customize_other_expenditure'});
+				})
+				
+				
+				ca.id('add').addEventListener('tap',function(){
+					ca.newInterface({url:'add_abroad_customize_other_expenditure.html',id:'add_abroad_customize_other_expenditure.html'})
+				})
+			})
+			
+			
+		</script>
+	</body>
+
+</html>

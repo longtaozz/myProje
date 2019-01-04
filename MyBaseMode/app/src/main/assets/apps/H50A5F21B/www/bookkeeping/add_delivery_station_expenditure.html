@@ -1,0 +1,375 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/style.css" />
+		<link rel="stylesheet" href="../css/mui.picker.min.css" />
+		<link rel="stylesheet" href="../css/iconfont.css" />
+		<link rel="stylesheet" href="../css/previewImage.css" />
+		<style>
+			.mui-bar-nav {
+			    top: 0;
+			    -webkit-box-shadow: 0 0px 0px #ccc;
+			    /* box-shadow: 0 1px 6px #ccc; */
+			}
+			.fukuanxuanze{
+				border: 1px solid #e5e5e5;
+				width: 21%;
+				font-size: 13px!important;
+				line-height:30px!important ;
+				border-radius:8px ;
+			}
+			.active{
+				background: #52BCEC;
+				color: #FFFFFF;
+				border: 0px;
+			}
+			.mui-slider{
+				height: 100%;
+			}
+			
+		
+		</style>
+		
+	</head>
+
+	<body style="background: #F2F2F2;">
+		<header class="mui-bar mui-bar-nav mheader">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mback"></a>
+		    <h1 class="mui-title htitle">门票支出(2018-5-21)</h1>
+		</header>
+		<div class="mui-content">
+		    <div class="bgwhite h40 bbf2 oh">
+		    	<div class="fl w30 fs14 c121212 pl20 lh40">
+		    		<span>名称</span>
+		    	</div>
+		    	<div class="fl w50 lh40 ">
+		    		<input type="text" class="w95 tc fs12" style="width:95%;border:1px solid #e5e5e5;border-radius:4px ;height: 28px;" placeholder="请选择车队名称" data_id=""/>
+		    	</div>
+		    	<div class="fl w10 lh40 " id="liebiao">
+		    		<span class="mui-icon mui-icon-arrowdown"></span>
+		    	</div>
+		    </div>
+		    <div class="bgwhite h40 bbf2 oh">
+		    	<div class="fl w30 fs14 c121212 pl20 lh40">
+		    		<span>日期</span>
+		    	</div>
+		    	<div class="fl w70 lh40 ">
+		    		<input type="text" class="w70 tc fs12" style="width:70%;border:1px solid #e5e5e5;border-radius:4px ;height: 28px;" placeholder="请输入时间"/>
+		    	</div>
+		    </div>
+		    <div class="bgwhite h40 bbf2 oh">
+		    	<div class="fl w30 fs14 c121212 pl20 lh40">
+		    		<span>标准</span>
+		    	</div>
+		    	<div class="fl w50 lh40">
+		    		<input type="text" class="w70 tc fs12" style="width:95%;border:1px solid #e5e5e5;border-radius:4px ;height: 28px;" placeholder="请选择标准"/>
+		    	</div>
+		    	<div class="fl w10 lh40 " id="liebiao1">
+		    		<span class="mui-icon mui-icon-arrowdown"></span>
+		    	</div>
+		    </div>
+		    <div class="bgwhite h40 bbf2 oh">
+		    	<div class="fl w30 fs14 c121212 pl20 lh40">
+		    		<span>订单</span>
+		    	</div>
+		    	<div class="fl w50 lh40">
+		    		<input type="text" readonly="readonly" class="w70 tc fs12" style="width:95%;border:1px solid #e5e5e5;border-radius:4px ;height: 28px;" placeholder="请选择团队订单"/>
+		    	</div>
+		    	<div class="fl w10 lh40 " id="liebiao2">
+		    		<span class="mui-icon mui-icon-arrowdown"></span>
+		    	</div>
+		    </div>
+		     <div class="bgwhite h40 bbf2 oh">
+		    	<div class="fl w30 fs14 c121212 pl20 lh40">
+		    		<span>单  价</span>
+		    	</div>
+		    	<div class="fl w70 lh40 ">
+		    		<input type="number" class="w70 tc fs12" style="width:70%;border:1px solid #e5e5e5;border-radius:4px ;height: 28px;" placeholder="请输入价格"/>
+		    	</div>
+		    </div>
+		    <div class="bgwhite h40 bbf2 oh">
+		    	<div class="fl w20 fs14 c121212 pl20 lh40">
+		    		<span>数  量</span>
+		    	</div>
+		    	<div class="fl w30 lh40 ">
+		    		<input type="number"  class="w90 tc fs12" style="width:90%;border:1px solid #e5e5e5;border-radius:4px ;height: 28px;" placeholder="输入数量"/>
+		    	</div>
+		    	<div class="fl w15 fs14 c121212 pl10 lh40">
+		    		<span>单  位</span>
+		    	</div>
+		    	<div class="fl w30 lh40 ">
+		    		<input type="text" value="辆" class="w90 tc fs12" style="width:90%;border:1px solid #e5e5e5;border-radius:4px ;height: 28px;" placeholder="输入单位"/>
+		    	</div>
+		    </div>
+		    <div class="bgwhite h40  oh" style="display: none;">
+		    	<div class="fl w30 fs14 c121212 pl20 lh40">
+		    		<span>总金额</span>
+		    	</div>
+		    	<div class="fl w70 lh40">
+		    		<input type="text" class="w70 tc fs12" style="width:70%;border:1px solid #e5e5e5;border-radius:4px ;height: 28px;" placeholder="请输入总金额"/>
+		    	</div>
+		    </div>
+		    <div class="bgwhite h40 bbf2 oh mt10">
+		    	<div class="fl w30 fs14 c121212 pl20 lh40">
+		    		<span>付款方式</span>
+		    	</div>
+		    </div>
+		    <div class="bgwhite h40  bbf2 oh">
+		    	<div class="fl w30 fs14 c121212 pl20 lh40">
+		    		<span>导游付</span>
+		    	</div>
+		    	<div class="fl w70 lh40 ">
+		    		<input type="number" onblur="yanzhen();" value="0.00" class="w70 tc fs12" style="width:70%;border:1px solid #e5e5e5;border-radius:4px ;height: 28px;" />
+		    	</div>
+		    </div>
+		    <div class="bgwhite h40 bbf2  oh">
+		    	<div class="fl w30 fs14 c121212 pl20 lh40">
+		    		<span>公司付</span>
+		    	</div>
+		    	<div class="fl w70 lh40">
+		    		<input type="number" onblur="yanzhen();" value="0.00" class="w70 tc fs12" style=" width:70%;border:1px solid #e5e5e5;border-radius:4px ;height: 28px;" />
+		    	</div>
+		    </div>
+		    <div class="bgwhite h40 bbf2  oh">
+		    	<div class="fl w30 fs14 c121212 pl20 lh40">
+		    		<span>签单</span>
+		    	</div>
+		    	<div class="fl w70 lh40">
+		    		<input type="number" onblur="yanzhen();" value="0.00" class="w70 tc fs12" style=" width:70%;border:1px solid #e5e5e5;border-radius:4px ;height: 28px;" />
+		    	</div>
+		    </div>
+		    <div class="bgwhite h100  bbf2 oh">
+		    	<div class=" w70 fs14 c121212 pl20 lh40">
+		    		<span>票据</span><span class="fs13"> (提供票据图片，大小5M以下)</span>
+		    	</div>
+		    	<div class="pl20">
+		    		<div class="fl" id="tu1" style="width: 55px;height: 55px;display: none;">
+		    			<img id="tu"  class="" style="width: 100%;height: 100%;" data-preview-src="" data-preview-group="1"/>
+		    		</div>
+		    		<div class="fl ml10">
+		    			<span class="mui-icon mui-icon-plusempty" id="tupian" style="padding: 5px;font-size: 45px;border: 1px solid #666666;"></span>
+		    		</div>
+		    	</div>
+		    </div>
+		    <div id="jizhang" style="background: #52bcec;color: #FFFFFF;height: 40px;line-height: 40px;text-align: center;position: fixed;bottom: 0;width: 100%;">
+				<span style="font-weight:bold ;font-size:15px ;">保  存</span>
+			</div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/castapp.js" ></script>
+		<script type="text/javascript" src="../js/mui.picker.min.js" ></script>
+		<script type="text/javascript" src="../js/mui.zoom.js" ></script>
+		<script type="text/javascript" src="../js/mui.previewimage.js" ></script>
+		<script type="text/javascript">
+			mui.previewImage();
+			var url=localStorage.getItem('url');
+			var teamsk_id=localStorage.getItem('teamsk_id');
+			var day=localStorage.getItem('jizhangday');
+			localStorage.setItem('upload_imgurl','http://img.manbuquanqiu.com/admin/ue_upload.html');
+			var user_id=localStorage.getItem('userid');
+			var upload_imgurl=localStorage.getItem('upload_imgurl');
+			var imgurl="";
+			var wucantin=0;
+			mui.plusReady(function(){
+				mui.init();
+				ca.init(true);
+				ca.blackStatusBar();
+				var input=ca.tagName('input');
+				ca.className('htitle')[0].innerHTML='添加接送站支出'+'('+day+')'
+				input[1].value=day;
+				var picker1 = new mui.PopPicker();
+				var picker2 = new mui.PopPicker();
+				var picker3 = new mui.PopPicker();
+				ca.ajaxs({url:'findContractCarBy',data:{
+						teamsk_id:teamsk_id
+					},
+					succFn:function(data){
+						if(ca.emptyFun(data)){
+							wucantin=1;
+						}else{
+							if(data.msg==1){
+								var da=data.data;
+								var arr=new Array();
+								for(var i=0;i<da.length;i++){
+									var ob=new Object();
+									ob.value={id:da[i].id,union_id:da[i].union_id};
+									ob.text=da[i].name;
+									arr.push(ob)
+								}
+								picker1.setData(arr);
+							}
+						}
+						show();
+						ca.closeWaiting();
+					},
+					errFn:function(call){
+						ca.closeWaiting();
+						mui.toast(call);
+					}
+				})
+				
+				function show(){
+					ca.id('liebiao').addEventListener('tap',function(){
+						if(wucantin==1){
+							mui.toast('无签约餐厅!');
+							return;
+						}
+						picker1.show(function (selectItems) {
+							input[0].value=selectItems[0].text;
+							input[0].setAttribute('guide_relation_id',selectItems[0].value.id);
+							input[0].setAttribute('guide_union_id',selectItems[0].value.union_id);
+						})
+					})
+				}
+				picker2.setData([{value:'1',text:'接站'},{value:'2',text:'送站'}]);
+				ca.id('liebiao1').addEventListener('tap',function(){
+					picker2.show(function (selectItems) {
+						input[2].value=selectItems[0].text;
+						ca.ajaxs({url:'findLineOrderbyTeam',data:{teamsk_id:teamsk_id,type:selectItems[0].value},
+							succFn:function(data){
+								if(ca.emptyFun(data)){
+									
+								}else{
+									var da=data;
+									var arr=new Array();
+									for(var i=0;i<da.length;i++){
+										var ob=new Object();
+										ob.value=da[i].id;
+										ob.text=da[i].order_num;
+										arr.push(ob)
+									}
+									picker3.setData(arr);
+								}
+								ca.closeWaiting();
+							},
+							errFn:function(call){
+								ca.closeWaiting();
+								mui.toast(call);
+							}
+						})
+						
+					})
+				})
+				ca.id('liebiao2').addEventListener('tap',function(){
+					picker3.show(function (selectItems) {
+						input[3].value=selectItems[0].text;
+					})
+				})
+				
+				ca.id('jizhang').addEventListener('tap',function(){
+					if(input[0].value==""){
+						mui.toast('请输入名称');
+						input[0].focus();
+						return;
+					}
+					if(input[1].value==""){
+						mui.toast('请输入时间');
+						input[1].focus();
+						return;
+					}
+					if(input[2].value==""){
+						mui.toast('请输入标准');
+						input[2].focus();
+						return;
+					}
+					if(input[3].value==""){
+						mui.toast('请选择订单');
+						input[3].focus();
+						return;
+					}
+					if(input[4].value==""){
+						mui.toast('请输入单价');
+						input[4].focus();
+						return;
+					}
+					if(input[5].value==""){
+						mui.toast('请输入数量');
+						input[5].focus();
+						return;
+					}
+					if(input[6].value==""){
+						mui.toast('请输入单位');
+						input[6].focus();
+						return;
+					}
+					
+					if(input[8].value==""){
+						mui.toast('请输入现付金额');
+						input[8].focus();
+						return;
+					}
+					if(input[9].value==""){
+						mui.toast('请输入公司付金额');
+						input[9].focus();
+						return;
+					}
+					if(input[10].value==""){
+						mui.toast('请输入签单金额');
+						input[10].focus();
+						return;
+					}
+					ca.ajaxs({url:'addAccountingGuide',data:{
+							user_id:user_id,
+							type:'pickup',
+							teamsk_id:teamsk_id,
+							client_id:input[0].getAttribute('guide_relation_id'),
+							union_id:input[0].getAttribute('guide_union_id'),
+							use_date:day,
+							name:input[0].value,
+							alias:input[2].value,
+							order_num:input[3].value,
+							price:input[4].value,
+							quantity:input[5].value,
+							unit:input[6].value,
+							img_url:imgurl,
+							guide_pay:input[8].value,
+							company_pay:input[9].value,
+							sign_bill:input[10].value,
+						},
+						succFn:function(data){
+							if(data.msg==1){
+								mui.toast('添加成功');
+								var arr1 = ['delivery_station_expenditure'];
+								ca.sendNotice(arr1,'update',{});
+								setTimeout(function(){
+								    ca.closeCurrentInterface();	
+								},1000);
+							}
+							else{
+								mui.toast('添加失败');
+							}
+						},
+						errFn:function(call){
+							ca.closeWaiting();
+							mui.toast(call);
+						}
+					})
+					
+				})
+				
+				ca.id('tupian').addEventListener('tap',function(){
+					var arr = ['照相机','相册'];
+					ca.actionSheet(arr,{succFn:function(data){
+						ca.id('tu1').style.display='block';
+						var t=ca.id('tu');
+						t.style.display='block';
+						t.src=data;
+						imgurl=data;
+					},
+					//是否开启上传
+					isUpload:true,
+					uploadUrl:upload_imgurl,
+					})
+				})
+			})
+			
+			
+		</script>
+	</body>
+
+</html>

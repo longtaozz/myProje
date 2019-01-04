@@ -1,0 +1,140 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/style.css" />
+		<style>
+			
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav mheader">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mback"></a>
+		    <h1 class="mui-title htitle"></h1>
+		</header>
+		<div class="mui-content fs14" id="content">
+			<!--<div class="mt10 ml10 oh">
+				<div class="fl w50">
+					<span class="c666666">床型</span>
+					<span class="ml5">12122</span>
+				</div>
+				<div class="fl w50">
+					<span class="c666666">面积</span>
+					<span class="ml5">28m²</span>
+				</div>
+			</div>
+			<div class="mt10 ml10 oh">
+				<div class="fl w50">
+					<span class="c666666">楼层</span>
+					<span class="ml5">12122</span>
+				</div>
+				<div class="fl w50">
+					<span class="c666666">宽带</span>
+					<span class="ml5">28m²</span>
+				</div>
+			</div>
+			<div class="mt10 ml10 oh">
+				<div class="fl w50">
+					<span class="c666666">可住</span>
+					<span class="ml5">12122</span>
+				</div>
+				<div class="fl w50">
+					<span class="c666666">窗户</span>
+					<span class="ml5">28m²</span>
+				</div>
+			</div>
+			<div class="mt10 ml10 oh">
+				<div class="fl w50">
+					<span class="c666666">早餐</span>
+					<span class="ml5">12122</span>
+				</div>
+				
+			</div>
+			<div class="mt10 ml10 oh">
+				<div class="fl w20">
+					<span class="c666666">客房设施和服务</span>
+				</div>
+				<div class="fl w80" style="padding:0px 10px;">
+					速度就会看见爱上看到啥都看见啊和啥酒店还看见爱上的开奖号看会空间撒谎的健康
+				</div>
+			</div>-->
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/castapp.js" ></script>
+		<script type="text/javascript">
+			mui.init({
+				swipeBack:true
+			});
+			ca.init();
+			ca.blackStatusBar();
+			mui.plusReady(function(){
+				plus.nativeUI.showWaiting();
+				var self = plus.webview.currentWebview();
+				var id = self.room_id;//获得参数
+				ca.ajaxs({url:'findSupplyHotelRoomById',data:{
+						id:id
+					},succFn:function(data){
+						if(data){
+							ca.className('htitle')[0].innerHTML=data.name;
+							var temp='<div class="mt10 ml10 oh">'
+									+	'<div class="fl w50">'
+									+		'<span class="c666666">床型</span>'
+									+		'<span class="ml5">'+data.bed+'</span>'
+									+	'</div>'
+									+	'<div class="fl w50">'
+									+		'<span class="c666666">面积</span>'
+									+		'<span class="ml5">'+data.area+'m²</span>'
+									+	'</div>'
+									+	'</div>'
+									+	'<div class="mt10 ml10 oh">'
+									+		'<div class="fl w50">'
+									+			'<span class="c666666">楼层</span>'
+									+			'<span class="ml5">'+data.floor+'层</span>'
+									+		'</div>'
+									+		'<div class="fl w50">'
+									+			'<span class="c666666">宽带</span>'
+									+			'<span class="ml5">'+data.wifi+'</span>'
+									+		'</div>'
+									+	'</div>'
+									+	'<div class="mt10 ml10 oh">'
+									+		'<div class="fl w50">'
+									+			'<span class="c666666">可住</span>'
+									+			'<span class="ml5">'+data.stay_num+'人</span>'
+									+		'</div>'
+									+		'<div class="fl w50">'
+									+			'<span class="c666666">窗户</span>'
+									+			'<span class="ml5">'+data.window+'</span>'
+									+		'</div>'
+									+	'</div>'
+									+	'<div class="mt10 ml10 oh">'
+									+		'<div class="fl w50">'
+									+			'<span class="c666666">早餐</span>'
+									+			'<span class="ml5">'+data.breakfast+'</span>'
+									+		'</div>'
+									+	'</div>'
+									+	'<div class="mt10 ml10 oh">'
+									+		'<div class="fl w20">'
+									+			'<span class="c666666">客房设施和服务</span>'
+									+		'</div>'
+									+		'<div class="fl w80" style="padding:0px 10px;">'+data.details+'</div>'
+									+		'</div>';	
+							
+							ca.id('content').innerHTML=temp;
+						}
+						ca.closeWaiting();
+					},errFn:function(err){
+						ca.closeWaiting();
+						mui.toast(err);
+					}
+				})
+				
+			})
+		</script>
+	</body>
+
+</html>

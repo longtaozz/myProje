@@ -1,0 +1,728 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/style.css" />
+		<link href="../css/iconfont.css"  rel="stylesheet" />
+		<style>
+			.user_index_top_c{
+				width: 60%;
+				height: 90px;
+				background: #FFFFFF;
+				border-radius: 4px;
+				position: absolute;
+				top: 50px;
+				left: 20%;
+			}
+			.mui-bar-nav {
+			    top: 0;
+			    -webkit-box-shadow: 0 0px 0px #ccc; 
+			    box-shadow: 0 0px 0px #ccc; 
+			}
+			.mui-scroll-wrapper1
+			{
+			    position: absolute;
+			    z-index: 2;
+			    top: 0;
+			    bottom: 0;
+			    left: 0;
+			    overflow: hidden;
+			    width: 100%;
+			}
+			
+			.mui-scroll1
+			{
+			    position: absolute;
+			    z-index: 1;
+			    width: 100%;
+			    -webkit-transform: translateZ(0);
+			            transform: translateZ(0);
+			}
+			.mui-scroll-wrapper2
+			{
+			    position: absolute;
+			    z-index: 2;
+			    top: 0;
+			    bottom: 0;
+			    left: 0;
+			    overflow: hidden;
+			    width: 100%;
+			}
+			.mui-scroll2
+			{
+			    position: absolute;
+			    z-index: 1;
+			    width: 100%;
+			    -webkit-transform: translateZ(0);
+			            transform: translateZ(0);
+			}
+			.user_index_top_c_1 img{
+				width: 95%;
+				height: 60px;
+				border-radius:100px ;
+				margin:2px;
+				
+			}
+			.pinlunshaixuan-active{
+				border: 1px solid #FFB400;
+				padding: 3px;
+				border-radius:2px;
+				background: #fffff4;
+				color:#FFB400 ;
+			}
+			.pinlunshaixuan{
+				border: 1px solid #F0F0F0;
+				padding: 3px;
+				border-radius:2px;
+				background: #F0F0F0; 
+				color: #666666;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav" style="background: #4F77AA;height: 69px;padding-top: 25px;">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: #FFFFFF !important;"></a>
+		    <h1 class="mui-title" style="font-size: 18px !important;color: #FFFFFF !important;">导游详细</h1>
+		    
+		</header>
+		<div class="mui-content">
+			<div class="user_index_top" style="position: fixed;width: 100%;z-index: 10;background: #EFEFF4;">
+				<div class="user_index_top_bg">
+					<img src="../img/user_inde_bg.png"/>
+				</div>
+				<div class="gd-item-content-1-biaoqian">
+		    		<span id="cishu">已安排0</span>
+		   	 	</div>
+				<div class="user_index_top_c">
+					<div class="user_index_top_c_1">
+						<div style="background: #FFFFFF;width: 65px;height: 65px;border-radius:100px ;position: relative;top: -30px;left:35%;">
+							<img  id="touxiang" src="../img/NoHeadportrait.png" />
+						</div>
+					</div>
+					<div class="user_index_top_c_2">
+						<span class="fs17" id="name"></span>
+					</div>
+					<div class="user_index_top_c_4 mt4">
+						<span id="phone"></span>
+					</div>
+				</div>
+				
+			</div>
+			<div class="bgwhite oh h40 lh38" style="margin-top: -5px;position: fixed;width: 100%;top: 212px;z-index: 11;">
+				<div class="fl tc c4F77AA w50 fs15 bb4f77aa">
+					<span>介绍</span>
+				</div>
+				<div class="fl w50 tc c666666 fs15">
+					<span id="pinglun">评论(0)</span>
+				</div>
+			</div>
+			<div id="jieshao">
+				<div id="refreshContainer1" class="mui-scroll-wrapper1 bgwhite" style="margin-top: 248px;z-index: 4;">
+		    		<div class="mui-scroll1" >
+						<div class="oh mt10">
+							<div class="fl w30 tc">
+								<span class="c666666 fs14 fr">从业资格证： </span>
+							</div>
+							<div class="fl w70 c333333 fs15">
+								<span class="ml15">无</span>
+							</div>
+						</div>
+						<div class="oh mt15">
+							<div class="fl w30 tc">
+								<span class="c666666 fs14 fr">导游证号： </span>
+							</div>
+							<div class="fl w70 c333333 fs15">
+								<span class="ml15">无</span>
+							</div>
+						</div>
+						<div class="oh mt15">
+							<div class="fl w30 tc">
+								<span class="c666666 fs14 fr">性别： </span>
+							</div>
+							<div class="fl w70 c333333 fs15">
+								<span class="ml15">无</span>
+							</div>
+						</div>
+						<div class="oh mt15">
+							<div class="fl w30 tc">
+								<span class="c666666 fs14 fr">擅长语种： </span>
+							</div>
+							<div class="fl w70 c333333 fs15">
+								<span class="ml15">无</span>
+							</div>
+						</div>
+						<div class="oh mt15">
+							<div class="fl w30 tc">
+								<span class="c666666 fs14 fr">工龄： </span>
+							</div>
+							<div class="fl w70 c333333 fs15">
+								<span class="ml15">无</span>
+							</div>
+						</div>
+						<div class="oh mt15">
+							<div class="fl w30 tc">
+								<span class="c666666 fs14 fr">擅长类型： </span>
+							</div>
+							<div class="fl w70 c333333 fs15">
+								<span class="ml15">无</span>
+							</div>
+						</div>
+						<div class="oh mt15">
+							<div class="fl w30 tc">
+								<span class="c666666 fs14 fr">擅长区域： </span>
+							</div>
+							<div class="fl w70 c333333 fs15">
+								<span class="ml15">无</span>
+							</div>
+						</div>
+						<div class="oh mt15">
+							<div class="fl w30 tc">
+								<span class="c666666 fs14 fr">详细介绍： </span>
+							</div>
+							<div class="fl w70 fs15">
+								<span class="ml15 ca6a6a6" id="details" style="word-break:normal; width:auto; display:block; white-space:pre-wrap;word-wrap : break-word ;overflow: hidden ;">无</span>
+							</div>
+						</div>
+					</div>    
+		    	</div>
+			</div>
+			<div id="pinlun" class="disn ">
+				<div id="refreshContainer2" class="mui-scroll-wrapper2 bgwhite" style="margin-top:248px;z-index: 4;margin-bottom: 55px;">
+		    		<div class="mui-scroll2" >
+		    			<ul id="pinlunlist">
+	    					
+		    			</ul>
+					</div>
+		    	</div>
+		    	<div class="disn tc" id="zanwupinlun" style="width: 100%;">
+		    		<span class="fs17 c666666">暂无评论</span>
+		   	 	</div>
+			</div>
+				<div class="tc bgwhite oh" style="position: fixed;bottom:0px;width:100%;height:55px;z-index: 100;border-top:1px solid #F0F0F0;box-shadow:0 -2px 10px -1px #999999;">
+					<div class="fl oh w100 c666666 mt5">
+						<div class="fl bgcaidan" style="width: 33%;">
+							<span class="iconfont icon-dianhua-copy fs23" style="text-align: center;
+			display:block;"></span>
+							<span class="fs12">电话咨询</span>
+						</div>
+						<div class="fl bgcaidan" style="width: 33%;">
+							<span class="iconfont icon-kefu fs18" style="text-align: center;
+			display:block;"></span>
+							<span class="fs12">在线咨询</span>
+						</div> 
+						<div class="fl bgcaidan" style="width: 33%;">
+							<span class="iconfont icon-wodeshoucang fs20" style="text-align: center;
+			display:block;"></span >
+							<span class="fs12">收藏</span>
+						</div>
+					</div>
+				</div>
+		</div>
+		<script id="pinlunlists" type="text/template">
+			{{each list.data.data}}
+				{{if list.data.current_page==1 && $index==0}}
+					<div class="oh" style="border-bottom: 7px solid #F0F0F0;">
+    					<div class="w25 tc h65 fl" style="padding-top: 10px;">
+    						<div id="pinfen" class="" style="color: #FFB400;font-weight:bold ;font-size: 26px;">4.5</div>
+    						<div class="fs13 mt3 c666666">车队评分</div>
+    					</div>
+    					<div class="fl w75 oh" style="line-height: 20px;padding-top: 15px;">
+    						<div class="fl shai pinlunshaixuan-active" data_id="0" data_shuju="{{list.com_num_level.num_hao+list.com_num_level.num_zhong+list.com_num_level.num_cha}}" style="">
+    							<span class="fs12">全部 {{list.com_num_level.num_hao+list.com_num_level.num_zhong+list.com_num_level.num_cha}}</span>
+    						</div>
+    						<div class="fl shai ml7 pinlunshaixuan" data_id="1" data_shuju="{{list.com_num_level.num_hao}}">
+    							<span class="fs12">好评 {{list.com_num_level.num_hao}}</span>
+    						</div>
+    						<div class="fl shai ml7 pinlunshaixuan" data_id="2" data_shuju="{{list.com_num_level.num_zhong}}">
+    							<span class="fs12">中评 {{list.com_num_level.num_zhong}}</span>
+    						</div>
+    						<div class="fl shai ml7 pinlunshaixuan" data_id="3" data_shuju="{{list.com_num_level.num_cha}}">
+    							<span class="fs12">差评 {{list.com_num_level.num_cha}}</span>
+    						</div>
+    					</div>
+    				</div>
+    				<li class="oh bbf0 pt5 pb5">
+						<div class="fl w15 pl10 pt5">
+							{{if $value.employee.img_url!=''}}
+								<img src="{{$value.employee.img_url}}" style="height: 30px;width: 30px;border-radius:50px ;"/>
+							{{else}}
+								<img src="../img/NoHeadportrait.png" style="height: 30px;width: 30px;border-radius:50px ;"/>
+							{{/if}}
+						</div>
+						<div class="fl w85">
+							<div class="oh">
+								<div class="fs14 fl">
+									<div>{{$value.employee.realname}}</div>
+									<div>
+										<div class="fl">
+											<span class="fs13 c999999">评分</span>
+										</div>
+										<div class="icons mui-inline fl fs13 ml10" style="">
+											<%for (var i=0;i<$value.grade;i++) {%>
+												<i data-index="1" class="mui-icon mui-icon-star-filled fs14"></i>
+										    <%}%>
+										    <%for (var i=0;i<5-$value.grade;i++) {%>
+												<i data-index="1" class="mui-icon mui-icon-star fs14"></i>
+										    <%}%>
+										</div>
+									</div>
+								</div>
+								<div class="fr mt5">
+									<span class="fs13 mr20 c999999">{{$value.create_time.slice(0,16)}}</span>
+								</div>
+							</div>
+							<div class="mt5">
+								<span class="fs14 c666666">{{$value.content}}</span>
+							</div>
+							{{if $value.review}}
+								<div class="btf0">
+								<span class="fs13 cred">用户追评</span>
+								<div>
+									<span class="fs14 c666666">{{$value.content}}</span>
+								</div>
+								</div>
+								<!--<div class="mt5 fs13 c999999 mb7 mr5" style="background: #F0F0F0;">
+									<span class="ml3">商家回复:</span><span class="">感谢亲</span>
+								</div>-->
+							{{/if}}
+						</div>
+					</li>
+				{{else}}
+					<li class="oh bbf0 pt5 pb5">
+						<div class="fl w15 pl10 pt5">
+							{{if $value.employee.img_url!=''}}
+								<img src="{{$value.employee.img_url}}" style="height: 30px;width: 30px;border-radius:50px ;"/>
+							{{else}}
+								<img src="../img/NoHeadportrait.png" style="height: 30px;width: 30px;border-radius:50px ;"/>
+							{{/if}}
+						</div>
+						<div class="fl w85">
+							<div class="oh">
+								<div class="fs14 fl">
+									<div>{{$value.employee.realname}}</div>
+									<div>
+										<div class="fl">
+											<span class="fs13 c999999">评分</span>
+										</div>
+										<div class="icons mui-inline fl fs13 ml10" style="">
+											<%for (var i=0;i<$value.grade;i++) {%>
+												<i data-index="1" class="mui-icon mui-icon-star-filled fs14"></i>
+										    <%}%>
+										    <%for (var i=0;i<5-$value.grade;i++) {%>
+												<i data-index="1" class="mui-icon mui-icon-star fs14"></i>
+										    <%}%>
+										</div>
+									</div>
+								</div>
+								<div class="fr mt5">
+									<span class="fs13 mr20 c999999">{{$value.create_time.slice(0,16)}}</span>
+								</div>
+							</div>
+							<div class="mt5">
+								<span class="fs14 c666666">{{$value.content}}</span>
+							</div>
+							{{if $value.review}}
+								<div class="btf0">
+								<span class="fs13 cred">用户追评</span>
+								<div>
+									<span class="fs14 c666666">{{$value.content}}</span>
+								</div>
+								</div>
+								<!--<div class="mt5 fs13 c999999 mb7 mr5" style="background: #F0F0F0;">
+									<span class="ml3">商家回复:</span><span class="">感谢亲</span>
+								</div>-->
+							{{/if}}
+						</div>
+					</li>
+				{{/if}}
+			{{/each}}
+		</script>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/castapp.js" ></script>
+		<script type="text/javascript" src="../js/template-web.js" ></script>
+		<script type="text/javascript">
+			var shifouyoupinlun=0;
+			var pages=1;
+			var pagess=1;
+			var level=0;
+			var guide_id=0;
+			var data_grade=0;
+			var comment_num=0;
+			var comments_num=0;
+			var enterprise_id=0;
+			var partment_id=0;
+			mui.plusReady(function(){
+				mui.init({
+					swipeBack:true
+				});
+				ca.init();
+				ca.blackStatusBar();
+				ca.checkTheNetwork();
+				ca.closeWaitings();
+				mui('#refreshContainer2').pullRefresh({
+				    up: {
+				        contentrefresh: "正在加载...",
+				        contentnomore: "没有更多数据了",
+				        callback: upFn2
+				    }
+				});
+	        	function upFn2(){
+	        		if(pagess==0){//判断是否有数据  0无 不再执行下拉刷新
+						this.endPullupToRefresh(true);
+					}else{
+						pages=pages+1;
+						showPinfen(pages,level);
+						this.endPullupToRefresh(false);
+					}
+		        }
+				mui('.mui-scroll-wrapper1').scroll();
+				mui('.mui-scroll-wrapper2').scroll();
+				
+				function itemOnclick(){
+					var cell=ca.className('w50');
+					cell[0].addEventListener('tap',function(){
+						cell[1].classList.add('c666666');
+						cell[1].classList.remove('c4F77AA');
+						cell[1].classList.remove('bb4f77aa');
+						cell[0].classList.add('c4F77AA');
+						cell[0].classList.add('bb4f77aa');
+						ca.id('pinlun').style.display='none';
+						ca.id('jieshao').style.display='block';
+					})
+					cell[1].addEventListener('tap',function(){
+						cell[0].classList.add('c666666');
+						cell[0].classList.remove('c4F77AA');
+						cell[0].classList.remove('bb4f77aa');
+						cell[1].classList.add('c4F77AA');
+						cell[1].classList.add('bb4f77aa');
+						ca.id('pinlun').style.display='block';
+						ca.id('jieshao').style.display='none';
+						if(shifouyoupinlun<=0){
+							ca.id('zanwupinlun').style.marginTop='258px';
+							ca.id('refreshContainer2').style.display='none';
+							ca.id('zanwupinlun').style.display='block';
+						}else{
+							ca.id('refreshContainer2').style.display='block';
+							ca.id('zanwupinlun').style.display='none';
+						}
+					})
+					
+				}
+				window.addEventListener('guide_item',function(event){
+					ca.whiteStatusBar();
+					var cell=ca.className('w50');
+					for(var i=0;i<cell.length;i++){
+						if(i==0){
+							cell[0].classList.add('c4F77AA');
+							cell[0].classList.add('bb4f77aa');
+						}else{
+							cell[1].classList.add('c666666');
+							cell[1].classList.remove('c4F77AA');
+							cell[1].classList.remove('bb4f77aa');
+						}
+					}
+					ca.id('jieshao').style.display='block';
+					ca.id('pinlun').style.display='none';
+					itemOnclick();
+					shifouyoupinlun=0;
+					pages=1;pagess=1;level=0;guide_id=0;
+					data_grade=0;comment_num=0;comments_num=0;
+					guide_id = event.detail.guide_id;
+// 					comment_num = event.detail.comment_num;
+// 					comments_num = event.detail.comments_num;
+// 					data_grade = event.detail.data_grade;
+// 					
+// 					ca.id('pinglun').innerText='评价('+comments_num+')';
+					findDetail(guide_id);
+					ca.id('pinlunlist').innerHTML="";
+					mui('#refreshContainer2').pullRefresh().refresh(true);
+					showPinfen(pages,level);
+				})
+				function findDetail(id){
+					shifouyoupinlun=comments_num;
+					ca.ajaxs({url:'findGuideById',data:{
+							id:id
+						},succFn:function(data){
+							if(!ca.emptyFun(data)){
+								enterprise_id=data.e_id;
+								partment_id=data.structure_id;
+								var sp=ca.className('ml15');
+								var da=data.supply_guide_info;
+								ca.id('cishu').innerText='带团'+data.comment_num+'次';
+								if(!ca.emptyFun(data.img_url)){
+									ca.id('touxiang').src=data.img_url;
+								}else{
+									ca.id('touxiang').src='../img/NoHeadportrait.png';
+								}
+								// alert(JSON.stringify(data))
+								if(ca.emptyFun(da)){
+									ca.id('name').innerText=data.realname;
+									ca.id('phone').innerText=data.phone;
+									sp[0].innerText='无';
+									sp[1].innerText='无';
+									sp[2].innerText='无';
+									sp[3].innerText='无';
+									sp[4].innerText='无';
+									sp[5].innerText='无';
+									sp[6].innerText='无';
+									sp[7].innerText='无';
+								}else{
+									ca.id('name').innerText=da.realname;
+									ca.id('phone').innerText=da.phone;
+									sp[0].innerText=da.cert_num ? da.cert_num:'';
+									sp[1].innerText=da.card_num;
+									var sex=da.sex?da.sex:0;
+									if(sex==1){
+										sp[2].innerText="男"
+									}else if(sex==2){
+										sp[2].innerText="女"
+									}else{
+										sp[2].innerText="";
+									}
+									if(ca.emptyFun(da.language)){
+										sp[3].innerText="普通话";
+									}else{
+										sp[3].innerText=da.language;
+									}
+									if(da.team_start_date=="" || da.team_start_date==null){
+										sp[4].innerText=0+"年";
+									}else{
+										var date1 = ca.getCurrentTime()[0]+'-'+ca.getCurrentTime()[1]+'-'+ca.getCurrentTime()[2];
+										var date2 = da.team_start_date;
+										// 拆分年月日
+										date1 = date1.split('-');
+										// 得到月数
+										date1 = parseInt(date1[0]) * 12 + parseInt(date1[1]);
+										// 拆分年月日
+										date2 = date2.split('-');
+										// 得到月数
+										date2 = parseInt(date2[0]) * 12 + parseInt(date2[1]);
+										var m = Math.abs(date1 - date2);
+										sp[4].innerText=parseInt(m/12)+" 年";
+									}
+									sp[5].innerText=da.good_type;
+									sp[6].innerText=da.good_zone;
+									sp[7].innerText=da.details;
+								}
+							}
+							ca.closeWaiting();
+						},errFn:function(call){
+							ca.closeWaiting();
+							mui.toast(call);
+						}
+					})
+					
+					ca.closeWaiting();
+				}
+				
+				function shaixuan(){
+					var cell=ca.className('shai');
+					for(var i=0;i<cell.length;i++){
+						(function(index){
+							cell[i].addEventListener('tap',function(){
+								for(var a=0;a<cell.length;a++){
+									if(index==a){
+										level=cell[a].getAttribute('data_id');
+										var data_shuju=cell[a].getAttribute('data_shuju');
+										if(data_shuju>0){
+											ca.id('pinlunlist').innerHTML="";
+											pages=1;
+											pagess=1;
+											mui('#refreshContainer2').pullRefresh().refresh(true);
+											showPinfen(pages,level);
+										}else{
+											mui.toast('没有数据!');
+										}
+										
+									}else{
+										
+									}
+								}
+							})	
+						})(i);
+					}
+				}
+				mui('body').on('tap','#phone',function(){
+					ca.callPhone(this.innerText);
+				})
+				function xuanran(level){
+					var cell=ca.className('shai');
+					for(var i=0;i<4;i++){
+						if(level==i){
+							cell[level].classList.remove('pinlunshaixuan');
+							cell[level].classList.add('pinlunshaixuan-active');
+						}else{
+							cell[i].classList.remove('pinlunshaixuan-active');
+							cell[i].classList.add('pinlunshaixuan');
+						}
+					}
+				}
+				function showPinfen(pages,level){
+					var id = guide_id;
+					ca.ajaxs({url:'findAllComment',data:{
+							type:'guide',
+							product_id:id,
+							page:pages,
+							level:level
+						},
+						succFn:function(data){
+							var da1=data.data.next_item;
+							if(da1==null){
+								pagess=0;
+							}
+							if(da1!=null){
+								pagess==1;
+							}
+							if(data.data.data=="" && pages==1){
+								ca.id('pinglun').innerText='评论(0)';
+								shifouyoupinlun=0
+								ca.id('pinlunlist').innerHTML="暂无数据";
+								ca.closeWaiting();
+								return;
+							}
+							ca.id('pinglun').innerText='评论('+data.data.data.length+')';
+							shifouyoupinlun=1;
+							pinlunlist=data;
+							fuzhi();
+							ca.id('pinfen').innerText=data.grade;
+							shaixuan();
+							xuanran(level);
+							ca.closeWaiting();
+						},
+						errFn:function(call){
+							ca.closeWaiting();
+							mui.toast(call);
+						}
+					})
+				}
+				function fuzhi(data){
+					try{
+						ca.id('pinlunlist').innerHTML+=template('pinlunlists', {
+							"list":data
+						});
+						
+					}catch(err){
+						console.log(err);
+					}
+					
+				}
+				var cff=ca.className('bgcaidan');
+				cff[0].addEventListener('tap',function(){
+						ca.callPhone(ca.id('phone').innerText);
+				})
+				cff[1].addEventListener('tap',function(){
+					plus.nativeUI.showWaiting();
+						ca.ajaxs({url:'findUserByid',data:{
+								user_id:guide_id
+							},succFn:function(data){
+								if(data.msg==1){
+									if(data.user.clientid==""){
+										mui.toast('用户暂时未使用此功能');
+										ca.closeWaiting();
+										return;
+									}
+									
+									var accounts=data.user.e_code+'_'+data.user.username;
+									var userimg=data.user.img_url;
+									var name=data.user.realname;
+										localStorage.setItem('accounts',accounts);
+										var account=localStorage.getItem('e_code')+'_'+localStorage.getItem('username')
+										var storageName='chatList'+account+'and'+accounts;
+					// 						plus.storage.removeItem(storageName)
+					// 						localStorage.setItem(account+'userimg','../img/NoHeadportrait.png')
+										var chatlistdetail=JSON.parse(plus.storage.getItem(storageName));
+										if(ca.emptyFun(chatlistdetail)){//如果没有
+											var selfimg=localStorage.getItem(account+'userimg');//获取用户自己的头像地址
+											var heimg='';//读取消息来源人的头像
+											plus.io.resolveLocalFileSystemURL('_downloads/'+account+'/'+accounts+'.png',function(entry){  
+												entry.file(function(file){
+													heimg=file.fullPath;
+												});
+											},function(e){//读取文件失败 重新下载
+												if(!ca.emptyFun(userimg)){
+													ca.downloader({url:userimg,filePath:account+'/'+accounts+'.png',//下载用户头像
+														succFn:function(file){
+															// alert(JSON.stringify(file))
+															findFileSystemURL({url:file.filename,succFn:function(fil){//根据路径读取文件
+																heimg=fil;//创建列表
+															}})
+														},errFn:function(){//下载失败 使用默认头像
+															heimg='../imag/NoHeadportrait.png';
+														}
+													})
+												}else{
+													heimg='../imag/NoHeadportrait.png';
+												}
+											});
+											setTimeout(function(){//防止文件资源还未读取到
+												var chat=new Object;
+												chat.selfname=localStorage.getItem('realname');
+												chat.selfimg=selfimg;
+												chat.selfaccount=account;
+												chat.hename=name;
+												chat.heimg=heimg;
+												chat.heaccount=accounts;
+												chat.updatetime=new Date().getTime();
+												chat.content=[];
+												plus.storage.setItem(storageName,JSON.stringify(chat));
+											},200)
+										}
+										setTimeout(function(){
+											mui.openWindow({
+												url:'../jiaoliu/chat_message_list_detail.html',
+												id:'chat_message_list_detail',
+												extras:{
+													accounts:accounts,
+													userimg:userimg,
+													name:name
+												}
+											});
+										},400)
+								}else{
+									mui.toast(data.data);
+								}
+								ca.closeWaiting();
+							},errFn:function(err){
+								mui.toast(err)
+								ca.closeWaiting();
+							}
+						})
+						
+				})
+				cff[2].addEventListener('tap',function(){
+					ca.ajaxs({url:'addMyFavorite',data:{
+								user_id:localStorage.getItem('userid'),
+								type:'guide',enterprise_id:enterprise_id,
+								item_id:guide_id,partment_id:partment_id
+						},succFn:function(data){
+							if(!ca.emptyFun(data)){
+								mui.toast(data.msgtext);
+							}
+							ca.closeWaiting();
+						},errFn:function(err){
+							mui.toast(err);
+							ca.closeWaiting();
+						}
+					})
+				})
+				/**
+				* 根据路径读取到文件   
+				*/
+				function findFileSystemURL(data){
+					plus.io.resolveLocalFileSystemURL(data.url,function(entry){  
+						entry.file(function(file){
+							data.succFn && data.succFn(file.fullPath);
+						});  
+					});
+				}
+			})
+			
+		</script>
+	</body>
+
+</html>

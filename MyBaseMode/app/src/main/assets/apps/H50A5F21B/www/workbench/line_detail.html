@@ -1,0 +1,171 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/style.css" rel="stylesheet" />
+		<style>
+			.line-detail-div{
+				margin-top: 5px;
+				background: #FFFFFF;
+			}
+			.line-detail-div1{
+				width: 20%;
+				background: #FF8201;
+				font-size: 16px;
+				color: #FFFFFF;
+				text-align: center;
+				height: 30px;
+				line-height: 30px;
+			}
+			.line-detail-div2{
+				font-size: 17px;
+				text-align: center;
+				color: #333333;
+				padding-top: 5px;
+			}
+			.line-detail-div3{
+				font-size: 15px;
+				margin-left: 15px;
+				color: #333333;
+				padding-top: 5px;
+			}
+			.line-detail-div4{
+				font-size: 15px;
+				margin-left: 0px;
+				color: #333333;
+				padding-top: 5px;
+			}
+			.line-detail-div4 span{
+				margin-left: 15px;
+			}
+			.line-detail-div5{
+				font-size: 15px;
+				margin-left: 15px;
+				padding-top: 5px;
+				color: #333333;
+			}
+			.line-detail-div6{
+				font-size: 13px;
+				padding: 5px 10px 5px 15px;
+				color: #666666;
+			}
+			img {
+				width: 100%;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav user-index-top-bg mheader" >
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"  style="color: #FFFFFF !important;"></a>
+		    <h1 class="mui-title" style="font-size: 18px !important;color: #FFFFFF !important;">线路详情</h1>
+		</header>
+		<div class="mui-content" id="mui-content" style="margin-top: 25px;">
+		    <!--<div class="line-detail-div">
+		    	<div class="line-detail-div1" style="">
+		    		<span>第1天</span>
+		    	</div>
+		    	<div class="line-detail-div2">
+		    		<span>张家界</span>
+		    	</div>
+		    	<div class="line-detail-div3">
+		    		<span>住宿地点：张家界</span>
+		    	</div>
+		    	<div class="line-detail-div4">
+		    		<span>早餐：自理</span>
+		    		<span>中餐：自理</span>
+		    		<span>早餐：自理</span>
+		    	</div>
+		    	<div class="line-detail-div5">
+		    		<span>行程介绍</span>
+		    	</div>
+		    	<div class="line-detail-div6">
+		    		金鞭溪全长6.5公里，自西向东贯通森林公园，两岸奇峰屏列，风光如画，嬉戏的鸟兽、古奇的树木、悠然的游鱼、景色显得异常幽静。金鞭溪所经之地被誉为“世界上最美丽的峡谷”。主要景致有醉罗汉、神鹰护鞭、金鞭岩、花果山、水帘洞、劈山救母、千里相会、楠木坪、水绕四门等。金鞭溪全长6.5公里，自西向东贯通森林公园，两岸奇峰屏列，风光如画，嬉戏的鸟兽、古奇的树木、悠然的游鱼、景色显得异常幽静。金鞭溪所经之地被誉为“世界上最美丽的峡谷”。主要景致有醉罗汉、神鹰护鞭、金鞭岩、花果山、水帘洞、劈山救母、千里相会、楠木坪、水绕四门等。
+		    	</div>
+		    </div>-->
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/castapp.js" ></script>
+		<script type="text/javascript">
+			mui.plusReady(function(){
+				mui.init({
+				swipeBack:true
+			});
+			ca.init();
+			ca.whiteStatusBar();
+			var self=plus.webview.currentWebview();
+			var id=self.line_id;
+			var list=document.getElementById('mui-content');
+			ca.ajaxs({url:'getLineItemByLineId',data:{
+					line_id:id
+				},succFn:function(data){
+					list.innerHTML="";
+					for(var a in data){
+						var zao;
+						var zhong;
+						var wan;
+						if(data[a].food[2]=="0"){
+							zao="无"
+						}
+						if(data[a].food[2]=="1"){
+							zao="有"
+						}if(data[a].food[6]=="0"){
+							zhong="无"
+						}
+						if(data[a].food[6]=="1"){
+							zhong="有"
+						}
+						if(data[a].food[10]=="0"){
+							wan="无"
+						}
+						if(data[a].food[10]=="1"){
+							wan="有"
+						}
+						var temp;
+						temp='<div class="line-detail-div">'
+							    +'<div class="line-detail-div1" style="">'	
+							    +'<span>第'+data[a].day_no+'天</span>'		
+							    +'</div>'
+							    +'<div class="line-detail-div2">'	
+						    	+'<span>'+data[a].stay_address+'张家界</span>'	
+						    	+'</div>'
+						    	+'<div class="line-detail-div3">'
+						    	+'<span>住宿地点：'+data[a].stay_address+'张家界</span>'	
+						    	+'</div>'
+						    	+'<div class="line-detail-div4">'
+						    	+'<span>早餐：'+zao+'</span>'	
+						    	+'<span>中餐：'+zhong+'</span>'	
+						    	+'<span>晚餐：'+wan+'</span>'
+						    	+'</div>'
+						    	+'<div class="line-detail-div5">'
+						    	+'<span>行程介绍</span>'	
+						    	+'</div>'
+						    	+'<div class="line-detail-div6">'
+						    	+'<span>'+data[a].detail+'</span>'
+						    	+'</div>'
+						    +'</div>';
+						list.innerHTML+=temp;
+					}
+					ca.closeWaiting();
+				},errFn:function(call){
+					ca.closeWaiting();
+					mui.toast(call);
+				}
+			})
+				
+				
+				
+				
+				
+				
+				
+			})
+			
+		</script>
+	</body>
+
+</html>

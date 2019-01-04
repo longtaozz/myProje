@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <h1 class="mui-title">标题</h1>
+		</header>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/test.js" ></script>
+		<script type="text/javascript" src="../js/castapp.js" ></script>
+		<script type="text/javascript" src="../js/crypto-js.js" ></script>
+		<script type="text/javascript">
+			mui.init();
+			ca.init();
+			var ts=Math.round(new Date().getTime()/1000);
+			var te="hawk.1.header\n"+ts+"\nba8g11\nGET\n/v1/ceshi\napi.manbuquanqiu.com\n80\n\n\n";
+			var hash = CryptoJS.HmacSHA256(te,"werxhqb98rpaxn39848xrunpaw3489ruxnpa98w4rxn");
+			var hashInBase64 = CryptoJS.enc.Base64.stringify(hash);
+			mui.ajax('http://api.manbuquanqiu.com/v1/ceshi',{
+				data:{},
+				dataType:'json',//服务器返回json格式数据
+				type:'get',//HTTP请求类型
+				timeout:10000,//超时时间设置为10秒；
+				headers:{
+					'Authorization':'Hawk id="123456", ts="'+ts+'", nonce="ba8g11", mac="'+hashInBase64+'"'
+				},
+				success:function(data){
+					//服务器返回响应，根据响应结果，分析是否登录成功；
+					alert(data);
+				},
+				error:function(xhr,type,errorThrown){
+					//异常处理；
+					console.log(type);
+				}
+			})
+//			
+//			
+			mui.plusReady(function(){
+				//无限制
+//				plus.storage.setItem('nnn','1qq');
+//				alert(plus.storage.getItem('nnn'))
+//				alert(plus.storage.getLength());
+				//获取localStorage存储的剩余容量  有限制5M
+//				alert(localStorage.length);
+//				var  aa=1024 * 1024 * 5 - unescape(encodeURIComponent(JSON.stringify(localStorage))).length;
+				
+			})
+		</script>
+	</body>
+
+</html>

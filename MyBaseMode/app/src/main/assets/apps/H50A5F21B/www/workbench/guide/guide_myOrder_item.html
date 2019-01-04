@@ -1,0 +1,371 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../css/style.css" />
+		<style>
+			.shaixuan-div{
+				float: left;
+				width: 50%;
+				padding: 5px 18px;
+				margin: 0 auto;
+			}
+			.mui-table-view-chevron .mui-table-view-cell {
+			    padding-right: 10px;
+			}
+			.mui-scroll-wrapper1
+			{
+			    position: absolute;
+			    z-index: 2;
+			    top: 0;
+			    bottom: 0;
+			    left: 0;
+			    overflow: hidden;
+			    width: 100%;
+			}
+			
+			.mui-scroll1
+			{
+			    position: absolute;
+			    z-index: 1;
+			    width: 100%;
+			    -webkit-transform: translateZ(0);
+			            transform: translateZ(0);
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="ccc"  class="shaixuan" style="height: 35px;position:fixed;top: 0px;width: 100%;">
+			<div class="shaixuan-div">
+				<div class="fl" style="margin-left: 10%;">
+					<span class="shaixuan-divxiala-zi li-title">日期筛选</span>
+				</div>
+				<div class="fl" style="">
+					<span class="mui-icon mui-icon-arrowdown sp-icon"></span>
+				</div>
+				
+			</div>
+			<div class="shaixuan-div">
+				<div class="fl" style="margin-left: 10%;">
+					<span class="shaixuan-divxiala-zi li-title">状态筛选</span>
+				</div>
+				<div class="fl" style="">
+					<span class="mui-icon mui-icon-arrowdown sp-icon"></span>
+				</div>
+				
+			</div>
+		</div>
+		<div class="body " >
+			<div id="pullrefresh" class="mui-content mui-scroll-wrapper pt5" style="margin-top: 35px;">
+	    		<div class="mui-scroll">		
+					<ul class="mui-table-view mui-table-view-chevron" id="div_list" style="background-color:#EFEFF4">
+			            
+					</ul>
+				</div>
+			</div>
+		</div>
+			<div id="middlePopover2" class="mui-popover" style=" position:fixed;height: 250px;width: 100%;border-radius:0px ;border-top: 1px solid #DADADD;z-index: 1000;">
+				<div class="mui-scroll-wrapper1" id="mui-scroll-wrapper2">
+					<div class="mui-scroll1">
+						<ul class="mui-table-view fs15" id="zhuangtai">
+							<li class="mui-table-view-cell zhuangtais" data_id="999">全部订单</li>
+							<li class="mui-table-view-cell zhuangtais" data_id="10">等待确认</li>
+							<li class="mui-table-view-cell zhuangtais" data_id="1">订单确认</li>
+							<li class="mui-table-view-cell zhuangtais" data_id="2">自己取消</li>
+							<li class="mui-table-view-cell zhuangtais" data_id="3">同意取消</li>
+							<li class="mui-table-view-cell zhuangtais" data_id="5">计调取消</li>
+							<li class="mui-table-view-cell zhuangtais" data_id="8">确认带团</li>
+							<li class="mui-table-view-cell zhuangtais" data_id="9">完成订单</li>
+						</ul>
+					</div>
+				</div>
+				
+			</div>
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/castapp.js" ></script>
+		<script type="text/javascript">
+			var pages=1;
+			var pagess=1;
+			var cell1=0;
+			var cell2=0;
+			var createtime=0;
+			var url=localStorage.getItem('url');
+			var status=localStorage.getItem('business_sorder_type');
+			if(ca.emptyFun(status)){
+				status=999;
+			}
+			mui.plusReady(function(){
+				mui.init({
+					pullRefresh : {
+						container:"#pullrefresh",//下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
+						up: {
+							height:150,
+							contentrefresh: '正在加载...',
+							callback: upFn // 上拉执行函数
+						}
+					}
+				});
+				ca.init();
+				var list=ca.id('div_list');
+				function upFn(){
+					if(pagess==0){
+						this.endPullupToRefresh(true);
+					}else{
+						pages=pages+1;
+						findItem(createtime,status,pages);
+						this.endPullupToRefresh(false);
+					}
+				}
+				
+				
+				
+				xila_onclick();
+				function xila_onclick(){
+			     	var cell=document.getElementsByClassName('shaixuan-div');
+			     	var select_input = ca.className('shaixuan-divxiala-zi');
+			     	var arrowdown=ca.className('mui-icon-arrowdown');
+			     	mui('#mui-scroll-wrapper1').scroll();
+					cell[0].addEventListener('tap',function(){
+						mui.toast('暂未开放!');
+						return;
+						if(cell1==0){
+							select_input[1].style.color='#323232';
+							arrowdown[1].style.color='#323232';
+							select_input[0].style.color='#4F77AA';
+							arrowdown[0].style.color='#4F77AA';
+							cell1=1;
+							cell2=0;
+							showdate();
+							function showdate(){
+								// 使用原生js获取时间对象
+								var date = new Date();
+								var year = date.getFullYear();//年
+								var month = date.getMonth() + 1;//月
+								var day = date.getDate();//日
+								ca.dateSelect({
+									defaultTime:year + '-' + month + '-' + day,
+									minTime:(year-2) + '-' + month + '-' + day,
+									maxTime:year + '-'+ (month+1) + '-' + day,
+									callback:function(data){
+										if(data){
+											select_input[0].innerHTML=data;
+											pages=1;
+											pagess=1;
+											createtime=data;
+											list.innerHTML="";
+											findItem(createtime,status,pages);
+											mui('#pullrefresh').pullRefresh().refresh(true);
+											cell1=0;
+										}else{
+											select_input[0].innerHTML="日期筛选";
+											select_input[0].style.color='#323232';
+											arrowdown[0].style.color='#323232';
+											pages=1;
+											pagess=1;
+											createtime=0;
+											list.innerHTML="";
+											findItem(createtime,status,pages);
+											mui('#pullrefresh').pullRefresh().refresh(true);
+											cell1=0;
+										}
+									}
+								})
+							}
+						}else{
+							select_input[0].style.color='#323232';
+							arrowdown[0].style.color='#323232';
+							cell1=0;
+						}
+					})
+					mui('#mui-scroll-wrapper2').scroll();
+					ca.id('middlePopover2').style.top='32px';
+					cell[1].addEventListener('tap',function(){
+						if(cell2==0){
+							select_input[1].style.color='#4F77AA';
+							arrowdown[1].style.color='#4F77AA';
+							select_input['0'].style.color='#323232';
+							arrowdown['0'].style.color='#323232';
+							mui('#middlePopover2').popover('show');
+							cell2=1;
+							cell1=0;
+							ca.className('mui-backdrop')[0].addEventListener('tap',function(){
+								select_input[1].style.color='#323232';
+								arrowdown[1].style.color='#323232';
+								mui("#middlePopover2").popover('hide');
+								cell2=0;
+							})
+						}else{
+							select_input[1].style.color='#323232';
+							arrowdown[1].style.color='#323232';
+							mui('#middlePopover2').popover('hide');
+							cell2=0;
+						}
+					})
+					zhuangtaixuanze();
+					 function zhuangtaixuanze(){
+					 	var cell11=ca.className('zhuangtais');
+			        	for(var i=0;i<cell11.length;i++){
+					     		(function(index1){
+									cell11[i].addEventListener('tap',function(){
+										leixingid=cell11[index1].getAttribute('data_id');
+										if(leixingid==999){
+											status="";
+											select_input[1].innerHTML='状态筛选';
+										}else{
+											select_input[1].innerHTML=cell11[index1].innerHTML;
+											status=leixingid;
+										}
+										
+										pages=1;
+										pagess=1;
+										list.innerHTML="";
+										findItem(createtime,status,pages);
+										mui('#pullrefresh').pullRefresh().refresh(true);
+										mui('#middlePopover2').popover('hide');
+										cell2=0;
+									})
+								})(i);
+					     }
+					 }
+			     }
+				
+				
+				findItem(createtime,status,pages);
+				function findItem(createtime,status,page){
+					ca.showWaiting();
+					ca.ajaxs({url:'findMyGuideOrder',data:{
+							user_id:localStorage.getItem('userid'),createtime:createtime,status:status,page:pages
+						},succFn:function(data){
+							if(data.msg==1){
+	        				var da=data.data.data;
+							var da1=data.data.next_item;
+							if(da1==null){
+								pagess=0;
+							}
+							if(da1!=null){
+								pagess==1;
+							}
+							if(da=="" && page==1){
+								list.innerHTML="暂无数据";
+								plus.nativeUI.closeWaiting();
+								return;
+							}
+							for(var a in da){
+								if(!ca.emptyFun(da[a].teamsk)){
+									var zhuangtai;
+									if(da[a].status==0){
+										zhuangtai='<div class="tour-guide-list-b-r-1 c4F77AA"><span>等待确认</span></div>'
+									}
+									if(da[a].status==1){
+										zhuangtai='<div class="tour-guide-list-b-r-1 c4F77AA"><span>订单确认</span></div>'
+									}
+									if(da[a].status==2){
+										zhuangtai='<div class="tour-guide-list-b-r-1 c4F77AA"><span>自己取消</span></div>'
+									}
+									if(da[a].status==3){
+										zhuangtai='<div class="tour-guide-list-b-r-1 c4F77AA"><span>同意取消</span></div>'
+									}
+									if(da[a].status==4){
+										zhuangtai='<div class="tour-guide-list-b-r-1 c4F77AA"><span>同意取消</span></div>'
+									}
+									if(da[a].status==5){
+										zhuangtai='<div class="tour-guide-list-b-r-1 c4F77AA"><span>计调取消</span></div>'
+									}
+									if(da[a].status==8){
+										zhuangtai='<div class="tour-guide-list-b-r-1 c4F77AA"><span>确认带团</span></div>'
+									}
+									if(da[a].status==9){
+										zhuangtai='<div class="tour-guide-list-b-r-1 c4F77AA"><span>完成带团</span></div>'
+									}
+									if(da[a].status==0){
+										if(!timeCompare(da[a].teamsk.end_date)){
+											zhuangtai='<div class="tour-guide-list-b-r-1 cred"><span>已过期</span></div>'
+										};
+									}
+									
+									var temp='<li class="tour-guide-list mui-table-view-cell" >'	
+										     + 		'<div class="mui-slider-right mui-disabled ">'
+											 +			'<a class="mui-btn mui-btn-red" >删除</a>'
+											 +		'</div>'
+											 +      '<div class="mui-slider-handle">'		
+											 +			'<div class="tour-guide-list-t" data_id="'+da[a].teamsk.id+'">'
+											 +				'<div class="tour-guide-list-t-1">'
+											 +					'<span class="ts-li-title">'+da[a].teamsk.line_name+'</span>'
+											 +				'</div>'
+											 +				'<div class="tour-guide-list-t-2">'
+											 +					'<span>团号：</span><span>'+da[a].team_num+'</span>'
+											 +				'</div>'
+											 +				'<div class="tour-guide-list-t-2">'
+											 +					'<span>团期：</span><span>'+da[a].teamsk.start_date+'——'+da[a].teamsk.end_date+'</span>'
+											 +				'</div>'
+											 +				'<div class="tour-guide-list-t-2">'
+											 +					'<span>人数：</span><span>'+(da[a].teamsk.man_num+da[a].teamsk.child_num)+'人(成人'+da[a].teamsk.man_num+'  儿童'+da[a].teamsk.child_num+')</span>'
+											 +				'</div>'
+											 +				'<div class="tour-guide-list-t-2">'
+											 +					'<span>公司：</span><span>'+da[a].structure.enterprise.alias+' '+da[a].structure.name+'</span><span class="ml15">业务计调：</span><span>'+da[a].teamsk.employee1.realname+'</span>'
+											 +				'</div>'
+											 +				'<div style="position: absolute;right: 0;top: 50px;color: #4F77AA;">'
+											 +					'<span class="fs15">点击查看</span><span class="mui-icon mui-icon-arrowright"></span>'
+											 +				'</div>'
+											 +			'</div>'
+											 +			'<div class="tour-guide-list-b">'
+											 +				'<div class="tour-guide-list-b-l">'
+											 +					'<span></span><span>'+da[a].create_time+'</span>'
+											 +				'</div>'
+											 +				'<div class="tour-guide-list-b-r">'+zhuangtai+'</div>'
+											 +			'</div>'
+											 +		'</div>'
+										     + 	'</li>';
+									list.innerHTML+=temp;
+								}else{
+									continue;
+								}
+								
+							}
+	        			}
+	        			plus.nativeUI.closeWaiting();
+	        			click_item();
+//	        			tijiao();
+						},errFn:function(call){
+							ca.closeWaiting();
+							mui.toast(call);
+						}
+					})
+				}
+				function click_item(){
+					mui("#div_list").on('tap','.tour-guide-list-t',function(){
+						var order_id=this.getAttribute('data_id');
+						mui.openWindow({
+						    url:'guide_myOrder_detail.html',
+						    id:'guide_myOrder_detail',
+						    extras:{
+						        order_id:order_id
+						    }
+						});
+					})
+				}
+				//订单开始与当前时间比较
+				function timeCompare(arg1){
+					var myDate = new Date();
+					var ye=myDate.getFullYear();
+					var mo=myDate.getMonth()+1; //获取当前月份(0-11,0代表1月)
+					var day=myDate.getDate();
+					var mmda=ye+'-'+mo+'-'+day;
+					var date = new Date(mmda.replace(/-/g, '/'));
+					var date1 = new Date(arg1.replace(/-/g, '/'));
+					if(date.getTime()>=date1.getTime()){
+						return false;
+					}else{
+						return true;
+					}
+				}
+			})
+		</script>
+	</body>
+
+</html>

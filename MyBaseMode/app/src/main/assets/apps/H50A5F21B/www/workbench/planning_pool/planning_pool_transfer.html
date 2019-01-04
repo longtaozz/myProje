@@ -1,0 +1,255 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../css/style.css" />
+		<link rel="stylesheet" href="../../css/mui.picker.min.css" />
+		<style>
+			.jihuachi_div{
+				background: #FFFFFF;
+				/*border-bottom: 1px solid #F9F9F9;*/
+				margin: 2px 5px;
+				border-radius:8px ;
+			}
+			.li-title{
+				overflow: hidden; 
+			    text-overflow: ellipsis; 
+			    -o-text-overflow: ellipsis;
+			    white-space:nowrap;
+			    width: 85%;
+			    display:block;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav mheader">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mback"></a>
+		    <h1 class="mui-title">移交</h1>
+		</header>
+		<div class="mui-content">
+		    <div class="fs15 c121212 ml15 mt10">
+		    	<span>当前选中</span>
+		    	<span class="fr fs12 cred mr10" id="xiaohai1"></span><span class="fr fs12 cred mr5" id="daren1"></span><span class="fr fs12 cred mr5" id="zongren1"></span>
+		    </div>
+		    <div id="xuanzhonglist">
+		    	
+		    	<!--<div class="mui-checkbox h65 jihuachi_div oh">
+		    		<div class="fl w20">
+		    			<input name="checkbox" checked="true" disabled="disabled" value="1"  type="checkbox" style="position: absolute;top: 20px;left: 20px; ;">
+		    		</div>
+		    		<div class="fl w80 h100" style="position: absolute;left: 20%; ">
+		    			<div class="">
+		    				<h5 class="c000000 ts-li-title fs16 mt3">森林公园+玻璃桥+天门山+凤凰古城经典5日游</h5>
+		    			</div>
+		    			<div class="fs13 c666666">
+		    				<span class="fs13 c666666">A823965567235853</span>
+		    				<span class="ml20">2018-15-16</span>
+		    			</div>
+		    			<div class="fs12 c666666">
+		    				<span >大人(15)</span><span class="ml10">小孩(15)</span>
+		    			</div>
+		    		</div>
+		    	</div>-->
+		    </div>
+		    <div class="fs15 c121212 ml15 mt10">
+		    	<span>选择团队</span>
+		    </div>
+		    <div>
+		    	<div id="teamxiala" style="border: 1px solid #FFFFFF;margin: 2px 10%;height: 40px;background: #FFFFFF;border-radius:10px ;">
+		    		<span class="fl w80 li-title lh40 fs14 ml3 tc" id="teamxialaname">
+		    			选择团队
+		    		</span>
+		    		<span class="w12 fr mui-icon mui-icon-arrowdown lh40 tc fs25">
+		    			
+		    		</span>
+		    	</div>
+		    </div>
+		    <div id="xiangxi" class="disn" style="padding-bottom:80px;">
+		    	
+		    </div>
+		</div>
+		<div id="yijiao" style="position: fixed;bottom: 0px;z-index: 100;background: #FFB400;width: 100%;height: 50px;border-radius:15px ;border-bottom-left-radius: 0px;border-bottom-right-radius: 0px;">
+			<div class="cffffff fl w100 lh44 tc">
+				<span>移交团队</span>
+			</div>
+		</div>
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/castapp.js" ></script>
+		<script src="../../js/mui.picker.js"></script>
+		<script src="../../js/mui.poppicker.js"></script>
+		<script type="text/javascript">
+			var wushuju=0;
+			var teamid=0;
+			var shenyu=0;
+			var xuanzong=0;
+			mui.plusReady(function(){
+				mui.init({
+					swipeBack:true
+				});
+				ca.init();
+				ca.blackStatusBar();
+				ca.closeWaitings();
+				var self = plus.webview.currentWebview();
+				var ids = self.ids;//获得参数
+				var picker1=new mui.PopPicker();
+				showchangeItem(ids)
+				function showchangeItem(id){
+					ca.ajaxs({url:'findChangeLineOrder',data:{
+							ids:id.toString()
+					},succFn:function(data){
+						if(!ca.emptyFun(data)){
+							ca.id('daren1').innerText='大('+data.num.mannum+')';
+							ca.id('xiaohai1').innerText='小('+data.num.child_num+')';
+							ca.id('zongren1').innerText='总:'+(parseInt(data.num.mannum)+parseInt(data.num.child_num));
+							xuanzong=(parseInt(data.num.mannum)+parseInt(data.num.child_num));
+							var da=data.data;
+							for(var a in da){
+								var temp='<div class="mui-checkbox h65 jihuachi_div oh">'
+								    	+	'<div class="fl w20">'
+								    	+		'<input name="checkbox"  checked="true" disabled="disabled" value="'+da[a].id+'"  type="checkbox" style="position: absolute;top: 20px;left: 20px; ;">'
+								    	+	'</div>'
+								    	+	'<div class="fl w80 h100 xuanzeliebiao" style="position: absolute;left: 20%;" data_id="'+da[a].id+'">'
+								    	+		'<div class="">'
+								    	+			'<h5 class="c000000 ts-li-title fs16 mt3">'+da[a].line_name+'</h5>'
+								    	+		'</div>'
+								    	+		'<div class="fs13 c666666">'
+								    	+			'<span class="fs13 c666666">'+da[a].order_num+'</span>'
+								    	+			'<span class="ml20">'+da[a].start_date+'</span>'
+								    	+		'</div>'
+								    	+		'<div class="fs12 c666666">'
+								    	+			'<span >大人('+da[a].man_num+')</span><span class="ml10" >小孩('+da[a].child_num+')</span>'
+								    	+		'</div>'
+								    	+	'</div>'
+								    	+'</div>';
+								ca.id('xuanzhonglist').innerHTML+=temp;
+							}
+							
+						}
+							ca.closeWaiting();
+						},errFn:function(call){
+							ca.closeWaiting();
+							mui.toast(call);
+						}
+						
+					})
+				}
+				showTeam();
+				function showTeam(){
+					ca.ajaxs({url:'findAvailableTeamSk',data:{
+							structure_id:localStorage.getItem('structure_id')
+						},succFn:function(data){
+							if(!ca.emptyFun(data)){
+								var arr=new Array();
+								for(var i=0;i<data.length;i++){
+									var ob=new Object();
+									ob.text=data[i].team_num+data[i].line_name;
+									var employee2_name='无';
+									if(!ca.emptyFun(data[i].employee2)){
+										employee2_name=data[i].employee2.realname
+									}
+									ob.value={id:data[i].id,team_num:data[i].team_num,
+										status:data[i].status,start_date:data[i].start_date,end_date:data[i].end_date,
+										people_num:data[i].people_num,line_name:data[i].line_name,man_num:data[i].man_num,
+										child_num:data[i].child_num,employee2_name:employee2_name,
+										employee1_name:data[i].employee1.realname
+									};
+									arr.push(ob)
+								}
+								picker1.setData(arr);
+							}else{
+								wushuju=1;
+							}
+							ca.closeWaiting();
+						},errFn:function(call){
+							ca.closeWaiting();
+							mui.toast(call);
+						}
+					})
+				}
+				
+				ca.id('teamxiala').addEventListener('tap',function(){
+					if(wushuju==1){
+						mui.toast('没有团队可供选择,请先创建团队!');
+					}else{
+						picker1.show(function (selectItems) {
+							var da=selectItems[0].value;
+							ca.id('teamxialaname').innerText=da.line_name;
+							var sta='收客';
+							if(da.status==2){
+								sta='成团';
+							}
+							var temp =  '<div class="fs13 c121212 mt10 tc"><span>团队详细</span></div>'
+								+    	'<div class="jihuachi_div h150 pt5">'
+								+   		'<div class="fs15 ml10 yc2"><span>'+da.line_name+'</span></div>'
+								+    		'<div class="fs14 ml10 c666666"><span>团号:'+da.team_num+'</span></div>'	
+								+    		'<div class="fs14 ml10 c666666"><span>发班日期:'+da.start_date+'</span>'
+								+    		'<span class="ml10">结束日期:'+da.end_date+'</span></div>'
+								+    		'<div class="fs14 ml10 c666666"><span>计划数:'+da.people_num+'</span><span class="ml10">接纳数:'+(da.man_num+da.child_num)+'</span>'	
+								+    		'<span class="ml5">大人('+da.man_num+')</span><span class="ml5">小孩('+da.child_num+')</span><span class="ml5 cred">剩余('+(da.people_num-(da.man_num+da.child_num))+')</span></div>'
+								+    		'<div class="fs14 ml10 c666666"><span>操作人:'+da.employee1_name+'</span><span class="ml15">导游:'+da.employee2_name+'</span></div>'
+								+    		'<div class="fs14 ml10 c666666"><span>状态:</span><span class="ml3 cred">'+sta+'</span></div>'	
+								+    	'</div>';
+							ca.id('xiangxi').innerHTML=temp;
+							ca.id('xiangxi').style.display='block';
+							teamid=da.id;
+							shenyu=(da.people_num-(da.man_num+da.child_num));
+						})
+					}
+					
+				})
+				
+				ca.id('yijiao').addEventListener('tap',function(){
+					if(teamid==0){
+						mui.toast('请选择团队！');
+					}else{
+						// if(shenyu-xuanzong>=0){
+							var btnArray = ['是','否'];
+							mui.confirm('确认移交该选中的的订单到此团队中去？', '提示', btnArray, function(e) {
+			                    if(e.index == 0){
+			                    	ca.ajaxs({url:'availableLineOrder',data:{
+			                    			team_id:teamid,line_ids:ids.toString(),user_id:localStorage.getItem('userid')
+			                    		},succFn:function(data){
+			                    			if(!ca.emptyFun(data)){
+			                    				if(data.msg==1){
+			                    					mui.toast('移交成功!');
+			                    					var arr1 = ['planning_pool_item'];
+			                    					ca.sendNotice(arr1,'update',{});
+													setTimeout(function(){
+													    ca.closeCurrentInterface();	
+													},300);
+			                    				}
+			                    			}
+			                    			ca.closeWaiting();
+			                    		},errFn:function(call){
+			                    			ca.closeWaiting();
+			                    			mui.toast(call);
+			                    		}
+			                    	})
+			                    }
+			                })
+// 						}else{
+// 							mui.toast('选中订单总人数大于,团队剩余人数！');
+// 						}
+					}
+				})
+				mui('#xuanzhonglist').on('tap','.xuanzeliebiao',function(){
+					var order_id=this.getAttribute('data_id');
+					mui.openWindow({
+					    url:'planning_pool_item_detail.html',
+					    id:'planning_pool_item_detail',
+					    extras:{
+					        order_id:order_id
+					    }
+					});
+				})
+			})
+			
+		</script>
+	</body>
+
+</html>

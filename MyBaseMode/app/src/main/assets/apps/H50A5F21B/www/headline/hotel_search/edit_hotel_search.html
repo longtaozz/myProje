@@ -1,0 +1,241 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/style.css" rel="stylesheet" />
+		<link href="../../css/iconfont.css" rel="stylesheet" />
+		<style>
+			.myself-recruit-xz{
+				margin:5px;background: #FE7B07;border-radius:5px;
+				text-align: center;height:50px;line-height: 50px;
+			}
+			.myself-recruit-zt1{
+				width:35px;height:3px; background: #FE7B07;
+				float: left;border-radius:2px;margin-top: 10px;
+				margin-left: 25px;
+			}
+			.myself-recruit-zt2{
+				width:35px;height:3px; background: #4AD4FB;float: left;border-radius:2px ;margin-top: 10px;
+				margin-left: 25px;
+			}
+			.myself-recruit-zt3{
+				width:35px;height:3px; background: #666666;float: left;border-radius:2px ;margin-top: 10px;
+				margin-left: 25px;
+			}
+			.dynamics-xs{
+				width:90%;height:3px;background: #FE7B07;border-radius:2px ;margin-top:8px;
+				margin-left: 5%;margin-right: 5%;
+			}
+			.dynamics-dd{
+				width:90%;height:3px;background: #4AD4FB;border-radius:2px ;margin-top:8px;
+				margin-left: 5%;margin-right: 5%;
+			}
+			.dynamics-gq{
+				width:90%;height:3px;background: #666666;border-radius:2px ;margin-top:8px;
+				margin-left: 5%;margin-right: 5%;
+			}
+			.mui-table-view-cell:after{
+				height: 0px;
+			}
+			.mui-table-view-cell{
+				padding: 0px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav user-index-top-bg mheader">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left cffffff"></a>
+			<h1 class="mui-title cffffff mtitle">编辑找酒店</h1>
+		</header>
+		<div class="mui-content">
+			<div style="position:fixed;width:100%;height:90px;z-index:89;background:#EFEFF4;">
+				<div class="myself-recruit-xz" id="add">
+					<span class="cffffff fs16">新 增</span>
+				</div>
+				<div class="mt10 oh">
+					<div class="myself-recruit-zt1" ></div>
+					<div class="fl fs14 c666666 ml5">
+						正在显示
+					</div>
+					<div class="myself-recruit-zt2"></div>
+					<div class="fl fs14 c666666 ml5">
+						等待显示
+					</div>
+					<div class="myself-recruit-zt3"></div>
+					<div class="fl fs14 c666666 ml5">
+						已过期
+					</div>
+				</div>
+			</div>
+			<div class="mui-scroll-wrapper" id="refreshContainer">
+				<div class="mui-scroll">
+					<ul class="" id="list">
+					</ul>
+				</div>
+			</div>
+		</div>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/castapp.js"></script>
+		<script src="../../js/template-web.js"></script>
+		<script type="text/template" id="list_ul">
+			{{each data}}
+				<li class="bgwhite  mt8 headline-div  ml10 mr10 oh mui-table-view-cell">
+					<div class="mui-slider-right mui-disabled" >
+						<a class="mui-btn mui-btn-red" data_id="{{$value.id}}">删除</a>
+					</div>
+					<div class="mui-slider-handle" data_id="{{$value.id}}">
+						<div class="fl w12">
+							<img src="{{$value.employee.img_url}}" class="fl ml10 mt10" style="border-radius:100px;width: 35px;height: 35px;"/>
+						</div>
+						<div class="fl w88 ">
+							<div class="oh h30 fs14 lh40 ">
+								<span class="fl ml10">{{$value.employee.enterprise.alias}}</span>	
+								<span class="fr mr10 fs13 c666666">{{$value.update_time.slice(0,16)}}</span>
+							</div>
+							{{#$value.view_start | dateFormat:$value.view_end}}
+							<div class="fs12 headline-div-text c666666 ml10 ">
+								<div>{{$value.city}} {{$value.county}}</div>
+								<div class="mr10">
+									<span>{{$value.name}}</span>
+									<span class="ml3">{{$value.content}}</span>
+								</div>
+							</div>
+							<div class="h30 oh lh30 fs12 c666666 mr10">
+								<span class="fl ml10 iconfont icon-account fs14" ></span><span class="ml3">{{$value.employee.realname}}</span>
+								<span class="fr ml3 phone">{{$value.contact_tel}}</span><span class="fr ml3">{{$value.contact_name}}</span><span class="fr iconfont icon-lianxiren fs14" ></span>
+							</div>
+						</div>
+					</div>
+				</li>
+			{{/each}}
+			
+		</script>
+		<script type="text/javascript">
+			mui.plusReady(function(){
+				mui.init({
+						pullRefresh : {
+							container:"#refreshContainer",//下拉刷新容器标
+							up: {
+									height:150,
+									contentrefresh: '正在加载...',
+									contentnomore:'到底了',
+									callback: upFn // 上拉执行函数
+								}
+						},
+						swipeBack:true
+				})
+				ca.init();
+				var page=1,pages=1;
+				if(mui.os.ios){
+					ca.id('refreshContainer').style.top=158+'px';
+				}else{
+					ca.id('refreshContainer').style.marginTop=89+'px';
+				}
+				function upFn(){
+					if(pages==0){
+						mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
+					}else{
+						page++;
+						findMyself();
+						this.endPullupToRefresh(false);
+					}
+				}
+				ca.receiveNotice('update',function(){
+					ca.id('list').innerHTML="";
+					page=1;pages=1;
+					findMyself();
+				
+				});
+				
+				findMyself();
+				function findMyself(){
+					ca.ajaxs({url:'findMyselfPostmsgHotelSearch',data:{
+							user_id:localStorage.getItem('userid'),page:page
+						},succFn:function(data){
+							if(!ca.emptyFun(data.data)){
+								if(ca.emptyFun(data.next_item)){
+									pages=0;
+								}
+								template.defaults.imports.dateFormat = function(arg1,arg2){
+									var timestamp =Date.parse(new Date());
+									var startTime=new Date(arg1.replace(/-/g, '/')).getTime();
+									var endTime = new Date(arg2.replace(/-/g, '/')).getTime();
+									if(timestamp>endTime){
+										return '<div class="dynamics-gq"></div>';
+									}else if(timestamp<=endTime & timestamp>=startTime){
+										return '<div class="dynamics-xs"></div>';
+									}else{
+										return '<div class="dynamics-dd"></div>';
+									}
+								};
+								try{
+									ca.id('list').innerHTML+=template('list_ul',{
+										'data':data.data
+									})
+								}catch(e){
+									console.log(e);
+								}
+							}
+							ca.closeWaiting();
+						},errFn:function(err){
+							mui.toast(err);
+							ca.closeWaiting();
+						}
+					})
+				}
+				/**
+				 * 删除
+				 */
+				mui('#list').on('tap','.mui-btn-red',function(){
+					var id=this.getAttribute('data_id');
+					var li=this.parentNode.parentNode;//获取整个item
+					var arr=['是','否'];
+					mui.confirm('确认删除该消息?', '提示', arr, function(e) {
+						if(e.index == 0){
+							ca.ajaxs({url:'deletePostmsgHotelSearch',data:{
+									user_id:localStorage.getItem('userid'),id:id
+								},succFn:function(data){
+									if(data.msg==1){
+										mui.toast('删除成功');
+										setTimeout(function(){
+											li.parentNode.removeChild(li);//移除item
+										},200)
+									}else{
+										mui.toast('删除失败');
+									}
+								},errFn:function(err){
+									mui.toast(err);
+									ca.closeWaiting();
+								}
+							})
+						}else{
+							mui.swipeoutClose(li);//恢复删除样式
+						}
+					})
+					
+				})
+				/**
+				 * 添加
+				 */
+				ca.id('add').addEventListener('tap',function(){
+					mui.openWindow({url:'add_hotel_search.html',id:'add_hotel_search'})
+				})
+				/**
+				 * 修改
+				 */
+				mui('#list').on('tap','.mui-slider-handle',function(){
+					var id=this.getAttribute('data_id');
+					var self=plus.webview.create('update_hotel_search.html','update_hotel_search',{},{search_id:id});
+					self.show('slide-in-right',400);
+				})
+			})
+			
+		</script>
+	</body>
+
+</html>

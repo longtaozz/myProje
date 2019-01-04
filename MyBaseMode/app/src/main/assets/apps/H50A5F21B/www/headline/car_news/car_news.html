@@ -1,0 +1,749 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/style.css" rel="stylesheet" />
+		<link href="../../css/iconfont.css" rel="stylesheet" />
+		<link href="../../css/mui.picker.min.css" rel="stylesheet"/>
+		<style>
+			.imgs{
+				border-radius:100px;width: 35px;height: 35px;
+			}
+			.mui-scroll-wrapper1{
+				position: absolute;
+				z-index: 2;
+				top:35px;
+				bottom: 0;
+				left: 0;overflow: hidden;width: 100%;
+			}
+			.mui-scroll1{
+				position: absolute;
+				z-index: 1;width: 100%;-webkit-transform: translateZ(0);
+				transform: translateZ(0);
+			}
+			.mui-scroll-wrapper2{
+				position: absolute;
+				z-index: 2;
+				top:35px;
+				bottom: 0;
+				left: 0;overflow: hidden;width: 100%;
+			}
+			.mui-scroll2{
+				position: absolute;
+				z-index: 1;width: 100%;-webkit-transform: translateZ(0);
+				transform: translateZ(0);
+			}
+			.quyu{
+				border: 1px solid #D0D0D0;color:#666666;font-size:13px;border-radius:3px;float: left;width:auto;text-align: center;margin-left: 4%;margin-top:8px;height:28px;line-height:28px;width:28%;
+			}
+			.quyu-active{
+				border: 1px solid #18A3E5;color:#18A3E5;font-size:13px;border-radius:3px;float: left;width: 28%;text-align: center;margin-left: 4%;margin-top:8px;height: 28px;line-height:28px;
+			}
+			
+			#topPopover .mui-popover-arrow {
+				left:2px;
+			}
+			input{
+				padding: 2px;
+				margin: 0px;
+				font-size: 13px;
+				margin-bottom:0px;
+			}
+			input::-webkit-input-placeholder{
+				color: #999999;
+				padding: 1px;
+			}
+			ul li{
+				position: relative;
+			}
+			.biaoqians{
+				width: 0;
+				height: 0;
+				border-style: solid;
+				border-width: 30px 0 0 30px;
+				border-color: transparent transparent transparent #24ABFE;
+				_border-color: #000000 #000000 #000000 #24ABFE;
+				_filter: progid:DXImageTransform.Microsoft.Chroma(color='#000000');
+				position: absolute;bottom:0px;
+			}
+			.biaoqians span{
+				position: absolute;bottom:-2px;left: -25px;
+			}
+			.biaoqians1{
+				width: 0;
+				height: 0;
+				border-style: solid;
+				border-width: 30px 0 0 30px;
+				border-color: transparent transparent transparent #FE7B07;
+				_border-color: #000000 #000000 #000000 #FE7B07;
+				_filter: progid:DXImageTransform.Microsoft.Chroma(color='#000000');
+				position: absolute;bottom:0px;
+				z-index: 100;
+			}
+			.biaoqians1 span{
+				position: absolute;bottom:-2px;left: -25px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav mheader user-index-top-bg">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left cffffff"></a>
+			<h1 class="mui-title cffffff">车辆动态</h1>
+			<span class="fr lh44 mr10 cffffff" id="add" style="position: relative;top:0px;z-index: 888;right: 0px;">
+				<span class="fs14 ">编辑动态</span><span class="iconfont icon-56 ml3 fs17 "></span>
+			</span>
+		</header>
+		<div class="mui-content">
+			<div class="pl10 lh35 h35 fs15 c333333 bgEFEFF4" style="position: fixed;top:69px;width:100%;z-index: 100;">
+				<span id="data_type">车辆属性</span>
+				<span class="iconfont icon-arrLeft-fill"></span>
+			</div>
+			<div style="position: fixed;width: 100%;z-index: 100;top:104px;">
+				<div  class="bgwhite oh bbfa disn">
+					<div class="fl h35 lh35 c666666 w33 xf" id="w333">
+						<div class="fl ml15">
+							<span class="fs13" id="xf1">出发时间</span>
+						</div>
+						<div class="fl" style="margin-top:1px;">
+							<span class="iconfont icon-arrLeft-fill fs16 ml5"></span>
+						</div>
+					</div>
+					<div class="fl h35 lh35 w33 c666666 xf" id="w334">
+						<div class="fl ml15">
+							<span class="fs13" id="xf2">出发地</span>
+						</div>
+						<div class="fl" style="margin-top:1px;">
+							<span class="iconfont icon-arrLeft-fill fs16 ml5"></span>
+						</div>
+					</div>
+					<div class="fl h35 lh35 w33 c666666 xf" id="w334">
+						<div class="fl ml15">
+							<span class="fs13" id="xf3">目的地</span>
+						</div>
+						<div class="fl" style="margin-top:1px;">
+							<span class="iconfont icon-arrLeft-fill fs16 ml5"></span>
+						</div>
+					</div>
+				</div>
+				<div  class="bgwhite oh bbfa disn">
+					<div class="fl h35 lh35 c666666 w33 xf" id="w333">
+						<div class="fl ml15">
+							<span class="fs13" id="xf4">车行区域</span>
+						</div>
+						<div class="fl" style="margin-top:1px;">
+							<span class="iconfont icon-arrLeft-fill fs16 ml5"></span>
+						</div>
+					</div>
+					<div class="fl oh h35 lh35 c666666">
+						<div class="fl ml15 ">
+							<span class="fs13">车辆类型</span>
+						</div>
+						<div class="fl ml5" style="margin-top:0px;">
+							<input type="number" placeholder="座位数"  style="width:80px;height:25px;"/>
+						</div>
+						<div class="fl ml10 fs15" id="sousuo">
+							<span>搜索</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="refreshContainer" class="mui-scroll-wrapper" style="margin-top: 40px;">
+				<div class="mui-scroll" >
+					<ul id="list">
+						<!-- <li class="bgwhite headline-div ml10 mr10 oh">
+							<div class="fl w12">
+								<img src="../img/touxiang1.jpg" class="fl ml10 mt10" style="border-radius:100px;width: 35px;height: 35px;"/>
+								<div class="biaoqians">
+									<span class="cffffff fs10">顺</span>
+								</div>
+							</div>
+							<div class="fl w88">
+								<div class="oh h30 fs14 lh40 ">
+									<span class="fl ml10">用途运输有限公司</span>	
+									<span class="fr mr10 fs13 c666666">2017-02-15 15:30</span>
+								</div>
+								<div class="fs12 headline-div-text c666666">
+									<span>十大歌手搜嘎奥奥奥奥奥奥奥奥奥奥奥奥奥军开始嘎多个傻瓜按时间给大家很感动</span>
+								</div>
+								<div class="h30 oh lh30 fs12 c666666 mr10">
+									<span class="fl ml10 iconfont icon-account fs14" ></span><span class="ml3">da[i].employee</span>
+									<span class="fr ml3 phone">da[i].contact_tel</span><span class="fr ml3"></span><span class="fr iconfont icon-lianxiren fs14" ></span>
+								</div>
+							</div>
+						</li> -->
+					</ul>
+				</div>
+			</div>
+			<div id="wushuju" class="disn">
+				<img src="../../img/wushuju.png" style="width: 100%;"/>
+			</div>
+		</div>
+		<div id="middlePopover0" class="mui-popover" style="position:fixed;height:250px;width:80%;left:10%;top:25%;z-index: 1000;">
+			<div class="oh">
+				
+			</div>
+			<div class="mt5">
+				<div style="margin-left:4%;width:92%;background:#D0D0D0;font-size:14px;padding-left:5px;color: #666666;text-align: center;height: 30px;line-height: 30px;">
+					<span>区域筛选</span>
+				</div>
+				<div class="mui-scroll-wrapper1" id="mui-scroll1">
+					<div class="mui-scroll1">
+						<ul id="city_list">
+							
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="middlePopover1" class="mui-popover" style="position:fixed;height:250px;width:80%;left:10%;top:25%;z-index: 1000;">
+			<div class="mt5">
+				<div style="margin-left:4%;width:92%;background:#D0D0D0;font-size:14px;padding-left:5px;color: #666666;text-align: center;height: 30px;line-height: 30px;">
+					<span>区域筛选</span>
+				</div>
+				<div class="mui-scroll-wrapper2" >
+					<div class="mui-scroll2">
+						<ul id="city_list1">
+							
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="topPopover" class="mui-popover" style="left:15px;top:115px;width:120px;height: 60px;">
+			<div class="mui-popover-arrow"></div>
+			<div>
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell tc fs15" data_type="顺风车">
+						<a href="#">顺风车</a>
+					</li>
+					<li class="mui-table-view-cell tc fs15" data_type="团队用车"><a href="#">团队用车</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/castapp.js"></script>
+		<script src="../../js/template-web.js"></script>
+		<script src="../../js/mui.poppicker.js"></script>
+		<script src="../../js/mui.picker.min.js"></script>
+		<script id='list_ul' type="text/template">
+			{{each data}}
+				{{if $value.attr=='团队用车'}}
+					<li class="bgwhite  mt8 headline-div  ml10 mr10 oh">
+						<div class="fl w12">
+							<img src="{{$value.employee.img_url}}" class="fl ml10 mt10 imgs"/>
+							<div class="biaoqians1">
+								<span class="cffffff fs10">团</span>
+							</div>
+						</div>
+						<div class="fl w88">
+							<div class="oh h30 fs14 lh40 ">
+								<span class="fl ml10">{{$value.employee.enterprise.alias}}</span>	
+								<span class="fr mr10 fs13">{{$value.update_time.slice(0,16)}}</span>
+							</div>
+							<div class="fs12 headline-div-text c666666 ml10 ">
+								<div>{{$value.city}} {{$value.county}}  {{$value.seating}}座</div>
+								<div class="mr10">
+									<span class="ml3">{{$value.content}}</span>
+								</div>
+							</div>
+							<div class="h30 oh lh30 fs12 c666666 mr10">
+								<span class="fl ml10 iconfont icon-account fs14" ></span><span class="ml3">{{$value.employee.realname}}</span>
+								<span class="fr ml3 phone">{{$value.contact_tel}}</span><span class="fr ml3">{{$value.contact_name}}</span><span class="fr iconfont icon-lianxiren fs14" ></span>
+							</div>
+						</div>
+					</li>
+				{{else}}
+					<li class="bgwhite  mt8 headline-div  ml10 mr10 oh">
+						<div class="fl w12">
+							<img src="{{$value.employee.img_url}}" class="fl ml10 mt10 imgs"/>
+							<div class="biaoqians">
+								<span class="cffffff fs10 ">顺</span>
+							</div>
+						</div>
+						<div class="fl w88">
+							<div class="oh h30 fs14 lh40 ">
+								<span class="fl ml10">{{$value.employee.enterprise.alias}}</span>	
+								<span class="fr mr10 fs13">{{$value.update_time.slice(0,16)}}</span>
+							</div>
+							<div class="fs12 headline-div-text c666666 ml10 ">
+								<div>出发地: {{$value.city}} {{$value.county}}</div>
+								<div>目的地: {{$value.to_city}} {{$value.to_county}}</div>
+								<div class="mr10">
+									<span>{{$value.go_time.slice(0,16)}}发车</span>
+									<span class="ml3">{{$value.content}}</span>
+								</div>
+							</div>
+							<div class="h30 oh lh30 fs12 c666666 mr10">
+								<span class="fl ml10 iconfont icon-account fs14" ></span><span class="ml3">{{$value.employee.realname}}</span>
+								<span class="fr ml3 phone">{{$value.contact_tel}}</span><span class="fr ml3">{{$value.contact_name}}</span><span class="fr iconfont icon-lianxiren fs14" ></span>
+							</div>
+						</div>
+					</li>
+				{{/if}}
+				
+			{{/each}}
+		</script>
+		<script type="text/javascript">
+			mui.plusReady(function(){
+				mui.init({
+					pullRefresh : {
+						container:"#refreshContainer",
+						down : {
+							style:'circle',//必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
+							color:'#24ABFE', 
+							height:50,//可选,默认50.触发下拉刷新拖动距离,
+							auto: false,//可选,默认false.首次加载自动下拉刷新一次
+							contentdown : "下拉可以刷新",//可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
+							contentover : "释放立即刷新",//可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
+							contentrefresh : "正在刷新...",//可选，正在刷新状态时，下拉刷新控件上显示的标题内容
+							callback :downFn //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+						},
+						up: {
+							contentrefresh: '正在加载...',
+							callback: upFn // 上拉执行函数
+						}
+					},
+					swipeBack:true
+				});
+				ca.init();
+				var page=1,pages=1,time=getDate(),attr='',//车辆属性
+				departure=[],//顺风车出发地数据
+				city='',//顺风车筛选出发地/团队用车 车行区域
+				county='',//
+				city_data='',//顺风车目的地数据
+				to_city='',//顺风车目的地
+				go_time='',//出发时间
+				city_active=localStorage.getItem('city');
+				var city_data1='',//团队用车车行区域
+				seating=0;//团队用车 座位数
+				city_active1=localStorage.getItem('city');
+				function downFn(){
+					 // mui('#refreshContainer').pullRefresh().endPulldown();
+					 dowFind();
+				}
+				function upFn(){
+					if(pages==0){
+						mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
+					}else{
+						page++;
+						findAll();
+						this.endPullupToRefresh(false);
+					}
+				}
+				ca.id('refreshContainer').style.marginTop=35+'px';
+				findAll();
+				function findAll(){
+					ca.ajaxs({url:'findPostmsgCarNews',data:{
+							user_id:localStorage.getItem('userid'),page:page,time:'',city:city,attr:attr,
+							seating:seating,go_time:go_time,county:county,to_city:to_city
+						},succFn:function(data){
+							if(!ca.emptyFun(data.data)){
+								ca.id('refreshContainer').classList.add('disb');
+								ca.id('wushuju').classList.add('disn');
+								ca.id('refreshContainer').classList.remove('disn');
+								if(ca.emptyFun(data.next_item)){
+									pages=0;
+								}
+								try{
+									ca.id('list').innerHTML+=template('list_ul',{
+										'data':data.data
+									})
+								}catch(e){
+									console.log(e);
+								}
+							}else{
+								ca.id('wushuju').classList.add('disb');
+								ca.id('refreshContainer').classList.add('disn');
+								ca.id('wushuju').classList.remove('disn');
+							}
+							ca.closeWaiting();
+						},errFn:function(err){
+							ca.closeWaiting();
+							mui.toast(err);
+						}
+					})
+				}
+				var againFind=function(){
+					page=1;
+					pages=1;
+					ca.id('list').innerHTML='';
+					mui('#refreshContainer').pullRefresh().refresh(true);
+					findAll();
+				}
+				
+				/**
+				 * 车辆属性筛选
+				*/
+				ca.className('bgEFEFF4')[0].addEventListener('tap',function(){
+					mui('#topPopover').popover('show');
+				})
+				mui('#topPopover').on('tap','li',function(){
+					var type=this.getAttribute('data_type');
+					ca.className('bgEFEFF4')[0].classList.remove('c333333');
+					ca.className('bgEFEFF4')[0].classList.add('c24ABFE');
+					ca.id('data_type').innerText=type;
+					if(type=='顺风车'){
+						ca.className('bbfa')[0].classList.add('disb');
+						ca.className('bbfa')[0].classList.remove('disn');
+						ca.className('bbfa')[1].classList.add('disn');
+						ca.className('bbfa')[1].classList.remove('disb');
+					}else{
+						ca.className('bbfa')[0].classList.add('disn');
+						ca.className('bbfa')[0].classList.remove('disb');
+						ca.className('bbfa')[1].classList.add('disb');
+						ca.className('bbfa')[1].classList.remove('disn');
+					}
+					attr=type;
+					againFind();
+					ca.id('refreshContainer').style.marginTop=72+'px';
+					mui('#topPopover').popover('hide');
+				})
+				
+				/**
+				 * 出发时间筛选
+				 */
+				var xf=ca.className('xf');
+				xf[0].addEventListener('tap',function(){
+					showdatapicker();
+				})
+				/**
+				 * 出发时间
+				 */
+				function showdatapicker(){
+					var date = new Date();
+					var year = date.getFullYear();//年
+					var month = date.getMonth() + 1;//月
+					var day = date.getDate();//日
+					var h = date.getHours();// 小时
+					var m = date.getMinutes(); // 分钟
+					ca.dateSelect({
+						defaultTime:year + '-' + month + '-' + day,
+						minTime:year + '-' + month + '-' + day,
+						maxTime:year + '-'+ (month + 1) + '-' + day,
+						callback:function(data){
+							if(data){
+								ca.timeSelect({
+									defaultTime:h + ':' + m ,
+									callback:function(datas){
+										if(datas){
+											ca.id('xf1').innerText=data+' '+datas;
+											setTableClick(0);
+											go_time=data+' '+datas;
+											againFind();
+										}
+									}
+								})
+							}
+							
+						}
+					})
+				}
+				function setTableClick(index){
+					var cell=ca.className('xf');
+					for(var a=0;a<cell.length;a++){
+						if(a==index){
+							cell[a].classList.add('c18A3E5');
+							cell[a].classList.remove('c666666');
+						}else{
+							cell[a].classList.remove('c18A3E5');
+							cell[a].classList.add('c666666');
+						}
+					}
+				}
+				
+				//出发地选择
+				xf[1].addEventListener('tap',function(){
+					plus.webview.currentWebview().setPullToRefresh({support:false});
+					if(ca.emptyFun(departure)){
+						findUserRegion();
+					}else{
+						ca.combinationSelect(2,departure,function(da){
+							var citys=da[0].te.split('/');
+							ca.id('xf2').innerText=citys[0];
+							setTableClick(1);
+							
+							plus.webview.currentWebview().setPullToRefresh({support:true,style:'circle'});
+							city=citys[0];
+							againFind();
+						})
+					}
+					ca.className('mui-backdrop')[0].addEventListener('tap',function(){
+						plus.webview.currentWebview().setPullToRefresh({support:true,style:'circle'});
+					})
+					
+				})
+				
+				//查询出发地
+				function findUserRegion(){
+					ca.showWaiting();
+					ca.ajaxs({url:'findUserRegion',data:{
+							user_id:localStorage.getItem('userid')
+						},succFn:function(data){
+							if(data){
+								departure=data;
+								ca.combinationSelect(2,data,function(da){
+									var citys=da[0].te.split('/');
+									ca.id('xf2').innerText=citys[0];
+									setTableClick(1);
+									plus.webview.currentWebview().setPullToRefresh({support:true,style:'circle'});
+									city=citys[0];
+									againFind();
+								})
+							}
+							ca.closeWaiting();
+						},errFn:function(err){
+							ca.closeWaiting();
+							mui.toast(err);
+						}
+					})
+				}
+				/**
+				 * 目的地选择
+				 */
+				xf[2].addEventListener('tap',function(){
+					ca.id('city_list').innerHTML='';
+					plus.webview.currentWebview().setPullToRefresh({support:false});
+					if(!ca.emptyFun(city_data)){
+						setCity();
+					}else{
+						findcity();
+					}
+				})
+				
+				/**
+				 * 查询用户所在省份的city
+				 */
+				function findcity(){
+					ca.showWaiting();
+					ca.ajaxs({url:'findUserProvincecity',data:{
+							user_id:localStorage.getItem('userid'),
+						},succFn:function(data){
+							if(!ca.emptyFun(data)){
+								city_data=data;
+								setCity();
+							}
+							ca.closeWaiting();
+						},errFn:function(err){
+							ca.closeWaiting();
+							mui.toast(err);
+						}
+					})
+				}
+				/**
+				 * 设置内容
+				 */
+				function setCity(){
+					for(var a in city_data){
+						var temp='';
+						if(city_data[a].name==city_active){
+							temp='<li class="quyu-active">'+city_data[a].name+'</li>'
+						}else{
+							temp='<li class="quyu">'+city_data[a].name+'</li>';
+						}
+						ca.id('city_list').innerHTML+=temp;
+						mui('#middlePopover0').popover('show');
+						mui('.mui-scroll-wrapper1').scroll();
+					}
+					ca.className('mui-backdrop')[0].addEventListener('tap',function(){
+						plus.webview.currentWebview().setPullToRefresh({support:true,style:'circle'});
+					})
+					
+				}
+				/**
+				 * 点击筛选列表
+				 */
+				mui('#city_list').on('tap','li',function(){
+					city_active=this.innerText;
+					ca.id('xf3').innerText=this.innerText;
+					to_city=this.innerText;
+					mui('#middlePopover0').popover('hide');
+					plus.webview.currentWebview().setPullToRefresh({support:true,style:'circle'});
+					setTableClick(2);
+					againFind();
+				})
+				/**
+				 * 团队用车 车行区域
+				 */
+				xf[3].addEventListener('tap',function(){
+					ca.id('city_list1').innerHTML='';
+					plus.webview.currentWebview().setPullToRefresh({support:false});
+					if(!ca.emptyFun(city_data)){
+						setCity1();
+					}else{
+						findcity1();
+					}
+				})
+				/**
+				* 查询用户所在省份的city
+				*/
+				function findcity1(){
+					ca.showWaiting();
+					ca.ajaxs({url:'findUserProvincecity',data:{
+							user_id:localStorage.getItem('userid'),
+						},succFn:function(data){
+							if(!ca.emptyFun(data)){
+								city_data1=data;
+								setCity1();
+							}
+							ca.closeWaiting();
+						},errFn:function(err){
+							ca.closeWaiting();
+							mui.toast(err);
+						}
+					})
+				}
+				/**
+				* 设置内容
+				*/
+				function setCity1(){
+					for(var a in city_data1){
+						var temp='';
+						if(city_data1[a].name==city_active1){
+							temp='<li class="quyu-active">'+city_data1[a].name+'</li>'
+						}else{
+							temp='<li class="quyu">'+city_data1[a].name+'</li>';
+						}
+						ca.id('city_list1').innerHTML+=temp;
+						mui('#middlePopover1').popover('show');
+						mui('.mui-scroll-wrapper2').scroll();
+					}
+					ca.className('mui-backdrop')[0].addEventListener('tap',function(){
+						plus.webview.currentWebview().setPullToRefresh({support:true,style:'circle'});
+					})
+					
+				}
+				/**
+				 * 团队用车车行区域筛选
+				 */
+				mui('#city_list1').on('tap','li',function(){
+					city_active1=this.innerText;
+					city=this.innerText;
+					ca.id('xf4').innerText=city;
+					mui('#middlePopover1').popover('hide');
+					plus.webview.currentWebview().setPullToRefresh({support:true,style:'circle'});
+					setTableClick(3);
+					againFind();
+				})
+				/**
+				 * 团队用车座位搜索
+				 */
+				ca.id('sousuo').addEventListener('tap',function(){
+					var num=ca.tagName('input')[0].value;
+					if(num>0){
+						seating=num;
+					}else{
+						seating=0;
+					}
+					againFind();
+				})
+				
+				/**
+				 * 拨打电话号码
+				 */
+				mui('#list').on('tap','.phone',function(){
+					ca.callPhone(this.innerText);
+				})
+				/**
+				 * 下拉查询数据
+				 */
+				function dowFind(){
+					ca.ajaxs({url:'findPostmsgCarNews',data:{
+							user_id:localStorage.getItem('userid'),page:page,time:time,city:city,attr:attr,
+							seating:seating,go_time:go_time,county:county,to_city:to_city
+						},succFn:function(data){
+							if(!ca.emptyFun(data)){
+								var datas=data;
+								for(var a in datas){
+									var li=document.createElement('li');
+									li.className='bgwhite  mt8 headline-div  ml10 mr10 oh';
+									if(datas[a].attr=='团队用车'){
+										li.innerHTML='<div class="fl w12">'
+													+	'<img src="'+datas[a].employee.img_url+'" class="fl ml10 mt10 imgs"/>'
+													+	'<div class="biaoqians1"><span class="cffffff fs10">团</span></div>'
+													+'</div>'
+													+'<div class="fl w88">'
+													+	'<div class="oh h30 fs14 lh40 ">'
+													+		'<span class="fl ml10">'+datas[a].employee.enterprise.alias+'</span>'
+													+		'<span class="fr mr10 fs13">'+datas[a].update_time.slice(0,16)+'</span>'
+													+	'</div>'
+													+	'<div class="fs12 headline-div-text c666666 ml10">'																	+		'<div>'+datas[a].city+' '+datas[a].county+' '+datas[a].seating+'座</div>'
+													+		'<div class="mr10">'
+													+			'<span class="ml3">'+datas[a].content+'</span>'
+													+		'</div>'
+													+	'</div>'
+													+	'<div class="h30 oh lh30 fs12 c666666 mr10">'
+													+		'<span class="fl ml10 iconfont icon-account fs14" ></span><span class="ml3">'+datas[a].employee.realname+'</span>'
+													+		'<span class="fr ml3 phone">'+datas[a].contact_tel+'</span><span class="fr ml3">'+datas[a].contact_name+'</span><span class="fr iconfont icon-lianxiren fs14"></span>'
+													+	'</div>'	
+													+'</div>';
+									}else{
+										li.innerHTML='<div class="fl w12">'
+													+	'<img src="'+datas[a].employee.img_url+'" class="fl ml10 mt10 imgs"/>'
+													+	'<div class="biaoqians"><span class="cffffff fs10">顺</span></div>'
+													+'</div>'
+													+'<div class="fl w88">'
+													+	'<div class="oh h30 fs14 lh40 ">'
+													+		'<span class="fl ml10">'+datas[a].employee.enterprise.alias+'</span>'
+													+		'<span class="fr mr10 fs13">'+datas[a].update_time.slice(0,16)+'</span>'
+													+	'</div>'
+													+	'<div class="fs12 headline-div-text c666666 ml10">'																		+		'<div>出发地: '+datas[a].city+' '+datas[a].county+'</div>'
+													+		'<div>目的地: '+datas[a].to_city+' '+datas[a].to_county+'</div>'
+													+		'<div class="mr10">'
+													+			'<span>'+datas[a].go_time.slice(0,16)+'发车</span>'
+													+			'<span class="ml3">'+datas[a].content+'</span>'
+													+		'</div>'
+													+	'</div>'
+													+	'<div class="h30 oh lh30 fs12 c666666 mr10">'
+													+		'<span class="fl ml10 iconfont icon-account fs14" ></span><span class="ml3">'+datas[a].employee.realname+'</span>'
+													+		'<span class="fr ml3 phone">'+datas[a].contact_tel+'</span><span class="fr ml3">'+datas[a].contact_name+'</span><span class="fr iconfont icon-lianxiren fs14"></span>'
+													+	'</div>'	
+													+'</div>';
+									}
+									ca.id('list').insertBefore(li,ca.id('list').firstChild);
+								}
+							}
+							time=getDate();
+							mui('#refreshContainer').pullRefresh().endPulldown();
+							ca.closeWaiting();
+						},errFn:function(err){
+							ca.closeWaiting();
+							mui.toast(err);
+						}
+					})
+				}
+				
+				function getDate(){
+					var date = new Date();
+					var year = date.getFullYear();//年
+					var month = date.getMonth() + 1;//月
+					var days = date.getDate();//日
+					if(date.getHours() < 10){
+						var h = '0'+date.getHours();
+					}else{
+						var h = date.getHours();
+					}
+					if(date.getMinutes() < 10){
+						var m = '0'+date.getMinutes();
+					}else{
+						var m = date.getMinutes();
+					}
+					return year+'-'+month+'-'+days+' '+h+':'+m;
+				}
+				
+				ca.id('add').addEventListener('tap',function(){
+					ca.showWaiting();
+					var self=plus.webview.create('edit_car_news.html','edit_car_news');
+					self.show('slide-in-right',400);
+				})
+			})
+			
+		</script>
+	</body>
+
+</html>

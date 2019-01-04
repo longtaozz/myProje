@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/style.css" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav mheader">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mback"></a>
+		    <h1 class="mui-title htitle">地图</h1>
+		    
+		</header>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/castapp.js" ></script>
+		<script type="text/javascript">
+			
+			var urls='https://m.ctrip.com/webapp/vacations/tour/detail?saleCityId=2&departCityId=2&productId=20909505&from=https%3A%2F%2Fm.ctrip.com%2Fwebapp%2Fvacations%2Ftour%2Findex';
+			mui.plusReady(function(){
+				mui.init({
+					 subpages:[{
+				      url:urls,//下拉刷新内容页面地址
+				      id:'dituaa',//内容页面标志
+				      styles:{
+				       top:'69px',
+				       bottom:'1px',
+				      }
+				    }]
+	       		});
+			})
+	       ca.init(true);
+	       
+		</script>
+	</body>
+
+</html>

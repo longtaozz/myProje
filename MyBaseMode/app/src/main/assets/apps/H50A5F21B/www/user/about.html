@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/style.css" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav user-index-top-bg mheader" >
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: #FFFFFF !important;"></a>
+		    <h1 class="mui-title" style="font-size: 16px !important;color: #FFFFFF !important;">关于优旅通</h1>
+		</header>
+		<div class="mui-content" style="margin-top: 25px;">
+			<div class="h120">
+				<div class="mt20">
+					
+					<div class="mauto"  style="height: 60px;width: 60px;border-radius:10px ;">
+						<img  src="../img/120.png" style="width: 60px;height: 60px;"/>
+					</div>
+				</div>
+				<div class="tc mt20 c666666 fs18">
+					<span >优旅通</span>
+				</div>
+			</div>
+		    <ul class="" style="background: #FFFFFF;padding: 0;">
+			    <li class="mui-table-view-cell fs15 c666666" style="">
+			        <a class="mui-navigate-right">检查更新<span class="fr mr20">v 0.0.1</span></a>
+			    </li>
+			</ul>
+			<ul class="" style="margin-top: 10px;background: #FFFFFF;padding: 0;">
+			    <li class="mui-table-view-cell fs15 c666666" style="">
+			        <a class="mui-navigate-right">优旅通介绍</a>
+			    </li>
+			</ul>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/castapp.js" ></script>
+		<script type="text/javascript">
+			mui.init();
+			ca.init();
+			ca.whiteStatusBar();
+			mui.plusReady(function(){
+//				alert(dongyi.getOs('name'))
+//				alert(dongyi.getRuntime('version'));
+				plus.runtime.getProperty(plus.runtime.appid,function(inf){
+					wgtVer=inf.version;
+					console.log(plus.runtime.appid);
+					ca.tagName('span')[1].innerHTML ='v'+wgtVer;
+		        });
+			})
+		</script>
+	</body>
+
+</html>

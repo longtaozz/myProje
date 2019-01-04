@@ -1,0 +1,143 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/style.css" />
+		<link rel="stylesheet" href="../css/iconfont.css" />
+	</head>
+
+	<body style="background:#F2F2F2;">
+		<header class="mui-bar mui-bar-nav mheader">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mback"></a>
+		    <h1 class="mui-title htitle">按天记账</h1>
+		</header>
+		<div class="mui-content">
+		    <div class="bgwhite mt5 h40 lh40 c121212 fs14" id="jidiaobeihzu">
+		    	<span class="ml15">计调备注</span><span class="mui-icon mui-icon-arrowright mui-pull-right lh40 c52bcec mr10"></span>
+		    </div>
+		    <div id="list">
+		    	
+		    
+		    </div>
+			<div class="bgwhite h45 lh45 c121212 fs14 mt5" id="jiesongzhan">
+				<span class="ml15">接送站</span><span class="mui-icon mui-icon-arrowright mui-pull-right lh40 c52bcec mr10"></span>
+			</div>
+			<div class="bgwhite h45 lh45 c121212 fs14 mt5" id="xingchengwai">
+				<span class="ml15">行程时间外记账</span><span class="mui-icon mui-icon-arrowright mui-pull-right lh40 c52bcec mr10"></span>
+			</div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/castapp.js" ></script>
+		<script type="text/javascript">
+			mui.plusReady(function(){
+				mui.init();
+				ca.init(true);
+				ca.blackStatusBar();
+				ca.checkTheNetwork();
+				var teamsk_id=localStorage.getItem('teamsk_id');
+				var list=ca.id('list');
+				plus.nativeUI.showWaiting();
+				ca.ajaxs({url:'findTeamSkdayByid',data:{
+						teamsk_id:teamsk_id
+					},succFn:function(data){
+						var zong=data.zong;
+						var data=data.data;
+						localStorage.setItem('mark',data.mark);
+						for(var a=0;a<data.days;a++){
+							var temp= 	'<div class="theday mt10 bgwhite oh">'
+								    +		'<div class="fl theday-dl">'
+								    +			'<div class="theday-dl-1 fs15">'
+								    +				'<span>D'+(a+1)+'</span>'
+								    +			'</div>'
+								    +			'<div class="theday-dl-2">'
+								    +				'<span class="iconfont icon-day cff8201"></span>'
+								    +			'</div>'
+								    +		'</div>'
+								    +		'<div class="fl theday-dr">'
+								    +			'<div class="theday-dr-1 fs13">'
+								    +				'<span class="ml15 day">'+dateAdd(data.start_date,a)+'</span><span class="mui-icon mui-icon-arrowright mui-pull-right lh40 c52bcec mr10"></span>'
+								    +			'</div>'
+								    +			'<div class="theday-dr-2 fs13">'
+								    +				'<span>收入：</span><span>'+zong[a].shouday+'元</span><span class="ml10">支出：</span><span>'+zong[a].zhiday+'元</span>'
+								    +			'</div>'
+								    +		'</div>'
+								    +	'</div>';
+								    	
+							list.innerHTML+=temp;	    	
+						}
+						
+						plus.nativeUI.closeWaiting();
+						jidiao_onclick();
+						item_onclick();
+						ca.closeWaiting();
+					},
+					errFn:function(call){
+						ca.closeWaiting();
+						mui.toast(call);
+					}
+				
+				})
+				
+				
+				function dateAdd(startDate,a) {
+			        startDate = new Date(startDate);
+			        startDate = +startDate + 1000*60*60*24*a;
+			        startDate = new Date(startDate);
+			        var nextStartDate = startDate.getFullYear()+"-"+(startDate.getMonth()+1)+"-"+startDate.getDate();
+			        return nextStartDate;
+			    }
+				
+				
+				
+				function jidiao_onclick(){
+					ca.id('jidiaobeihzu').addEventListener('tap',function(){
+						ca.newInterface({url:'adjustment_note.html',id:'adjustment_note'});
+					})
+				}
+				
+				
+				
+				function item_onclick(){
+					var myDate = new Date();
+					var ye=myDate.getFullYear(); //获取当前年份(2位)
+					var mo=myDate.getMonth()+1; //获取当前月份(0-11,0代表1月)
+					var day=myDate.getDate();
+					var mmda=ye+'-'+mo+'-'+day;// 也很简单
+					var date = new Date(mmda.replace(/-/g, '/'));
+					var time1 = date.getTime();
+					var cell=ca.className('theday-dr-1');
+					var cel=ca.className('day');
+					for(var i=0;i<cell.length;i++){
+						(function(index){
+							cell[i].addEventListener('tap',function(){
+								var day=cel[index].innerHTML;
+								var date1 = new Date(day.replace(/-/g, '/'));
+								var time2 = date1.getTime();
+//								if(time1<time2){
+//									mui.toast('请团期过后！再进行报账');
+//									return;
+//								}
+								localStorage.setItem('jizhangday',day);
+								ca.newInterface({url:'bookkeeping_by_unit_top.html',id:'bookkeeping_by_unit_top'});
+							})
+						})(i);
+					}
+				}
+				ca.id('jiesongzhan').addEventListener('tap',function(){
+					ca.newInterface({url:'pickup/pickup_by_unit.html',id:'pickup_by_unit'});
+				})
+				ca.id('xingchengwai').addEventListener('tap',function(){
+					ca.newInterface({url:'trip_abroad/trip_abroad_by_unit.html',id:'trip_abroad_by_unit'});
+				})
+				
+			})
+			
+			
+		</script>
+	</body>
+
+</html>

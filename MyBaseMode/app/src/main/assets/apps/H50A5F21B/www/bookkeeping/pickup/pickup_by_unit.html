@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/style.css" rel="stylesheet" />
+		<link href="../../css/iconfont.css" rel="stylesheet"/>
+		<style>
+			li
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav mheader">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mback"></a>
+			<h1 class="mui-title htitle ">按单位记账(接送站)</h1>
+		</header>
+		<div class="mui-content">
+			<ul>
+				<li class="mt5 bgwhite h50 oh" style="border-bottom: 5px solid #F2F2F2;">
+					<div class="fl by-unit-li-l">
+						<div class="by-unit-li-l-1">
+							<span class="iconfont icon-zhufangbutie  cffffff"></span>
+						</div>
+					</div>
+					<div class="fl by-unit-li-c">
+						<span class="c121212 fs15 fl">
+							房费支出
+						</span>
+						<div class="fr cff8201 fs14">
+							<span></span>
+						</div>
+					</div>
+				</li>
+				<li class="mt5 bgwhite h50 oh"  style="border-bottom: 5px solid #F2F2F2;">
+					<div class="fl by-unit-li-l">
+						<div class="by-unit-li-l-1">
+							<span class="iconfont icon-restaurant  cffffff" style="font-size: 18px;"></span>
+						</div>
+					</div>
+					<div class="fl by-unit-li-c">
+						<span class="c121212 fs15 fl">
+							餐费支出
+						</span>
+						<div class="fr cff8201 fs14">
+							<span></span>
+						</div>
+					</div>
+				</li>
+				<li class="mt5 bgwhite h50 oh" style="border-bottom: 5px solid #F2F2F2;">
+					<div class="fl by-unit-li-l">
+						<div class="by-unit-li-l-1">
+							<span class="iconfont icon-chucha  cffffff"></span>
+						</div>
+					</div>
+					<div class="fl by-unit-li-c">
+						<span class="c121212 fs15 fl">
+							交通支出
+						</span>
+						<div class="fr cff8201 fs14">
+							<span></span>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/castapp.js"></script>
+		<script type="text/javascript">
+			mui.plusReady(function(){
+				mui.init();
+				ca.init();
+				ca.blackStatusBar();
+				var li=ca.tagName('li');
+				li[0].addEventListener('tap',function(){
+					ca.newInterface({url:'pickup_room.html',id:'pickup_room'})
+// 					var self=plus.webview.create('pickup_room.html','pickup_room',{},{});
+// 					self.show('slide-in-right',400);
+				})
+				li[1].addEventListener('tap',function(){
+					ca.newInterface({url:'pickup_food.html',id:'pickup_food'})
+					
+// 					var self=plus.webview.create('pickup_food.html','pickup_food',{},{});
+// 					self.show('slide-in-right',400);
+				})
+				li[2].addEventListener('tap',function(){
+					ca.newInterface({url:'pickup_car.html',id:'pickup_car'})
+// 					ca.showWaiting();
+// 					var self=plus.webview.create('pickup_car.html','pickup_car');
+// 					self.show('slide-in-left',400);
+				})
+			})
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<style>
+			.brand-store-bar.dock-header-bar{position: fixed;top: 44px;z-index: 99;margin-top: 0;}
+			.brand-bar-wrapper{height: 40px;}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">标题</h1>
+		</header>
+		<div class="mui-content mui-scroll-wrapper" id="refreshContainer">
+			<div class="mui-scroll">
+				<div style="height: 100px;">
+					
+				</div>
+				<div class="brand-bar-wrapper">
+					<div id="tab" class="brand-store-bar mui-slider-indicator mui-segmented-control mui-segmented-control-inverted mui-segmented-control-negative">
+						<a class="mui-control-item mui-active" >菜单项目1</a>
+						<a class="mui-control-item" >菜单项目2</a>
+					</div>
+				</div>
+				<div style="height: 700px;">
+					23
+					323
+					
+					32
+				</div>
+			</div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init();
+			
+			var dockHeader = function(){
+
+                var wrapper         = mui('#refreshContainer')[0],
+                    barWrapper      = mui('.brand-bar-wrapper')[0],
+                    brandBar        = mui('#tab')[0],
+                    scroll          = mui('#refreshContainer').scroll();
+
+                //顶部悬停
+                var dock = function(){
+                    if (!brandBar.classList.contains('dock-header-bar')) {
+                        wrapper.appendChild(brandBar);
+                        brandBar.classList.add('dock-header-bar');
+                    }
+
+                }
+
+                //复原
+                var reset = function(){
+                    if (brandBar.classList.contains('dock-header-bar')) {
+                        barWrapper.appendChild(brandBar);
+                        brandBar.classList.remove('dock-header-bar');
+                    }
+                }
+
+                 //安卓停靠方式
+                var androidDock = function(){
+                    document.addEventListener('scroll', function(e) {
+                        window.pageYOffset > barWrapper.offsetTop ? dock() : reset();
+                    });
+                }
+
+                //IOS停靠方式
+                var iosDock = function(){
+                    wrapper.addEventListener('scroll', function(e) {
+                        scroll.y < -barWrapper.offsetTop ? dock() : reset();
+                    }, false);
+                }
+
+                //准备执行条件
+                var init = function(){
+
+                    if (mui.os.ios) {
+                        iosDock();
+                    }else{
+                        //安卓系统禁止系统滚动条
+                        document.body.addEventListener('touchmove', function (event) {
+                            event.stopPropagation();
+                        }, false);
+                        androidDock();
+                    }
+                }
+
+                init();
+            }
+			dockHeader();
+		</script>
+	</body>
+
+</html>

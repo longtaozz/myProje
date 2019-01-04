@@ -1,0 +1,472 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../css/style.css" />
+		<style>
+			.mui-checkbox input[type=checkbox]{
+			    position: absolute; */
+			    top: 4px;
+			    right: 20px;
+			    display: inline-block;
+			    width: 28px;
+			    height: 26px;
+			    border: 0;
+			    outline: 0!important;
+			    background-color: transparent;
+			    -webkit-appearance: none;
+			}
+			.ts-li-title{
+				overflow: hidden; 
+			    text-overflow: ellipsis; 
+			    -o-text-overflow: ellipsis;
+			    white-space:nowrap;
+			    display:block;
+			    width: 95%;
+			}
+			.li-title{
+				overflow: hidden; 
+			    text-overflow: ellipsis; 
+			    -o-text-overflow: ellipsis;
+			    white-space:nowrap;
+			    width: 100%;
+			    display:block;
+			}
+			.jihuachi_div{
+				background: #FFFFFF;
+				/*border-bottom: 1px solid #F9F9F9;*/
+				margin: 2px 5px;
+				border-radius:8px ;
+			}
+			.mui-scroll-wrapper1
+			{
+			    position: absolute;
+			    z-index: 2;
+			    top: 0;
+			    bottom: 0;
+			    left: 0;
+			    overflow: hidden;
+			    width: 100%;
+			}
+			
+			.mui-scroll1
+			{
+			    position: absolute;
+			    z-index: 1;
+			    width: 100%;
+			    -webkit-transform: translateZ(0);
+			            transform: translateZ(0);
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav mheader" style="z-index: 10001;">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mback"></a>
+		    <h1 class="mui-title">计划池</h1>
+		</header>
+		<div class="mui-content" style="">
+			<div id="ccc"  class="shaixuan" style="height: 35px;position:fixed;top: 69px;width: 100%;z-index: 10001;">
+				<div class="shaixuan-div">
+					<div class="w75 fl">
+						<span class="shaixuan-divxiala-zi li-title">线路筛选</span>
+					</div>
+					<div class="fl" style="margin-left: -5px;">
+						<span class="mui-icon mui-icon-arrowdown sp-icon"></span>
+					</div>
+					
+				</div>
+				<div class="shaixuan-div">
+					<div class="w75 fl">
+						<span class="shaixuan-divxiala-zi li-title">出发日期</span>
+					</div>
+					<div class="fl" style="margin-left: -5px;">
+						<span class="mui-icon mui-icon-arrowdown sp-icon"></span>
+					</div>
+					
+				</div>
+				<div class="shaixuan-div">
+					<div class="w75 fl">
+						<span class="shaixuan-divxiala-zi li-title">状态筛选</span>
+					</div>
+					<div class="fl" style="margin-left: -5px;">
+						<span class="mui-icon mui-icon-arrowdown sp-icon"></span>
+					</div>
+					
+				</div>
+				
+			</div>
+			<div id="pullrefresh" class="mui-content mui-scroll-wrapper mb40">
+		    	<div class="mui-scroll">		
+					<ul class="" id="div_list">
+				    	<!--<div class="mui-checkbox h100 jihuachi_div oh">
+				    		<div class="fl w20">
+				    			<input name="checkbox" value="1"  type="checkbox" style="position: absolute;top: 35px;left: 20px; ;">
+				    		</div>
+				    		<div class="fl w80 h100" style="position: absolute;left: 20%; ">
+				    			<div class="">
+				    				<h5 class="c000000 ts-li-title fs16 mt8">森林公园+玻璃桥+天门山+凤凰古城经典5日游</h5>
+				    			</div>
+				    			<div>
+				    				<span class="fs13 c666666">订单:A823965567235853</span>
+				    			</div>
+				    			<div class="fs13 c666666">
+				    				<span >2018-15-16</span><span>--</span><span>2018-15-16</span>
+				    			</div>
+				    			<div class="fs12 c666666">
+				    				<span >大人(15)</span><span class="ml10">小孩(15)</span>
+				    				<span class="fr mr15 cred fs15">19580</span><span class="fr cred fs12">￥</span>
+				    			</div>
+				    		</div>
+				    	</div>-->
+			    	</ul>
+				</div>
+			</div>
+			<div style="position: fixed;bottom: 0px;z-index: 100;background: #FFB400;width: 100%;height: 50px;border-radius:15px ;border-bottom-left-radius: 0px;border-bottom-right-radius: 0px;">
+				<div class="cffffff fl w50 lh44 fs16 tc">
+					<span id="quanxuan">全选</span>
+				</div>
+				<div class="cffffff fl w50 lh44 tc">
+					<span>移交</span>
+				</div>
+			</div>
+		</div>
+		<div id="middlePopover0" class="mui-popover" style=" position:fixed;height: 300px;width: 100%;border-radius:0px ;border-top: 1px solid #DADADD;z-index: 1000;">
+			<div class="mui-scroll-wrapper1" id="mui-scroll-wrapper2">
+				<div class="mui-scroll1">
+					<ul class="mui-table-view fs14" id="xianlu" style="max-height: 4000px;">
+						
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div id="middlePopover2" class="mui-popover" style=" position:fixed;height: 250px;width: 100%;border-radius:0px ;border-top: 1px solid #DADADD;z-index: 1000;">
+			<div class="mui-scroll-wrapper" id="mui-scroll-wrapper2">
+				<div class="mui-scroll">
+					<ul class="mui-table-view" id="zhuangtai">
+						<li class="mui-table-view-cell zhuangtais" data_id="-2">全部订单</li>
+						<li class="mui-table-view-cell zhuangtais" data_id="99">订单完成</li>
+						<li class="mui-table-view-cell zhuangtais" data_id="0">等待确认</li>
+						<li class="mui-table-view-cell zhuangtais" data_id="2">地接确认</li>
+						<li class="mui-table-view-cell zhuangtais" data_id="8">取消订单</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<script id="list_item" type="text/template">
+			{{each list}}
+				<div class="mui-checkbox h100 jihuachi_div oh">
+		    		<div class="fl w20">
+		    			<input name="checkbox" value="{{$value.id}}"  type="checkbox" style="position: absolute;top: 35px;left: 20px; ;">
+		    		</div>
+		    		<div class="fl w80 h100" data_id="{{$value.id}}" style="position: absolute;left: 20%; ">
+		    			<div class="">
+		    				<h5 class="c000000 ts-li-title fs16 mt8">{{$value.line_name}}</h5>
+		    			</div>
+		    			<div>
+		    				<span class="fs13 c666666">订单:{{$value.order_num}}</span>
+		    			</div>
+		    			<div class="fs13 c666666">
+		    				<span >{{$value.start_date}}</span><span>--</span><span>{{$value.end_date}}</span>
+		    			</div>
+		    			<div class="fs12 c666666">
+		    				<span >大人({{$value.man_num}})</span><span class="ml10">小孩({{$value.child_num}})</span>
+		    				<span class="fr mr15 cred fs15">{{$value.total_amount}}</span><span class="fr cred fs12">￥</span>
+		    			</div>
+		    		</div>
+		    	</div>
+			{{/each}}
+		</script>
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/castapp.js" ></script>
+		<script type="text/javascript" src="../../js/template-web.js" ></script>
+		<script type="text/javascript">
+			var quan=false;
+			var cell0=0;
+			var cell1=0;
+			var cell2=0;
+			var time=0,line_id=0,page=1,pages=1;
+			mui.plusReady(function(){
+				mui.init({
+					pullRefresh : {
+						    container:"#pullrefresh",//下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
+						    up: {
+					        	height:150,
+					            contentrefresh: '正在加载...',
+					            callback: upFn // 上拉执行函数
+					        }
+					},
+					swipeBack:true
+				})
+				function upFn(){
+		        	if(pages==0){//判断是否有数据  0无 不再执行下拉刷新
+						this.endPullupToRefresh(true);
+					}else{
+						page=page+1;
+						showItem(time,line_id,page);
+						this.endPullupToRefresh(false);
+					}
+			    }
+				
+				if(plus.os.name=='iOS'){
+					ca.id('pullrefresh').style.marginTop='105px';
+				}else{
+					ca.id('pullrefresh').style.marginTop='35px';
+				}
+				ca.init();
+				ca.blackStatusBar();
+				ca.checkTheNetwork();
+				ca.closeWaitings();
+				
+				ca.receiveNotice('update',function(){
+					ca.id('div_list').innerHTML="";
+					page=1;
+					showItem(time,line_id,page);
+				});
+				mui('#div_list').on('change', 'input', function() {
+					var value = this.checked?"true":"false";
+					
+				});
+				onclickQuanxuan();
+				function onclickQuanxuan(){
+					var inp=ca.tagName('input');
+					ca.className('w50')[0].addEventListener('tap',function(){
+						if(!quan){
+							for(var a=0;a<inp.length;a++){
+								inp[a].checked=true;
+							}
+							ca.id('quanxuan').innerText='取消';
+							quan=true;
+						}else{
+							for(var a=0;a<inp.length;a++){
+								inp[a].checked=false;
+							}
+							ca.id('quanxuan').innerText='全选';
+							quan=false;
+						}
+					})
+				}
+				ca.className('w50')[1].addEventListener('tap',function(){
+					var ids=yijiao()
+					if(!ca.emptyFun(ids)){
+						mui.openWindow({
+						    url:'planning_pool_transfer.html',
+						    id:'planning_pool_transfer',
+						    extras:{
+						        ids:ids
+						    }
+						});
+//						planning_pool_transfer.html
+					}else{
+						mui.toast('请选择线路!');
+					}
+					
+				})
+				function yijiao(){
+					var inp=ca.tagName('input');
+					var arr=new Array();
+					for(var a=0;a<inp.length;a++){
+						if(inp[a].checked){
+							arr.push(parseInt(inp[a].value));
+						}
+					}
+					return arr;
+				}
+				
+			xila_onclick();
+			function xila_onclick(){
+					mui('#mui-scroll-wrapper2').scroll();
+			     	var cell=document.getElementsByClassName('shaixuan-div');
+			     	var select_input = ca.className('shaixuan-divxiala-zi');
+			     	var arrowdown=ca.className('mui-icon-arrowdown');
+			     	ca.id('middlePopover0').style.top='105px';
+					cell[0].addEventListener('tap',function(){
+						if(cell0==0){
+						select_input['0'].style.color='#4F77AA';
+						arrowdown['0'].style.color='#4F77AA';
+						select_input[1].style.color='#323232';
+						arrowdown[1].style.color='#323232';
+						mui('#middlePopover0').popover('show');
+						cell0=1;
+						cell1=0;
+						ca.className('mui-backdrop')[0].addEventListener('tap',function(){
+							select_input[0].style.color='#323232';
+							arrowdown[0].style.color='#323232';
+							mui("#middlePopover0").popover('hide');
+							cell0=0;
+						})
+						
+					}else{
+						select_input[0].style.color='#323232';
+						arrowdown[0].style.color='#323232';
+						mui('#middlePopover0').popover('hide');
+						cell0=0;
+					}
+					})
+					cell[1].addEventListener('tap',function(){
+						if(cell0==1){
+							select_input[0].style.color='#323232';
+							arrowdown[0].style.color='#323232';
+							mui('#middlePopover0').popover('hide');
+							cell0=0;
+						}
+						if(cell1==0){
+							select_input[1].style.color='#4F77AA';
+							arrowdown[1].style.color='#4F77AA';
+							select_input['0'].style.color='#323232';
+							arrowdown['0'].style.color='#323232';
+							cell1=1;
+							cell0=0;
+							showdate();
+							function showdate(){
+								// 使用原生js获取时间对象
+								var date = new Date();
+								var year = date.getFullYear();//年
+								var month = date.getMonth() + 1;//月
+								var day = date.getDate();//日
+								ca.dateSelect({
+									defaultTime:year + '-' + month + '-' + day,
+									minTime:year+ '-' + month + '-' + day,
+									maxTime:year + '-'+ (month+2) + '-' + day,
+									callback:function(data){
+										if(data){
+											select_input[1].innerHTML=data;
+											page=1;
+											time=data;
+											ca.id('div_list').innerHTML="";
+											showItem(data,line_id,page);
+											mui('#pullrefresh').pullRefresh().refresh(true);
+											cell1=0;
+										}else{
+											select_input[1].innerHTML="出发日期";
+											select_input[1].style.color='#323232';
+											arrowdown[1].style.color='#323232';
+											page=1;
+											time=0;
+											ca.id('div_list').innerHTML="";
+											showItem(time,line_id,page);
+											mui('#pullrefresh').pullRefresh().refresh(true);
+											cell1=0;
+										}
+									}
+								})
+							}
+						}else{
+							select_input[1].style.color='#323232';
+							arrowdown[1].style.color='#323232';
+							cell1=0;
+						}
+					})
+					cell[2].addEventListener('tap',function(){
+						mui.toast('暂未开通!')
+					})
+					
+					findxianlu();
+					function findxianlu(){
+						var urls=localStorage.getItem('url');
+				       	var eid=localStorage.getItem('e_id');
+				       	var partment_id=localStorage.getItem('structure_id')
+				       	var list=ca.id('xianlu');
+				       	var html=[];
+				       	mui.get(urls +'findContractLineTome',{partment_id:partment_id},function(data){
+				       		for(var a in data){
+				       			if(a==0){
+				       				html.push('<li class="mui-table-view-cell xianlus" data_id="0">全部线路</li>')
+				       				html.push('<li class="mui-table-view-cell xianlus" data_id="'+data[0].id+'">'+data[0].alias+'</li>')
+				       			}else{
+				       				html.push('<li class="mui-table-view-cell xianlus" data_id="'+data[a].id+'">'+data[a].alias+'</li>')
+				       			}
+				       			
+				       		}
+				       		list.innerHTML = html.join('');
+				       		xianluxuanze();
+				       	});
+					}
+					 function xianluxuanze(){
+					 	var cell11=ca.className('xianlus');
+			        	for(var i=0;i<cell11.length;i++){
+					     		(function(index1){
+									cell11[i].addEventListener('tap',function(){
+										if(index1==0){
+											select_input[0].innerHTML="线路筛选";
+										}else{
+											select_input[0].innerHTML=cell11[index1].innerHTML;
+										}
+										xianluid=cell11[index1].getAttribute('data_id');
+										line_id=xianluid;
+										page=1;
+										ca.id('div_list').innerHTML="";
+										showItem(time,xianluid,page);
+										mui('#pullrefresh').pullRefresh().refresh(true);
+										mui('#middlePopover0').popover('hide');
+										cell0=0;
+									})
+								})(i);
+					     }
+					 }
+			
+			     }
+				showItem(time,line_id,page);
+				function showItem(time,line_id,page){
+					var partment_id=localStorage.getItem('structure_id');
+					ca.ajaxs({url:'findPlanningPoolByline_idAndtime',data:{
+							partment_id:partment_id,time:time,line_id:line_id,page:page
+						},succFn:function(data){
+							if(!ca.emptyFun(data)){
+								var da=data.data;
+								if(!ca.emptyFun(da)){
+									var da1=data.next_item;
+									if(da1==null){
+										pages=0;
+									}
+									if(da1!=null){
+										pages==1;
+									}
+									if(da=="" && page==1){
+										ca.id('div_list').innerHTML="暂无数据";
+										ca.closeWaiting();
+										return;
+									}
+									fuzhi(da);
+								}else{
+									ca.id('div_list').innerHTML="暂无数据";
+								}
+							}else{
+								mui.toast('没有数据!');
+							}
+							ca.closeWaiting();
+						},errFn:function(call){
+							ca.closeWaiting();
+							mui.toast(call);
+						}
+					})
+				}
+				function fuzhi(data){
+					try{
+						ca.id('div_list').innerHTML+=template('list_item', {
+							"list":data
+						});
+					}catch(err){
+						console.log(err);
+					}
+				}
+				
+				mui('#div_list').on('tap','.w80',function(){
+					var order_id=this.getAttribute('data_id');
+					mui.openWindow({
+					    url:'planning_pool_item_detail.html',
+					    id:'planning_pool_item_detail',
+					    extras:{
+					        order_id:order_id
+					    }
+					});
+				})
+			})
+		</script>
+	</body>
+
+</html>

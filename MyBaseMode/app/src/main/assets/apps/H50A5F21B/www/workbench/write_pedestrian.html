@@ -1,0 +1,176 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/style.css" rel="stylesheet" />
+		<style>
+			.mui-table-view-cell {
+				height: 40px;
+			}
+			
+			.mui-table-view-cell span {
+				font-size: 15px;
+				color: #666666;
+			}
+			
+			.mui-table-view-cell input::-webkit-input-placeholder {
+				font-size: 13px;
+				color: #C3C3C3;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav user-index-top-bg mheader" >
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: #FFFFFF !important;"></a>
+			<h1 class="mui-title" style="font-size: 18px !important;color: #FFFFFF !important;">新增出行人</h1>
+			<span class="mui-pull-right" id="add" style="line-height: 44px;color: #FFFFFF !important;font-weight: bold;">保存</span>
+		</header>
+		<div class="mui-content" style="margin-top: 25px;">
+			<div>
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell" style="height: 45px;">
+						<span>扫描证件</span>
+						<span class="mui-icon mui-icon-camera" style="margin-left: 20px;font-size: 25px;color: #FF8201;"></span>
+					</li>
+					<li class="mui-table-view-cell mui-input-row">
+						<span>中文姓名</span>
+						<input type="text"  class="mui-input-clear" style="width: 70%;margin-left: 10px;height: 30px;margin-top: -10px;border: 0px;" placeholder="与出行人证件一致" />
+					</li>
+				</ul>
+			</div>
+			<div>
+				<span style="margin-left: 10px;font-size: 12px;color: #C3C3C3;">请确认:您填写的姓名与出行人所持证件一致</span>
+			</div>
+			<div>
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell">
+						<span>证件类型</span>
+						<input type="text" style="width: 70%;margin-left: 10px;height: 30px;margin-top: -10px;border: 0px;" placeholder="身份证" readonly="readonly" />
+					</li>
+					<li class="mui-table-view-cell mui-input-row">
+						<span>证件号码</span>
+						<input type="text" class="mui-input-speech mui-input-clear" style="width: 70%;margin-left: 10px;height: 30px;margin-top: -10px;border: 0px;" placeholder="请输入18位身份证号码" />
+					</li>
+					<li class="mui-table-view-cell mui-input-row">
+						<span>电话号码</span>
+						<input type="text" class="mui-input-clear" style="width: 70%;margin-left: 10px;height: 30px;margin-top: -10px;border: 0px;" placeholder="输入电话号码" />
+					</li>
+				</ul>
+			</div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/castapp.js"></script>
+		<script type="text/javascript" src="../js/my.js"></script>
+		<script type="text/javascript">
+			mui.init();
+			ca.init();
+			ca.whiteStatusBar();
+			var urls = localStorage.getItem('url');
+			var input = document.getElementsByTagName('input');
+			document.getElementById('add').addEventListener('tap', function() {
+				if(input['0'].value == '') {
+					mui.toast('请填写姓名');
+					input['0'].focus();
+					return;
+				}
+				if(input[2].value == '') {
+					mui.toast('请填写证件号码');
+					input[2].focus();
+					return;
+				}
+				if(!my.IdentityCodeValid(input[2].value)) {
+					mui.toast('请填写正确的证件号码');
+					input[2].focus();
+					return;
+				}
+				var sexage = my.getSexAge(input[2].value);
+				var tourists = localStorage.getItem('youkexinxi');
+				var arrs = JSON.parse(tourists);
+				var arr = new Array();
+				if(arrs == null) {
+
+				} else {
+					if(arrs.length > 0) {
+						arr = arrs;
+					}
+				}
+				var tourist = new Object;
+				tourist.name = input['0'].value;
+				tourist.card = input[2].value;
+				tourist.sex = sexage.sex;
+				tourist.age = sexage.age;
+				tourist.phone = input[3].value;
+				tourist.mark = "";
+				arr.push(tourist);
+				localStorage.setItem('youkexinxi', JSON.stringify(arr));
+				mui.toast('保存成功');
+				var arr1 = ['add_pedestrian'];
+				ca.sendNotice(arr1, 'update', {});
+				setTimeout(function() {
+					ca.closeCurrentInterface();
+				}, 1000);
+
+			});
+			
+			
+			mui.plusReady(function() {
+				var tu = ca.className('mui-table-view-cell');
+				tu[0].addEventListener('tap', function() {
+					var arr = ['照相机', '相册'];
+					ca.actionSheet(arr, {
+						succFn: function(path, name) {
+							plus.zip.compressImage({
+								src:path,
+								format:'jpg',
+								dst:"_doc/"+new Date().getTime()+".jpg",
+								quality:50,
+								width:"50%",//缩小到原来的一半
+								height:"50%"//缩小到原来的一半
+							
+							},
+							function(i) {
+									plus.nativeUI.showWaiting('上传中...');
+									var task = plus.uploader.createUpload(urls + 'IdCardIndex', {
+										method: "POST"
+									},
+									function(t, status) {
+										if(status == 200) {
+											var responseText = t.responseText;
+											var js = JSON.parse(responseText);
+											if(js.msg == 1) {
+												var data = JSON.parse(js.data);
+												input[0].value = data.name;
+												input[2].value = data.num;
+											} else {
+												mui.toast('上传出错,请重新上传');
+											}
+											ca.closeWaiting();
+										} else {
+											mui.toast('上传出错,请重新上传');
+											ca.closeWaiting();
+										}
+									});
+									task.addData("uid", localStorage.getItem('userid'));
+									task.addFile(i.target, {
+										key:'image'
+									});
+									task.start();
+									},function(error) {
+											alert("Compress error!");
+									});
+							
+						},
+						//是否开启上传
+						isUpload: false,
+					})
+				})
+			});
+		</script>
+	</body>
+
+</html>

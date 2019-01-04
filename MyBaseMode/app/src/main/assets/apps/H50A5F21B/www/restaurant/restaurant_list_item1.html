@@ -1,0 +1,524 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<script src="../js/mui.min.js"></script>
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/style.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/iconfont.css" />
+		<style>
+			.mui-backdrop {
+			    position: fixed;
+			    top: 172px !important;
+			    right: 0;
+			    bottom: 0;
+			    left: 0;
+			    z-index: 998;
+			    background-color: rgba(0,0,0,0.2);
+			}
+			.mui-popover{
+				-webkit-box-shadow: 0 0 0px rgba(0,0,0,0.1);
+    		 box-shadow: 0 0 0px rgba(0,0,0,0.1)
+			}
+			.mui-row.mui-fullscreen>[class*="mui-col-"] {
+				height: 100%;
+			}
+			.mui-col-xs-3,
+			.mui-control-content {
+				overflow-y: auto;
+				height: 100%;
+			}
+			.mui-segmented-control .mui-control-item {
+				line-height: 50px;
+				width: 100%;
+				
+			}
+			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
+				background-color: #fff;
+				color: #4F77AA;
+			}
+			.mui-scroll-wrapper1
+			{
+			    position: absolute;
+			    z-index: 2;
+			    top: 0;
+			    bottom: 0;
+			    left: 27%;
+			
+			    overflow: hidden;
+			
+			    width: 100%;
+			}
+			
+			.mui-scroll1
+			{
+			    position: absolute;
+			    z-index: 1;
+			
+			    width: 100%;
+			
+			    -webkit-transform: translateZ(0);
+			            transform: translateZ(0);
+			}
+			.mui-scroll-wrapper2
+			{
+			    position: absolute;
+			    z-index: 20;
+			    top: 0;
+			    bottom: 0;
+			    left: 0;
+			
+			    overflow: hidden;
+			
+			    width: 22%;
+			}
+			
+			.mui-scroll2
+			{
+			    position: absolute;
+			    z-index: 19;
+			
+			    width: 100%;
+			
+			    -webkit-transform: translateZ(0);
+			            transform: translateZ(0);
+			}
+		</style>
+	</head>
+
+	<body> 	
+		<div id="ccc"  class="shaixuan" style="height: 35px;position:fixed;top: 0px;width: 100%;border-bottom: 1px solid #4F77AA;">
+				<div class="shaixuan-div" >
+					<span class="shaixuan-divxiala-zi">推荐筛选</span>
+					<span class="mui-icon mui-icon-arrowdown"></span>
+					
+				</div>
+				<div class="shaixuan-div">
+					<span class="shaixuan-divxiala-zi">价格筛选</span>
+					<span class="mui-icon mui-icon-arrowdown"></span>
+				</div>
+				<div class="shaixuan-div">
+					<span class="shaixuan-divxiala-zi ts-li-title fl" style="width: 70%;">区域筛选</span>
+					<span  class="mui-icon mui-icon-arrowdown fl mt5 ml3"></span>
+				</div>
+				
+		</div>
+		<div class="body " >
+				<div id="pullrefresh" class="mui-content mui-scroll-wrapper pt5" style="margin-top: 35px;">
+	    			<div class="mui-scroll">		
+						<ul class="mui-table-view mui-table-view-chevron" id="div_list">
+				             
+						</ul>
+					</div>
+				</div>
+			</div>
+			
+			
+			<div id="middlePopover1" class="mui-popover" style=" position:fixed;height: 300px;width: 100%;border-radius:0px ;border-top: 1px solid #DADADD;z-index: 1000;">
+				<div class="mui-content mui-row mui-fullscreen">
+					<div class="mui-col-xs-3 mui-scroll-wrapper2">
+						<div id="segmentedControls" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-vertical mui-scroll2">
+						
+						</div>
+					</div>
+					<div id="segmentedControlContents" class="mui-col-xs-9" style="border-left: 1px solid #c8c7cc;width: 80%;">
+					
+					</div>
+				</div>
+			</div>
+			<div id="middlePopover2" class="mui-popover" style=" position:fixed;height: 300px;width: 100%;border-radius:0px ;border-top: 1px solid #DADADD;z-index: 1000;">
+				<div class="mui-scroll-wrapper" id="mui-scroll-wrapper2">
+					<div class="mui-scroll">
+						<ul class="mui-table-view" id="xingji">
+							<li class="mui-table-view-cell jiage" data_price1="0" data_price2="20">20元以下/人</li>
+							<li class="mui-table-view-cell jiage" data_price1="20" data_price2="40">20-40元/人</li>
+							<li class="mui-table-view-cell jiage" data_price1="40" data_price2="60">40-60元/人</li>
+							<li class="mui-table-view-cell jiage" data_price1="60" data_price2="80">60-80元/人</li>
+							<li class="mui-table-view-cell jiage" data_price1="80" data_price2="10000">80元以上/人</li>
+						</ul>
+					</div>
+				</div>
+				
+			</div>
+			<div id="middlePopover0" class="mui-popover" style=" position:fixed;height: 150px;width: 100%;border-radius:0px ;border-top: 1px solid #DADADD;z-index: 1000;">
+				<div class="mui-scroll-wrapper" id="mui-scroll-wrapper2">
+					<div class="mui-scroll">
+						<ul class="mui-table-view" id="leixing">
+							<li class="mui-table-view-cell leixings" data_id="0">默认排序</li>
+						</ul>
+					</div>
+				</div>
+				
+			</div>
+		<script type="text/javascript" src="../js/castapp.js" ></script>
+		<script type="text/javascript">
+			var cell0=0;
+			var cell1=0;
+			var cell2=0;
+			var leixingid=localStorage.getItem('leixingid');
+			var price1=0;
+			var price2=10000;
+			var quyuid=0;
+			var city=0;
+			var pages=1;
+			var pagess=1;
+			var listhotel=ca.id('div_list');
+			mui.plusReady(function(){
+				mui.init({
+					pullRefresh : {
+					    container:"#pullrefresh",//下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
+				        up: {
+				        	height:150,
+				            contentrefresh: '正在加载...',
+				            callback: upFn // 上拉执行函数
+				        }
+					}
+		       });
+				ca.init();
+				function upFn(){
+					if(pagess==0){
+						this.endPullupToRefresh(true);
+					}else{
+						pages=pages+1;
+						getHotel(leixingid,xingjiid,city,quyuid,pages);
+						this.endPullupToRefresh(false);
+						
+					}
+//					this.endPullupToRefresh(true|false);
+				}
+				xila_onclick();
+//				var cell=document.getElementsByClassName('shaixuan-div');
+				function xila_onclick(){
+			     	var cell=document.getElementsByClassName('shaixuan-div');
+			     	var select_input = ca.className('shaixuan-divxiala-zi');
+			     	var arrowdown=ca.className('mui-icon-arrowdown');
+			     	ca.id('middlePopover0').style.top='35px';
+					cell[0].addEventListener('tap',function(){
+						if(cell0==0){
+						select_input['0'].style.color='#4F77AA';
+						arrowdown['0'].style.color='#4F77AA';
+						select_input[2].style.color='#323232';
+						arrowdown[2].style.color='#323232';
+						select_input[1].style.color='#323232';
+						arrowdown[1].style.color='#323232';
+						mui('#middlePopover0').popover('show');
+						cell0=1;
+						cell1=0;
+						cell2=0;
+						ca.className('mui-backdrop')[0].addEventListener('tap',function(){
+							select_input[0].style.color='#323232';
+							arrowdown[0].style.color='#323232';
+							mui("#middlePopover0").popover('hide');
+							cell0=0;
+						})
+						
+					}else{
+						select_input[0].style.color='#323232';
+						arrowdown[0].style.color='#323232';
+						mui('#middlePopover0').popover('hide');
+						cell0=0;
+					}
+					})
+					ca.id('middlePopover2').style.top='35px';
+					mui('#mui-scroll-wrapper2').scroll();
+					cell[1].addEventListener('tap',function(){
+						if(cell1==0){
+							select_input[2].style.color='#323232';
+							arrowdown[2].style.color='#323232';
+							select_input[1].style.color='#4F77AA';
+							arrowdown[1].style.color='#4F77AA';
+							mui('#middlePopover2').popover('show');
+							select_input['0'].style.color='#323232';
+							arrowdown['0'].style.color='#323232';
+							cell1=1;
+							cell2=0;
+							cell0=0;
+							ca.className('mui-backdrop')[0].addEventListener('tap',function(){
+								select_input[1].style.color='#323232';
+								arrowdown[1].style.color='#323232';
+								mui("#middlePopover2").popover('hide');
+								cell1=0;
+							})
+							
+						}else{
+							select_input[1].style.color='#323232';
+							arrowdown[1].style.color='#323232';
+							mui('#middlePopover2').popover('hide');
+							cell1=0;
+						}
+					})
+					
+					cell[2].addEventListener('tap',function(){
+						if(cell2==0){
+							select_input[1].style.color='#323232';
+							arrowdown[1].style.color='#323232';
+							select_input[2].style.color='#4F77AA';
+							arrowdown[2].style.color='#4F77AA';
+							select_input['0'].style.color='#323232';
+							arrowdown['0'].style.color='#323232';
+							mui('#middlePopover1').popover('show');
+							cell2=1;
+							cell1=0;
+							cell0=0;
+							ca.className('mui-backdrop')[0].addEventListener('tap',function(){
+								select_input[2].style.color='#323232';
+								arrowdown[2].style.color='#323232';
+								mui("#middlePopover1").popover('hide');
+								cell2=0;
+							})
+							
+						}else{
+							select_input[2].style.color='#323232';
+							arrowdown[2].style.color='#323232';
+							mui('#middlePopover1').popover('hide');
+							cell2=0;
+						}
+					})
+					leixingxuanze();
+					 function leixingxuanze(){
+					 	var cell11=ca.className('leixings');
+			        	for(var i=0;i<cell11.length;i++){
+					     		(function(index1){
+									cell11[i].addEventListener('tap',function(){
+										select_input[0].innerHTML=cell11[index1].innerHTML;
+										listhotel.innerHTML="";
+										leixingid=cell11[index1].getAttribute('data_id');
+										if(leixingid==0){
+											price1=0;
+											price2=0;
+											quyuid=0;
+											select_input[1].innerHTML='价格筛选';
+											select_input[2].innerHTML='区域筛选';
+										}
+										pages=1;
+										pagess=1;
+										getHotel(price1,price2,city,quyuid,pages);
+										mui('#pullrefresh').pullRefresh().refresh(true);
+										mui('#middlePopover0').popover('hide');
+										cell0=0;
+									})
+								})(i);
+					     }
+					 }
+					
+//					findxinji();
+//					function findxinji(){
+//						var urls=localStorage.getItem('url');
+//				       	var eid=localStorage.getItem('e_id');
+//				       	var list=ca.id('xingji');
+//				       	var html=[];
+//				       	mui.get(urls +'findAllHotelStar',{},function(data){
+//				       		for(var a in data){
+//				       			html.push('<li class="mui-table-view-cell xingjis" data_id="'+data[a].id+'">'+data[a].name+'</li>')
+//				       		}
+//				       		list.innerHTML = html.join('');
+//				       		
+//				       	});
+//					}
+					xingjixuanze();
+					 function xingjixuanze(){
+					 	var cell11=ca.className('jiage');
+			        	for(var i=0;i<cell11.length;i++){
+					     		(function(index1){
+									cell11[i].addEventListener('tap',function(){
+										select_input[1].innerHTML=cell11[index1].innerHTML;
+										listhotel.innerHTML="";
+										price1=cell11[index1].getAttribute('data_price1');
+										price2=cell11[index1].getAttribute('data_price2');
+										pages=1;
+										pagess=1;
+										getHotel(price1,price2,quyuid,pages);
+										mui('#pullrefresh').pullRefresh().refresh(true);
+										mui('#middlePopover2').popover('hide');
+										cell1=0;
+									})
+								})(i);
+					     }
+					 }
+			
+			
+			
+			
+			
+			
+					findquyushaixuan();
+			       	function findquyushaixuan(){
+			       		var urls=localStorage.getItem('url');
+				       	var eid=localStorage.getItem('e_id');
+			       		mui.get(urls +'findAllHotelZoneBye_id',{e_id:eid},function(data){
+			       			ca.id('middlePopover1').style.top='10px';			
+					       	var controls = document.getElementById("segmentedControls");
+							var contents = document.getElementById("segmentedControlContents");
+							var html = [];
+							if(data.msg==1){
+								var da1=data.data1;
+								var da2=data.data2;
+								var i = 1,
+									j = 1,
+									m = da1.length+1, //左侧选项卡数量+1
+									n = da2.length+1;
+								 //每个选项卡列表数量+1
+								for (i=1; i < m; i++) {
+									html.push('<a class="mui-control-item" href="#content' + i + '"><span>'+da1[i-1]+'</span></a>');
+								}
+								controls.innerHTML = html.join('');
+								html = [];
+								for (i = 1; i < m; i++) {
+									html.push('<div  id="content' + i + '" class="mui-control-content mui-scroll-wrapper1" ><div class="mui-scroll1"><ul class="mui-table-view" style="max-height:2000px;">');
+									for (j = 1; j < da2[i-1].length+1; j++) {
+										html.push('<li style="background: #FFFFFF;" class="mui-table-view-cell quyuxuanze" data_id="'+da2[i-1][j-1].id+'">' + da2[i-1][j-1].name+'</li>');
+									}
+									html.push('</ul></div></div>');
+								}
+								contents.innerHTML = html.join('');
+								mui('.mui-scroll-wrapper1').scroll();
+								mui('.mui-scroll-wrapper2').scroll();
+							 	//默认选中第一个
+								controls.querySelector('.mui-control-item').classList.add('mui-active');
+								contents.querySelector('.mui-control-content').classList.add('mui-active');	
+								quyuxuanze();
+							}
+							
+			       		})
+			       	}
+			        function quyuxuanze(){
+			        	var cell11=ca.className('quyuxuanze');
+			        	city=ca.className('mui-control-item')[0].firstChild.innerHTML;
+			        	mui('body').on('tap','.mui-control-item',function(){
+			        		city=this.firstChild.innerHTML
+			        	})
+			        	for(var i=0;i<cell11.length;i++){
+					     		(function(index){
+									cell11[i].addEventListener('tap',function(){
+										select_input[2].innerHTML=cell11[index].innerHTML;
+										listhotel.innerHTML="";
+//										quyuid=cell11[index].getAttribute('data_id');
+										quyuid=cell11[index].innerHTML;
+										pages=1;
+										pagess=1;
+										getHotel(price1,price2,city,quyuid,pages);
+										mui('#pullrefresh').pullRefresh().refresh(true);
+										mui('#middlePopover1').popover('hide');
+										cell2=0;
+									})
+								})(i);
+					     }
+			        }
+			     }
+			    
+				getHotel(price1,price2,city,quyuid,pages);
+			function getHotel(leixing,xingji,city,quyu,page){
+				plus.nativeUI.showWaiting();
+				ca.checkTheNetwork();
+				var urls=localStorage.getItem('url');
+			    var eid=localStorage.getItem('e_id');
+				mui.get(urls+'findAllFoodByposition_price',{e_id:eid,price1:price1,price2:price2,city:city,position:quyu,page:page},function(datas){
+					if(datas.msg==1){
+						var da=datas.data.data;
+						var da1=datas.data.next_item;
+						if(da1==null){
+							pagess=0;
+						}
+						if(da1!=null){
+							pagess==1;
+						}
+						if(da=="" && pages==1){
+							listhotel.innerHTML="暂无数据";
+							plus.nativeUI.closeWaiting();
+							return;
+						}
+						for(var a in da){
+							var img="../img/errimg.png";
+							if(da[a].pic!=""){
+								img=da[a].pic;
+							}
+							var timestamp=new Date().getTime();
+							var lasttame=da[a].last_reserve_time*1000;
+							var shijian=timestampToTime(timestamp-lasttame);
+							
+							var temp ='<li class="restaurant-list" id="div_list" data_id="'+da[a].id+'" style="background: #FFFFFF;">'  
+									+		'<div class="restaurant-list-div">'
+									+			'<div class="restaurant-list-div-l">'
+									+				'<img src="'+img+'" alt=""/>'
+									+			'</div>'
+									+			'<div class="restaurant-list-div-r">'
+									+				'<div class="restaurant-list-div-r-o">'
+									+					'<div class="restaurant-list-div-r-o-l">'
+									+						'<h4>'+da[a].name+'</h4>'
+									+					'</div>'
+									+				'</div>'
+									+				'<div class="restaurant-list-div-r-t">'
+									+					'<div class="restaurant-list-div-r-t-l ts-li-title" style="width:100%;">'
+									+						'<span class="">'+da[a].specialty+'</span>'
+									+						'<span class=""></span>'
+									+						'<span class=""></span>'
+									+					'</div>'
+									+				'</div>'
+									+				'<div class="restaurant-list-div-r-t">'
+									+					'<div class="restaurant-list-div-r-t-l" style="margin-top: 1px;">'
+									+						'<span style="color: #333333 !important;">'+da[a].position+'</span>'
+									+						'<span style="margin-left: 5px;color: #333333;"></span>'
+									+					'</div>'
+									+				'</div>'
+									+				'<div class="restaurant-list-div-r-tt" style="margin-top: 1px;">'
+									+					'<span class="yudinrenshu">'+shijian+'前有人预定</span>'
+									+					'<div class="restaurant-list-div-r-o-r">'
+									+							'<h5><span>¥</span><span class="big-txt">'+da[a].price+'</span><span class="big-txt">/人</span></h5>'
+									+					'</div>'
+									+				'</div>'
+									+			'</div>'
+									+		'</div>'
+									+	'</li>';
+								listhotel.innerHTML+=temp;
+						}
+					}else{
+						listhotel.innerHTML="暂无数据";
+					}
+					item_onclick();
+					plus.nativeUI.closeWaiting();
+				});
+			}
+			function timestampToTime(timestamp) {
+					var tem="";
+			       var miao=parseInt(timestamp/(1000*60));
+		
+			       if(miao>=60){
+			       	var h=parseInt(miao/60);
+				       	if(h>=24){
+				       		tem=parseInt(h/24)+'天';
+				       	}else{
+				       		tem=h+'小时';
+				       	}
+			       }else{
+			       	tem=miao+'分钟';
+			       }
+			       return tem;
+			    }
+				
+			});
+			
+			function item_onclick(){
+			     	var cell=document.getElementsByClassName('restaurant-list');
+			     	for(var i=0;i<cell.length;i++){
+			     		(function(index){
+							cell[i].addEventListener('tap',function(){
+								var iid = cell[index].getAttribute('data_id');
+								localStorage.setItem('food_item_id',iid);
+								ca.newInterface({url:'restaurant_item_list_detail.html',id:'restaurant_item_list_detail'});
+							})
+						})(i);
+			     	}
+			 }
+			
+		</script>
+		
+			
+			    
+			    
+			     
+	</body>
+
+</html>

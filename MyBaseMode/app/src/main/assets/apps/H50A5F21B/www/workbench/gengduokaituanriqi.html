@@ -1,0 +1,98 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/style.css" />
+	</head>
+
+	<body style="background: #FFFFFF;">
+		<header class="mui-bar mui-bar-nav">
+		    <!--<a class="mui-action-back mui-icon mui-icon mui-icon-closeempty mui-pull-left" style="font-size:30px ;color: #A6A6A6;"></a>-->
+		    <h1 class="mui-title" style="color: #4F77AA;font-weight: bold;">
+		    	选择开团日期
+		    </h1>
+		</header>
+		<div class="mui-content">
+		    <div class="" style="background: #FFFFFF;height: auto;padding-bottom: 10px;">
+		    	<div class="business_order_div_3_1">
+					<span>选择开团日期</span>
+				</div>
+				<div class="business_order_div_3_2">
+					<div class="business_order_div_3_2_1" id="list">
+						
+					</div>
+				</div>
+		    </div>
+		    <div style="background: #FFFFFF;padding-top: 15px;padding-bottom: 10px;">
+		    	<input type="button" value="确定" style="margin-left: 10%;width: 80%;background: #FF8201;color: #FFFFFF;border: 0px;border-radius:5px ;"/>
+		    </div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/castapp.js" ></script>
+		<script type="text/javascript">
+			mui.init();
+			ca.init();
+			
+			var riqi=localStorage.getItem('genduoriqi');
+			var ss=JSON.parse(riqi)
+			var list=document.getElementById('list');
+			for(var a in ss){
+				var temp;
+				if(a>7){
+					temp='<div class="selectdate" id="'+ss[a].id+'">'
+					+'<span>'+ss[a].start_date+'</span>'
+					+'</div>';
+					list.innerHTML+=temp;
+				}
+				
+			}
+			xuanze();
+			function xuanze(){
+				var selectdate=document.getElementsByClassName('selectdate');
+				for(var i=0;i<selectdate.length;i++){
+					(function(index){
+						selectdate[i].addEventListener('tap',function(){
+							for(var a=0;a<selectdate.length;a++){
+								if(index==a){
+									selectdate[a].style.color="#fff";
+		                        	selectdate[a].style.backgroundColor="#4F77AA";
+		                        	localStorage.setItem('kaituanriqi',selectdate[a].innerHTML);
+		                        	localStorage.setItem('kaituanriqiid',selectdate[a].getAttribute('id'));
+								}else{
+									selectdate[a].style.color="";
+		                        	selectdate[a].style.backgroundColor="";
+								}
+							}
+						})
+					})(i);
+				}
+			}
+			var a=document.getElementsByTagName('input')
+			a[0].addEventListener('tap',function(){
+				mui.plusReady(function(){
+					
+					var self=plus.webview.getWebviewById('business_order1');
+					
+					var arr1 = ['business_order1'];
+					ca.sendNotice(arr1,'update',{});
+					setTimeout(function(){
+						self.setStyle({
+					    	mask:'none'
+						});
+						
+					    mui.back();
+					},1000);
+					
+				})
+				
+				
+			})
+			
+		</script>
+	</body>
+
+</html>

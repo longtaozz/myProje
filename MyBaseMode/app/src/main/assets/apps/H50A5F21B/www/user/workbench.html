@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+	</head>
+	<style>
+		.mui-table-view-cell a{
+			font-size: 14px;
+			color: #666666!important;
+		}
+		
+	</style>
+	<body>
+		<header class="mui-bar mui-bar-nav" style="background: #4F77AA;height: 69px;padding-top: 25px;">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: #FFFFFF !important;"></a>
+		    <h1 class="mui-title" style="font-size: 18px !important;color: #FFFFFF !important;">工作台</h1>
+		</header>
+		<div class="" style="margin-top: 80px;">
+		    <ul class="mui-table-view" id="menu" >
+			    
+			</ul>
+			
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/castapp.js" ></script>
+		<script type="text/javascript">
+			mui.init();
+			ca.init();
+			ca.whiteStatusBar();
+			ca.checkClientid('../login.html','login');
+			var url=localStorage.getItem('url');
+			var user_id=localStorage.getItem('userid');
+			var listview=ca.id('menu');
+			
+			mui.plusReady(function(){
+				
+				plus.nativeUI.showWaiting();
+				ca.checkTheNetwork();
+				mui.get(url+'findMenu',{user_id:user_id,structure_id:localStorage.getItem('structure_id')},function(data){
+					var da=data;
+					if(da.msg==1){
+						showMenu(da.data);
+					}else{
+						listview.innerHTML='暂时无操作权限'
+					}
+					plus.nativeUI.closeWaiting();
+				})
+			})
+			
+			
+			function showMenu(data){
+				for(var a in data){
+					var temp='<li class="mui-table-view-cell"   data-url="'+data[a].url+'">'
+			        		+'<a class="mui-navigate-right">'+data[a].name+'</a>'
+			   		 		+'</li>';
+			   		 		
+			   		listview.innerHTML+=temp;
+				}
+				onclick_iten();
+			}
+			function onclick_iten(){
+				var cell=ca.className('mui-table-view-cell');
+				for(var a=0;a<cell.length;a++){
+					(function(index){
+						cell[a].addEventListener('tap',function(){
+							urls=cell[index].getAttribute('data-url');
+							ids=urls.substring(urls.lastIndexOf('/')+1,urls.lastIndexOf('.'));
+							ca.newInterface({url:urls,id:ids});
+						})
+					})(a);
+				}
+			}
+			
+//			document.getElementById('yewuxiadan').addEventListener('tap',function(){
+//				ca.newInterface({url:'../workbench/business_order1.html',id:'business_order1'});
+//			})
+//			var cell=ca.className('mui-table-view-cell');
+//			cell[1].addEventListener('tap',function(){
+//				ca.newInterface({url:'../workbench/tour_guide.html',id:'tour_guide'});
+//			})
+//			cell[4].addEventListener('tap',function(){
+//				ca.newInterface({url:'../Test/popover.html',id:'popover'});
+//			})
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,185 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/style.css" />
+		<link rel="stylesheet" href="../css/iconfont.css" />
+		<link rel="stylesheet" href="../css/previewImage.css" />
+		<style>
+			img{
+				width: 100%;
+			}
+			.mui-slider{
+				height: 100%;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div style="background: #F2F2F2;">
+			<div class="sc-top" style="position: fixed;top: 0px;width: 100%;z-index: 11;">
+				<div class="sc-top-1">
+					<div class="mui-action-back item-top-back" style="background: #808080;margin-top: 0px;">
+					<span class="iconfont icon-fanhui"></span>
+					</div>
+					<span ></span>
+				</div>
+				<div class="sc-top-2 " >
+					<div class="sc-top-2-l">
+						<div style="background:#DCDCDC;height:80px;width: 150px;margin-left: 10px;margin-top: 10px;" class="sc-top-2-l-bg">
+							<div class="sy-banner" style="z-index: 1000;">
+						        <div class="mui-slider" id="slider">
+						          <div class="mui-slider-group mui-slider-loop" id="banner">
+						           
+						          </div>
+						        </div>
+		 				 </div>
+						</div>
+					</div>
+					<div class="sc-top-2-r" >
+						<div class="sc-top-2-r-1">
+							<span id="name" class="ts-li-title"></span>
+						</div>
+						<div class="sc-top-2-r-2">
+							<span id="city" class="yc2"></span>
+						</div>
+						<div class="fs14 c4F77AA">
+							<div><span>负责人:</span><span class="ml5" id="phonename"></span></div>
+							<span>电话:</span><span class="ml5" id="phone"></span>
+						</div>
+					</div>
+				</div>
+			</div>
+		
+			
+			<div class="sc-top-3" style="position: fixed;top:179px;width: 100%;z-index: 13;">
+				<div class="sc-top-3-1" data_index=0>
+					<div class="sc-top-3-z c4F77AA"><span>入园指南</span></div>
+					<div class="sc-top-3-b dibu"></div>
+				</div>
+				
+				<div class="sc-top-3-1" data_index=1>
+					<div class="sc-top-3-z"><span>价格政策</span></div>
+					<div class="dibu"></div>
+				</div>
+				<div class="sc-top-3-1" data_index=2>
+					<div class="sc-top-3-z"><span>交通信息</span></div>
+					<div class="dibu"></div>
+				</div>
+			</div>
+			<div style="margin-top:220px;clear: both;padding:5px;background:#FFFFFF;">
+				<div class="weizhi" style="padding-top:10px;padding-right:2px;">
+					
+				</div>
+				<div class="weizhi disn" style="padding-right:2px;padding-top:10px;">
+					
+				</div>
+				<div class="weizhi disn" style="padding-right:2px;padding-top:10px;">
+					
+				</div>
+			</div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/castapp.js" ></script>
+		<script type="text/javascript" src="../js/mui.zoom.js" ></script>
+		<script type="text/javascript" src="../js/mui.previewimage.js" ></script>
+		<script type="text/javascript">
+			mui.init({
+				swipeBack:true //启用右滑关闭功能
+			});
+			ca.init();
+			mui.plusReady(function(){
+				var self=plus.webview.currentWebview();
+				var id=self.ticket_item_id;
+				var cell=ca.className('weizhi');
+				ca.showWaiting();
+				ca.hiddenScroll();
+				ca.ajaxs({url:'findSupplyTicketByid',data:{
+						id:id
+					},succFn:function(data){
+						if(!ca.emptyFun(data)){
+							var banner=ca.id('banner');
+							var b="";
+							if(data.pics){
+								var pics=data.pics.split(",");
+								var length=pics.length-1;
+								for(var pic in pics){
+									var temp="";
+									if(pic==0){
+										temp='<div class="mui-slider-item mui-slider-item-duplicate"><a href="#"><img src="'+pics[length]+'" /></a></div>'
+											+'<div class="mui-slider-item"><a href="#"><img src="'+pics[pic]+'" data-preview-src="" data-preview-group="2" /></a></div>';
+									}else if(pic==length){
+										temp='<div class="mui-slider-item"><a href="#"><img src="'+pics[pic]+'" data-preview-src="" data-preview-group="2"/></a></div>'
+										+'<div class="mui-slider-item mui-slider-item-duplicate"><a href="#"><img src="'+pics[0]+'" /></a></div>';
+									}else if(pic!=0 && pic!=length){
+										temp='<div class="mui-slider-item"><a href="#"><img src="'+pics[pic]+'"  data-preview-src="" data-preview-group="2"/></a></div>';
+									}
+									b+=temp;
+								}
+								banner.innerHTML=b;
+								ca.pictureScroll({
+										callback:function(pictureNumber){
+										},
+										isAutoScroll:true,
+										scrollTime:3
+								});
+								callphone();
+							}
+							ca.id('name').innerHTML=data.name;
+							ca.id('city').innerHTML=data.enterprise.address;
+							ca.id('phonename').innerHTML=data.enterprise.principal;
+							ca.id('phone').innerHTML=data.enterprise.phone;
+							cell[0].innerHTML=data.notice;
+							cell[1].innerHTML=data.details;
+							cell[2].innerHTML=data.traffic_info;
+							mui.previewImage();
+						}else{
+							mui.toast('暂无数据!')
+							setTimeout(function(){
+								self.close();
+							},800)
+						}
+						ca.closeWaiting();
+					},errFn:function(err){
+						ca.closeWaiting();
+						mui.toast(err);
+					}
+				})
+				function callphone(){
+					ca.id('phone').addEventListener('tap',function(){
+						ca.callPhone(this.innerHTML);
+					})
+				}
+				
+				mui('body').on('tap','.sc-top-3-1',function(){
+						setItem(this.getAttribute('data_index'));
+				})
+				function setItem(index){
+						var cells=ca.className('sc-top-3-z');
+						var cells1=ca.className('dibu');
+						var weizhi=ca.className('weizhi');
+						for(var i=0;i<3;i++){
+							if(i==index){
+								cells[i].classList.add('c4F77AA');
+								cells1[i].classList.add('sc-top-3-b');
+								weizhi[i].classList.add('disb');
+								weizhi[i].classList.remove('disn');
+							}else{
+								cells[i].classList.remove('c4F77AA');
+								cells1[i].classList.remove('sc-top-3-b');
+								weizhi[i].classList.add('disn');
+								weizhi[i].classList.remove('disb');
+							}
+						}
+						
+				}
+			})
+			
+		</script>
+	</body>
+
+</html>

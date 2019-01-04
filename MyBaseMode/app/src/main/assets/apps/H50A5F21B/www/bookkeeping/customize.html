@@ -1,0 +1,189 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/style.css" />
+		<link rel="stylesheet" href="../css/iconfont.css" />
+	</head>
+
+	<body>
+		<div >
+			<div id="pullrefresh" class="mui-scroll-wrapper">
+    			<div class="mui-scroll">		
+					<ul class="mui-table-view " id="div_list">
+						<li class="mt5 bgwhite h50 oh" style="border-bottom: 5px solid #F2F2F2;">
+				    		<div class="fl by-unit-li-l">
+				    			<div class="by-unit-li-l-1">
+				    				<span class="iconfont icon-menpiao11  cffffff"></span>
+				    			</div>
+				    		</div>
+				    		<div class="fl by-unit-li-c">
+				    			<span class="c121212 fs15 fl">
+				    				自定景点
+				    			</span>
+				    			<div class="fr cff8201 fs14">
+				    				<span></span>
+				    			</div>
+				    		</div>
+				    	</li>
+							<li class="mt5 bgwhite h50 oh" style="border-bottom: 5px solid #F2F2F2;">
+								<div class="fl by-unit-li-l">
+									<div class="by-unit-li-l-1">
+										<span class="iconfont icon-gouwu  cffffff" style="font-size: 18px;"></span>
+									</div>
+								</div>
+								<div class="fl by-unit-li-c">
+									<span class="c121212 fs15 fl">
+										购物
+									</span>
+									<div class="fr cff8201 fs14">
+										<span></span>
+									</div>
+								</div>
+							</li>
+				    	<li class="mt5 bgwhite h50 oh" style="border-bottom: 5px solid #F2F2F2;">
+				    		<div class="fl by-unit-li-l">
+				    			<div class="by-unit-li-l-1">
+				    				<span class="iconfont icon-zhufangbutie  cffffff"></span>
+				    			</div>
+				    		</div>
+				    		<div class="fl by-unit-li-c">
+				    			<span class="c121212 fs15 fl">
+				    				自定用房
+				    			</span>
+				    			<div class="fr cff8201 fs14">
+				    				<span></span>
+				    			</div>
+				    		</div>
+				    	</li>
+				    	<li class="mt5 bgwhite h50 oh" >
+				    		<div class="fl by-unit-li-l">
+				    			<div class="by-unit-li-l-1">
+				    				<span class="iconfont icon-restaurant  cffffff" style="font-size: 18px;"></span>
+				    			</div>
+				    		</div>
+				    		<div class="fl by-unit-li-c">
+				    			<span class="c121212 fs15 fl">
+				    				自定用餐
+				    			</span>
+				    			<div class="fr cff8201 fs14">
+				    				<span></span>
+				    			</div>
+				    		</div>
+				    	</li>
+				    	<li class="mt5 bgwhite h50 oh disn" style="border-bottom: 5px solid #F2F2F2;">
+				    		<div class="fl by-unit-li-l">
+				    			<div class="by-unit-li-l-1">
+				    				<span class="iconfont icon-weituoshuguanli  cffffff"></span>
+				    			</div>
+				    		</div>
+				    		<div class="fl by-unit-li-c">
+				    			<span class="c121212 fs15 fl">
+				    				回执单收入
+				    			</span>
+				    			<div class="fr cff8201 fs14">
+				    				<span></span>
+				    			</div>
+				    		</div>
+				    	</li>
+				    	<li class="mt5 bgwhite h50 oh disn">
+				    		<div class="fl by-unit-li-l">
+				    			<div class="by-unit-li-l-1">
+				    				<span class="iconfont icon-qita  cffffff"></span>
+				    			</div>
+				    		</div>
+				    		<div class="fl by-unit-li-c">
+				    			<span class="c121212 fs15 fl">
+				    				其他支出
+				    			</span>
+				    			<div class="fr cff8201 fs14">
+				    				<span></span>
+				    			</div>
+				    		</div>
+				    	</li>
+		    		</ul>
+				</div>
+			</div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/castapp.js" ></script>
+		<script type="text/javascript">
+			var day=localStorage.getItem('jizhangday');
+			var teamsk_id=localStorage.getItem('teamsk_id');
+			
+			mui.plusReady(function(){
+				mui.init({
+					pullRefresh : {
+					    container:"#pullrefresh",//下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
+					    down : {
+					      height:50,//可选,默认50.触发下拉刷新拖动距离,
+					      auto: false,//可选,默认false.首次加载自动下拉刷新一次
+					      contentdown : "下拉可以刷新",//可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
+					      contentover : "释放立即刷新",//可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
+					      contentrefresh : "正在刷新...",//可选，正在刷新状态时，下拉刷新控件上显示的标题内容
+					      callback :downFn //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+					    },
+//				        up: {
+//				        	height:150,
+//				            contentrefresh: '正在加载...',
+//				            callback: upFn // 上拉执行函数
+//				        }
+					}
+		       });
+				ca.init();
+				ca.blackStatusBar();
+				ca.checkTheNetwork();
+				function downFn(){
+					show();
+					mui('#pullrefresh').pullRefresh().endPulldownToRefresh(true);
+				}
+				var fr=ca.className('fr');
+				show();
+				function show(){
+					plus.nativeUI.showWaiting();
+					ca.ajaxs({url:'findCustomizeBydayAndtype',data:{teamsk_id:teamsk_id,date:day},
+						succFn:function(data){
+							fr[0].innerHTML=data.add_ticket;
+							fr[1].innerHTML=data.add_hotel;
+							fr[2].innerHTML=data.add_food;
+							fr[3].innerHTML=data.add_shop;
+							fr[4].innerHTML=data.add_back_bill;
+							fr[5].innerHTML=data.add_other_expend;
+							ca.closeWaiting();
+						},
+						errFn:function(call){
+							ca.closeWaiting();
+							mui.toast(call);
+						}
+					})
+				}
+				
+			})
+			
+			var li=ca.tagName('li');
+			li[0].addEventListener('tap',function(){
+				ca.newInterface({url:'customize_scenic_spot.html',id:'customize_scenic_spot'})
+			})
+			li[2].addEventListener('tap',function(){
+				ca.newInterface({url:'customize_room.html',id:'customize_room'})
+			})
+			li[3].addEventListener('tap',function(){
+				ca.newInterface({url:'customize_food.html',id:'customize_food'})
+			})
+			li[1].addEventListener('tap',function(){
+				ca.newInterface({url:'customize_shop.html',id:'customize_shop'})
+			})
+			li[4].addEventListener('tap',function(){
+				ca.newInterface({url:'customize_return_receipt.html',id:'customize_return_receipt'})
+			})
+			li[5].addEventListener('tap',function(){
+				ca.newInterface({url:'customize_other_expenditure.html',id:'customize_other_expenditure'})
+			})
+		</script>
+	</body>
+
+</html>

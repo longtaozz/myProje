@@ -1,0 +1,245 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../css/style.css" />
+		<style>
+			.mui-table-view-cell span{
+				font-size:13px ;
+				color: #333333;
+			}
+			.cell-l{
+				font-size:15px !important;
+			}
+			.cell-r{
+				margin-right: 5px;
+			}
+			.mui-icon-arrowright{
+				font-size: 20px!important;
+				color: #52bcec!important;
+			}
+		</style>
+	</head>
+	
+	<body>
+		<header class="mui-bar mui-bar-nav" style="background: #FFFFFF;height: 69px;padding-top: 25px;">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: #333333;"></a>
+		    <h1 class="mui-title" style="color: #333333;">团信息</h1>
+		</header>
+		<div class="mui-content">
+		    <div class="" style="background: #FFFFFF;padding-left: 15px;padding-bottom: 10px;">
+		    	<div class="tour-guide-list-t-1" style="padding-top: 10px;">
+					<span></span>
+				</div>
+				<div class="tour-guide-list-t-2">
+					<span>团号：</span><span></span>
+				</div>
+				<div class="tour-guide-list-t-2">
+					<span>团期：</span><span></span>
+				</div>
+				<div class="tour-guide-list-t-2">
+					<span>人数：</span><span></span>
+				</div>
+				<div class="tour-guide-list-t-2">
+					<span>公司：</span><span></span><span class="ml15">业务计调：</span><span></span><span class="ml10" id="jdphone"></span>
+				</div>
+		    </div>
+		    <div style="background: #FFFFFF;margin-top: 5px;">
+		    	<ul class="mui-table-view">
+    				<li class="mui-table-view-cell">
+    					<span class="cell-l">预领团款</span><span class="mui-pull-right cell-r"></span>
+    				</li>
+    				<!-- <li class="mui-table-view-cell" id="sijiphone">
+    					<span class="cell-l">司机</span><span class="mui-icon mui-icon-arrowright mui-pull-right"></span><span class="mui-pull-right cell-r">12123132123</span><span class="mui-pull-right cell-r">吴嬷嬷</span>
+    				</li> -->
+    				<!--<li class="mui-table-view-cell">
+    					<span class="cell-l">计划详情</span><span class="mui-icon mui-icon-arrowright mui-pull-right"></span>
+    				</li>-->
+    			</ul>
+		    </div>
+		    <!--<div style="background: #FFFFFF;margin-top: 5px;margin-bottom: 60px;">
+		    	<ul class="mui-table-view">
+    				<li class="mui-table-view-cell">
+    					<span class="cell-l">团款代收</span><span class="mui-icon mui-icon-arrowright mui-pull-right"></span><span class="mui-pull-right cell-r" >(10)</span><span class="mui-pull-right cell-r">1000</span>
+    				</li>
+    				<li class="mui-table-view-cell">
+    					<span class="cell-l">导补佣金</span><span class="mui-icon mui-icon-arrowright mui-pull-right"></span><span class="mui-pull-right cell-r">6000</span>
+    				</li>
+    				<li class="mui-table-view-cell">
+    					<span class="cell-l">导游现付</span><span class="mui-icon mui-icon-arrowright mui-pull-right"></span><span class="mui-pull-right cell-r" >(1000)</span><span class="mui-pull-right cell-r">5000</span>
+    				</li>
+    				<li class="mui-table-view-cell">
+    					<span class="cell-l">账面退补</span><span class="mui-icon mui-icon-arrowright mui-pull-right"></span><span class="mui-pull-right cell-r">10000</span>
+    				</li>
+    			</ul>
+		    </div>-->
+		</div>
+		<div class="mauto" style="position: fixed;bottom: 20px;width: 100%;display: none;" id="btt">
+			<!--<div class="w80 tc h40" style="margin-left: 10%;background: #FF8201;border-radius:4px ;">
+				<span class="lh40 cffffff">订单完成</span>
+			</div>-->
+			<div class="w80" style="margin-left: 10%;">
+				<div class="fl tc" style="background: #FF8201;border-radius:4px ;width: 45%;">
+					<span class="lh40 cffffff">订单确认</span>
+				</div>
+				<div class="fl tc" style="margin-left:10%;background: #2AC845;border-radius:4px ;width: 45%;">
+					<span class="lh40 cffffff">订单拒接</span>
+				</div>
+			</div>
+		</div>
+		<div class="mauto" style="position: fixed;bottom: 20px;width: 100%;display: none;" id="btt1">
+			<!--<div class="w80 tc h40" style="margin-left: 10%;background: #FF8201;border-radius:4px ;">
+				<span class="lh40 cffffff">订单完成</span>
+			</div>-->
+			<div class="w80" style="margin-left: 10%;">
+				<div class="fl tc" style="background: #FF8201;border-radius:4px ;width: 100%;">
+					<span class="lh40 cffffff">开始带团</span>
+				</div>
+				
+			</div>
+		</div>
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/castapp.js" ></script>
+		<script type="text/javascript">
+			var url=localStorage.getItem('url');
+			var user_id=localStorage.getItem('userid');
+			mui.plusReady(function(){
+				mui.init();
+				ca.init(true);
+				ca.blackStatusBar();
+				var cell=ca.tagName('span');
+				var self = plus.webview.currentWebview();
+				var teamsk_id = self.order_id;//获得参数
+				show(teamsk_id);
+				function show(teamsk_id){
+					ca.ajaxs({url:'findTeamSkById',data:{
+						teamsk_id:teamsk_id,user_id:localStorage.getItem('userid')
+						},succFn:function(data){
+							var da=data.data;
+							var nums=data.nums;
+							var guideorder=data.guideorder;
+	//						cell[0].innerHTML=(da.line_name.replace('（','z')).replace('/）/',')');
+							cell[0].innerHTML=da.line_name;
+							cell[2].innerHTML=da.team_num;
+							cell[4].innerHTML=da.start_date+'——'+da.end_date;
+							cell[6].innerHTML=(nums.child_num+nums.man_num)+'(成人'+nums.man_num  +'儿童'+nums.child_num+')';
+							cell[8].innerHTML=da.enterprise.name;
+							cell[10].innerHTML=da.employee1.realname;
+							cell[11].innerHTML=da.employee1.phone;
+							ca.id('jdphone').addEventListener('tap',function(){
+								jdphone(da.employee1.phone);
+							})
+	// 						ca.id('sijiphone').addEventListener('tap',function(){
+	// 							jdphone(da.driver_tel);
+	// 						})
+							cell[13].innerHTML=da.draw_fee;
+	//						cell[14].innerHTML=da.employee2.realname;
+	// 						cell[16].innerHTML=da.driver_tel;
+	// 						cell[17].innerHTML=da.driver_name;
+							if(guideorder.status==0 && !timeCompare(da.end_date)){
+								ca.id('btt').style.display="block";
+								showbt(guideorder.id);
+							}
+							if(guideorder.status==1 && !timeCompare(da.end_date)){
+								ca.id('btt1').style.display="block";
+								showbt(guideorder.id);
+							}
+	//						cell[22].innerHTML=data.driver_name;
+	//						cell[35].innerHTML=da.guide_commission;
+							plus.nativeUI.closeWaiting();
+						},errFn:function(err){
+							ca.closeWaiting();
+							mui.toast(err);
+						}
+					})
+				}
+				
+				var cell1=ca.className('mui-table-view-cell');
+//				cell1[2].addEventListener('tap',function(){
+//					localStorage.setItem('teamsk_id',teamsk_id);
+//					ca.newInterface({url:'../../bookkeeping/tourist_information.html',id:'tourist_information'})
+//				})
+				function showbt(id){
+					var ce=ca.className('fl');
+					ce[0].addEventListener('tap',function(){
+						var btnArray = ['是','否'];
+						mui.confirm('确认接收该订单', '提示', btnArray, function(e) {
+		                    if (e.index == 0) {
+		                    	posts(id,1);
+		                    }
+						})
+						
+					})
+					ce[1].addEventListener('tap',function(){
+						var btnArray = ['是','否'];
+						mui.confirm('确认拒接该订单', '提示', btnArray, function(e) {
+		                    if (e.index == 0) {
+		                    	posts(id,2);
+		                    }
+						})
+						
+					})
+					ce[2].addEventListener('tap',function(){
+						var btnArray = ['是','否'];
+						mui.confirm('确认开始带团', '提示', btnArray, function(e) {
+		                    if (e.index == 0) {
+		                    	posts(id,8);
+		                    }
+						})
+						
+					})
+				}
+				
+				function posts(id,sta){
+					ca.showWaiting();
+					ca.ajaxs({url:'updateTeamSkByGuide',data:{
+							t_id:id,status:sta,user_id:localStorage.getItem('userid')
+						},succFn:function(data){
+							if(data){
+								if(data.code>0){
+									mui.toast('操作成功');
+									location.reload();
+								}else{
+									mui.toast(data.msg);
+								}
+							}else{
+								mui.toast('操作失败')
+							}
+							ca.closeWaiting();
+						},errFn:function(call){
+							ca.closeWaiting();
+							mui.toast(call);
+						}
+					})
+				
+				}
+				
+				function jdphone(phone){
+					ca.callPhone(phone);
+				}
+				//订单开始与当前时间比较
+				function timeCompare(arg1){
+					var myDate = new Date();
+					var ye=myDate.getFullYear();
+					var mo=myDate.getMonth()+1; //获取当前月份(0-11,0代表1月)
+					var day=myDate.getDate();
+					var mmda=ye+'-'+mo+'-'+day;
+					var date = new Date(mmda.replace(/-/g, '/'));
+					var date1 = new Date(arg1.replace(/-/g, '/'));
+					if(date.getTime()<=date1.getTime()){
+						return false;
+					}else{
+						return true;
+					}
+				}
+			})
+			
+			
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,267 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/style.css" rel="stylesheet"/>
+		<link href="../../css/iconfont.css" rel="stylesheet" />
+		<link href="../../css/mui.picker.min.css" rel="stylesheet" />
+		<style>
+			.add-headline-div{
+				margin:5px;background:#FFFFFF;border-radius:5px;
+				box-shadow:1px -1px 2px rgba(0,0,0,0.1),-1px 1px 2px rgba(0,0,0,0.1);
+			}
+			input{
+				border:0px;
+				font-size: 14px;
+			}
+			input::-webkit-input-placeholder {
+				color: #999999;
+			}
+			textarea{
+				padding: 5px;
+				height: 120px;
+				font-size: 14px;
+			}
+			.myself-recruit-xz{
+				margin:5px;background: #FE7B07;border-radius:5px;
+				text-align: center;height:50px;line-height: 50px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav user-index-top-bg mheader">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left cffffff"></a>
+			<h1 class="mui-title cffffff mtitle">添加找车队</h1>
+		</header>
+		<div class="mui-content">
+			<div class="add-headline-div">
+				<div class="h45 lh45 pl10 pr10 bbf0 oh">
+					<div class="fl w30 fs14">
+						<span>开始显示时间</span>
+					</div>
+					<div class="fl w60">
+						<input type="text" placeholder="选择时间" readonly="readonly" style="border: 0px;"/>
+					</div>
+					<div class="fl c24ABFE">
+						<span class="iconfont icon-arrLeft-fill fs19"></span>
+					</div>
+				</div>
+				<div class="h45 lh45 pl10 pr10 bbf0 oh">
+					<div class="fl w30 fs14">
+						<span>结束显示时间</span>
+					</div>
+					<div class="fl w60">
+						<input type="text" readonly="readonly" placeholder="选择时间"  style="border: 0px;"/>
+					</div>
+					<div class="fl c24ABFE">
+						<span class="iconfont icon-arrLeft-fill fs19"></span>
+					</div>
+				</div>
+				<div class="h45 lh45 pl10 pr10 bbf0 oh">
+					<div class="fl w30 fs14">
+						<span>车辆大小</span>
+					</div>
+					<div class="fl w60">
+						<input type="number" placeholder="输入座位数"  style="border: 0px;"/>
+					</div>
+					<div class="fl fs13">
+						座
+					</div>
+				</div>
+				<div class="h45 lh45 pl10 pr10 bbf0 oh">
+					<div class="fl w30 fs14">
+						<span>出发地</span>
+					</div>
+					<div class="fl w60">
+						<input type="text" placeholder="选择出发地" readonly="readonly"  style="border: 0px;"/>
+					</div>
+					<div class="fl c24ABFE">
+						<span class="iconfont icon-arrLeft-fill fs19"></span>
+					</div>
+				</div>
+				<div class="h45 lh45 pl10 pr10 bbf0 oh">
+					<div class="fl w30 fs14">
+						<span>目的地</span>
+					</div>
+					<div class="fl w60">
+						<input type="text" placeholder="选择目的地" readonly="readonly"  style="border: 0px;"/>
+					</div>
+					<div class="fl c24ABFE">
+						<span class="iconfont icon-arrLeft-fill fs19"></span>
+					</div>
+				</div>
+				<div class="h45 lh45 pl10 pr10 bbf0 oh">
+					<div class="fl w30 fs14">
+						<span>联系人</span>
+					</div>
+					<div class="fl w60">
+						<input type="text" placeholder="输入联系人"  style="border: 0px;"/>
+					</div>
+				</div>
+				<div class="h45 lh45 pl10 pr10 bbf0 oh">
+					<div class="fl w30 fs14">
+						<span>联系电话</span>
+					</div>
+					<div class="fl w60">
+						<input type="number" placeholder="输入联系人电话"  style="border: 0px;"/>
+					</div>
+				</div>
+				<div class=" pl10 pr10  oh">
+					<div class="fl w30 fs14 h45 lh45">
+						<span>消息内容</span>
+					</div>
+					<div class="m510">
+						<textarea rows="" cols="" placeholder="填写所需发布信息内容"></textarea>
+					</div>
+				</div>
+			</div>
+			<div class="myself-recruit-xz" id="add">
+				<span class="cffffff fs16">新 增</span>
+			</div>
+		</div>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/castapp.js"></script>
+		<script src="../../js/mui.picker.min.js"></script>
+		<script type="text/javascript">
+			mui.plusReady(function(){
+				mui.init({
+					swipeBack:true
+				})
+				ca.init();
+				var citys=[];
+				var picker1=new mui.PopPicker();
+				var inputs=ca.tagName('input');
+				//开始显示时间
+				inputs[0].addEventListener('tap',function(){
+					showdatapicker(inputs[0])
+				})
+				//结束显示时间
+				inputs[1].addEventListener('tap',function(){
+					showdatapicker(inputs[1])
+				})
+				
+				
+				
+				
+				
+				function showdatapicker(ob){
+					var date = new Date();
+					var year = date.getFullYear();//年
+					var month = date.getMonth() + 1;//月
+					var day = date.getDate();//日
+					var h = date.getHours();// 小时
+					var m = date.getMinutes(); // 分钟
+					ca.dateSelect({
+						defaultTime:year + '-' + month + '-' + day,
+						minTime:year + '-' + month + '-' + day,
+						maxTime:year + '-'+ (month + 1) + '-' + day,
+						callback:function(data){
+							if(data){
+								ca.timeSelect({
+									defaultTime:h + ':' + m ,
+									callback:function(datas){
+										if(datas){
+											ob.value=data+' '+datas;
+										}
+									}
+								})
+							}
+							
+						}
+					})
+				}
+				//工作区域选择
+				inputs[3].addEventListener('tap',function(){
+					if(ca.emptyFun(citys)){
+						findUserRegion(inputs[3]);
+					}else{
+						ca.combinationSelect(2,citys,function(da){
+							inputs[3].value=da[0].te;
+						})
+					}
+				})
+				inputs[4].addEventListener('tap',function(){
+					if(ca.emptyFun(citys)){
+						findUserRegion(inputs[4]);
+					}else{
+						ca.combinationSelect(2,citys,function(da){
+							inputs[4].value=da[0].te;
+						})
+					}
+				})
+				
+				//查询工作区域
+				function findUserRegion(ob){
+					ca.showWaiting();
+					ca.ajaxs({url:'findUserRegion',data:{
+							user_id:localStorage.getItem('userid')
+						},succFn:function(data){
+							if(data){
+								citys=data;
+								ca.combinationSelect(2,data,function(da){
+									ob.value=da[0].te;
+								})
+							}
+							ca.closeWaiting();
+						},errFn:function(err){
+							ca.closeWaiting();
+							mui.toast(err);
+						}
+					})
+				}
+				ca.id('add').addEventListener('tap',function(){
+					if(!inputs[0].value){
+						mui.toast('请选择显示时间');
+					}else if(!inputs[1].value){
+						mui.toast('请选择结束时间');
+					}else if(!inputs[2].value){
+						mui.toast('请输入座位数');
+					}else if(!inputs[3].value){
+						mui.toast('请选择出发地');
+					}else if(!inputs[4].value){
+						mui.toast('请选择目的地');
+					}else if(!inputs[5].value){
+						mui.toast('请输入联系人');
+					}else if(!inputs[6].value){
+						mui.toast('请输入联系电话');
+					}else if(!ca.tagName('textarea')[0].value){
+						mui.toast('请输入消息内容');
+					}else{
+						var cirys=inputs[3].value.split('/');
+						var cirys1=inputs[4].value.split('/');
+						ca.showWaiting();
+						ca.ajaxs({url:'addPostmsgCarSearch',data:{
+								user_id:localStorage.getItem('userid'),city:cirys[0],county:cirys[1],seating:inputs[2].value,
+								to_city:cirys1[0],to_county:cirys1[1],
+								content:ca.tagName('textarea')[0].value,contact_name:inputs[5].value,
+								contact_tel:inputs[6].value,view_start:inputs[0].value,view_end:inputs[1].value
+							},succFn:function(data){
+								if(data.msg==1){
+									mui.toast('添加成功');
+									var arr1=['edit_car_search'];
+									ca.sendNotice(arr1,'update',{});
+									setTimeout(function(){
+										mui.back();
+									},1000);
+								}else{
+									mui.toast('添加失败');
+								}
+							},errFn:function(err){
+								ca.closeWaiting()
+								mui.toast(err);
+							}
+						})
+					}
+				})
+				
+			})
+			
+		</script>
+	</body>
+
+</html>

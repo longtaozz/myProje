@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/style.css" />
+		<link rel="stylesheet" href="../css/iconfont.css" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav mheader">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mback"></a>
+		    <h1 class="mui-title htitle">计调备注</h1>
+		</header>
+		<div class="mui-content">
+		    <div style="padding: 10px 10px;" id="neirong">
+		    	
+		    </div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/castapp.js" ></script>
+		<script type="text/javascript">
+			mui.init();
+			ca.init(true);
+			ca.blackStatusBar();
+			if(localStorage.getItem('mark')){
+				ca.id('neirong').innerHTML=localStorage.getItem('mark');
+			}else{
+				ca.id('neirong').innerHTML='无备注';
+			}
+			
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,151 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/style.css" />
+		<style>
+			input::-webkit-input-placeholder{
+				font-size: 16px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav bgwhite" style="height: 69px;padding-top: 25px;">
+		    <h1 class="mui-title c333333" style="font-size: 16px !important;">添加账号</h1>
+		    <span class="fr lh44 mr10 fs15 mui-action-back" id="quxiao">取消</span>
+		</header>
+		<div class="mui-content">
+			<div class="mt20  bgwhite">
+				<div class="mui-input-row" style="border-bottom: 1px solid #EDEDED;">
+		       	 	<label class="fs15">企业号</label>
+			    	<input type="text" class="mui-input-clear" style="" placeholder="请输入企业号">
+			    </div>
+			    <div class="mui-input-row" style="border-bottom: 1px solid #EDEDED;">
+		       	 	<label class="fs15">工    &nbsp;&nbsp;号</label>
+			    	<input type="text" class="mui-input-clear"  placeholder="请输入工号">
+			    </div>
+			    <div class="mui-input-row" >
+			        <label class="fs15">密 &nbsp;&nbsp;码</label>
+			        <input type="password" class="" placeholder="请输入密码">
+			    </div>
+			</div>
+			<div class="mt20 tc aaa h40 lh40" id="denglu" style="margin: 5%;border-radius:5px ;">
+				<span class="cffffff">登录</span>
+			</div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/castapp.js" ></script>
+		<script type="text/javascript" src="../js/md5.js" ></script>
+		<script type="text/javascript">
+			mui.init();
+			ca.init();
+			ca.blackStatusBar();
+			ca.checkTheNetwork();
+			var input=ca.tagName('input');
+			mui.plusReady(function(){
+				ca.id('denglu').addEventListener('tap',function(){
+					if(ca.emptyFun(input[0].value)){
+						mui.toast('请输入企业号');
+						return;
+					}
+					if(ca.emptyFun(input[1].value)){
+						mui.toast('请输入工号');
+						return;
+					}
+					if(ca.emptyFun(input[2].value)){
+						mui.toast('请输入密码');
+						return;
+					}
+					ca.ajaxs({url:'login',data:{
+							e_code:input[0].value,
+							username:input[1].value,
+							password:input[2].value,
+						},
+						succFn:function(data){
+							var da=data;
+							if(da.msg==1){
+								mui.toast(da.msg_value);
+								input[0].focus();
+								ca.closeWaiting();
+								return;
+							}
+							if(da.msg==2){
+								mui.toast(da.msg_value);
+								input[1].focus();
+								ca.closeWaiting();
+								return;
+							}if(da.msg==3){
+								mui.toast(da.msg_value);
+								input[2].focus();
+								ca.closeWaiting();
+								return;
+							}
+							if(da.msg==4){
+								var user=localStorage.getItem('account_switch');
+								var arrs = JSON.parse(user);
+								var arr = new Array();
+								var isexistence=0;
+								if(arrs == null) {
+	
+								} else {
+									if(arrs.length > 0) {
+										arr = arrs;
+									}
+								}
+								for(var i=0;i<arr.length;i++){
+									if(arr[i].userid==da.data.id){
+										isexistence=1;
+									}
+								}
+								if(isexistence==1){
+									mui.toast('该账号已经登录！');
+								}else{
+									mui.toast(da.msg_value);
+									var ob=new Object;
+									ob.userid=da.data.id;
+									ob.istrue=1;
+									ob.loginlasttime=new Date().getTime();
+									ob.isadmin=da.data.is_admin;
+									ob.username=da.data.username;
+									ob.realname=da.data.realname;
+									ob.e_id=da.data.e_id;
+									ob.province=da.data.enterprise.province;
+									ob.city=da.data.enterprise.city;
+									ob.e_name=da.data.enterprise.name;
+									ob.im_token=hex_md5(da.data.username+da.data.password);
+									ob.structure_id=da.data.structure_id;
+									ob.structure_name=da.data.structure.name;
+									ob.e_code=da.data.e_code;
+									ob.userimg_url=da.data.img_url;
+									if(arr.length==5){
+										arr.splice(4,1);
+									}else{
+										
+									}
+									arr.splice(0,0,ob);
+									localStorage.setItem('account_switch', JSON.stringify(arr));
+								}
+								
+								var arr1 = ['account_switch'];
+								ca.sendNotice(arr1,'update',{});
+								ca.closeWaiting();
+								var ws=plus.webview.getWebviewById('add_account');
+								plus.webview.close(ws);
+							}
+						},
+						errFn:function(call){
+							ca.closeWaiting();
+							mui.toast(call);
+						}
+					})
+				})
+			})
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,659 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../../css/style.css" rel="stylesheet" />
+		<link href="../../../css/iconfont.css"  rel="stylesheet"/>
+		<link rel="stylesheet" href="../../../css/mui.picker.min.css" />
+		<style>
+			.add_purchase_div1{
+				margin: 5px;background: #FFFFFF;border-radius:5px;
+			}
+			.add_purchase_div1_d2{
+				margin:0px 10px;border-bottom: 1px solid #F0F0F0;
+			}
+			input{
+				padding: 0px !important;
+			}
+			textarea{
+				padding: 0px !important;
+			}
+			.mui-switch{
+				width:60px;
+				border: 1px solid #ddd;
+			}
+			
+			.mui-switch:before {
+				font-size: 13px;
+				position: absolute;
+				top: -8px;
+				right:12px;
+				content: '否';
+				text-transform: uppercase;
+				color: #999;
+			}
+			.mui-switch.mui-active:before {
+				right: auto;
+				left: 12px;
+				content: '是';
+				color: #fff;
+			}
+			.mui-switch.mui-active {
+				border-color: #1E93FE;
+				background-color: #1E93FE;
+			}
+			.mui-numbox {
+				position: relative;
+				display: inline-block;
+				overflow: hidden;
+				width: 100px;
+				height: 32px;
+				padding: 0 0px;
+				vertical-align: top;
+				vertical-align: middle;
+				border:1px solid #F0F0F0;
+				border-radius: 3px;
+				background-color: #efeff4;
+			}
+			.mui-numbox [class*=btn-numbox]{
+				font-size: 18px;
+				font-weight: 400;
+				line-height: 100%;
+				position: absolute;
+				top: 0;
+				overflow: hidden;
+				width:32px;
+				height: 100%;
+				padding: 0;
+				color: #555;
+				border: none;
+				border-radius: 0;
+				background-color: #f9f9f9;
+			}
+			.mui-numbox .mui-input-numbox {
+				display: inline-block;
+				overflow: hidden;
+				width: 100%!important;
+				height: 100%;
+				margin: 0;
+				padding: 0 3px!important;
+				text-align: center;
+				text-overflow: ellipsis;
+				word-break: normal;
+				border: none!important;
+				border-right: solid 1px #ccc!important;
+				border-left: solid 1px #ccc!important;
+				border-radius: 0!important;
+			}
+			.add_item_input{
+				
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav user-index-top-bg mheader">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left cffffff"></a>
+			<span class="cffffff fl fs15 ml20" id="title" style="line-height: 42px;"></span>
+		</header>
+		<div class="mui-content">
+			<div class="add_purchase_div1">
+				<div class="oh h45 lh45 ml10 mr10" id="xuanze0">
+					<div class="w30 fl c666666 fs15">
+						<span >选择使用时间</span>
+					</div>
+					<div class="w60 fl">
+						<input id="use_date" type="text" placeholder="选择使用时间"  readonly="readonly"   style="border: 0px;font-size: 14px;"/>
+					</div>
+					<div class="c1296db fr mr10">
+						<span class="iconfont icon-arrLeft-fill fs16"></span>
+					</div>
+				</div>
+				<div class="oh h45 lh45 ml10 mr10" id="xuanze1">
+					<div class="w30 fl c666666 fs15">
+						<span >选择供应商</span>
+					</div>
+					<div class="w60 fl">
+						<input id="names" type="text" placeholder="选择供应商"  readonly="readonly"   style="border: 0px;font-size: 14px;"/>
+					</div>
+					<div class="c1296db fr mr10">
+						<span class="iconfont icon-arrLeft-fill fs16"></span>
+					</div>
+				</div>
+				<div class="add_purchase_div1_d2" id="add_item" style="margin-left:5%;">
+					
+				</div>
+				<div class="oh h45 lh45 add_purchase_div1_d2">
+					<div class="w30 fl c666666 fs15">
+						<span >总金额</span>
+					</div>
+					<div class="w60 fl">
+						<input type="text" id="zong" readonly="readonly"  style="border: 0px;font-size: 14px;"/>
+					</div>
+				</div>
+				<div class="oh h45 lh45 add_purchase_div1_d2">
+					<div class="w30 fl c666666 fs15">
+						<span >供应商确认</span>
+					</div>
+					<div class="w60 fl ">
+						<div class="mui-switch mt5 mui-active">
+							<div class="mui-switch-handle" ></div>
+						</div>
+					</div>
+				</div>
+				<div class="oh h45 lh45 add_purchase_div1_d2">
+					<div class="w30 fl c666666 fs15">
+						<span >导游付</span>
+					</div>
+					<div class="w60 fl">
+						<input type="text" value="0" class="fu" onblur="yanzhen()"  style="border: 0px;font-size: 14px;"/>
+					</div>
+					<div class="fs14 fr mr10 c999999">
+						<span>元</span>
+					</div>
+				</div>
+				<div class="oh h45 lh45 add_purchase_div1_d2">
+					<div class="w30 fl c666666 fs15">
+						<span >签单付</span>
+					</div>
+					<div class="w60 fl">
+						<input type="text" value="0" class="fu" onblur="yanzhen()"  style="border: 0px;font-size: 14px;"/>
+					</div>
+					<div class="fs14 fr mr10 c999999">
+						<span>元</span>
+					</div>
+				</div>
+				<div class="oh h100 add_purchase_div1_d2">
+					<div class="w30 fl c666666 fs15 mt5">
+						<span >备注</span>
+					</div>
+					<div class="w70 fl mt5">
+						<textarea class="fs14 h120 w100" style="border: 0px;" placeholder="填写备注"></textarea>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div style="position: relative;bottom: 0px;background: #FFFFFF;width: 100%;height:55px;border-radius:15px ;border-bottom-left-radius: 0px;border-bottom-right-radius: 0px;">
+			<div class="fl w50 lh50 tc c333333" style="border-right: 1px dashed #F0F0F0;">
+				<span>确定</span>
+			</div>
+			<div class="fl w50 lh50 tc c333333">
+				<span>取消</span>
+			</div>
+		</div>
+		<script src="../../../js/mui.min.js"></script>
+		<script src="../../../js/castapp.js"></script>
+		<script src="../../../js/mui.picker.min.js"></script>
+		<script src="../../../js/mui.poppicker.js"></script>
+		<script type="text/javascript">
+			mui.plusReady(function(){
+				mui.init({
+					
+				});
+//         // 设置应用全屏显示！
+// 		var self=plus.webview.currentWebview();
+// 		 plus.screen.lockOrientation('landscape');
+// 		 mui.back = function() {
+// 			 plus.screen.unlockOrientation();
+// 			 plus.screen.lockOrientation('portrait');
+// 			 self.close();
+// 		 	 
+// 		 }
+				
+				var self=plus.webview.currentWebview();
+				var team_time=self.team_date,team_num=self.team_num,type=self.type,teamsk_id=self.teamsk_id,order_id=self.order_id,pickup_flag=self.pickup_flag;
+				var alias="",alias_two="",alias_three="",alias_four="",client_id=0,union_id=0,no_confirm=0,procurement_price=0,procurement_price_two=0,procurement_price_three=0,procurement_price_four=0,procurement_quantity=0,procurement_quantity_two=0,procurement_quantity_three=0,procurement_quantity_four=0;
+				ca.init();
+				var picker1=new mui.PopPicker();
+				findSupplier();
+				function findSupplier(){
+					ca.id('use_date').value=team_time;
+					switch(type){
+						case "hotel":
+							ca.id('title').innerText=team_time +'(住房采购)';
+							findhotel();
+							break;
+						case "food":
+							ca.id('title').innerText=team_time +'(用餐采购)';
+							findfood();
+							break;
+						case "pickup":
+							ca.id('title').innerText=team_time +'(用车采购)';
+							findcar();
+							break;
+					}
+					
+				}
+				
+				
+				function findhotel(){
+					ca.ajaxs({url:'findContractHotelBy',data:{
+							teamsk_id:teamsk_id
+						},succFn:function(data){
+							if(data.msg==1){
+								var da=data.data;
+								var arr=new Array();
+								for(var i=0;i<da.length;i++){
+									var ob=new Object();
+									ob.value={id:da[i].id,union_id:da[i].union_id,price1:da[i].price1,
+										price2:da[i].price2,price3:da[i].price3,price4:da[i].price4};
+									ob.text=da[i].name;
+									arr.push(ob)
+								}
+								picker1.setData(arr);
+							}
+							ca.closeWaiting();
+						},errFn:function(err){
+							mui.toast(err);
+							ca.closeWaiting();
+						}
+					})
+				}
+				function findfood(){
+					ca.ajaxs({url:'findContractFoodBy',data:{
+							teamsk_id:teamsk_id
+						},succFn:function(data){
+							if(data.msg==1){
+								var da=data.data;
+								var arr=new Array();
+								for(var i=0;i<da.length;i++){
+									var ob=new Object();
+									ob.value={id:da[i].id,union_id:da[i].union_id,price1:da[i].food1,
+										price2:da[i].food2,price3:da[i].food3,price4:da[i].food4};
+									ob.text=da[i].name;
+									arr.push(ob)
+								}
+								picker1.setData(arr);
+							}
+							ca.closeWaiting();
+						},errFn:function(err){
+							mui.toast(err);
+							ca.closeWaiting();
+						},
+					})
+				}
+				function findcar(){
+					ca.ajaxs({url:'findContractPickupBy',data:{
+							teamsk_id:teamsk_id
+						},
+						succFn:function(data){
+							if(data.msg==1){
+								var da=data.data;
+								var arr=new Array();
+								for(var i=0;i<da.length;i++){
+									var ob=new Object();
+									ob.value={id:da[i].id,union_id:da[i].union_id};
+									ob.text=da[i].name;
+									arr.push(ob)
+								}
+								picker1.setData(arr);
+							}
+							ca.closeWaiting();
+						},
+						errFn:function(call){
+							ca.closeWaiting();
+							mui.toast(call);
+						}
+					})
+				}
+				
+				ca.id('xuanze1').addEventListener('tap',function(){
+					picker1.show(function (selectItems) {
+						if(selectItems[0].text=="" || selectItems[0].text==null){
+							mui.toast('没有签约的供应商');
+							return;
+						}
+						union_id=selectItems[0].value.union_id;
+						client_id=selectItems[0].value.id;
+						switch(type){
+							case "hotel":
+								showHotel(selectItems[0].text,selectItems[0].value);
+								break;
+							case "food":
+								showFood(selectItems[0].text,selectItems[0].value);
+								break;
+							case "pickup":
+								showCar(selectItems[0].text,selectItems[0].value);
+								break;
+						}
+					})
+				})
+				
+				function showHotel(data1,data2){
+					var temps="";
+					if(data2.price1>=0){
+						var temp='<div class="h35">'
+						+	'<span class="w25 fs15" id="alias">单人间</span>'
+						+	'<input onblur="jisuan();" id="alias1" class="jisuan" type="number" value="'+data2.price1+'" placeholder="单价" style="width: 25%;height: 35px;border: 0px;font-size: 14px;margin-left: 10px;"/><span class="fs14 c999999">元</span>'
+						+	'<div class="mui-numbox ml15" data-numbox-min="0">'
+						+		'<button class="mui-btn mui-btn-numbox-minus" type="button">-</button>'
+						+		'<input class="mui-input-numbox jisuan fs14" id="alias2" value="0" type="number">'		
+						+		'<button class="mui-btn mui-btn-numbox-plus" type="button">+</button>'		
+						+	'</div>'
+						+'</div>';
+						alias=1;
+						temps+=temp;
+					}if(data2.price2>=0){
+						var temp='<div class="h35">'
+						+	'<span class="w25 fs15" id="alias_two">双人间</span>'
+						+	'<input onblur="jisuan();" id="alias_two1" class="jisuan" type="number" value="'+data2.price2+'" placeholder="单价" style="width: 25%;height: 35px;border: 0px;font-size:14px;margin-left: 10px;"/><span class="fs14 c999999">元</span>'
+						+	'<div class="mui-numbox ml15" data-numbox-min="0">'
+						+		'<button class="mui-btn mui-btn-numbox-minus" type="button">-</button>'
+						+		'<input class="mui-input-numbox jisuan fs14" id="alias_two2" value="0" type="number">'		
+						+		'<button class="mui-btn mui-btn-numbox-plus" type="button">+</button>'		
+						+	'</div>'
+						+'</div>';
+						alias_two=1;
+						temps+=temp;
+					}
+					if(data2.price3>=0){
+						var temp='<div class="h35">'
+						+	'<span class="w25 fs15" id="alias_three">三人间</span>'
+						+	'<input onblur="jisuan();" id="alias_three1" class="jisuan" type="number" value="'+data2.price3+'" placeholder="单价" style="width: 25%;height: 35px;border: 0px;font-size: 14px;margin-left: 10px;"/><span class="fs14 c999999">元</span>'
+						+	'<div class="mui-numbox ml15" data-numbox-min="0">'
+						+		'<button class="mui-btn mui-btn-numbox-minus" type="button">-</button>'
+						+		'<input class="mui-input-numbox fs14 jisuan" id="alias_three2" value="0"  type="number">'		
+						+		'<button class="mui-btn mui-btn-numbox-plus" type="button">+</button>'		
+						+	'</div>'
+						+'</div>';
+						alias_three=1;
+						temps+=temp;
+					}
+					if(data2.price4>=0){
+						var temp='<div class="h35">'
+						+	'<span class="w25 fs15" id="alias_four">司陪房</span>'
+						+	'<input onblur="jisuan();" class="jisuan" id="alias_four1" type="number" value="'+data2.price4+'" placeholder="单价" style="width: 25%;height: 35px;border: 0px;font-size: 14px;margin-left: 10px;"/><span class="fs14 c999999">元</span>'
+						+	'<div class="mui-numbox ml15" data-numbox-min="0">'
+						+		'<button class="mui-btn mui-btn-numbox-minus" type="button">-</button>'
+						+		'<input class="mui-input-numbox fs14 jisuan" id="alias_four2" value="0"  type="number">'		
+						+		'<button class="mui-btn mui-btn-numbox-plus" type="button">+</button>'		
+						+	'</div>'
+						+'</div>';
+						alias_four=1;
+						temps+=temp;
+					}
+					ca.id('names').value=data1;
+					ca.id('add_item').innerHTML=temps;
+				}
+				
+				
+				function showFood(data1,data2){
+					var temps="";
+					if(data2.price1>=0){
+						var temp='<div class="h35">'
+						+	'<span class="w25 fs15" id="alias">早餐</span>'
+						+	'<input onblur="jisuan();" class="jisuan" id="alias1" type="number" value="'+data2.price1+'" placeholder="单价" style="width: 25%;height: 35px;border: 0px;font-size: 14px;margin-left: 10px;"/><span class="fs14 c999999">元</span>'
+						+	'<div class="mui-numbox ml15" data-numbox-min="0">'
+						+		'<button class="mui-btn mui-btn-numbox-minus" type="button">-</button>'
+						+		'<input class="mui-input-numbox jisuan fs14" id="alias2" value="0" type="number">'		
+						+		'<button class="mui-btn mui-btn-numbox-plus" type="button">+</button>'		
+						+	'</div>'
+						+'</div>';
+						alias=1;
+						temps+=temp;
+					}if(data2.price2>=0){
+						var temp='<div class="h35">'
+						+	'<span class="w25 fs15" id="alias_two">中餐</span>'
+						+	'<input onblur="jisuan();" class="jisuan" id="alias_two1" type="number" value="'+data2.price2+'" placeholder="单价" style="width: 25%;height: 35px;border: 0px;font-size:14px;margin-left: 10px;"/><span class="fs14 c999999">元</span>'
+						+	'<div class="mui-numbox ml15" data-numbox-min="0">'
+						+		'<button class="mui-btn mui-btn-numbox-minus" type="button">-</button>'
+						+		'<input class="mui-input-numbox jisuan fs14" id="alias_two2" value="0" type="number">'		
+						+		'<button class="mui-btn mui-btn-numbox-plus" type="button">+</button>'		
+						+	'</div>'
+						+'</div>';
+						alias_two=1;
+						temps+=temp;
+					}
+					if(data2.price3>=0){
+						var temp='<div class="h35">'
+						+	'<span class="w25 fs15" id="alias_three">晚餐</span>'
+						+	'<input onblur="jisuan();" class="jisuan" id="alias_three1" type="number" value="'+data2.price3+'" placeholder="单价" style="width: 25%;height: 35px;border: 0px;font-size: 14px;margin-left: 10px;"/><span class="fs14 c999999">元</span>'
+						+	'<div class="mui-numbox ml15" data-numbox-min="0">'
+						+		'<button class="mui-btn mui-btn-numbox-minus" type="button">-</button>'
+						+		'<input class="mui-input-numbox fs14 jisuan" id="alias_three2" value="0"  type="number">'		
+						+		'<button class="mui-btn mui-btn-numbox-plus" type="button">+</button>'		
+						+	'</div>'
+						+'</div>';
+						alias_three=1;
+						temps+=temp;
+					}
+					if(data2.price4>=0){
+						var temp='<div class="h35">'
+						+	'<span class="w25 fs15" id="alias_four">半餐</span>'
+						+	'<input onblur="jisuan();" id="alias_four1" class="jisuan" type="number" value="'+data2.price4+'" placeholder="单价" style="width: 25%;height: 35px;border: 0px;font-size: 14px;margin-left: 10px;"/><span class="fs14 c999999">元</span>'
+						+	'<div class="mui-numbox ml15" data-numbox-min="0">'
+						+		'<button class="mui-btn mui-btn-numbox-minus" type="button">-</button>'
+						+		'<input class="mui-input-numbox fs14 jisuan" id="alias_four2" value="0"  type="number">'		
+						+		'<button class="mui-btn mui-btn-numbox-plus" type="button">+</button>'		
+						+	'</div>'
+						+'</div>';
+						alias_four=1;
+						temps+=temp;
+					}
+					ca.id('names').value=data1;
+					ca.id('add_item').innerHTML=temps;
+				}
+				function showCar(data1,data2){
+					var temp='<div class="h35">'
+					+	'<span class="w25 fs15" id="alias">总价</span>'
+					+	'<input onblur="jisuan();" id="alias1" class="jisuan" type="number" value="" placeholder="总价" style="width: 45%;height: 35px;border: 0px;font-size: 14px;margin-left: 10px;"/><span class="fs14 c999999">元</span>'
+					+'</div>';
+					ca.id('names').value=data1;
+					ca.id('add_item').innerHTML=temp;
+				}
+				
+				
+				
+				ca.className('mui-switch')[0].addEventListener("toggle",function(event){
+					if(event.detail.isActive){
+						no_confirm=0;
+					}else{
+						no_confirm=1;
+					}
+				})
+				mui('#add_item').on('tap','.mui-btn-numbox-plus',function(){
+					this.previousElementSibling.value=parseInt(this.previousElementSibling.value)+1;
+					jisuans();
+				})
+				mui('#add_item').on('tap','.mui-btn-numbox-minus',function(){
+					var value=this.nextElementSibling.value;
+					if(parseInt(value)>0){
+						this.nextElementSibling.value=parseInt(value)-1;
+						jisuans();
+					}
+				})
+				function jisuans(){
+					var inputs=ca.className('jisuan');
+					var nums=0;
+					for(var i=0;i<inputs.length/2;i++){
+						nums=parseInt(inputs[i+i].value)*parseInt(inputs[i+i+1].value)+nums;
+					}
+					ca.id('zong').value=nums;
+				}
+				
+				ca.className('w50')[0].addEventListener('tap',function(){
+					switch(type){
+						case "hotel":
+							setHotelDatas();
+							break;
+						case "food":
+							setFoodDatas();
+							break;
+						case "pickup":
+							setCarDatas();
+							break;
+						
+					}
+				})
+				ca.className('w50')[1].addEventListener('tap',function(){
+					self.close();
+				})
+				function setHotelDatas(){
+					var fus=ca.className('fu');
+					if(alias>0){
+						alias='单人间';
+						procurement_price=ca.id('alias1').value;
+						procurement_quantity=ca.id('alias2').value;
+					}if(alias_two>0){
+						alias_two='双人间';
+						procurement_price_two=ca.id('alias_two1').value;
+						procurement_quantity_two=ca.id('alias_two2').value;
+					}
+					if(alias_three>0){
+						alias_three='三人间';
+						procurement_price_three=ca.id('alias_three1').value;
+						procurement_quantity_three=ca.id('alias_three2').value;
+					}
+					if(alias_four>0){
+						alias_four='司陪房';
+						procurement_price_four=ca.id('alias_four1').value;
+						procurement_quantity_four=ca.id('alias_four2').value;
+					}
+					var datas={
+						user_id:localStorage.getItem('userid'),team_num:team_num,type:type,
+						client_id:client_id,union_id:union_id,use_date:ca.id('use_date').value,end_date:'',name:ca.id('names').value,alias:alias,
+						alias_two:alias_two,alias_three:alias_three,alias_four:alias_four,
+						procurement_price:procurement_price,procurement_price_two:procurement_price_two,
+						procurement_price_three:procurement_price_three,procurement_price_four:procurement_price_four,
+						procurement_quantity:procurement_quantity,procurement_quantity_two:procurement_quantity_two,
+						procurement_quantity_three:procurement_quantity_three,unit:'间',
+						order_num:order_id,caigou:1,pickup_flag:pickup_flag,
+						procurement_quantity_four:procurement_quantity_four,mark:ca.tagName('textarea')[0].value,
+						guide_pay:fus[0].value,sign_bill:fus[1].value,no_confirm:no_confirm
+					}
+					addTeamPurchase(datas);
+				}
+				function setFoodDatas(){
+					var fus=ca.className('fu');
+					if(alias>0){
+						alias='早餐';
+						procurement_price=ca.id('alias1').value;
+						procurement_quantity=ca.id('alias2').value;
+					}if(alias_two>0){
+						alias_two='中餐';
+						procurement_price_two=ca.id('alias_two1').value;
+						procurement_quantity_two=ca.id('alias_two2').value;
+					}
+					if(alias_three>0){
+						alias_three='晚餐';
+						procurement_price_three=ca.id('alias_three1').value;
+						procurement_quantity_three=ca.id('alias_three2').value;
+					}
+					if(alias_four>0){
+						alias_four='半餐';
+						procurement_price_four=ca.id('alias_four1').value;
+						procurement_quantity_four=ca.id('alias_four2').value;
+					}
+					var datas={
+						user_id:localStorage.getItem('userid'),team_num:team_num,type:type,
+						client_id:client_id,union_id:union_id,use_date:ca.id('use_date').value,end_date:'',name:ca.id('names').value,alias:alias,
+						alias_two:alias_two,alias_three:alias_three,alias_four:alias_four,
+						procurement_price:procurement_price,procurement_price_two:procurement_price_two,
+						procurement_price_three:procurement_price_three,procurement_price_four:procurement_price_four,
+						procurement_quantity:procurement_quantity,procurement_quantity_two:procurement_quantity_two,
+						procurement_quantity_three:procurement_quantity_three,unit:'位',
+						order_num:order_id,caigou:1,pickup_flag:pickup_flag,
+						procurement_quantity_four:procurement_quantity_four,mark:ca.tagName('textarea')[0].value,
+						guide_pay:fus[0].value,sign_bill:fus[1].value,no_confirm:no_confirm
+					}
+					addTeamPurchase(datas);
+				}
+				
+				function setCarDatas(){
+					var fus=ca.className('fu');
+					alias='接送站';
+					procurement_price=ca.id('alias1').value;
+					procurement_quantity=1;
+					var datas={
+						user_id:localStorage.getItem('userid'),team_num:team_num,type:type,
+						client_id:client_id,union_id:union_id,use_date:ca.id('use_date').value,end_date:'',name:ca.id('names').value,alias:alias,
+						alias_two:alias_two,alias_three:alias_three,alias_four:alias_four,
+						procurement_price:procurement_price,procurement_price_two:procurement_price_two,
+						procurement_price_three:procurement_price_three,procurement_price_four:procurement_price_four,
+						procurement_quantity:procurement_quantity,procurement_quantity_two:procurement_quantity_two,
+						procurement_quantity_three:procurement_quantity_three,unit:'',
+						order_num:order_id,caigou:1,pickup_flag:pickup_flag,
+						procurement_quantity_four:procurement_quantity_four,mark:ca.tagName('textarea')[0].value,
+						guide_pay:fus[0].value,sign_bill:fus[1].value,no_confirm:no_confirm
+					}
+					addTeamPurchase(datas);
+				}
+				function addTeamPurchase(datas){
+					if(!datas.name && client_id==0){
+						mui.toast('请选择供应商');
+						return;
+					}
+					if(ca.id('zong').value<=0){
+						mui.toast('请输入正确的数量,与单价');
+						return;
+					}
+					ca.ajaxs({url:'addTeamPurchase',data:datas,
+						succFn:function(data){
+							if(data.msg==1){
+								mui.toast('采购成功！');
+								var arr=['purchase_pickups_detail']
+								ca.sendNotice(arr,'update',{});
+								setTimeout(function(){
+									self.close();
+								},800)
+							}else{
+								mui.toast(data.text);
+							}
+							ca.closeWaiting();
+						},errFn:function(err){
+							ca.closeWaiting();
+							mui.toast(err);
+						}
+					})
+				}
+				mui('body').on('tap','#xuanze0',function(){
+					showdatapicker();
+				})
+				function showdatapicker(){
+					var date = new Date();
+					var year = date.getFullYear();//年
+					var month = date.getMonth() + 1;//月
+					var day = date.getDate();//日
+					var spl=team_time.split('-');
+					ca.dateSelect({
+						defaultTime:spl[0] + '-' + spl[1] + '-' + spl[2],
+						minTime:year + '-' + (month-2) + '-' +day,
+						maxTime:year + '-' +(month+2) + '-' +day,
+						callback:function(data){
+							ca.id('use_date').value=data;
+						}
+					})
+				}
+			})
+			function jisuan(){
+				var inputs=document.getElementsByClassName('jisuan');
+				var nums=0;
+				if(inputs.length==1){
+					nums=inputs[0].value;
+				}else{
+					for(var i=0;i<inputs.length/2;i++){
+						nums=parseInt(inputs[i+i].value)*parseInt(inputs[i+i+1].value)+nums;
+					}
+				}
+				
+				document.getElementById('zong').value=nums;
+			}
+			function yanzhen(){
+				var inp=ca.className('fu');
+				if(ca.emptyFun(inp[0].value)){
+					inp[0].value=0;
+				}
+				if(ca.emptyFun(inp[1].value)){
+					inp[1].value=0;
+				}
+				inp[1].value=ca.id('zong').value-inp[0].value;
+			}
+		</script>
+		
+	</body>
+
+</html>

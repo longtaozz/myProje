@@ -1,0 +1,204 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<script src="../js/jquery.min.js"></script>
+		<script src="../js/qrcode.min.js"></script>
+	</head>
+	<style>
+		.mycard-div-1{
+			
+			margin-left: 15px;
+			padding-top: 5px;
+			font-size: 16px;
+			color: #666666;
+		}
+		.mycard-div-2{
+			overflow: hidden;
+		}
+		.mycard-div-2 img{
+			float: right;
+			width: 50px;
+			height: 50px;
+			margin-right: 10px;
+			margin-top: 15px;
+		}
+		.mycard-div-3{
+			font-size: 24px;
+			color: #333333;
+			margin-left: 15px;
+			margin-top: 10px;
+		}
+		.mycard-div-4{
+			margin-top: 25px;
+			margin-left: 15px;
+			ont-size: 16px;
+			color: #666666;
+		}
+		.mycard-div-5{
+			margin-top: 5px;
+			margin-left: 15px;
+			font-size: 16px;
+			color: #666666;
+		}
+		.mycard-div-6{
+			width: 80%;
+			margin: 0 auto;
+		}
+		.mycard-div-6 img{
+			width: 100%;
+			height: 100%;
+			padding: 40px;
+		}
+	</style>
+
+	<body>
+		<header class="mui-bar mui-bar-nav" style="background: #FFFFFF;height: 69px;padding-top: 25px;">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: #333333;"></a>
+		    <h1 class="mui-title" style="font-size: 16px;">我的名片</h1>
+		</header>
+		<div class="mui-content" style="margin-top: 25px;">
+		    <div style="margin: 5%;background: #FFFFFF;width: 90%;">
+		    	<div class="mycard-div-1">
+		    		<span id="enterprise">
+		    		</span>
+		    	</div>
+		    	<div class="mycard-div-2">
+		    		<img src=""/>
+		    	</div>
+		    	<div class="mycard-div-3">
+		    		<span id="name">
+		    		</span>
+		    	</div>
+		    	<div class="mycard-div-4">
+		    		<span id="phone">
+		    		</span>
+		    	</div>
+		    	<div class="mycard-div-5">
+		    		<span id="email">
+		    			
+		    		</span>
+		    	</div>
+		    	<div class="mycard-div-6">
+		    		<div id="qrcode" style="width:100%; height:100%; margin-top:15px;" >
+		    	</div>
+		    </div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/castapp.js" ></script>
+		<script type="text/javascript" src="../js/mui.picker.min.js" ></script>
+		<script type="text/javascript">
+			mui.init({
+				 gestureConfig:{
+				    longtap: true, //默认为false
+				    release:true
+				   }
+			});
+			
+			ca.init();
+			ca.blackStatusBar();
+			var id=localStorage.getItem('userid');
+			var qrcode = new QRCode(document.getElementById("qrcode"), {
+				width : 200,
+				height : 200
+			});
+			qrcode.makeCode(localStorage.getItem('e_code')+'_'+localStorage.getItem('username'));
+			mui.plusReady(function(){
+				ca.ajaxs({url:'findUserByid',data:{
+						user_id:id
+					},succFn:function(data){
+						var da=data.user;
+						ca.id('enterprise').innerHTML=da.enterprise.name+'  ('+da.structure.name+')';
+						var img="";
+						if(da.img_url=="" || da.img_url==null){
+							img="../img/touxiang1.jpg"
+						}else{
+							img=da.img_url
+						}
+						ca.tagName('img')[0].src=img;
+						ca.id('name').innerHTML=da.realname;
+						ca.id('phone').innerHTML=da.phone;
+						ca.id('email').innerHTML=da.email;
+						ca.closeWaiting();
+					},errFn:function(call){
+						ca.closeWaiting();
+						mui.toast(call);
+					}
+				})
+				
+				
+// 				ca.tagName('img')[0].addEventListener('longtap',function(){
+// //					oooon(this.src);
+// 					createDownload();
+// 				})
+// 				ca.id('tu').addEventListener('longtap',function(){
+// 					oooon(this.src);
+// //					createDownload();
+// 				})
+// 				// 创建下载任务
+// 				function createDownload() {
+// 					var dtask = plus.downloader.createDownload( "http://img.manbuquanqiu.com/uploads/csdy1/admin/20180621/1529552587361773.jpg", {}, function ( d, status ) {
+// 						// 下载完成
+// 						if ( status == 200 ) { 
+// 							oooon(d.filename);
+// 							
+// //							alert( "Download success: " + d.filename );
+// 						} else {
+// 							alert( "Download failed: " + status ); 
+// 						}  
+// 					});
+// 					//dtask.addEventListener( "statechanged", onStateChanged, false );
+// 					dtask.start(); 
+// 					
+// 				}
+// 				function oooon(aa){
+// 					plus.barcode.scan( aa, function (type,result) {
+// 								ooon(1,aa);
+// 								
+// //								alert( "Scan success:("+type+")"+result );
+// 							}, function (error) {
+// 								ooon(2,aa);
+// 					});
+// 				}
+// 				
+// 				function ooon(a,aa){
+// 					if(a==1){
+// 						plus.nativeUI.actionSheet({title:"提示",cancel:"取消",buttons:[{title:"保存图片到手机相册"},{title:"扫描图中二维码"}]}, 
+// 						function(e){
+// 							if(e.index==1){
+// 								plus.gallery.save( aa, function () {
+// 									alert( "保存图片到相册成功" );
+// 								} );
+// 							}
+// 							if(e.index==2){
+// 								plus.barcode.scan( aa, function (type,result) {
+// 									alert( "Scan success:("+type+")"+result );
+// 								}, function (error) {
+// 									alert( error.message );
+// 								});
+// 							}
+// 						} 
+// 						);
+// 					}else{
+// 						plus.nativeUI.actionSheet({title:"提示",cancel:"取消",buttons:[{title:"保存图片到手机相册"}]}, 
+// 						function(e){
+// 							if(e.index==1){
+// 								plus.gallery.save( aa, function () {
+// 									alert( "保存图片到相册成功" );
+// 								} );
+// 							}
+// 						} 
+// 						);
+// 					}
+// 					
+// 				}
+				
+			})
+		</script>
+	</body>
+
+</html>

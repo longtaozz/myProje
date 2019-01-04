@@ -1,0 +1,203 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/style.css" />
+		<style>
+			ul li span{
+				font-size: 15px;
+    			color: #666;
+			}
+			.sp{
+				font-size: 15px;
+    			color: #333;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav" style="background: #FFFFFF;height: 69px;padding-top: 25px;">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: #333333;"></a>
+		    <h1 class="mui-title" style="font-size: 16px;">用户信息</h1>
+		</header>
+		<div class="mui-content" style="margin-top: 25px;">
+		    <ul class="mui-table-view">
+		            <li class="mui-table-view-cell h50 oh" style="padding:0px;">
+		                <div class="fl lh50 pl10">
+		                	<span>头像</span>
+		                </div>
+		                <div class="fr lh50" style="padding: 4px 10px;">
+		                	<img src="" style="width: 40px;height: 40px;border-radius:100px ;"/>
+		                </div>
+		            </li>
+		            <li class="mui-table-view-cell" style="padding:0px;">
+		               <div class="fl lh44 pl10">
+		                	<span>名称</span>
+		                </div>
+		                <div class="fr lh44" style="padding: 0px 5px;">
+		                	<span class="sp"></span>
+		                	<span class="mui-icon mui-icon-arrowright"></span>
+		                	
+		                </div>
+		            </li>
+		            <li class="mui-table-view-cell" style="padding:0px;">
+		               <div class="fl lh44 pl10">
+		                	<span>电话</span>
+		                </div>
+		                <div class="fr lh44" style="padding: 0px 5px;">
+		                	<span class="sp"></span>
+		                	<span class="mui-icon mui-icon-arrowright"></span>
+		                	
+		                </div>
+		            </li>
+		            
+		            <li class="mui-table-view-cell" style="padding:0px;">
+		               <div class="fl lh44 pl10">
+		                	<span>邮箱</span>
+		                </div>
+		                <div class="fr lh44" style="padding: 0px 5px;">
+		                	<span class="sp"></span>
+		                	<span class="mui-icon mui-icon-arrowright"></span>
+		                	
+		                </div>
+		            </li>
+		        </ul>
+		        <ul class="mui-table-view mt10" >
+		        	<li class="mui-table-view-cell" style="padding:0px;">
+		               <div class="fl lh44 pl10">
+		                	<span>修改密码</span>
+		                </div>
+		                <div class="fr lh44" style="padding: 0px 5px;">
+		                	<span class="mui-icon mui-icon-arrowright"></span>
+		                	
+		                </div>
+		            </li>
+		        </ul>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/castapp.js" ></script>
+		<script type="text/javascript">
+			mui.init();
+			ca.init(true);
+			ca.blackStatusBar();
+			var url=localStorage.getItem('url');
+			var user_id=localStorage.getItem('userid');
+			var upload_imgurl=localStorage.getItem('upload_imgurl');
+			
+			mui.plusReady(function(){
+				var cell=ca.className('mui-table-view-cell');
+				var sp=ca.className('sp');
+				ca.receiveNotice('update',function(){
+					show();
+				});
+				show();
+				function show(){
+					plus.nativeUI.showWaiting();
+					ca.checkTheNetwork();
+					ca.ajaxs({url:'findUserByid',data:{
+							user_id:user_id
+						},succFn:function(data){
+							if(data.msg==1){
+								var user=data.user;
+								var role=data.role;
+								if(user.img_url==""){
+									ca.tagName('img')[0].src=""
+								}else{
+									ca.tagName('img')[0].src=user.img_url;
+								}
+								sp[0].innerHTML=user.realname;
+								sp[1].innerHTML=user.phone;
+								sp[2].innerHTML=user.email;
+								
+							}
+							ca.closeWaiting();
+						},errFn:function(call){
+							ca.closeWaiting();
+							mui.toast(call);
+						}
+					})
+				}
+				
+				cell[0].addEventListener('tap',function(){
+					var arr = ['照相机','相册'];
+					ca.actionSheet(arr,{
+						succFn:function(path,name){
+//						var t=ca.tagName('img');
+//						t[0].src=data;
+//						mui.post(url+'updateUserImg',{user_id:user_id,img_url:data},function(da){
+//							if(da.msg!=1){
+//								mui.toast('修改失败!');
+//								return;
+//							}
+//							var arr1 = ['user/user_index1'];
+//							ca.sendNotice(arr1,'update',{});
+//						})
+
+					plus.zip.compressImage({
+							src:path,
+							format:'jpg',
+							dst:"_doc/"+new Date().getTime()+".jpg",
+							quality:50,
+							width:"50%",//缩小到原来的一半
+							height:"50%"//缩小到原来的一半
+							
+						},
+						function(i) {
+				      ca.uploadFiles(upload_imgurl,i.target,function(imgPath){
+				        var t=ca.tagName('img');
+								t[0].src=path;
+										ca.ajaxs({url:'updateUserImg',data:{
+												user_id:user_id,img_url:imgPath
+											},succFn:function(data){
+													if(data.msg!=1){
+														mui.toast('修改失败!');
+														return;
+													}
+													localStorage.setItem('userimg_url',imgPath);
+													var arr1 = ['user/user_index'];
+													ca.sendNotice(arr1,'update',{});
+													ca.closeWaiting();
+											},errFn:function(err){
+												ca.closeWaiting();
+												mui.toast(err);
+											}
+										});
+		        			},function(error){
+		        				mui.toast('修改失败')
+		        			});
+						},function(error) {
+							mui.toast('修改失败')
+						});
+					},
+					//是否开启上传
+					isUpload:false,
+					});
+				})
+				cell[1].addEventListener('tap',function(){
+					ca.newInterface({url:'update_user.html',id:'update_user'});
+					localStorage.setItem('update_user_name',sp[0].innerHTML);
+					localStorage.setItem('update_user_tag',1);
+				})
+				cell[2].addEventListener('tap',function(){
+					ca.newInterface({url:'update_user.html',id:'update_user'});
+					localStorage.setItem('update_user_name',sp[1].innerHTML);
+					localStorage.setItem('update_user_tag',2);
+				})
+				cell[3].addEventListener('tap',function(){
+					ca.newInterface({url:'update_user.html',id:'update_user'});
+					localStorage.setItem('update_user_name',sp[2].innerHTML);
+					localStorage.setItem('update_user_tag',3);
+				})
+				
+				cell[4].addEventListener('tap',function(){
+					ca.newInterface({url:'update_user_password.html',id:'update_user_password'})
+				})
+			});
+		</script>
+	</body>
+
+</html>
