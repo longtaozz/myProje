@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 
 import com.m.lib_http.api.DemoApi;
 import com.m.lib_http.base.DemoBean;
-import com.m.lib_http.bean.BaseResult;
 import com.m.lib_http.http.HttpManager;
 import com.m.lib_http.listener.IResponseListener;
 
@@ -23,9 +22,14 @@ public class DemoActivity extends Activity {
         Map<String , Object> map=new HashMap<>();
         map.put("username", "xiexin");
         map.put("password", "123456");
-        httpManager.request(httpManager.createApi(DemoApi.class).postLog("cloudzf/user/login",map), new IResponseListener<DemoBean>() {
+        httpManager.request(httpManager.createApi(DemoApi.class).post(map), new IResponseListener<DemoBean>() {
             @Override
             public void onSuccess(DemoBean data) {
+            }
+
+            @Override
+            public void onComplete() {
+
             }
 
             @Override

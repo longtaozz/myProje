@@ -1,4 +1,4 @@
-package com.m.lib_http.base;
+package com.m.lib_http.constants;
 
 /**
  * 存放基础请求数据
@@ -8,9 +8,9 @@ package com.m.lib_http.base;
  **/
 public class BaseData {
     //ip
-    public final static String BASE_IP = "http://114.116.156.44:9080/";
+//    public final static String BASE_IP = "http://114.116.156.44:9080/";
 //    public final static String BASE_IP = "http://www.jianshu.com";
-//    public final static String BASE_IP = "http://www.baidu.com";
+    public final static String BASE_IP = "http://www.baidu.com";
 
     //token
     public static String TOKEN = "";

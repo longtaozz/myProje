@@ -23,15 +23,16 @@ import retrofit2.http.Url;
 public interface DemoApi {
 
     //登录,也可以直接放个对象，如DemoBean
-    @POST
-    Observable<DemoBean> postLog(@Url String fileUrl,@Body Map<String,Object> map);
+    @POST("cloudzf/user/login")
+    Observable<DemoBean> post(@Body Map<String,Object> map);
 
+//    @GET("cloudzf/user/login")此写法报错
     //用户信息
-    @GET("cloudzf/user/login")
-    Observable<DemoBean> getUser(@QueryMap Map<String,Object> maps);
+    @GET
+    Observable<DemoBean> get(@Url String fileUrl,@QueryMap Map<String,Object> maps);
 
     //下载文件
-    @GET()
+    @GET
     @Streaming
     Call<ResponseBody> downloadFile(@Url String fileUrl);
 }

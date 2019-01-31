@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">lib_mvvm</string>
+    <string name="loading_process_tip">加载中&#8230;</string>
+</resources>

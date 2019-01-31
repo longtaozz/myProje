@@ -4,12 +4,11 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.m.lib_http.base.BaseData;
+import com.m.lib_http.constants.BaseData;
 import com.m.lib_http.bean.BaseResult;
 import com.m.lib_http.listener.IResponseListener;
 import com.m.lib_http.util.AndroidUtil;
 import com.m.lib_http.util.NetConnect;
-import com.orhanobut.logger.BuildConfig;
 import com.orhanobut.logger.Logger;
 
 import java.io.File;
@@ -129,7 +128,7 @@ public class HttpManager {
             HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
                 @Override
                 public void log(String message) {
-                    Logger.d(message);
+                    Logger.e(message);
                 }
 
 
@@ -215,20 +214,20 @@ public class HttpManager {
                             }
 
                             @Override
-                            public void onComplete() {
-                                Log.e("onError..........", "onComplete");
-
+                            public void onComplete() {//请求完成
+                                Log.e("onComplete..........", "onComplete");
+                                listener.onComplete();
                             }
 
                             @Override
                             public void onSubscribe(Disposable disposable) {
-                                Log.e("onError..........", "onSubscribe");
+                                Log.e("onSubscribe..........", "onSubscribe");
 
                             }
 
                             @Override
                             public void onNext(BaseResult<T> data) {
-                                Log.e("onError..........", data.getMessge());
+                                Log.e("onNext..........", data.getMessge());
                                 if (listener != null) {
                                     //假如为token超时或无token（由服务器定义）
                                     if (data.getCode() == 10003) {
