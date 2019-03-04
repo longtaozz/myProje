@@ -1,27 +1,32 @@
 package com.m.mvvm.activity;
 
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.view.View;
 
 import com.m.lib_mvvm.constants.middle.MyActivity;
 import com.m.mvvm.R;
 import com.m.mvvm.VM.MainViewModel;
+import com.m.mvvm.beans.StrBean;
 import com.m.mvvm.databinding.ActivityMainBinding;
 
-public class MainActivity extends MyActivity {
+public class MainActivity extends MyActivity<ActivityMainBinding> {
 
     private MainViewModel mainViewModel;
-    private ActivityMainBinding mainBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        basebinding.setStr(new StrBean());
     }
 
     @Override
     protected int getLayoutId() {
         return R.layout.activity_main;
+    }
+
+    @Override
+    protected View getTopView() {
+        return null;
     }
 
     @Override

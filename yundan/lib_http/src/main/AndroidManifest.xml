@@ -1,0 +1,17 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.m.lib_http">
+
+    <!--写入-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!--读取-->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!--联网-->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!--网络状态-->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!--安装卸载-->
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+
+    <application android:networkSecurityConfig="@xml/network_security_config" />
+
+</manifest>

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/head">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dp_16"
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_16"
+            android:paddingBottom="@dimen/dp_30"
+            android:background="@color/white"
+            app:layout_constraintTop_toBottomOf="@+id/ll_head"
+            tools:ignore="MissingConstraints">
+
+            <TextView
+                android:id="@+id/qrc_consapp_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/dp_20"
+                android:paddingTop="@dimen/dp_18"
+                android:text="工地："
+                android:textColor="@color/color_9b9b9b"
+                android:textSize="@dimen/text_14" />
+
+            <TextView
+                android:id="@+id/qrc_consapp_name_c"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/dp_18"
+                android:text="xxxx工地"
+                android:textColor="@color/color_484848"
+                android:textSize="@dimen/text_14"
+                app:layout_constraintLeft_toRightOf="@+id/qrc_consapp_name" />
+
+            <View
+                android:id="@+id/qrc_consapp_name_lin"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginEnd="@dimen/dp_12"
+                android:layout_marginStart="@dimen/dp_12"
+                android:layout_marginTop="@dimen/dp_19"
+                android:background="@color/color_dddddd"
+                app:layout_constraintTop_toBottomOf="@+id/qrc_consapp_name" />
+
+            <TextView
+                android:id="@+id/qrc_consapp_carnumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/dp_20"
+                android:paddingTop="@dimen/dp_18"
+                android:text="车牌号："
+                android:textColor="@color/color_9b9b9b"
+                android:textSize="@dimen/text_14"
+                app:layout_constraintTop_toBottomOf="@+id/qrc_consapp_name_lin" />
+
+            <TextView
+                android:id="@+id/qrc_consapp_carnumber_c"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/dp_18"
+                android:text="车牌"
+                android:textColor="@color/color_484848"
+                android:textSize="@dimen/text_14"
+                app:layout_constraintLeft_toRightOf="@+id/qrc_consapp_carnumber"
+                app:layout_constraintTop_toBottomOf="@+id/qrc_consapp_name_lin" />
+
+            <View
+                android:id="@+id/qrc_consapp_carnumber_lin"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginEnd="@dimen/dp_12"
+                android:layout_marginStart="@dimen/dp_12"
+                android:layout_marginTop="@dimen/dp_19"
+                android:background="@color/color_dddddd"
+                app:layout_constraintTop_toBottomOf="@+id/qrc_consapp_carnumber" />
+
+            <TextView
+                android:id="@+id/qrc_consapp_operator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/dp_20"
+                android:paddingTop="@dimen/dp_18"
+                android:text="操作人："
+                android:textColor="@color/color_9b9b9b"
+                android:textSize="@dimen/text_14"
+                app:layout_constraintTop_toBottomOf="@+id/qrc_consapp_carnumber_lin" />
+
+            <TextView
+                android:id="@+id/qrc_consapp_operator_c"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/dp_18"
+                android:text="操作人"
+                android:textColor="@color/color_484848"
+                android:textSize="@dimen/text_14"
+                app:layout_constraintLeft_toRightOf="@+id/qrc_consapp_operator"
+                app:layout_constraintTop_toBottomOf="@+id/qrc_consapp_carnumber_lin" />
+
+            <View
+                android:id="@+id/qrc_consapp_operator_lin"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginEnd="@dimen/dp_12"
+                android:layout_marginStart="@dimen/dp_12"
+                android:layout_marginTop="@dimen/dp_19"
+                android:background="@color/color_dddddd"
+                app:layout_constraintTop_toBottomOf="@+id/qrc_consapp_operator" />
+
+            <TextView
+                android:id="@+id/qrc_consapp_operator_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/dp_20"
+                android:paddingTop="@dimen/dp_18"
+                android:text="操作时间："
+                android:textColor="@color/color_9b9b9b"
+                android:textSize="@dimen/text_14"
+                app:layout_constraintTop_toBottomOf="@+id/qrc_consapp_operator_lin" />
+
+            <TextView
+                android:id="@+id/qrc_consapp_operator_time_c"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/dp_18"
+                android:text="2018-2-2 12:02:01"
+                android:textColor="@color/color_9b9b9b"
+                android:textSize="@dimen/text_14"
+                app:layout_constraintLeft_toRightOf="@+id/qrc_consapp_operator_time"
+                app:layout_constraintTop_toBottomOf="@+id/qrc_consapp_operator_lin" />
+
+            <View
+                android:id="@+id/qrc_consapp_operator_time_lin"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginEnd="@dimen/dp_12"
+                android:layout_marginStart="@dimen/dp_12"
+                android:layout_marginTop="@dimen/dp_19"
+                android:background="@color/color_dddddd"
+                app:layout_constraintTop_toBottomOf="@+id/qrc_consapp_operator_time" />
+
+            <Button
+                android:id="@+id/qrc_consapp_submit"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:layout_marginTop="@dimen/dp_35"
+                android:layout_marginStart="@dimen/dp_50"
+                android:layout_marginEnd="@dimen/dp_50"
+                android:background="@drawable/bt_login_circular"
+                android:text="提交"
+                android:textColor="@color/white"
+                app:layout_constraintTop_toBottomOf="@+id/qrc_consapp_operator_time_lin"
+                 />
+        </android.support.constraint.ConstraintLayout>
+
+        <include layout="@layout/base_head" />
+
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

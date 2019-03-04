@@ -123,7 +123,7 @@ public class HttpManager {
 
 
         //设置是否打印log
-        Log.e("daying,..",AndroidUtil.isApkInDebug(context)+"");
+        Log.e("daying,..", AndroidUtil.isApkInDebug(context) + "");
         if (AndroidUtil.isApkInDebug(context)) {
             HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
                 @Override
@@ -179,11 +179,13 @@ public class HttpManager {
                 public X509Certificate[] getAcceptedIssuers() {
                     return null;
                 }
+
                 @Override
                 public void checkServerTrusted(X509Certificate[] arg0, String arg1)
                         throws CertificateException {
 
                 }
+
                 @Override
                 public void checkClientTrusted(X509Certificate[] arg0, String arg1)
                         throws CertificateException {
@@ -250,7 +252,6 @@ public class HttpManager {
                 .build();
         return retrofit.create(service);
     }
-
 
 
     /**

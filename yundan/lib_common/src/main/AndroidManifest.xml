@@ -1,0 +1,11 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.m.common" >
+
+    <application>
+
+        <activity
+            android:name=".base.ImageBigActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/ImageScale" />
+    </application>
+</manifest>

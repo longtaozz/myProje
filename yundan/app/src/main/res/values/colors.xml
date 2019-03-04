@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--window背景色-->
+    <color name="windowBackground">#ffffffff</color>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="master">#3296fa</color>
+    <color name="head">#ededee</color>
+
+</resources>

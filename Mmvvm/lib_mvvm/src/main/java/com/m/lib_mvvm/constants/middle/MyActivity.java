@@ -3,6 +3,7 @@ package com.m.lib_mvvm.constants.middle;
 import android.content.pm.ActivityInfo;
 
 import com.hjq.toast.ToastUtils;
+import com.hjq.umeng.UmengHelper;
 import com.m.lib_mvvm.R;
 import com.m.lib_mvvm.constants.structure.IView;
 import com.m.lib_mvvm.constants.utils.UIUtils;
@@ -12,7 +13,7 @@ import com.m.lib_mvvm.constants.utils.UIUtils;
 /**
  *  项目中的Activity基类
  */
-public abstract class MyActivity extends UIActivity implements IView {
+public abstract class MyActivity<T> extends UIActivity<T> implements IView {
 
 
     @Override
@@ -47,14 +48,14 @@ public abstract class MyActivity extends UIActivity implements IView {
     protected void onResume() {
         super.onResume();
         // 友盟统计
-//        UmengHelper.onResume(this);
+        UmengHelper.onResume(this);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         // 友盟统计
-//        UmengHelper.onPause(this);
+        UmengHelper.onPause(this);
     }
 
 

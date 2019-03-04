@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="isGone"
+            type="Boolean" />
+
+        <variable
+            name="view"
+            type="android.view.View" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/head">
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/statistic_title"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_55"
+            android:background="@color/head"
+            android:focusable="true"
+            android:focusableInTouchMode="true">
+
+            <ImageView
+                android:id="@+id/statistic_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingEnd="@dimen/dp_8"
+                android:paddingStart="@dimen/dp_18"
+                android:src="@drawable/return_icon"
+                bind:layout_constraintBottom_toBottomOf="parent"
+                bind:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/statistic_title_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="趟次查询"
+                android:textColor="@color/color_484848"
+                android:textSize="@dimen/text_15"
+                bind:layout_constraintBottom_toBottomOf="parent"
+                bind:layout_constraintLeft_toRightOf="@+id/statistic_back"
+                bind:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/dp_whit_10"
+                android:layout_width="@dimen/dp_10"
+                android:layout_height="@dimen/dp_1"
+                bind:layout_constraintLeft_toRightOf="@+id/statistic_title_name" />
+
+            <AutoCompleteTextView
+                android:id="@+id/statistic_auto"
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="@dimen/dp_40"
+                android:layout_marginEnd="@dimen/dp_5"
+                android:background="@drawable/bt_circular_border_white"
+                android:paddingEnd="@dimen/dp_50"
+                android:paddingStart="@dimen/dp_10"
+                bind:layout_constraintBottom_toBottomOf="parent"
+                bind:layout_constraintLeft_toRightOf="@+id/dp_whit_10"
+                bind:layout_constraintRight_toRightOf="parent"
+                bind:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/statistic_center_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/dp_50"
+                android:src="@drawable/search_big"
+                android:visibility="@{isGone?view.GONE : view.VISIBLE}"
+                bind:layout_constraintBottom_toBottomOf="parent"
+                bind:layout_constraintLeft_toRightOf="@+id/dp_whit_10"
+                bind:layout_constraintRight_toRightOf="parent"
+                bind:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_10"
+                android:text="车牌号"
+                android:textColor="@color/color_9b9b9b"
+                android:textSize="@dimen/text_13"
+                android:visibility="@{isGone?view.GONE : view.VISIBLE}"
+                bind:layout_constraintBottom_toBottomOf="parent"
+                bind:layout_constraintLeft_toRightOf="@+id/statistic_center_search"
+                bind:layout_constraintTop_toTopOf="parent" />
+
+
+            <ImageView
+                android:id="@+id/statistic_right_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingEnd="@dimen/dp_30"
+                android:src="@drawable/search_big"
+                android:visibility="@{isGone?view.VISIBLE : view.GONE}"
+                bind:layout_constraintBottom_toBottomOf="parent"
+                bind:layout_constraintRight_toRightOf="parent"
+                bind:layout_constraintTop_toTopOf="parent" />
+
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/statistic_swipe_refresh"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="@dimen/dp_0"
+            android:layout_marginEnd="@dimen/dp_16"
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_16"
+            bind:layout_constraintBottom_toBottomOf="parent"
+            bind:layout_constraintLeft_toLeftOf="parent"
+            bind:layout_constraintRight_toRightOf="parent"
+            bind:layout_constraintTop_toBottomOf="@+id/statistic_title">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/statistic_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+        </android.support.v4.widget.SwipeRefreshLayout>
+    </android.support.constraint.ConstraintLayout>
+
+</layout>

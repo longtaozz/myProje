@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">电子运单</string>
+    <string name="bracket_left">(</string>
+    <string name="bracket_right">)</string>
+    <string name="slash">/</string>
+    <string name="nothing">无</string>
+    <string name="absorptive">消纳场</string>
+    <string name="role_name">工程</string>
+    <string name="company_name">某某某公司</string>
+    <string name="user_name">某某某</string>
+</resources>

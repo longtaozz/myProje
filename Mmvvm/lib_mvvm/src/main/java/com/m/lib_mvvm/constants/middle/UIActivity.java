@@ -13,7 +13,7 @@ import cn.bingoogolapple.swipebacklayout.BGASwipeBackHelper;
 /**
  * 支持沉浸式和侧滑的Activity基类（默认开启沉浸式状态栏和侧滑功能）
  */
-public abstract class UIActivity extends BaseActivity
+public abstract class UIActivity<T> extends BaseActivity<T>
         implements BGASwipeBackHelper.Delegate, ViewTreeObserver.OnGlobalLayoutListener {
 
     private BGASwipeBackHelper mSwipeBackHelper;//侧滑返回

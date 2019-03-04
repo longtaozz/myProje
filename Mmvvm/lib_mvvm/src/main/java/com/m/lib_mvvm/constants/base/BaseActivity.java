@@ -3,6 +3,7 @@ package com.m.lib_mvvm.constants.base;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -12,13 +13,24 @@ import me.yokeyword.fragmentation.SupportActivity;
 /**
  *  Activity 基类
  */
-public abstract class BaseActivity extends SupportActivity {
+public abstract class BaseActivity<T> extends SupportActivity {
+
+    public T basebinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getLayoutId() > 0) {
-            setContentView(getLayoutId());
+            basebinding = (T) DataBindingUtil.setContentView(this, getLayoutId());
+        }
+        if (getTopView() != null) {
+            View v=getTopView();
+            int result = 0;
+            int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+            if (resourceId > 0) {
+                result = getResources().getDimensionPixelSize(resourceId);
+            }
+            v.setPadding(0,result,0,0);
         }
         init();
     }
@@ -30,6 +42,9 @@ public abstract class BaseActivity extends SupportActivity {
 
     //引入布局
     protected abstract int getLayoutId();
+
+    //头布局沉侵式状态栏用的,不使用传null
+    protected abstract View getTopView();
 
     //初始化控件
     protected abstract void initView();

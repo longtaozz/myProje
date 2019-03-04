@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--禁止明文请求，解决。需在application配置此文件。CLEARTEXT communication to ...... not permitted by network security policy-->
+<network-security-config>
+    <base-config cleartextTrafficPermitted="true" />
+</network-security-config>

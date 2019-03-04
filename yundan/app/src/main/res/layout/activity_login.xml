@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="user"
+            type="com.zt.yundan.bean.User"/>
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/login_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginEnd="@dimen/dp_15"
+            android:paddingTop="@dimen/dp_7"
+            android:paddingBottom="@dimen/dp_7"
+            android:textSize="@dimen/text_16"
+            android:textColor="@color/color_484848"
+            android:textStyle="bold"
+            android:text="注册"/>
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            >
+            <ImageView
+                android:id="@+id/log_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/logo"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                />
+
+            <EditText
+                android:id="@+id/login_user_name"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_28"
+                android:layout_marginStart="@dimen/dp_30"
+                android:layout_marginEnd="@dimen/dp_30"
+                android:layout_marginTop="@dimen/dp_49"
+                android:hint="用户名"
+                android:textSize="@dimen/text_13"
+                android:textCursorDrawable="@null"
+                android:text="@{user.username}"
+                android:background="@null"
+                android:drawableBottom="@color/color_484848"
+                app:layout_constraintTop_toBottomOf="@+id/log_img"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_1"
+                app:layout_constraintTop_toBottomOf="@+id/login_user_name"
+                android:layout_marginStart="@dimen/dp_30"
+                android:layout_marginEnd="@dimen/dp_30"
+                android:background="@color/color_484848"/>
+
+            <EditText
+                android:id="@+id/login_user_password"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_28"
+                android:layout_marginStart="@dimen/dp_30"
+                android:layout_marginEnd="@dimen/dp_30"
+                android:layout_marginTop="@dimen/dp_40"
+                android:hint="密码"
+                android:textCursorDrawable="@null"
+                android:password="true"
+                android:text="@{user.password}"
+                android:textSize="@dimen/text_13"
+                android:background="@null"
+                android:drawableBottom="@color/color_484848"
+                app:layout_constraintTop_toBottomOf="@+id/login_user_name"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_1"
+                app:layout_constraintTop_toBottomOf="@+id/login_user_password"
+                android:layout_marginStart="@dimen/dp_30"
+                android:layout_marginEnd="@dimen/dp_30"
+                android:background="@color/color_484848"/>
+
+            <Button
+                android:id="@+id/login_submit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bt_login_circular"
+                app:layout_constraintTop_toBottomOf="@+id/login_user_password"
+                android:layout_marginStart="@dimen/dp_30"
+                android:layout_marginEnd="@dimen/dp_30"
+                android:layout_marginTop="@dimen/dp_40"
+                android:textColor="@color/white"
+                android:text="登录"
+                />
+
+            <LinearLayout
+                android:id="@+id/login_select"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/login_submit"
+                android:gravity="center"
+                android:paddingLeft="@dimen/dp_30"
+                android:layout_marginTop="@dimen/dp_23">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/selection_img"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_5"
+                    android:textColor="@color/color_484848"
+                    android:textSize="@dimen/text_16"
+                    android:text="记住密码"/>
+            </LinearLayout>
+        </android.support.constraint.ConstraintLayout>
+
+
+    </android.support.constraint.ConstraintLayout>
+</layout>
