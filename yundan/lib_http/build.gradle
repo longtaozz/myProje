@@ -30,7 +30,7 @@ android {
 dependencies {
 
     /**
-     * 使用okhttp3+Retrofit2+RxJava实现
+     * 使用okhttp3+Retrofit2+RxJava2实现
      */
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])

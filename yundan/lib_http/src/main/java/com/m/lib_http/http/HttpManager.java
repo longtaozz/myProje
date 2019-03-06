@@ -206,7 +206,6 @@ public class HttpManager {
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<BaseResult<T>>() {
-
                             @Override
                             public void onError(Throwable e) {
                                 e.printStackTrace();
