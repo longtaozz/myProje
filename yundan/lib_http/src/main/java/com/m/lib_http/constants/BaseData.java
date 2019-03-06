@@ -8,9 +8,7 @@ package com.m.lib_http.constants;
  **/
 public class BaseData {
     //ip
-//    public final static String BASE_IP = "http://114.116.156.44:9080/";
 //    public final static String BASE_IP = "http://192.168.0.60:7082/yundan/";//开发内网环境
-    public final static String BASE_IP = "http://114.116.156.44:9080/yundan/";//开发外网环境
 
     //token
     public static String TOKEN = "";
